@@ -1,0 +1,21 @@
+div {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	top: 50%;
+	left: 50%;
+	background-color: red;
+	transform: translate(-50%, -50%);
+}
+
+#enfant {
+	width: 50px;
+	height: 50px;
+	background-color: aqua;
+	transition: width 3s;
+}
+
+div:hover #enfant {
+	width: 200px;
+	height: 200px;
+}
