@@ -58,8 +58,8 @@ li {
 
 
 header {
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 }
 
 #booknow{
@@ -67,6 +67,7 @@ header {
 	position: absolute;
 	top: 0;
 	right: 0;
+	overflow: hidden;
 }
 #callus{
 	position: absolute;
@@ -116,4 +117,17 @@ header {
 #text {
 	text-align: justify;
 }
-      
+#text::first-letter {
+	margin: 20px;
+	font-size: 30px;
+	font: bold;
+	text-transform: uppercase;
+
+}
+#messenger {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	font-size: 100px;
+	color: rgb(79, 79, 220);
+}
