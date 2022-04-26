@@ -40,7 +40,8 @@ body {
 	bottom: 0;
 	width: 500px;
 	height: 500px;
-	/* border: solid 2px black; */
+	transition: 2s cubic-bezier(0.86, 0, 0.07, 1);
+	/* border: solid 2px black; */;
 }
 
 #img_left {
@@ -61,7 +62,7 @@ body {
 #img_bottom {
 	width: 500px;
 	height: 500px;
-	transition: transform 0.8s;
+	transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
 	backface-visibility: hidden;
 	-webkit-backface-visibility: hidden;
 }
@@ -99,7 +100,10 @@ body {
 	color: black;
 	font-size: 20px;
 	font-family: Arial, Helvetica, sans-serif;
-	visibility: hidden;
+	visibility: visible;
+	transform: rotateY(180deg);
+	transition: transform 2s;
+	z-index: 0;
 }
 
 .bottom_frame:hover #img_bottom {
@@ -109,7 +113,5 @@ body {
 
 .bottom_frame:hover #text_bottom {
 	visibility: visible;
+	transform: rotateY(180deg);
 }
-
-
-
