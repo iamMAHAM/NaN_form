@@ -1,0 +1,95 @@
+body, *{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.container {
+	height: 100vh;
+	object-fit: cover;
+}
+
+#head-top {
+	border: solid 5px black;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 70px;
+	font-size: 25px;
+}
+
+.input-search-micro {
+	display: flex;
+	flex-direction: row;
+	width: 40%;
+}
+.input-search {
+	width: 85%;
+	background-color: #F7F4F3;
+	border: groove 1.5px;
+}
+
+.fa-solid\ fa-magnifying-glass {
+	margin-top: 20px;
+}
+#input-field
+{
+	margin-top: 5px;
+	height: 80%;
+	width: 88%;
+}
+
+
+#left-container {
+	width: 300px;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+#head-bottom {
+	width: 100%;
+	display: flex;
+	gap: 1%;
+	flex-direction: row;
+	position: absolute;
+	top: 50px;
+	left: 310px;
+}
+
+.center-left-div-imgs {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+
+.left-divs {
+	height: 100vh;
+	justify-content: space-around;
+}
+
+.top-left-div {
+	height: 30vh;
+	background-color: aquamarine;
+}
+
+.center-left-div {
+	height: 30vh;
+	background-color: bisque;
+	margin-top: 30px;
+}
+
+.bottom-left-div {
+	margin-top: 30px;
+	height: 30vh;
+	background-color: violet;
+}
+
+.top-left-div,
+.center-left-div,
+.bottom-left-div {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around
+}
