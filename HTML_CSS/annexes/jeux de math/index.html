@@ -10,14 +10,14 @@
 <body>
 	<div id="parent">
 		<div id="loading-bar">
-
+			<progress></progress>
 		</div>
 		<div id="calc">
 			<span id="nl">0</span>
 			<span>+</span>
 			<span id="nr">0</span>
 			<span>=</span>
-			<input type="number">
+			<input type="number" oninput="checkResult(event)">
 		</div>
 	</div>
 	<script src="script.js"></script>	
