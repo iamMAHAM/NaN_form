@@ -1,0 +1,35 @@
+body, * {
+	margin: 0;
+	padding: 0;
+}
+
+#parent {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%);
+	background-color: aquamarine;
+	width: 500px;
+	height: 300px;
+}
+
+
+#calc {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%);
+}
+#loading-bar {
+	position: absolute;
+	left: 50%;
+	top: 30px;
+	height: 20px;
+	width: 200px;
+	background-color: red;
+	transform: translate(-50%);
+}
+
+input {
+	width: 100px;
+}
