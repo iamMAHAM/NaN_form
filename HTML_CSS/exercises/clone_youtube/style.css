@@ -5,11 +5,12 @@ body, *{
 }
 .container {
 	height: 100vh;
+	width: 100%;
 	object-fit: cover;
 }
 
 #head-top {
-	border: solid 5px black;
+	border: solid 1px white;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -18,72 +19,62 @@ body, *{
 }
 
 .input-search-micro {
+	margin-top: 10px;
+	text-align: center;
+	height: 50px;
 	display: flex;
-	flex-direction: row;
-	width: 40%;
+	/* flex-direction: row;
+	flex-wrap: nowrap;*/
+	justify-content: space-around;
+	width: 600px;
+}
+
+#micro {
+	font-size: 25px;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	background-color: #F7F4F3;
+	/* display: flex; */
+	margin-top: 10px;
 }
 .input-search {
-	width: 85%;
+	width: 550px;
 	background-color: #F7F4F3;
-	border: groove 1.5px;
 }
 
-.fa-solid\ fa-magnifying-glass {
-	margin-top: 20px;
-}
 #input-field
 {
-	margin-top: 5px;
-	height: 80%;
-	width: 88%;
+	font-size: 20px;
+	margin-left: -15px;
+	height: 100%;
+	width: 500px;
 }
 
-
 #left-container {
-	width: 300px;
+	width: 200px;
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
-}
-
-#head-bottom {
-	width: 100%;
-	display: flex;
-	gap: 1%;
-	flex-direction: row;
-	position: absolute;
-	top: 50px;
-	left: 310px;
 }
 
 .center-left-div-imgs {
-	width: 30px;
-	height: 30px;
+	width: 25px;
+	height: 25px;
 	border-radius: 50%;
 }
 
 
 .left-divs {
+	position: absolute;
+	float: left;
 	height: 100vh;
-	justify-content: space-around;
 }
 
+.bottom-left-div,
+.center-left-div,
 .top-left-div {
-	height: 30vh;
-	background-color: aquamarine;
-}
-
-.center-left-div {
-	height: 30vh;
-	background-color: bisque;
-	margin-top: 30px;
-}
-
-.bottom-left-div {
-	margin-top: 30px;
-	height: 30vh;
-	background-color: violet;
+	height: 15vh;
 }
 
 .top-left-div,
@@ -91,5 +82,99 @@ body, *{
 .bottom-left-div {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around
+	gap: 10px;
+}
+
+.bottom-left-div-title {
+	font-size: 20px;
+}
+.logos{
+	margin-left: 20px;
+	margin-top: 21px;
+}
+
+#youtube-ic{
+	margin-left: 10px;
+	color: red;
+}
+
+#span-tube {
+	margin-left: 0;
+}
+
+.left-divs-items{
+	font-size: 17px;
+	margin-left: 20px;
+	height: 30px;
+	justify-content: left;
+}
+
+.left-divs-items:hover {
+	background-color: #555;
+	cursor: pointer;
+}
+
+.right-icones {
+	width: 200px;
+	display: flex;
+	justify-content: space-around;
+}
+.right-icones :nth-child(1){
+	margin-top: 20px;
+	width: 25px;
+	height: 25px;
+}
+
+#lol {
+	width: 40px;
+	height: 40px;
+	margin-top: 12px;
+}
+
+#main-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 100vw;
+	height: 100vh;
+	margin-left: 200px;
+	background-color: #F7F4F3;
+}
+
+.content {
+	margin: 20px 20px 20px 20px;
+	height: 200px;
+	width: 200px;
+}
+
+.contents {
+	width: 200px;
+	height: 150px;
+}
+
+.contents:hover {
+	cursor: pointer;
+}
+
+.content:hover {
+	transform: scale(1.2);
+}
+
+.texts {
+	margin-left: 5px;
+	text-align: justify;
+}
+
+.content-logo {
+	float: left;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+.down {
+	height: 25px;
+	width: 25px;
+	border-radius: 50%;
+	float: left;
 }
