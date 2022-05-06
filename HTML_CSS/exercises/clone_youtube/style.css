@@ -3,6 +3,7 @@ body, *{
 	padding: 0;
 	box-sizing: border-box;
 }
+
 #container {
 	height: 100vh;
 	width: 100%;
@@ -42,6 +43,7 @@ body, *{
 .input-search {
 	width: 550px;
 	background-color: #F7F4F3;
+
 }
 
 #input-field
@@ -49,7 +51,7 @@ body, *{
 	font-size: 20px;
 	margin-left: -15px;
 	height: 100%;
-	width: 500px;
+	width: calc(100% - 25px);
 }
 
 #left-container {
@@ -228,4 +230,11 @@ body, *{
 }
 .left-divs-items .down {
 	margin-left: 0;
+}
+
+@media screen and (max-width: 1000px)
+{
+	.input-search-micro {
+		width: 300px;
+	}			
 }
