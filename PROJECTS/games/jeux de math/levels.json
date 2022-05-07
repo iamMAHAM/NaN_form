@@ -4,7 +4,8 @@
 		"min": 0,
 		"max": 20,
 		"nb_second": 20,
-		"correct_response": 10
+		"correct_response": 10,
+		"operator": ["+"]
 	},
 
 	{
@@ -12,7 +13,8 @@
 		"min": 0,
 		"max": 100,
 		"nb_second": 18,
-		"correct_response": 10
+		"correct_response": 10,
+		"operator": ["+"]
 	},
 
 	{
@@ -20,7 +22,8 @@
 		"min": 0,
 		"max": 150,
 		"nb_second": 16,
-		"correct_response": 10
+		"correct_response": 10,
+		"operator": ["+"]
 	},
 
 	{
@@ -28,7 +31,8 @@
 		"min": 0,
 		"max": 200,
 		"nb_second": 14,
-		"correct_response": 10
+		"correct_response": 10,
+		"operator": ["+", "-"]
 	},
 
 	{
@@ -36,6 +40,7 @@
 		"min": 0,
 		"max": 250,
 		"nb_second": 12,
-		"correct_response": 10
+		"correct_response": 10,
+		"operator": ["+", "-", "*"]
 	}
 ]
