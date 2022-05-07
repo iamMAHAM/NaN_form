@@ -1,0 +1,41 @@
+[
+	{
+		"level": 1,
+		"min": 0,
+		"max": 20,
+		"nb_second": 20,
+		"correct_response": 10
+	},
+
+	{
+		"level": 2,
+		"min": 0,
+		"max": 100,
+		"nb_second": 18,
+		"correct_response": 10
+	},
+
+	{
+		"level": 3,
+		"min": 0,
+		"max": 150,
+		"nb_second": 16,
+		"correct_response": 10
+	},
+
+	{
+		"level": 4,
+		"min": 0,
+		"max": 200,
+		"nb_second": 14,
+		"correct_response": 10
+	},
+
+	{
+		"level": 5,
+		"min": 0,
+		"max": 250,
+		"nb_second": 12,
+		"correct_response": 10
+	}
+]
