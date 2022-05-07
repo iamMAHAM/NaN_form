@@ -42,10 +42,14 @@ function checkResult(e)
 			found = 0
 			currentLevel = levels[currentLevel.level]
 			level_count.textContent = currentLevel.level
+			showAnimeLevel(currentLevel)
 		}
-		generateNumber(currentLevel.min, currentLevel.max)
-		e.target.value = ""
-		found_count.textContent = found
+		else 
+		{
+			generateNumber(currentLevel.min, currentLevel.max)
+			e.target.value = ""
+			found_count.textContent = found
+		}
 	}
 }
 
@@ -55,7 +59,6 @@ function decompte(nb_second)
 	inter = setInterval(() => {
 		let percent  = (count * 400) / nb_second
 		progress.style.width = percent + "px"
-		console.log(percent)
 		if (count == 0)
 		{
 			found = 0
@@ -68,10 +71,25 @@ function decompte(nb_second)
 
 }
 
+function showAnimeLevel(currentLevel)
+{
+	let span = document.querySelector("#level-state")
+	span.textContent = currentLevel.level
+	let parent = span.parentElement
+	parent.parentElement.style.display = "block"
+	parent.classList.add("anim-level")
+	setTimeout(() => {
+		parent.classList.remove("anim-level")
+		parent.parentElement.style.display = "none"
+		generateNumber(currentLevel.min, currentLevel.max)
+	}, 6000)
+
+}
+
 window.addEventListener("load", async function(){
 	levels = await fetch("./levels.json")
 	levels = await levels.json()
 	currentLevel = levels[0]
 	level_count.textContent = currentLevel.level
-	generateNumber(currentLevel["min"], currentLevel["max"])
+	showAnimeLevel(currentLevel)
 })
