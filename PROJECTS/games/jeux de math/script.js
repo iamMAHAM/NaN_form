@@ -36,7 +36,7 @@ function checkResult(e)
 		found++
 		clearInterval(inter)
 		progress.style.width = "400px"
-		
+
 		if (found == currentLevel.correct_response)
 		{
 			found = 0
@@ -66,7 +66,6 @@ function decompte(nb_second)
 		count--
 	}, 1000)
 
-	
 }
 
 window.addEventListener("load", async function(){
