@@ -20,15 +20,42 @@ body, * {
 	left: 50%;
 	transform: translate(-50%);
 }
+
 #loading-bar {
 	position: absolute;
+	background-color: grey;
+	border-radius: 1rem;
 	left: 50%;
 	top: 30px;
-	height: 20px;
-	width: 200px;
+	height: 10px;
+	width: 400px;
+	overflow: hidden;
 	transform: translate(-50%);
 }
 
-input {
+#progress
+{
+	width: 100%;
+	height: 100%;
+	background-color: lime;
+	/* border-radius: 1rem; */
+
+}
+input
+{
 	width: 100px;
+}
+
+#level-div
+{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+#found-div
+{
+	position: absolute;
+	right: 0;
+	bottom: 0;
 }
