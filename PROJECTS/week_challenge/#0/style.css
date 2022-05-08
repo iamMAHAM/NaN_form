@@ -4,9 +4,14 @@ body, *
 	padding: 0;
 }
 
+body
+{
+	background-color: black;
+}
+
 #parent
 {
-	width: 400px;
+	width: 350px;
 	height: 380px;
 	position: absolute;
 	top: 20%;
@@ -14,13 +19,13 @@ body, *
 	justify-content: space-between;
 	transform: translate(-50%);
 	border: solid 2px black;
-	/* overflow: hidden; */
+	overflow: hidden;
 }
 
 img
 {
 	width: 350px;
-	height: 350px;
+	height: 340px;
 }
 
 #child
@@ -64,22 +69,84 @@ button
 	position: absolute;
 	border-radius: 15px;
 	right: 3px;
-	bottom: 0;
+	bottom: 8px;
 	cursor: pointer;
 	text-align: center;
-	background-color: #04AA6D;
+	background: #111;
+	color: white;
 	padding: 6px 20px;
 	box-shadow: 0 5px #999;
 
 }
 
-button:hover {background-color: #3e8e41}
-      
-button:active
+.button 
 {
+	width: 220px;
+	height: 50px;
+	border: none;
+	outline: none;
+	color: #fff;
+	background: #111;
+	cursor: pointer;
+	position: relative;
+	z-index: 0;
+	border-radius: 10px;
+}
+    
+button:before 
+{
+	content: '';
+	background: linear-gradient(
+		45deg, 
+		#ff0000, 
+		#ff7300, 
+		#fffb00, 
+		#48ff00, 
+		#00ffd5, 
+		#002bff, 
+		#7a00ff, 
+		#ff00c8, 
+		#ff0000
+	);
+	position: absolute;
+	top: -2px;
+	left:-2px;
+	background-size: 400%;
+	z-index: -1;
+	filter: blur(5px);
+	width: calc(100% + 4px);
+	height: calc(100% + 4px);
+	animation: illuminate 20s linear infinite;
+	opacity: 0;
+	transition: opacity .3s ease-in-out;
+	border-radius: 10px;
+}
+    
+button:active 
+{
+	color: #000;
 	background-color: #3e8e41;
 	box-shadow: 0 5px #666;
 	transform: translateY(4px);
+}
+    
+button:hover:before 
+{
+	opacity: 1;
+}
+    
+button:after 
+{
+	z-index: -1;
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #111;
+	left: 0;
+	top: 0;
+	border-radius: 10px;
+	background: transparent;
 }
       
 @keyframes hide-text {
@@ -207,4 +274,20 @@ button:active
 		width: 293px;
 		margin-left: -293px;
 	}
-      }
+}
+
+@keyframes illuminate 
+{
+	0% 
+	{
+		 background-position: 0 0; 
+	}
+	50% 
+	{ 
+		background-position: 400% 0; 
+	}
+	100% 
+	{ 
+		background-position: 0 0; 
+	}
+}
