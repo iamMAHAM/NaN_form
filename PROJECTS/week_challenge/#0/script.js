@@ -1,4 +1,4 @@
-let p = document.querySelector("p")
+let div = document.querySelector("#child")
 let button = document.querySelector("button")
 
 /**
@@ -20,7 +20,7 @@ async function showOrHide()
 	if (!p.classList.contains("anim"))
 	{
 		p.classList.add("anim")
-		await sleep(2000)
+		await sleep(5000)
 		button.textContent = "Show me"
 	}
 	else

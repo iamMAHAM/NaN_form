@@ -9,11 +9,17 @@
 	<script src="https://kit.fontawesome.com/3d7d1bcca5.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div>
+	<div id="parent">
 		<img src="iamMAHAM.png" alt="image du username de MAHAM">
-		<p>
-			<i class="fa-brands fa-github"></i> Github : @iamMAHAM	
-		</p>
+		<div id="child">
+			<p id="openclose">
+				<span><i class="fa-brands fa-github"></i>Github     :</span>
+				<span><i class="fa-brands fa-twitter"></i>Twitter   :</span>
+				<span><i class="fa-brands fa-linkedin"></i>Linkedin :</span>
+				
+			</p>
+			<span>@iamMAHAM</span>
+		</div>
 		<button>Hide me</button>
 	</div>
 	<script src="script.js"></script>
