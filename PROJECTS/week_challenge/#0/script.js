@@ -26,7 +26,8 @@ async function showOrHide()
 	}
 	else
 	{
-		div.style.animation = "none";
+		div.classList.remove("hide")
+		div.style.animation = "none"
 		button.textContent = "Hide me"
 	}
 }
