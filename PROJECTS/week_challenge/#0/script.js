@@ -1,4 +1,4 @@
-let p = document.querySelector("p")
+let div = document.querySelector("#child")
 let button = document.querySelector("button")
 
 /**
@@ -17,15 +17,17 @@ function sleep(ms)
  */
 async function showOrHide()
 {
-	if (!p.classList.contains("anim"))
+	if (!div.classList.contains("hide"))
 	{
-		p.classList.add("anim")
-		await sleep(2000)
+		div.classList.add("hide")
+		div.style.animation = "hide-text 5s 0s cubic-bezier(1, -0.61, 1, 1) forwards"
+		await sleep(5000)
 		button.textContent = "Show me"
 	}
 	else
 	{
-		p.classList.remove("anim")
+		div.classList.remove("hide")
+		div.style.animation = "none"
 		button.textContent = "Hide me"
 	}
 }

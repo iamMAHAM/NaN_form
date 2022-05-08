@@ -4,10 +4,15 @@ body, *
 	padding: 0;
 }
 
-div
+body
 {
-	width: 400px;
-	height: 370px;
+	background-color: black;
+}
+
+#parent
+{
+	width: 350px;
+	height: 380px;
 	position: absolute;
 	top: 20%;
 	left: 50%;
@@ -20,12 +25,14 @@ div
 img
 {
 	width: 350px;
-	height: 350px;
+	height: 340px;
 }
 
-p
+#child
 {
-	position: absolute;
+	position: relative;
+	display: flex;
+	flex-direction: row;
 	bottom: 0;
 	left: 0;
 	height: 26px;
@@ -39,11 +46,21 @@ p
 		#fff800 100%
 	);
 	background-size: 200% auto;
-	color: #fff;
 	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	animation: anim-text 2.5s linear infinite;
+}
+
+
+#openclose
+{
+	width: 87px;
+	margin-left: -87px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: row;
+	animation: openclose 10s 2s ease-in-out infinite;
 }
 
 button
@@ -51,26 +68,84 @@ button
 	position: absolute;
 	border-radius: 15px;
 	right: 3px;
-	bottom: 0;
+	bottom: 8px;
 	cursor: pointer;
 	text-align: center;
-	background-color: #04AA6D;
+	background: #111;
+	color: white;
 	padding: 6px 20px;
 	box-shadow: 0 5px #999;
 
 }
 
-button:hover {background-color: #3e8e41}
-      
-button:active
+.button 
 {
+	width: 220px;
+	height: 50px;
+	border: none;
+	outline: none;
+	color: #fff;
+	background: #111;
+	cursor: pointer;
+	position: relative;
+	z-index: 0;
+	border-radius: 10px;
+}
+    
+button:before 
+{
+	content: '';
+	background: linear-gradient(
+		45deg, 
+		#ff0000, 
+		#ff7300, 
+		#fffb00, 
+		#48ff00, 
+		#00ffd5, 
+		#002bff, 
+		#7a00ff, 
+		#ff00c8, 
+		#ff0000
+	);
+	position: absolute;
+	top: -2px;
+	left:-2px;
+	background-size: 400%;
+	z-index: -1;
+	filter: blur(5px);
+	width: calc(100% + 4px);
+	height: calc(100% + 4px);
+	animation: illuminate 20s linear infinite;
+	opacity: 0;
+	transition: opacity .3s ease-in-out;
+	border-radius: 10px;
+}
+    
+button:active 
+{
+	color: #000;
 	background-color: #3e8e41;
 	box-shadow: 0 5px #666;
 	transform: translateY(4px);
 }
-
-.anim {
-	animation: hide-text 5s 0s cubic-bezier(1, -0.61, 1, 1) forwards;
+    
+button:hover:before 
+{
+	opacity: 1;
+}
+    
+button:after 
+{
+	z-index: -1;
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #111;
+	left: 0;
+	top: 0;
+	border-radius: 10px;
+	background: transparent;
 }
       
 @keyframes hide-text {
@@ -125,5 +200,92 @@ button:active
 	to
 	{
 		background-position: 200% center;
+	}
+}
+@keyframes openclose {
+	0% 
+	{
+		width: 87px;
+		margin-left: -88px;
+	}
+
+	8%
+	{
+		width: 87px;
+		margin-left: -88px;
+	}
+	20%
+	{
+		width: 87px;
+		margin-left: 0;	
+	}
+	30% 
+	{
+		width: 87px;
+		margin-left: 0;
+	}
+
+	38% 
+	{
+		width: 87px;
+		margin-left: -88px;
+	  
+	}
+	48% 
+	{
+		width: 87px;
+		margin-left: -88px;
+	}
+	62% 
+	{
+		width: 184px;
+		margin-left: -88px;
+	}
+	66% 
+	{
+		width: 184px;
+		margin-left: -88px;
+	}
+	71% 
+	{
+		width: 184px;
+		margin-left: -184px;
+	}
+	82% 
+	{
+		width: 184px;
+		margin-left: -184px;
+	}
+	88%
+	{
+		width: 293px;
+		margin-left: -184px;
+	}
+	93% 
+	{
+		width: 293px;
+		margin-left: -184px;
+	}
+
+	100% 
+	{
+		width: 293px;
+		margin-left: -293px;
+	}
+}
+
+@keyframes illuminate 
+{
+	0% 
+	{
+		 background-position: 0 0; 
+	}
+	50% 
+	{ 
+		background-position: 400% 0; 
+	}
+	100% 
+	{ 
+		background-position: 0 0; 
 	}
 }
