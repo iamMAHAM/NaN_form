@@ -17,15 +17,16 @@ function sleep(ms)
  */
 async function showOrHide()
 {
-	if (!p.classList.contains("anim"))
+	if (!div.classList.contains("hide"))
 	{
-		p.classList.add("anim")
+		div.classList.add("hide")
+		div.style.animation = "hide-text 5s 0s cubic-bezier(1, -0.61, 1, 1) forwards"
 		await sleep(5000)
 		button.textContent = "Show me"
 	}
 	else
 	{
-		p.classList.remove("anim")
+		div.style.animation = "none";
 		button.textContent = "Hide me"
 	}
 }
