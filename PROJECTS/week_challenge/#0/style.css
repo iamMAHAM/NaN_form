@@ -1,0 +1,89 @@
+body, *
+{
+	margin: 0;
+	padding: 0;
+}
+
+div
+{
+	width: 350px;
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	justify-content: space-between;
+	transform: translate(-50%);
+	border: solid 2px black;
+	overflow: hidden;
+}
+
+img
+{
+	width: 350px;
+	height: 350px;
+}
+
+p
+{
+	position: absolute;
+	bottom: 0;
+	left: -100%;
+	height: 26px;
+	font-size: 22px;
+	/* animation: anim-text 5s 0s ease-in-out forwards; */
+}
+
+button
+{
+	position: absolute;
+	border-radius: 5px;
+	right: 3px;
+	bottom: 3px;
+
+}
+
+@keyframes anim-text {
+	0% 
+	{
+		left: -100%;
+	}
+
+	10%
+	{
+		left: -50%;
+	}
+	30%
+	{
+		left: -30%;
+	}
+
+	50%
+	{
+		left: 0%;
+	}
+
+	
+	75%
+	{
+		left: 25%;
+	}
+
+	85%
+	{
+		left: 35%;
+	}
+
+	90%
+	{
+		left: 60%;
+	}
+
+	95%
+	{
+		left: 75%;
+	}
+
+	100% 
+	{
+		left: 100%;
+	}
+}
