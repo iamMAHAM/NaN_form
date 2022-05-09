@@ -27,7 +27,7 @@ async function showOrHide()
 	else
 	{
 		div.classList.remove("hide")
-		div.style.animation = "none"
+		div.style.animation = "anim-text 2.5s linear infinite"
 		button.textContent = "Hide me"
 	}
 }
