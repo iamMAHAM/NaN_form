@@ -2,12 +2,13 @@ body, *
 {
 	margin: 0;
 	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 header
 {
 	position: relative;
-	height: 80vh;
+	height: 90vh;
 }
 #yoojo-logo 
 {
@@ -17,8 +18,9 @@ header
 
 .fixed-top 
 {
-	margin-top: 10px;
+	background-color: white;
 	position: fixed;
+	z-index: 1;
 	width: 100vw;
 	display: flex;
 	flex-direction: row;
@@ -62,12 +64,13 @@ a:hover
 .not-fixed 
 {
 	height: 50%;
+	width: 100%;
 }
 
 #header-bg-img
 {
-	width: 100%;
-	height: 80vh;
+	width: 100vw;
+	height: 90vh;
 }
 
 #txt 
@@ -97,6 +100,7 @@ input
 	width: 100%;
 	border: none;
 }
+
 #input-search :nth-child(2)
 {
 	border-radius: 20px;
@@ -117,10 +121,19 @@ input
 .bottom-icons
 {
 	color: rgba(20, 20, 193, 0.671);
+	font-size: 25px;
 }
 
+
+.bottom-text
+{
+	font-weight: bold;
+	font-size: 20px;
+}
 .elements 
 {
+	width: 1320px;
+	padding: 50px 0px;
 	position: relative;
 	left: 20%;
 	/* padding: 86px; */
@@ -129,4 +142,148 @@ input
 .head
 {
 	display: flex;
+}
+
+.rows
+{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 1%;
+}
+
+.rows img
+{
+	height: 80%;
+	transform: tranform 2s;
+}
+
+.rows img:hover
+{
+	transform: scale(1.2);
+}
+
+.rows >p
+{
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.items
+{
+	overflow: hidden;
+	height: 200px;
+}
+
+.current-services
+{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 1.2%;
+	width: 1320px;
+}
+
+.pictures
+{
+	overflow: hidden;
+	border-radius: 20px;
+}
+
+.c_services
+{
+	position: relative;
+	width: 250px;
+}
+
+.elements >p
+{
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.medium-price
+{
+	opacity: 0.65;
+}
+
+#next
+{
+	position: absolute;
+	right: 0;
+	top: 50%;
+	font-size: 30px;
+	background-color: white;
+	border-radius: 50%;
+	padding: 10px;
+	border: solid 2px black;
+	transform: translate(50%, -50%);
+}
+
+#next:hover
+{
+	cursor: pointer;
+}
+
+.qual
+{
+	margin-top: 20px;
+	width: 320px;
+}
+
+.cadre
+{
+	background-image: url();
+}
+
+.elem
+{
+	display: flex;
+	gap: 1.2%;
+}
+
+.oklm
+{
+	height: 100%;
+}
+.ic-elems
+{
+	padding: 15px;
+	background-color: rgba(0, 0, 255, 0.635);
+	border-radius: 50%;
+	color: white;
+	font-size: 30px;
+	height: 64px;
+}
+
+.oklm :nth-child(2)
+{
+	font-size: 25px;
+}
+
+.cadre
+{
+	border-radius: 20px;
+	border: solid 2px black;
+}
+
+.cadre >div
+{
+	padding: 50px;
+}
+
+.cadre >div >p
+{
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.jb
+{
+	transform: translateX(35%);
+}
+
+.o
+{
+	width: 50%;
 }
