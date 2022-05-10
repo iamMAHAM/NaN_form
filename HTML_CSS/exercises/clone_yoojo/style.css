@@ -29,11 +29,22 @@ header
 
 #ask-button 
 {
-	padding: 5px;
-	border-radius: 20px;
+	font-size: 20px;
+	margin: 5px;
+	transform: translateX(50%);
+	border-radius: 999px;
+	width: 300px;
 	border: none;
-	background-color: rgba(20, 20, 193, 0.671);
+	color: white;
+	background-color: #0078fa;
+	font-weight: 500;
 }
+
+#ask-button >span
+{
+	padding: 0 5px;	
+}
+
 ul 
 {
 	display: flex;
@@ -41,13 +52,14 @@ ul
 
 li 
 {
+	margin-top: 5px;
 	align-items: center;
 	border-radius: 20px;
 	list-style-type: none;
 	margin-right: 20px;
 }
 
-a 
+li a 
 {
 	color: black;
 	border-radius: 30%;
@@ -105,7 +117,7 @@ input
 {
 	border-radius: 20px;
 	padding: 5px;
-	background-color: rgba(20, 20, 193, 0.671);
+	background-color: #0078fa;
 	position: absolute;
 	right: 0;
 }
@@ -120,7 +132,7 @@ input
 
 .bottom-icons
 {
-	color: rgba(20, 20, 193, 0.671);
+	color: #0078fa;
 	font-size: 25px;
 }
 
@@ -155,7 +167,7 @@ input
 .rows img
 {
 	height: 80%;
-	transform: tranform 2s;
+	transform: transform 2s;
 }
 
 .rows img:hover
@@ -249,7 +261,7 @@ input
 .ic-elems
 {
 	padding: 15px;
-	background-color: rgba(0, 0, 255, 0.635);
+	background-color: #0078fa;
 	border-radius: 50%;
 	color: white;
 	font-size: 30px;
@@ -263,8 +275,12 @@ input
 
 .cadre
 {
+	background-image: url("https://d1b747rczec55w.cloudfront.net/assets/bg-ypj-in-numbers-7514a65c81d212dd2eec0de1cdd7c75fdf4305ab6cca93fc98025307ecc2d535.jpg");
 	border-radius: 20px;
-	border: solid 2px black;
+	background-size: auto 100%;
+	background-position: right;
+	background-repeat: no-repeat;
+	background-color: rgb(241, 237, 237);
 }
 
 .cadre >div
@@ -286,4 +302,62 @@ input
 .o
 {
 	width: 50%;
+}
+
+.pictures.img
+{
+	width: 140px;
+	height: 140px;
+}
+
+.cadre.ok
+{
+	color: white;
+	font-weight: 500;
+	border-radius: 20px;
+	display: block;
+	background-repeat: no-repeat;
+	background-image: url("https://d1b747rczec55w.cloudfront.net/assets/yoojoDirectIllustration-9bc06f1818928be669e20d08f3a8d8701ee69abc031c15678074c65c24c82599.svg");
+	background-size: auto 100%;
+	background-position: right;
+	background-color: rgba(238, 67, 67, 0.5);
+	height: 400px;
+}
+
+.cadre.ok >div
+{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+.cadre.ok >div >p
+{
+	width: 50%;
+	font-size: 50px;
+}
+
+.mlm
+{
+	width: 50%;
+	font-size: 20px;
+}
+
+.cadre.ok >div >button
+{
+	margin-top: 50px;
+	border: none;
+	border-radius: 999px;
+	background-color: white;
+	width: 250px;
+	font-size: 20px;
+}
+.current-services.ok
+{
+	flex-wrap: nowrap;
+}
+
+.cities div 
+{
+	width: 150px;
+	height: 150px;
 }
