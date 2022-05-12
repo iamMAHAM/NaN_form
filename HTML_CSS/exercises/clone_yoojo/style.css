@@ -386,6 +386,7 @@ input
 
 .rows.l 
 {
+	justify-content: space-around;
 	margin: 0 auto;
 }
 
@@ -483,3 +484,70 @@ input
 {
 	padding: 50px;
 }
+
+.blelem.ok
+{
+	display: flex;
+	flex-direction: row;
+}
+
+.blelem span
+{
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.blelem p
+{
+	margin: 5px;
+}
+
+.blelem
+{
+	margin: 20px;
+}
+
+.azs 
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	font-size: 20px;
+	padding: 30px;
+}
+
+.azs a
+{
+	color: #0078fa;
+}
+
+footer
+{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.logoss
+{
+	width: 30px;
+	height: 30px;
+}
+
+.toup :nth-child(1)
+{
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.store
+{
+	width: 150px;
+}
+
+.iconess
+{
+	color: #0078fa;
+}
+
