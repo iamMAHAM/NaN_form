@@ -164,14 +164,21 @@ input
 	gap: 1%;
 }
 
+.pictures img:hover,
+.rows img
+{
+	transition: transform 1s;
+}
+
 .rows img
 {
 	height: 80%;
-	transform: transform 2s;
 }
 
+.pictures img:hover,
 .rows img:hover
 {
+	cursor: pointer;
 	transform: scale(1.2);
 }
 
@@ -181,6 +188,10 @@ input
 	font-weight: bold;
 }
 
+.imgs-hide
+{
+	overflow: hidden;
+}
 .items
 {
 	overflow: hidden;
@@ -241,11 +252,6 @@ input
 {
 	margin-top: 20px;
 	width: 320px;
-}
-
-.cadre
-{
-	background-image: url();
 }
 
 .elem
