@@ -173,6 +173,7 @@ input
 .rows img
 {
 	height: 80%;
+	width: 100%;
 }
 
 .pictures img:hover,
@@ -366,4 +367,107 @@ input
 {
 	width: 150px;
 	height: 150px;
+}
+
+.c_services.l div {
+	width: 100%;
+	object-fit: cover;
+}
+
+.rows >.last-rows
+{
+	width: 300px;
+}
+
+.pictures.img.bottom
+{
+	width: 100%;
+}
+
+.rows.l 
+{
+	margin: 0 auto;
+}
+
+.left-notes
+{
+	width: 348px;
+}
+
+.cadre.m
+{
+	background-image: none;
+	display: flex;
+	flex-direction: row;
+}
+
+.ele
+{
+	width: 500px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.star
+{
+	margin: 5px;
+	padding: 5px;
+	background-color: rgb(181, 172, 172);
+	width: 250px;
+}
+
+.stars
+{
+	padding: 3px;
+	color: white;
+	background-color: green;
+}
+.right-notes
+{
+	margin-left: 30px;
+}
+
+.master
+{
+	display: flex;
+	flex-direction: row;
+}
+
+
+.tof img
+{
+	height: 100%;
+	border-radius: 50%;
+}
+
+.tof
+{
+	display: flex;
+	flex-direction: row;
+	width: 250px;
+	/* flex-wrap: wrap; */
+	
+}
+
+.text 
+{
+	width: 408px;
+}
+
+.text :nth-child(1)
+{
+	font-weight: bold;
+	font-size: 25px;
+}
+.mmmmmm
+{
+	margin-top: 20px;
+}
+
+.partenaires
+{
+	display: flex;
+	justify-content: space-around;
+	font-size: 30px;
 }
