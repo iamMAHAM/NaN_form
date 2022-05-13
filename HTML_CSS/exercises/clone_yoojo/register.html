@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>register</title>
+	<link rel="stylesheet" href="register.css">
+	<script src="https://kit.fontawesome.com/3d7d1bcca5.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<form action="#">
+		<span id="close-button"><i class="fa-regular fa-circle-xmark"></i></span>
+		<div class="login-top">
+			<p>
+				Vous êtes nouveau sur le site ?
+			</p>
+			<p>
+				Enregistrez-vous pour profiter de nos services
+			</p>
+			<div class="like-button">
+				<span class="ic"><i class="fa-brands fa-facebook-square"></i></span>
+				<span class="fb"> Continuer avec Facebook</span>
+			</div>
+		</div>
+		<div class="login-down">
+			<label for="nom">Nom :</label>
+			<input type="text" name="nom" placeholder="Nom">
+			<label for="prenom">Prenom :</label>
+			<input type="text" name="prenom" placeholder="Prenom">
+			<label for="age">Age :</label>
+			<input type="text" name="age" placeholder="age">
+			<label for="email">Adresse email :</label>
+			<input type="text" name="email" placeholder="Adresse e-mail">
+			<label for="password">Mot de passe :</label>
+			<div class="pass-show">
+				<input class="pwd" type="password" name="pwd" placeholder="mot de passe">
+				<span id="afficher" onclick="showOrHide(event)">Afficher</span>
+			</div>
+			<div class="like-buttons"><span class="co">S'enregistrer</span></div>
+			<div class="not-member">
+				<span>Déjà membre ?</span><a id="login_from_register" href="#">Se connecter</a>
+			</div>
+		</div>
+	</form>
+	<script src="script.js"></script>
+</body>
+</html>
