@@ -14,7 +14,8 @@ body
 	width: 100vw;
 	height: 100vh;
 }
-form
+#form1,
+#form2
 {
 	background-color: white;
 	display: none;
