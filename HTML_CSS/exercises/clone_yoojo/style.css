@@ -211,7 +211,7 @@ input
 .pictures
 {
 	overflow: hidden;
-	border-radius: 20px;
+	border-radius: 5px;
 }
 
 .c_services
@@ -422,13 +422,15 @@ input
 {
 	padding: 3px;
 	color: white;
-	background-color: green;
+	background-color: rgba(10, 202, 10, 0.5);
+	color: white;
 }
 .right-notes
 {
 	margin-left: 30px;
 }
 
+#remember-me,
 .master
 {
 	display: flex;
@@ -549,5 +551,24 @@ footer
 .iconess
 {
 	color: #0078fa;
+}
+
+.bg 
+{
+	display: none;
+	top: 0;
+	left: 0;
+	position: fixed;
+	z-index: 1;
+	width: 100vw;
+	height: 100vh;
+	background-color: black;
+	opacity: .5;
+}
+
+#remember-me >input
+{
+	width: 15px;
+	height: 15px;
 }
 
