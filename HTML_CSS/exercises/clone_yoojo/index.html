@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Yoojo Accueil</title>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="login.css">
 	<script src="https://kit.fontawesome.com/3d7d1bcca5.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -20,7 +21,7 @@
 					<li>
 						<a href="#">Devenir Jobber</a>
 					</li>
-					<li>
+					<li id="login_button">
 						<a href="#">Connexion</a>
 					</li>
 					<li>
@@ -474,6 +475,39 @@
 	</div>
 
 	<hr>
+	<div class="bg"></div>
+	<form action="#">
+		<span id="close-button"><i class="fa-regular fa-circle-xmark"></i></span>
+		<div class="login-top">
+			<p>
+				Content de vous revoir !
+			</p>
+			<p>
+				Connectez vous pour acceder à votre compte 
+			</p>
+			<div class="like-button">
+				<span class="ic"><i class="fa-brands fa-facebook-square"></i></span>
+				<span class="fb"> Continuer avec Facebook</span>
+			</div>
+		</div>
+		<div class="login-down">
+			<input type="text" name="email" placeholder="Adresse-Email">
+			<div id="pass-show">
+				<input class="pwd" type="password" name="pwd" placeholder="mot de passe">
+				<span id="afficher" onclick="showOrHide(event)">Afficher</span>
+			</div>
+			<div id="lsls">
+				<div id="remember-me">
+					<input type="checkbox"><span>Se souvenir de moi</span>
+				</div>
+				<a href="#">Mot de passe oublié ?</a>
+			</div>
+			<div class="like-buttons"><span class="co">Se connecter</span></div>
+			<div class="not-member">
+				<span>Pas encore membre ?</span><a href="#">Créer un compte</a>
+			</div>
+		</div>
+	</form>
 	<footer>
 		<div>
 			<img class="logoss" src="https://d1b747rczec55w.cloudfront.net/assets/brand/yoojo-logo-icon-0b046b4cc9a75f81a78f7504d6a0542f96d3f2a68c9f72aca1670b13e7b74ac0.svg" alt="">
@@ -537,6 +571,7 @@
 				<img class="store" src="https://d1b747rczec55w.cloudfront.net/assets/app/google-play-badge-82bfd7160c955c71bca4cddf01f9deb0c00b2d13194834470aa16717f9ba5176.png" alt="">
 			</span>
 		</div>
+		<script src="script.js"></script>
 	</footer>
 </body>
 </html>
