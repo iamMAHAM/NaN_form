@@ -24,7 +24,7 @@
 					<li id="login_button">
 						<a href="#">Connexion</a>
 					</li>
-					<li>
+					<li id="register">
 						<a href="#">Inscription</a>
 					</li>
 				</ul>
@@ -476,7 +476,7 @@
 
 	<hr>
 	<div class="bg"></div>
-	<form action="#">
+	<form id="form1" action="#">
 		<span id="close-button"><i class="fa-regular fa-circle-xmark"></i></span>
 		<div class="login-top">
 			<p>
@@ -505,6 +505,40 @@
 			<div class="like-buttons"><span class="co">Se connecter</span></div>
 			<div class="not-member">
 				<span>Pas encore membre ?</span><a href="#">Créer un compte</a>
+			</div>
+		</div>
+	</form>
+	<form id="form2" action="#">
+		<span id="close-button"><i class="fa-regular fa-circle-xmark"></i></span>
+		<div class="login-top">
+			<p>
+				Vous êtes nouveau sur le site ?
+			</p>
+			<p>
+				Enregistrez-vous pour profiter de nos services
+			</p>
+			<div class="like-button">
+				<span class="ic"><i class="fa-brands fa-facebook-square"></i></span>
+				<span class="fb"> Continuer avec Facebook</span>
+			</div>
+		</div>
+		<div class="login-down">
+			<label for="nom">Nom :</label>
+			<input type="text" name="nom" placeholder="Nom">
+			<label for="prenom">Prenom :</label>
+			<input type="text" name="prenom" placeholder="Prenom">
+			<label for="age">Age :</label>
+			<input type="text" name="age" placeholder="age">
+			<label for="email">Adresse email :</label>
+			<input type="text" name="email" placeholder="Adresse e-mail">
+			<label for="password">Mot de passe :</label>
+			<div class="pass-show">
+				<input class="pwd" type="password" name="pwd" placeholder="mot de passe">
+				<span id="afficher" onclick="showOrHide(event)">Afficher</span>
+			</div>
+			<div class="like-buttons"><span class="co">S'enregistrer</span></div>
+			<div class="not-member">
+				<span>Déjà membre ?</span><a href="#">Se connecter</a>
 			</div>
 		</div>
 	</form>
