@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="login.css">
+	<script src="https://kit.fontawesome.com/3d7d1bcca5.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<form action="#">
+		<span id="close-button"><i class="fa-regular fa-circle-xmark"></i></span>
+		<div class="login-top">
+			<p>
+				Content de vous revoir !
+			</p>
+			<p>
+				Connectez vous pour acceder à votre compte 
+			</p>
+			<div class="like-button">
+				<span class="ic"><i class="fa-brands fa-facebook-square"></i></span>
+				<span class="fb"> Continuer avec Facebook</span>
+			</div>
+		</div>
+		<div class="login-down">
+			<input type="text" name="email" placeholder="Adresse-Email">
+			<div id="pass-show">
+				<input class="pwd" type="password" name="pwd" placeholder="mot de passe">
+				<span id="afficher" onclick="showOrHide(event)">Afficher</span>
+			</div>
+			<div id="lsls">
+				<div id="remember-me">
+					<input type="checkbox"><span>Se souvenir de moi</span>
+				</div>
+				<a href="#">Mot de passe oublié ?</a>
+			</div>
+			<div class="like-buttons"><span class="co">Se connecter</span></div>
+			<div class="not-member">
+				<span>Pas encore membre ?</span><a href="#">Créer un compte</a>
+			</div>
+		</div>
+	</form>
+</body>
+</html>
