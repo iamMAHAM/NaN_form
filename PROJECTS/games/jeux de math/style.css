@@ -22,6 +22,14 @@ body, * {
 	transform: translate(-50%);
 }
 
+#calc >span,
+#level-div >span,
+#found-div >span
+{
+	color: red;
+	font-size: 25px;
+}
+
 #loading-bar {
 	position: absolute;
 	background-color: grey;
@@ -44,6 +52,9 @@ body, * {
 }
 input
 {
+	color: red;
+	font-size: 25px;
+	height: 30px;
 	width: 100px;
 }
 
