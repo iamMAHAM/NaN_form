@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login / Register</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://kit.fontawesome.com/3d7d1bcca5.js" crossorigin="anonymous"></script>
+	
+</head>
+<body>
+	<header class="header">
+		<div class="header-items">
+
+			<div class="header-items-left">
+				<i class="fa-brands fa-adn"></i>
+				<span class="tit">ADN</span>
+			</div>
+			<div class="header-items-right">
+				<span class="right">HOME</span>
+				<span class="right">VIEWS</span>
+				<span class="right">CONTACTS</span>
+			</div>
+		</div>
+		<img class="header-img" src="https://images.pexels.com/photos/3783512/pexels-photo-3783512.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3783512.jpg&fm=jpg" alt="">
+	</header>
+	<div class="login-register-pop">
+		<div class="login-register-pop-left">
+			<span class="el register-from-left"><i class="fa-solid fa-registered"></i></span>
+			<span class="el">Register</span>
+		</div>
+		<div class="login-register-pop-left">
+			<span class="el login-from-left"><i class="fa-solid fa-circle-arrow-right"></i></span>
+			<span class="el">Login</span>
+		</div>
+	</div>
+
+	<form action="#" class="register-fields register">
+	<fieldset class="register-fieldset">
+		<legend class="register-legend">Register</legend>
+		<input class="fields" type="text" name="name" placeholder="Name">
+		<input class="fields" type="text" name="surname" placeholder="Surname">
+		<input class="fields" type="text" name="email" placeholder="E-mail">
+		<input class="fields" type="password" name="password" placeholder="password">
+		<input class="fields" type="number" name="age" placeholder="Age">
+		<input class="fields" type="text" name="country" placeholder="country">
+		<div class="bottom">
+			<div class="bottom-left">
+				<div class="bottom-left-left">
+					<input type="checkbox" name="agree">
+					<span>I Agree</span>
+				</div>
+				<div class="bottom-left-right">
+					<button class="register-button">Register</button>
+				</div>
+			</div>
+			<div class="bottom-left">
+				<div class="bottom-left-left">
+					<span>Already have an Account ?</span><br>
+					<a class="login-from-register Already" href="#">Login</a>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+	</form>
+
+	<form action="#" class="register-fields login">
+		<fieldset class="register-fieldset">
+			<legend class="register-legend">Login</legend>
+			<p class="happy-back">
+				Happy to see to you back !
+				Login now ...
+			</p>
+			<input class="fields" type="text" name="email" placeholder="E-mail">
+			<input class="fields" type="password" name="password" placeholder="password">
+			<div class="bottom">
+				<div class="bottom-left">
+					<div class="bottom-left-left">
+						<input type="checkbox" name="agree">
+						<span>Remember me</span>
+					</div>
+					<div class="bottom-left-right">
+						<button class="register-button">Login</button>
+					</div>
+				</div>
+				<div class="bottom-left">
+					<div class="bottom-left-left">
+						<span>Not have an Account ?</span><br>
+						<a class="login-from-register noyet" href="#">Register</a>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+
+	<script src="script.js"></script>
+</body>
+</html>
