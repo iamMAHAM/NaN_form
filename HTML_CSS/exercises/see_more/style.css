@@ -1,0 +1,61 @@
+body, *
+{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.container
+{
+	overflow: hidden;
+	position: absolute;
+}
+
+.imgs
+{
+	padding: 10px;
+	width: 252px;
+	height: 300px;
+	background-color: #0078fa;
+}
+
+.vp
+{
+	cursor: pointer;
+	position: relative;
+	text-decoration: underline;
+	cursor: pointer;
+	font-size: 20px;
+	left: 50%;
+}
+
+.active
+{
+	display: block;
+}
+
+.images
+{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.cadres
+{
+	text-align: center;
+	margin: 15px;
+	border: 1px solid #333;
+}
+
+.cadret
+{
+	color: #333;
+	font-size: 20px;
+}
+
+.bottom
+{
+	display: none;	
+}
