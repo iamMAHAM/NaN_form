@@ -1,0 +1,38 @@
+form
+{
+	width:440px;
+	padding:25px;
+	margin:auto;
+	border:5px solid #aaa;
+	border-radius:15px 15px;
+}
+
+input
+{
+	background:#888;
+	color:#fff;
+	font-size:15px;
+	padding-top:15px;
+	padding-bottom:15px;
+	padding-left:19px;
+	width: 60px;
+	padding-right:19px;
+	margin:6px;
+}
+
+h2
+{
+	text-align:center;
+}
+
+input.sc
+{
+	width: auto;
+	background:#fff;
+	color:#000;
+}
+
+table
+{
+	text-align: center;
+}
