@@ -1,3 +1,15 @@
+/**targetting elements for 2nd functions */
+let second = document.querySelector(".sec")
+let sinus = document.querySelector(".sin")
+let cosinus = document.querySelector(".cos")
+let tangente = document.querySelector(".tan")
+let form = document.querySelector("form")
+
+let sinusAtt = sinus.getAttribute("onclick")
+let cosAtt = cosinus.getAttribute("onclick")
+let tangAtt =tangente.getAttribute("onclick")
+
+console.log(sinus.onclick)
 
 function addChar(input, character)
 {
@@ -77,6 +89,12 @@ function checkNum(str)
 	return true
 }
 
+function degree(radians)
+{
+  var pi = Math.PI;
+  return radians * (180/pi);
+}
+
 function fact(form)
 {
 	let x = form.display.value
@@ -103,7 +121,52 @@ function fact(form)
 	form.display.value = fact;
 }
 
+function arcsin()
+{
+	form.display.value = Math.asin(form.display.value)
+
+}
+
+function arccos()
+{
+	form.display.value = Math.acos(form.display.value)
+	
+}
+
+function arctan()
+{
+	form.display.value = Math.atan(form.display.value)
+	
+}
+
 function Snd()
 {
-	
+	if (!second.classList.contains("active"))
+	{
+		second.classList.add("active")	
+		sinus.value = "sin⁻¹"
+		cosinus.value = "cos⁻¹"
+		tangente.value = "tan⁻¹"
+		sinus.removeAttribute("onclick")
+		sinus.addEventListener("click", arcsin)
+		cosinus.removeAttribute("onclick")
+		cosinus.addEventListener("click", arccos)
+		tangente.removeAttribute("onclick")
+		tangente.addEventListener("click", arctan)
+		
+	}
+	else
+	{
+		sinus.removeEventListener("click", arcsin)
+		cosinus.removeEventListener("click", arccos)
+		tangente.removeEventListener("click", arctan)
+		second.classList.remove("active")
+		sinus.value = "sin"
+		cosinus.value = "cos"
+		tangente.value = "tan"
+		sinus.setAttribute("onclick", sinusAtt)
+		cosinus.setAttribute("onclick", cosAtt)
+		tangente.setAttribute("onclick", tangAtt)
+
+	}
 }

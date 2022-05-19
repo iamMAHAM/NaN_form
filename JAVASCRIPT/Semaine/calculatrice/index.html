@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Calculatrice Scientifique</title>
 	<link rel="stylesheet" href="style.css">
-	<script src="script.js"></script>
 </head>
 <body>
 	<form name="calc">
@@ -20,7 +19,7 @@
 				<td><input type="button" value="C" onclick="deleteChar(this.form.display)"></td>
 				<td><input type="button" value="=" name="Enter" onclick="if (checkNum(this.form.display.value)) { compute(this.form) }"></td>
 				<td><input type="button" value="!" name="factorial" onclick="if (checkNum(this.form.display.value)) { fact(this.form) }"></td>
-				<td><input type="button" value="2nd" name="2nd" onclick="Snd(this.form)"></td>
+				<td><input class="sec" type="button" value="2nd" name="2nd" onclick="Snd(this.form)"></td>
 			</tr> 
 			<tr>
 				<td><input type="button" value="exp" onclick="if (checkNum(this.form.display.value)) { exp(this.form) }"></td>
@@ -52,13 +51,14 @@
 			</tr>                                  
 			<tr>                                   
 				<td><input type="button" value="( " onclick="addChar(this.form.display, '(')"></td>
-				<td><input type="button" value="cos" onclick="if (checkNum(this.form.display.value)) { cos(this.form) }"></td>
-				<td><input type="button" value="sin" onclick="if (checkNum(this.form.display.value)) { sin(this.form) }"></td>
-				<td><input type="button" value="tan" onclick="if (checkNum(this.form.display.value)) { tan(this.form) }"></td>
+				<td><input class="cos" type="button" value="cos" onclick="if (checkNum(this.form.display.value)) { cos(this.form) }"></td>
+				<td><input class="sin" type="button" value="sin" onclick="if (checkNum(this.form.display.value)) { sin(this.form) }"></td>
+				<td><input class="tan" type="button" value="tan" onclick="if (checkNum(this.form.display.value)) { tan(this.form) }"></td>
 				<td><input type="button" value=")" onclick="addChar(this.form.display, ')')"></td>
 			</tr>                                 
 			
 		</table>
-		</form>
+	</form>
+	<script src="script.js"></script>
 </body>
 </html>
