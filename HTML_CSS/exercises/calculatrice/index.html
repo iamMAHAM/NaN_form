@@ -20,7 +20,7 @@
 				<td><input type="button" value="C" onclick="deleteChar(this.form.display)"></td>
 				<td><input type="button" value="=" name="Enter" onclick="if (checkNum(this.form.display.value)) { compute(this.form) }"></td>
 				<td><input type="button" value="!" name="factorial" onclick="if (checkNum(this.form.display.value)) { fact(this.form) }"></td>
-				<td><input type="button" value="2nd" name="2nd" onclick="if (checkNum(this.form.display.value)) { Snd(this.form) }"></td>
+				<td><input type="button" value="2nd" name="2nd" onclick="Snd(this.form)"></td>
 			</tr> 
 			<tr>
 				<td><input type="button" value="exp" onclick="if (checkNum(this.form.display.value)) { exp(this.form) }"></td>
@@ -37,14 +37,14 @@
 				<td><input type="button" value=" * " onclick="addChar(this.form.display, '*')"></td>
 			</tr>                                   
 			<tr>                                    
-				<td><input type="button" value="sqrt" onclick="if (checkNum(this.form.display.value)) { sqrt(this.form) }"></td>
+				<td><input type="button" value="√x" onclick="if (checkNum(this.form.display.value)) { sqrt(this.form) }"></td>
 				<td><input type="button" value="1" onclick="addChar(this.form.display, '1')"></td>
 				<td><input type="button" value="2" onclick="addChar(this.form.display, '2')"></td>
 				<td><input type="button" value="3" onclick="addChar(this.form.display, '3')"></td>
 				<td><input type="button" value="-" onclick="addChar(this.form.display, '-')"></td>
 			</tr>                                  
 			<tr>                                   
-				<td><input type="button" value="sq" onclick="if (checkNum(this.form.display.value)) { square(this.form) }"></td>
+				<td><input type="button" value="x²" onclick="if (checkNum(this.form.display.value)) { square(this.form) }"></td>
 				<td><input type="button" value="0" onclick="addChar(this.form.display, '0')"></td>
 				<td><input type="button" value="." onclick="addChar(this.form.display, '.')"></td>
 				<td><input type="button" value="+/-" onclick="changeSign(this.form.display)"></td>
