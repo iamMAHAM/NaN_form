@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>rgb</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="containers">
+			<div class="color"></div>
+			<div class="content">
+				<span>R</span>
+				<input type="range" min="0" max="255" step="1" class="range red" value="255" oninput="setRgb()">
+				<span>255</span>
+			</div>
+			<div class="content">
+				<span>G</span>
+				<input type="range" min="0" max="255" step="1" class="range green" value="255" oninput="setRgb()">
+				<span>255</span>
+			</div>
+			<div class="content">
+				<span>B</span>
+				<input type="range" min="0" max="255" step="1" class="range blue" value="255" oninput="setRgb()">
+				<span>255</span>
+			</div>
+		</div>
+		<div class="containers">
+			<div class="color gl"></div>
+			<div class="content">
+				<span>R</span>
+				<input type="range" min="0" max="255" step="1" class="range redl" value="255" oninput="setRgbg()">
+				<span>255</span>
+			</div>
+			<div class="content">
+				<span>G</span>
+				<input type="range" min="0" max="255" step="1" class="range greenl" value="255" oninput="setRgbg()">
+				<span>255</span>
+			</div>
+			<div class="content">
+				<span>B</span>
+				<input type="range" min="0" max="255" step="1" class="range bluel" value="255" oninput="setRgbg()">
+				<span>255</span>
+			</div>
+		</div>
+	</div>
+	<script src="script.js"></script>
+</body>
+</html>

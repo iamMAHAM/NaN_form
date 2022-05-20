@@ -1,0 +1,58 @@
+body, *
+{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body
+{
+	background-color: aquamarine;
+}
+
+.color
+{
+	background-color: #fff;
+	height: 200px;
+	width: 200px;
+
+}
+
+.container
+{
+	width: 200px;
+	display: flex;
+	flex-direction: row;
+	gap: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.containers
+{
+	width: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+span
+{
+	font-size: 20px;
+	color: #555;
+	padding: 10px;
+}
+
+.content
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+input
+{
+	width: calc(100% - 50px);
+}
