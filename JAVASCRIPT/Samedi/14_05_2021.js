@@ -100,5 +100,5 @@ function fibonacci(limite)
 console.log(equation1(4, 9, 0))
 isPrime(32)
 divisor(100)
-factoriel(4)
-console.log(fibonacci(100))²
+factoriel(5)
+console.log(fibonacci(50))
