@@ -1,5 +1,10 @@
 function equation1(a, b, c)
 {
+	if (a === 0)
+	{
+		console.log("a ne peut être nul :(")
+		return
+	}
 	let x = (c - b)/a
 	if (a == 1)
 		a = ""
@@ -80,16 +85,20 @@ function fibonacci(limite)
 	while (c < limite)
 	{	
 		c = a + b
-		array.push(c)
-		a = b
-		b = c
+		if (c > limite){}
+		else
+		{
+			array.push(c)
+			a = b
+			b = c	
+		}
 	}
-	return (`les ${limite} premiers termes sont : ` + (array))
+	return (`les premiers termes inférieur à ${limite} sont : ` + (array))
 }
 
 
-console.log(equation1(1, 1, 0))
+console.log(equation1(4, 9, 0))
 isPrime(32)
 divisor(100)
 factoriel(4)
-console.log(fibonacci(4))
+console.log(fibonacci(100))²
