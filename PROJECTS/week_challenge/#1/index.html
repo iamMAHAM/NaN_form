@@ -28,13 +28,13 @@
 					<td><input class="cos" type="button" value="cos(x)" onclick="if (checkNum(form.display.value)) { cos() }"></td>
 					<td><input class="sin" type="button" value="sin(x)" onclick="if (checkNum(form.display.value)) { sin() }"></td>
 					<td><input class="tan" type="button" value="tan(x)" onclick="if (checkNum(form.display.value)) { tan() }"></td>
-					<td><input type="button" value="!" name="factorial" onclick="if (checkNum(form.display.value)) { fact() }"></td>
+					<td><input class="fact" type="button" value="!" name="factorial" onclick="if (checkNum(form.display.value)) { fact() }"></td>
 				</tr>
 				<tr>
 					<td><input type="button" value="7" onclick="addChar(form.display, '7')"></td>
 					<td><input type="button" value="8" onclick="addChar(form.display, '8')"></td>
 					<td><input type="button" value="9" onclick="addChar(form.display, '9')"></td>
-					<td><input type="button" value="/" onclick="addChar(form.display, '/')"></td>                             
+					<td><input class="div" type="button" value="/" onclick="addChar(form.display, this.value)"></td>                             
 					<td><input type="button" value="ln(x)" onclick="if (checkNum(form.display.value)) { ln() }"></td>
 				</tr>
 				<tr>
@@ -62,9 +62,9 @@
 		</form>
 		<div class="history">
 				<h2 id="hist">History</h2>
-				<i id="arrow" class="fa-solid fa-arrow-right-arrow-left"></i>
-				<span class="histem">2 * 3 = 5</span>
+				<span id="clear"><i class="fa-regular fa-trash-can"></i></span>
 		</div>
+		<i id="arrow" class="fa-solid fa-arrow-right-arrow-left"></i>
 	</div>
 	<script src="script.js"></script>
 </body>
