@@ -10,6 +10,7 @@ body, *
 	position: absolute;
 	left: 50%;
 	top: 50%;
+	height: 498px;
 	transform: translate(-50%, -50%);
 	display: flex;
 	flex-direction: row;
@@ -55,15 +56,16 @@ input.sc
 
 .history
 {
-	text-align: center;
 	display: flex;
+	overflow: auto;
+	text-align: center;
 	flex-direction: column;
-	transition: transform 5s;
+	transition: transform 3s, width 3s;
 	transform: translateX(-100%);
 	z-index: -1;
 	border-radius: 15px;
 	height: 100%;
-	width: 200px;
+	width: 0;
 	background-color: aquamarine;
 }
 
@@ -93,4 +95,14 @@ table
 
 .active
 {
+}
+
+#clear
+{
+	font-size: 20px;
+	cursor: pointer;
+	padding: 5px;
+	position: absolute;
+	top: 0;
+	right: 0;
 }
