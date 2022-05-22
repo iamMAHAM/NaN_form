@@ -158,20 +158,26 @@ function fact()
 
 function arcsin()
 {
-	form.display.value = Math.asin(form.display.value)
-
+	let c = form.display.value
+	let value = Math.floor(degree(Math.acos(form.display.value)))
+	form.display.value = value
+	appendToHistory(`sin⁻¹(${c}) = ${value}`)
 }
 
 function arccos()
 {
-	form.display.value = Math.acos(form.display.value)
-	
+	let c = form.display.value
+	let value = Math.floor(degree(Math.acos(form.display.value)))
+	form.display.value = value
+	appendToHistory(`cos⁻¹(${c}) = ${value}`)
 }
 
 function arctan()
 {
-	form.display.value = Math.atan(form.display.value)
-	
+	let c = form.display.value
+	let value = Math.floor(degree(Math.acos(form.display.value)))
+	form.display.value = value
+	appendToHistory(`tan⁻¹(${c}) = ${value}`)	
 }
 
 function Snd()
