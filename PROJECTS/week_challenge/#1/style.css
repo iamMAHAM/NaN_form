@@ -1,0 +1,96 @@
+body, *
+{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.container
+{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: row;
+	gap: 0%;
+
+}
+form
+{
+	width: 400px;
+	padding: 10px;
+	border: 5px solid #aaa;
+	border-radius: 15px;
+	background-color:  aquamarine;
+}
+
+input
+{
+	display: flex;
+	background: #888;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	padding: 15px 19px;
+	width:  60px;
+	margin: 6px;
+	justify-content: center;
+}
+
+h2
+{
+	text-align: center;
+}
+
+input.sc
+{
+	border-radius: 5px;
+	display: flex;
+	width:  350px;
+	pointer-events: none;
+	background: #fff;
+	color: #000;
+}
+
+.history
+{
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	transition: transform 5s;
+	transform: translateX(-100%);
+	z-index: -1;
+	border-radius: 15px;
+	height: 100%;
+	width: 200px;
+	background-color: aquamarine;
+}
+
+#arrow
+{
+	transform: translateX(100%);
+	z-index: 1;
+	cursor: pointer;
+	top: 0;
+	display: inline-block;
+	position: absolute;
+	right: 0;
+	font-size: 30px;
+	height: 100%;
+}
+
+.histem
+{
+	font-size: 20px;
+	padding: 3px;
+}
+
+table
+{
+	text-align:  center;
+}
+
+.active
+{
+}
