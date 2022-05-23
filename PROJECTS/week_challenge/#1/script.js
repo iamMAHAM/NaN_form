@@ -25,17 +25,17 @@ function addChar(input, character)
 
 function cos() 
 {
-	form.display.value = Math.cos(form.display.value);
+	form.display.value = parseFloat(Math.cos(radians(form.display.value))).toFixed(2);
 }
 
 function sin() 
 {
-	form.display.value = Math.sin(form.display.value);
+	form.display.value = parseFloat(Math.sin(radians(form.display.value))).toFixed(2)
 }
 
 function tan() 
 {
-	form.display.value = Math.tan(form.display.value);
+	form.display.value = parseFloat(Math.tan(radians(form.display.value))).toFixed(2)
 }
 
 function sqrt() 
@@ -118,14 +118,20 @@ function checkNum(str)
 
 function degree(radians)
 {
-  var pi = Math.PI;
-  return radians * (180/pi);
+	let pi = Math.PI
+	return radians * (180/pi)
+}
+
+function radians(degrees)
+{
+	let pi = Math.PI;
+	return degrees * (pi/180)
 }
 
 function fact()
 {
 	let x = form.display.value
-	if (Number(x) === NaN)
+	if (isNaN(x))
 	{
 		alert("Not a Number")
 		return
