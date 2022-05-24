@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>quizz</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="quizz">
+			<div class="questions">
+				<span class="question">Qui est tu ?</span>
+				<div class="lines">
+					<input type="checkbox" class="checkbox">
+					<span class="response">Abdul Kabore</span>
+				</div>
+				<div class="lines">
+					<input type="checkbox" class="checkbox">
+					<span class="response">Akoto</span>
+				</div>
+				<div class="lines">
+					<input type="checkbox" class="checkbox">
+					<span class="response">No Body</span>
+				</div>
+			</div>
+			<div class="questions">
+				<span class="question">Que signifie NaN</span>
+				<div class="lines">
+					<input type="checkbox" class="checkbox">
+					<span class="response">Not a Number</span>
+				</div>
+				<div class="lines">
+					<input type="checkbox" class="checkbox">
+					<span class="response">Number a Number</span>
+				</div>
+				<div class="lines">
+					<input type="checkbox" class="checkbox">
+					<span class="response">Not African Number</span>
+				</div>
+			</div>
+			<div class="questions">
+				<span class="question">Que signifie HTML</span>
+				<div class="lines">
+					<input type="checkbox" class="checkbox">
+					<span class="response">Hypertext Markup Language</span>
+				</div>
+				<div class="lines">
+					<input type="checkbox" class="checkbox">
+					<span class="response">Hola Monl Light</span>
+				</div>
+				<div class="lines">
+					<input type="checkbox" class="checkbox">
+					<span class="response">Hooly Month Light</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="grades">
+			
+			<div class="timer">
+				<p>
+					Remaining Time
+				</p>
+				<p id="count">
+					<span id="de">3</span> <span>s</span>
+				</p>
+			</div>
+			<p class="grade">
+				<span id="current-grade">0</span><span id="tot">/20</span>
+			</p>
+		</div>
+
+	</div>
+	<button id="next">Next</button>
+	<script src="script.js"></script>
+</body>
+</html>
