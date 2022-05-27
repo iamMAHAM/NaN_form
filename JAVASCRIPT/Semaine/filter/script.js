@@ -23,6 +23,7 @@ function insertMessage()
 	{
 		messages.appendChild(div)
 		banned.style.display = "none"
+		input.value = ""
 	}
 	
 }
