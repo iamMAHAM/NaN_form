@@ -1,0 +1,24 @@
+.container
+{
+	text-align: center;
+	margin-top: 20px;
+	position: relative;
+	width: 85%;
+	border: 2px solid black;
+	height: 85vh;
+	left: 50%;
+	transform: translate(-50%);
+}
+
+.description
+{
+	font-size: 30px;
+}
+
+button {
+	position: relative;
+	display: block;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 20px;
+}
