@@ -1,0 +1,65 @@
+body, *
+{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.container
+{
+	margin-top: 20px;
+	position: relative;
+	width: 85%;
+	border: 2px solid black;
+	height: 85vh;
+	left: 50%;
+	transform: translate(-50%);
+}
+
+.messages
+{
+	overflow-y: scroll;
+	height: 100%;
+}
+
+.message
+{
+	border: 2px;
+	border: 2px solid black;
+	border-radius: 5px;
+	margin: 20px;
+	padding: 20px;
+	text-align: justify;
+}
+
+.input-send
+{
+	display: flex;
+	flex-direction: row;
+	border-radius: 5px;
+	border: 2px solid black;
+	left: 50%;
+	height: 35px;
+	position: fixed;
+	bottom: 5px;
+	transform: translate(-50%);
+	width: 98%;
+}
+
+#input
+{
+	display: block;
+	height: 100%;
+	font-size: 20px;
+	width: calc(100% - 35px);
+}
+
+#send
+{
+	color: rgb(40, 40, 156);
+	cursor: pointer;
+	font-size: 25px;
+	height: 30px;
+	width: 30px;
+}
