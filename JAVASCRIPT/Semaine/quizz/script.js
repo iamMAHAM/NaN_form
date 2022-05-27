@@ -4,12 +4,43 @@ let time = document.querySelector("#de")
 let currentGrade = document.querySelector("#current-grade")
 let checks = document.querySelectorAll(".checkbox")
 let next = document.querySelector("#next")
+let question = document.querySelector(".question")
+let response = document.querySelectorAll(".response")
 let inter = null
+let index = null
+let questions = null
+let currentArray = []
 /* Functions */
 
 function upgradeRate()
 {
 	currentGrade.textContent = Number(currentGrade.textContent) + 2
+}
+
+function addChecked(e)
+{
+	currentArray.sort()
+	if (e.target.checked)
+	{
+		let value = Number(e.target.value)
+		console.log("value added", value)
+		currentArray.push(value)
+	}
+	else
+	{
+		let value = Number(e.target.value)
+		console.log("value removed",value)
+		currentArray.splice(currentArray.indexOf(value), 1)
+	}
+	currentArray.sort()
+}
+
+function uncheckAll()
+{
+	for (let i = 0; i < checks.length; i++)
+	{
+		checks[i].checked = false
+	}
 }
 
 function addOrRemoveListener(array, action)
@@ -19,6 +50,7 @@ function addOrRemoveListener(array, action)
 		for (let i = 0; i < array.length; i++)
 		{
 			array[i].addEventListener("click", counter)
+			array[i].addEventListener("click", addChecked)
 		}
 	}
 
@@ -57,63 +89,71 @@ function counter(e)
 			{
 				time.textContent = 0
 				clearInterval(inter)
+				verifyAnswer()
 			}
-			upgradeRate()
 		}
 	}, 1000)
 }
 
 function nextQuestions()
 {
+	uncheckAll()
 	clearInterval(inter)
-	time.textContent = 3
-	document.querySelector(".quizz").innerHTML = `			<div class="questions">
-	<span class="question">next</span>
-	<div class="lines">
-		<input type="checkbox" class="checkbox">
-		<span class="response">Abdul Kabore</span>
-	</div>
-	<div class="lines">
-		<input type="checkbox" class="checkbox">
-		<span class="response">Akoto</span>
-	</div>
-	<div class="lines">
-		<input type="checkbox" class="checkbox">
-		<span class="response">No Body</span>
-	</div>
-</div>
-<div class="questions">
-	<span class="question">next NaN</span>
-	<div class="lines">
-		<input type="checkbox" class="checkbox">
-		<span class="response">Not a Number</span>
-	</div>
-	<div class="lines">
-		<input type="checkbox" class="checkbox">
-		<span class="response">Number a Number</span>
-	</div>
-	<div class="lines">
-		<input type="checkbox" class="checkbox">
-		<span class="response">Not African Number</span>
-	</div>
-</div>
-<div class="questions">
-	<span class="question">Qnext HTML</span>
-	<div class="lines">
-		<input type="checkbox" class="checkbox">
-		<span class="response">Hypertext Markup Language</span>
-	</div>
-	<div class="lines">
-		<input type="checkbox" class="checkbox">
-		<span class="response">Hola Monl Light</span>
-	</div>
-	<div class="lines">
-		<input type="checkbox" class="checkbox">
-		<span class="response">Hooly Month Light</span>
-	</div>
-</div>`
-addOrRemoveListener(document.querySelectorAll(".checkbox"), "add")
+	time.textContent = 60
+	addOrRemoveListener(document.querySelectorAll(".checkbox"), "add")
+	verifyAnswer(index)
+	randomQuestion()
 }
+
+function verifyAnswer(index)
+{
+	console.log("current", currentArray)
+	correct = questions[index].correctIndex.sort()
+	console.log(correct)
+	if (JSON.stringify(correct) === JSON.stringify(currentArray))
+	{
+		upgradeRate()
+	}
+	else
+	{
+		alert("you failed this question")
+	}
+}
+
+function randomQuestion()
+{
+	index = getRandomIndex(questions)
+	let elms = questions[index]
+	question.textContent = elms.question
+	for (let i = 0; i < 4; i++)
+	{
+		switch (i)
+		{
+			case 0:
+				response[i].textContent = elms.answers[i]
+			case 1:
+				response[i].textContent = elms.answers[i]
+			case 2:
+				response[i].textContent = elms.answers[i]
+			case 3:
+				response[i].textContent = elms.answers[i]
+		}
+	}
+}
+/*Json treatment*/
+
+function getRandomIndex(array)
+{
+	return Math.floor(Math.random() * array.length)
+}
+
+window.addEventListener("load", async () =>
+{
+	questions = await fetch("./quizz.json")
+	questions = await questions.json()
+	questions = questions.questions
+	randomQuestion()
+})
 
 /*AddEventListener */
 addOrRemoveListener(checks, "add")
