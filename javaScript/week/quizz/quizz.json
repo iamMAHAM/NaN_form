@@ -109,28 +109,6 @@
 				"29,029 ft (8,847 m)"
 			],
 			"correctIndex": [3]
-		},
-
-		{
-			"question": "When did The Avengers come out?",
-			"answers": [
-				"May 2, 2008",
-				"May 4, 2012",
-				"May 3, 2013",
-				"April 4, 2014"
-			],
-			"correctIndex": [1]
-		},
-
-		{
-			"question": "What is 48,879 in hexidecimal?",
-			"answers": [
-				"0x18C1",
-				"0xBEEF",
-				"0xDEAD",
-				"0x12D591"
-			],
-			"correctIndex": [1]
 		}
 	]
 }
