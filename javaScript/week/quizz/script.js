@@ -6,6 +6,9 @@ let checks = document.querySelectorAll(".checkbox")
 let next = document.querySelector("#next")
 let question = document.querySelector(".question")
 let response = document.querySelectorAll(".response")
+let quizz = document.querySelector(".quizz")
+let indicator = document.querySelector(".success-failed")
+let grades = document.querySelector(".grades")
 let inter = null
 let index = null
 let questions = null
@@ -70,91 +73,81 @@ function addOrRemoveListener(array, action)
 		
 }
 
-function counter(e)
+function counter()
 {
-	let parent = e.target.parentElement.parentElement.parentElement
-	children = parent.children
-	let first = children[0]
-	console.log("first", first)
 	addOrRemoveListener(checks, "remove")
 	inter = setInterval(() =>
 	{
 		time.textContent = Number(time.textContent) - 1
 		if (Number(time.textContent) === 0)
 		{
-			time.textContent = 3
-			parent.removeChild(first)
-			first = children[0]
-			if (children.length === 0)
+			verifyAnswer()
+			console.log("index before check if condition", index)
+			if (index === questions.length - 1)
 			{
 				time.textContent = 0
 				clearInterval(inter)
-				verifyAnswer()
+				quizz.style.display = "none"
+				grades.style.transform = "scale(1.5)"
+				return
+
 			}
+			time.textContent = 15
+			newQuestion()
 		}
 	}, 1000)
 }
 
-function nextQuestions()
+function successFailed()
 {
-	uncheckAll()
-	clearInterval(inter)
-	time.textContent = 60
-	addOrRemoveListener(document.querySelectorAll(".checkbox"), "add")
-	verifyAnswer(index)
-	randomQuestion()
+	indicator.style.display = "none"
 }
-
-function verifyAnswer(index)
+function verifyAnswer()
 {
 	console.log("current", currentArray)
+	console.log("correct no sorted ", questions[index].correctIndex)
 	correct = questions[index].correctIndex.sort()
-	console.log(correct)
+	console.log("correct sorted", correct)
+	console.log("stringiofied", JSON.stringify(currentArray))
 	if (JSON.stringify(correct) === JSON.stringify(currentArray))
 	{
+		indicator.style.display = "block"
+		indicator.style.color = "green"
+		indicator.textContent = "Great you succeed this question ! "
 		upgradeRate()
 	}
 	else
 	{
-		alert("you failed this question")
+		indicator.style.display = "block"
+		indicator.style.color = "red"
+		indicator.textContent = "Sorry you failed this question ! "
 	}
+	setTimeout(successFailed, 2000)
 }
 
-function randomQuestion()
+function newQuestion()
 {
-	index = getRandomIndex(questions)
+	uncheckAll()
+	currentArray = []
+	index += 1
 	let elms = questions[index]
 	question.textContent = elms.question
 	for (let i = 0; i < 4; i++)
 	{
-		switch (i)
-		{
-			case 0:
-				response[i].textContent = elms.answers[i]
-			case 1:
-				response[i].textContent = elms.answers[i]
-			case 2:
-				response[i].textContent = elms.answers[i]
-			case 3:
-				response[i].textContent = elms.answers[i]
-		}
+		response[i].textContent = elms.answers[i]
 	}
 }
 /*Json treatment*/
 
-function getRandomIndex(array)
-{
-	return Math.floor(Math.random() * array.length)
-}
-
 window.addEventListener("load", async () =>
 {
+	index = -1
 	questions = await fetch("./quizz.json")
 	questions = await questions.json()
 	questions = questions.questions
-	randomQuestion()
+	newQuestion()
 })
 
 /*AddEventListener */
 addOrRemoveListener(checks, "add")
-next.addEventListener("click", nextQuestions)
+next.addEventListener("click", newQuestion)
