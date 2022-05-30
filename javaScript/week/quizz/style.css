@@ -55,6 +55,7 @@ body, *
 {
 	font-weight: bold;
 	text-align: center;
+	transition: transform 3s;
 }
 
 #count
@@ -80,4 +81,13 @@ body, *
 	position: absolute;
 	bottom: 5px;
 	left: 50%;
+}
+
+.success-failed
+{
+	position: absolute;
+	left: 50%;
+	top: 20%;
+	font-size: 23px;
+	transform: translate(-50%);
 }
