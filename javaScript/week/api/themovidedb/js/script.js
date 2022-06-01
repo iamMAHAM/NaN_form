@@ -8,8 +8,9 @@ let page = 0
 
 window.addEventListener("load", async () =>
 {
-	extendImages()
+	await extendImages()
 	vp.addEventListener("click", extendImages)
+
 })
 
 function fillImages(array)
@@ -18,7 +19,7 @@ function fillImages(array)
 	{
 		container.innerHTML +=
 		`
-		<div class="cadre" id=${array[i].id}>
+		<div class="cadre" id=${array[i].id} onclick="getDetails(event)">
 			<span class="definition oncadre">HD</span>
 			<span class="rate oncadre">${array[i].vote_average}</span>
 			<img src="${imgUrl+array[i].poster_path}" alt="" class="image">
@@ -64,4 +65,30 @@ async function extendImages()
 	let res = await fetch(`${baseUrl}/discover/movie?sort_by=popularity.desc&api_key=${apiKey}&language=fr&page=${page}`)
 	res = await res.json()
 	fillImages(res.results)
+}
+
+function joinArray(array)
+{
+	let joined = []
+	array.forEach(element => {
+		joined.push(element.name)
+	});
+	return joined.join(", ")
+}
+async function getDetails(e)
+{
+	id = e.target.parentElement.id
+	console.log("id", id)
+	let res = await fetch(`${baseUrl}/movie/${id}?api_key=${apiKey}&language=fr`)
+	res = await res.json()
+	console.log("details", res)
+	return {
+		original_title: res.original_title,
+		overview: res.overview,
+		vote_average: res.vote_average,
+		gender: joinArray(res.genres),
+		production_companies: joinArray(res.production_companies),
+		release_date: res.release_date.slice(0, 4),
+		poster_path: res.poster_path
+	}
 }
