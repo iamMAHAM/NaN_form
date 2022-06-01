@@ -3,23 +3,22 @@ const baseUrl = "https://api.themoviedb.org/3"
 const imgUrl = "https://image.tmdb.org/t/p/w500"
 let container = document.querySelector(".container")
 let vp = document.querySelector(".vp")
+let fetched = []
+let page = 0
 
 window.addEventListener("load", async () =>
 {
-	let res = await fetch(`${baseUrl}/discover/movie?sort_by=popularity.desc&api_key=${apiKey}&language=fr`)
-	res = await res.json()
-	console.log(res)
-	fillImages(res.results)
+	extendImages()
 	vp.addEventListener("click", extendImages)
-	fetchImage(20, 25)
 })
 
 function fillImages(array)
 {
 	for (let i = 0; i < array.length; i++)
 	{
+		console.log(container.innerHTML)
 		container.innerHTML +=
-		`<div class="cadre">
+		`<div class="cadre" id=${array[i].id}>
 		<span class="definition oncadre">HD</span>
 		<span class="rate oncadre">${array[i].vote_average}</span>
 		<img src="${imgUrl+array[i].poster_path}" alt="" class="image">
@@ -28,30 +27,40 @@ function fillImages(array)
 	}
 }
 
-async function fetchImage(from, to)
+async function fetchImage()
 {
-	let fetched = []
-	for (let id = from; id < to; id++)
+	try
 	{
+		id = generateNumber(0, 5000)
 		let details = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=fr`)
-		console.log(details.status)
-		details = await details.json()
-		datos = {
-			vote_average: details.vote_average,
-			title: details.title,
-			poster_path: details.poster_path,
-		}
-		fetched.push(datos)
+		if (details.ok)
+		{
+			details = await details.json()
+			if (!details.poster_path){throw TypeError(`error while loading this id : ${id}`)}
+			datos = {
+				vote_average: details.vote_average,
+				title: details.title,
+				poster_path: details.poster_path,
+			}
+			fetched.push(datos)
+		} else {throw TypeError(`error while loading this id : ${id}`)}
 	}
-	console.log(fetched)
+	catch (e){}
 	return fetched
-
 }
 
-async function extendImages(array)
+async function fetchImages()
 {
-	for (let i = 0; i < 50; i++)
-	{
-		container.innerHTML
-	}
+	fetched = []
+	while (fetched.length < 20){await fetchImage()}
+}
+
+function generateNumber(min, max){ return Math.floor(Math.random() * (max -min) + min) }
+
+async function extendImages()
+{
+	page += 1
+	let res = await fetch(`${baseUrl}/discover/movie?sort_by=popularity.desc&api_key=${apiKey}&language=fr&page=${page}`)
+	res = await res.json()
+	fillImages(res.results)
 }
