@@ -16,14 +16,15 @@ function fillImages(array)
 {
 	for (let i = 0; i < array.length; i++)
 	{
-		console.log(container.innerHTML)
 		container.innerHTML +=
-		`<div class="cadre" id=${array[i].id}>
-		<span class="definition oncadre">HD</span>
-		<span class="rate oncadre">${array[i].vote_average}</span>
-		<img src="${imgUrl+array[i].poster_path}" alt="" class="image">
-		<span class="title oncadre">${array[i].title}</span>
-		</div>`
+		`
+		<div class="cadre" id=${array[i].id}>
+			<span class="definition oncadre">HD</span>
+			<span class="rate oncadre">${array[i].vote_average}</span>
+			<img src="${imgUrl+array[i].poster_path}" alt="" class="image">
+			<span class="title oncadre">${array[i].title}</span>
+		</div>
+		`
 	}
 }
 
