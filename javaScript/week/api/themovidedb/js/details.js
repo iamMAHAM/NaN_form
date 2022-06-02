@@ -1,15 +1,19 @@
 let details = document.querySelector(".details")
-
-function fillDetails(data)
+console.log(details)
+function fillDetails()
 {
+	data = localStorage.getItem("datas")
+	data = JSON.parse(data)
+	console.log("this data", data)
+	details.innerHTML = 
 	`
 	<div class="left">
 			<div class="cadre img">
-				<img src="${data.poster_path}" alt="" class="image img">
+				<img src="${imgUrl+data.poster_path}" alt="" class="image img">
 			</div>
 	</div>
 	<div class="right">
-		<span class="top">$${data.title}</span>
+		<span class="top">${data.original_title}</span>
 		<p class="descrp">
 			${data.overview}
 		</p>
@@ -19,7 +23,7 @@ function fillDetails(data)
 					<span class="gender">Gender:</span> <span class="cats">${data.gender}</span>
 				</p>
 				<p class="items">
-					<span class="gender">Productosr:</span> <span class="cats">$${data.production_companies}</span>
+					<span class="gender">Productors:</span> <span class="cats">${data.production_companies}</span>
 				</p>
 				<p class="items">
 					<span class="gender">Rate:</span> <span class="cats">${data.vote_average}</span>
@@ -40,3 +44,6 @@ function fillDetails(data)
 	</div>
 	`
 }
+
+
+window.addEventListener("load", fillDetails)
