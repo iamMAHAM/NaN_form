@@ -5,7 +5,7 @@ let container = document.querySelector(".container")
 let vp = document.querySelector(".vp")
 let fetched = []
 let page = 0
-
+let datas = null
 window.addEventListener("load", async () =>
 {
 	await extendImages()
@@ -19,7 +19,7 @@ function fillImages(array)
 	{
 		container.innerHTML +=
 		`
-		<div class="cadre" id=${array[i].id} onclick="getDetails(event)">
+		<div class="cadre" id=${array[i].id} href="details.html" onclick="newPage(event)">
 			<span class="definition oncadre">HD</span>
 			<span class="rate oncadre">${array[i].vote_average}</span>
 			<img src="${imgUrl+array[i].poster_path}" alt="" class="image">
@@ -78,10 +78,8 @@ function joinArray(array)
 async function getDetails(e)
 {
 	id = e.target.parentElement.id
-	console.log("id", id)
 	let res = await fetch(`${baseUrl}/movie/${id}?api_key=${apiKey}&language=fr`)
 	res = await res.json()
-	console.log("details", res)
 	return {
 		original_title: res.original_title,
 		overview: res.overview,
@@ -91,4 +89,12 @@ async function getDetails(e)
 		release_date: res.release_date.slice(0, 4),
 		poster_path: res.poster_path
 	}
+}
+
+async function newPage(e)
+{
+	datas = await getDetails(e)
+	localStorage.setItem("datas", JSON.stringify(datas))
+	open("details.html", "new url")
+	console.log(datas)
 }
