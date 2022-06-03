@@ -1,5 +1,5 @@
 let details = document.querySelector(".details")
-console.log(details)
+let log = document.querySelector("#logout")
 function fillDetails()
 {
 	isConnected = localStorage.getItem("is_connected")
@@ -48,6 +48,10 @@ function fillDetails()
 		`
 	}
 	else {window.location.href = "login.html"}
+	log.addEventListener("click", ()=>{
+		localStorage.setItem("is_connected", "false")
+		window.location.href = "login.html"
+	})
 }
 
 window.addEventListener("load", fillDetails)
