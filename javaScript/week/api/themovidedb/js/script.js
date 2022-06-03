@@ -3,15 +3,11 @@ const baseUrl = "https://api.themoviedb.org/3"
 const imgUrl = "https://image.tmdb.org/t/p/w500"
 let container = document.querySelector(".container")
 let vp = document.querySelector(".vp")
+let logout = document.querySelector("#logout")
 let fetched = []
 let page = 0
 let datas = null
-window.addEventListener("load", async () =>
-{
-	await extendImages()
-	vp.addEventListener("click", extendImages)
-
-})
+let isConnected
 
 function fillImages(array)
 {
@@ -23,7 +19,6 @@ function fillImages(array)
 			<span class="definition oncadre">HD</span>
 			<span class="rate oncadre">${array[i].vote_average}</span>
 			<img src="${imgUrl+array[i].poster_path}" alt="" class="image">
-			<span class="title oncadre">${array[i].title}</span>
 		</div>
 		`
 	}
@@ -98,3 +93,18 @@ async function newPage(e)
 	open("details.html", "new url")
 	console.log(datas)
 }
+
+window.addEventListener("load", async () =>
+{
+	isConnected = localStorage.getItem("is_connected")
+	if (isConnected == "true")
+	{
+		await extendImages()
+		vp.addEventListener("click", extendImages)
+	}
+	else {window.location.href = "login.html"}
+	logout.addEventListener("click", ()=>{
+		localStorage.setItem("is_connected", "false")
+		window.location.href = "login.html"
+	})
+})

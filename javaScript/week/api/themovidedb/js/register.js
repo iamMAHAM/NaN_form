@@ -13,11 +13,12 @@ console.log(parent.children)
 let keys = ["name", "surname", "email", "password", "age", "country"]
 function registerF(e)
 {
+	e.preventDefault()
 	for (let i = 1, j = 0; i < 7; i++, j++)
 	{
 		localStorage.setItem(keys[j], parent.children[i].value)
-		console.log(`item : ${keys[j]} || value : ${parent.children[i].value}`)
 	}
+	window.location.href = "login.html"
 }
 
 /* Event Listeners */
