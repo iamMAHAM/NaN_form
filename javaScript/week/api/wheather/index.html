@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Meteo</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://kit.fontawesome.com/3d7d1bcca5.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="header">
+		<!-- <img class="img" src="https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg?cs=srgb&dl=pexels-pixabay-33545.jpg&fm=jpg" alt=""> -->
+		<div class="content">
+			<div class="header-top">
+				<span id="icone"><i class="fa-solid fa-cloud-sun-rain"></i></span>Ivoire Méteo
+			</div>
+			<div class="header-center">
+				<input type="text" id="search-input" placeholder="recherchez votre ville">
+				<span class="search"><i class="fa-solid fa-magnifying-glass"></i></span>
+			</div>
+			<div class="header-bottom">
+				<div class="current-location">
+					<span class="city">Abidjan</span>
+					<span class="country">Côte d'ivoire</span>
+					<div class="current-degree">
+						<img class="icone" src="https://images.pexels.com/photos/189349/pexels-photo-189349.jpeg?cs=srgb&dl=pexels-sebastian-voortman-189349.jpg&fm=jpg" alt="">
+						<span class="degree">30°</span>
+					</div>
+				</div>
+
+				<iframe class="map" src="https://maps.google.com/maps?q=abidjan&t=&z=7&ie=UTF8&iwloc=&output=embed" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+			</div>
+		</div>
+	</div>
+	<div class="container">
+	</div>
+	<script src="script.js"></script>
+</body>
+</html>
