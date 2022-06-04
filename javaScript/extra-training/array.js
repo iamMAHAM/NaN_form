@@ -94,10 +94,52 @@ class Arr
 		this.length++
 		return this.content
 	}
+
+	at(index)
+	{
+		return this.content[index]
+	}
+
+	pop()
+	{
+		let toDelete = this.content[this.length - 1]
+		delete this.content[this.length - 1]
+		this.length--
+		return toDelete
+	}
+
+	concat(arr)
+	{
+		for (let  i = 0; i < arr.length; i++)
+		{
+			this.content[this.length] = arr.content[i]
+			this.length++
+		}
+	}
+
+	find(item)
+	{
+		for (let i in this.content)
+		{
+			if (this.content[i] === item){return i}
+		}
+		return undefined
+	}
+
+	includes(item)
+	{
+		for (let  i = 0; i < this.length -1; i++)
+		{
+			if (this.content[i] === item){return true}
+		}
+		return false
+	}
 }
 
-let arr = new Arr("a", "b", "c", "d", "e", "f", 100, "m", "k", 'f')
+let arr = new Arr("a", "b", "c", "d", "e", "f", "g", "h", 'i')
+let arr1 = new Arr("j", "k", "l")
 
-arr.splice(-2, 1, "zoohien")
-console.log("array", arr)
-console.log(arr.max())
+
+arr.concat(arr1)
+console.log("includes", arr.includes("f"))
+console.log(arr.find("k"))
