@@ -134,12 +134,19 @@ class Arr
 		}
 		return false
 	}
+
+	forEach(callback)
+	{
+		for (let i = 0; i < this.length; i++)
+		{
+			callback(this.content[i])
+		}
+	}
 }
 
 let arr = new Arr("a", "b", "c", "d", "e", "f", "g", "h", 'i')
 let arr1 = new Arr("j", "k", "l")
+let arr2 = new Arr(2, 3, 4, 5)
 
 
-arr.concat(arr1)
-console.log("includes", arr.includes("f"))
-console.log(arr.find("k"))
+console.log(arr2.forEach(nElement => console.log("elment", nElement)))
