@@ -119,6 +119,7 @@ a
 
 #search
 {
+	display: none;
 	width: calc(100% - 30px);
 }
 .lol{
