@@ -4,6 +4,7 @@ const imgUrl = "https://image.tmdb.org/t/p/w500"
 let container = document.querySelector(".container")
 let vp = document.querySelector(".vp")
 let logout = document.querySelector("#logout")
+let search = document.querySelector("#search")
 let fetched = []
 let page = 0
 let datas = null
@@ -19,6 +20,7 @@ function fillImages(array)
 			<span class="definition oncadre">HD</span>
 			<span class="rate oncadre">${array[i].vote_average}</span>
 			<img src="${imgUrl+array[i].poster_path}" alt="" class="image">
+			<p class="title oncadre">${array[i].original_title}</p>
 		</div>
 		`
 	}
