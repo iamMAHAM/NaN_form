@@ -4,7 +4,9 @@ const imgUrl = "https://image.tmdb.org/t/p/w500"
 let container = document.querySelector(".container")
 let vp = document.querySelector(".vp")
 let logout = document.querySelector("#logout")
-let search = document.querySelector("#search")
+let search_input = document.querySelector("#search")
+let loupe = document.querySelector(".lol")
+console.log(search_input)
 let fetched = []
 let page = 0
 let datas = null
@@ -20,7 +22,7 @@ function fillImages(array)
 			<span class="definition oncadre">HD</span>
 			<span class="rate oncadre">${array[i].vote_average}</span>
 			<img src="${imgUrl+array[i].poster_path}" alt="" class="image">
-			<p class="title oncadre">${array[i].original_title}</p>
+			<p class="title oncadre">${array[i].original_title.toLowerCase()}</p>
 		</div>
 		`
 	}
@@ -54,7 +56,7 @@ async function fetchImages()
 	while (fetched.length < 20){await fetchImage()}
 }
 
-function generateNumber(min, max){ return Math.floor(Math.random() * (max -min) + min) }
+function generateNumber(min, max){ return Math.floor(Math.random() * (max - min) + min) }
 
 async function extendImages()
 {
@@ -88,6 +90,18 @@ async function getDetails(e)
 	}
 }
 
+function search(e)
+{
+	console.log("changed value : ", e.target.value)
+	let input = e.target.value
+	let titles = document.querySelectorAll(".title")
+	for (let i = 0; i < titles.length; i++)
+	{
+		if (titles[i].textContent.includes(input)){titles[i].parentElement.style.display = "flex"}
+		else {titles[i].parentElement.style.display = "none"}
+	}
+}
+
 async function newPage(e)
 {
 	datas = await getDetails(e)
@@ -96,8 +110,10 @@ async function newPage(e)
 	console.log(datas)
 }
 
+function show(){search_input.style.display = "block"}
 window.addEventListener("load", async () =>
 {
+	loupe.addEventListener("click", show)
 	isConnected = localStorage.getItem("is_connected")
 	if (isConnected == "true")
 	{
