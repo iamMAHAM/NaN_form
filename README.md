@@ -1,6 +1,6 @@
 # NAN Digital Academy Projects repository
 
-## HTML_CSS
+## html_css
 * Introduction to html and css
 
 ## javaScript
