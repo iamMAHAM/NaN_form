@@ -83,8 +83,9 @@ a
 	right: 5px;
 }
 
-.title
+.title.oncadre
 {
+	visibility: hidden;
 	bottom: 5px;
 	left: 50%;
 	transform: translateX(-50%);
@@ -101,4 +102,28 @@ a
 	font-size: 20px;
 	color: white;
 	font-weight: 100000;
+}
+
+#search {
+	display: flex;
+	font-size: 20px;
+}
+
+
+.onglet.search
+{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+#search
+{
+	width: calc(100% - 30px);
+}
+.lol{
+	cursor: pointer;
+	color: white;
+	font-size: 20px;
+	padding: 5px;
 }
