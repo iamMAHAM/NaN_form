@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Ivoire Stream</title>
 	<script src="https://kit.fontawesome.com/3d7d1bcca5.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 	<link rel="stylesheet" href="css/index.css">
 </head>
 <body>
@@ -22,9 +23,27 @@
 			</ul>
 		</nav>
 	</div>
+	<div class="first-slide">
+		
+	</div>
 	<div class="container">
 	</div>
-	<span class="vp">See more</span>
+	<div class="pagination">
+		<input type="button" value="prev" class="page prev" onclick="extendImages(event.target.value)">
+		<input type="button" value="1" class="page" onclick="extendImages(event.target.value, event)">
+		<input type="button" value="2" class="page" onclick="extendImages(event.target.value, event)">
+		<input type="button" value="3" class="page" onclick="extendImages(event.target.value, event)">
+		<input type="button" value="4" class="page" onclick="extendImages(event.target.value, event)">
+		<input type="button" value="5" class="page" onclick="extendImages(event.target.value, event)">
+		<input type="button" value="6" class="page" onclick="extendImages(event.target.value, event)">
+		<input type="button" value="7" class="page" onclick="extendImages(event.target.value, event)">
+		<input type="button" value="8" class="page" onclick="extendImages(event.target.value, event)">
+		<input type="button" value="9" class="page" onclick="extendImages(event.target.value, event)">
+		<input type="button" value="next" class="page next" onclick="extendImages(event.target.value)">
+	</div>
+	<!-- <span class="vp">See more</span> -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<script src="js/script.js"></script>
 </body>
 </html>
