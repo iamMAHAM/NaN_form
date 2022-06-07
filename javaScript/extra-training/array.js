@@ -145,8 +145,10 @@ class Arr
 }
 
 let arr = new Arr("a", "b", "c", "d", "e", "f", "g", "h", 'i')
+let integer = new Arr(1, 2, 3, 4, 9)
 let arr1 = new Arr("j", "k", "l")
 let arr2 = new Arr(2, 3, 4, 5)
 
 
-console.log(arr2.forEach(nElement => console.log("elment", nElement)))
+integer.splice(2, 1, 7)
+console.log(integer)
