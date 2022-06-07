@@ -13,6 +13,10 @@ let datas = null
 let isConnected
 let prev = document.querySelector(".prev")
 let next = document.querySelector(".next")
+let currentEvent = null
+let pagination = document.querySelector(".pagination")
+let leftArrow = document.querySelector(".left")
+let rightArrow = document.querySelector(".right")
 
 function fillImages(array)
 {
@@ -60,7 +64,7 @@ async function fetchImages()
 
 function generateNumber(min, max){ return Math.floor(Math.random() * (max - min) + min) }
 
-async function extendImages(page)
+async function extendImages(page, e=null)
 {
 	currentPage = Number(currentPage)
 	if (isNaN((Number(page))))
@@ -72,10 +76,19 @@ async function extendImages(page)
 	console.log("currentPage : ", currentPage)
 	let res = await fetch(`${baseUrl}/discover/movie?sort_by=popularity.desc&api_key=${apiKey}&language=fr&page=${page}`)
 	res = await res.json()
-	container.innerHTML = ""
+	// container.innerHTML = ""
 	fillImages(res.results)
 	if (currentPage <= 1){prev.disabled = true}
 	else (prev.disabled = false)
+	if (e)
+	{
+		for (let i = 0; i < pagination.children.length; i++)
+		{
+			console.log(e.target)
+			if (e.target === pagination.children[i]){pagination.children[i].style.backgroundColor = "green"}
+			else{pagination.children[i].style.backgroundColor = "white"}
+		}
+	}
 }
 
 function joinArray(array)
@@ -128,13 +141,22 @@ window.addEventListener("load", async () =>
 {
 	loupe.addEventListener("click", show)
 	isConnected = localStorage.getItem("is_connected")
-	if (isConnected == "true")
-	{
-		await extendImages(1)
-	}
+	if (isConnected == "true"){await extendImages(1)}
 	else {window.location.href = "login.html"}
-	logout.addEventListener("click", ()=>{
+	logout.addEventListener("click", ()=>
+	{
 		localStorage.setItem("is_connected", "false")
 		window.location.href = "login.html"
 	})
+
+	$('.first-slide').slick(
+		{
+			infinite: true,
+			slidesToShow: 3,
+			slidesToScroll: 3,
+		}
+	)
+	document.querySelector(".slick-prev.slick-arrow").innerHTML = '<i class="fa-solid fa-circle-arrow-left icones left"></i>'
+	document.querySelector(".slick-next.slick-arrow").innerHTML = '<i class="fa-solid fa-circle-right icones right"></i>'
+	
 })
