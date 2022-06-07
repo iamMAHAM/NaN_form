@@ -38,6 +38,7 @@ a
 
 .container
 {
+	position: relative;
 	justify-content: center;
 	display: flex;
 	flex-direction: row;
@@ -149,4 +150,24 @@ a
 	position: relative;
 	left: 50%;
 	transform: translate(-50%);
+}
+
+.pagination
+{
+	width: auto;
+	transform: translateX(-50%);
+	position: relative;
+	left: 50%;
+	display: inline-flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
+.page
+{
+	margin: 2px;
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	font-size: 20px;
 }
