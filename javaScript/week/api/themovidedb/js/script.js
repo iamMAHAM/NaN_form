@@ -8,9 +8,11 @@ let search_input = document.querySelector("#search")
 let loupe = document.querySelector(".lol")
 console.log(search_input)
 let fetched = []
-let page = 0
+let currentPage = 1
 let datas = null
 let isConnected
+let prev = document.querySelector(".prev")
+let next = document.querySelector(".next")
 
 function fillImages(array)
 {
@@ -58,12 +60,22 @@ async function fetchImages()
 
 function generateNumber(min, max){ return Math.floor(Math.random() * (max - min) + min) }
 
-async function extendImages()
+async function extendImages(page)
 {
-	page += 1
+	currentPage = Number(currentPage)
+	if (isNaN((Number(page))))
+	{
+		if (page === "prev"){page = currentPage - 1}
+		else if (page === "next"){page = currentPage + 1}
+	}
+	currentPage = Number(page)
+	console.log("currentPage : ", currentPage)
 	let res = await fetch(`${baseUrl}/discover/movie?sort_by=popularity.desc&api_key=${apiKey}&language=fr&page=${page}`)
 	res = await res.json()
+	container.innerHTML = ""
 	fillImages(res.results)
+	if (currentPage <= 1){prev.disabled = true}
+	else (prev.disabled = false)
 }
 
 function joinArray(array)
@@ -111,14 +123,14 @@ async function newPage(e)
 }
 
 function show(){search_input.style.display = "block"}
+
 window.addEventListener("load", async () =>
 {
 	loupe.addEventListener("click", show)
 	isConnected = localStorage.getItem("is_connected")
 	if (isConnected == "true")
 	{
-		await extendImages()
-		vp.addEventListener("click", extendImages)
+		await extendImages(1)
 	}
 	else {window.location.href = "login.html"}
 	logout.addEventListener("click", ()=>{
