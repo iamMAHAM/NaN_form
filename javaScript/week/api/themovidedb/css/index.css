@@ -176,11 +176,11 @@ a
 
 .first-slide
 {
-	width: 1200px;
+	width: 1000px;
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
-	display: inline-flex;
+	/* display: inline-flex; */
 	/* flex-direction: row;
 	flex-wrap: nowrap;
 	gap: .5% */
@@ -214,6 +214,7 @@ a
 	top: 50%;
 }
 
+.cadre.slide.slick-slide.slick-cloned,
 .slick-slide img,
 .cadre.slide
 {
