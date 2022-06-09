@@ -6,7 +6,6 @@ let vp = document.querySelector(".vp")
 let logout = document.querySelector("#logout")
 let search_input = document.querySelector("#search")
 let loupe = document.querySelector(".lol")
-console.log(search_input)
 let fetched = []
 let currentPage = 1
 let datas = null
@@ -17,55 +16,46 @@ let currentEvent = null
 let pagination = document.querySelector(".pagination")
 let leftArrow = document.querySelector(".left")
 let rightArrow = document.querySelector(".right")
+let firstSlide = document.querySelector(".first-slide")
+let page = 1
 
-function fillImages(array)
+function fillImages(element, array, add_class="")
 {
 	for (let i = 0; i < array.length; i++)
 	{
-		container.innerHTML +=
+		original_title = array[i].original_title ? array[i].original_title : array[i].name
+		element.innerHTML +=
 		`
-		<div class="cadre" id=${array[i].id} href="details.html" onclick="newPage(event)">
+		<div class="cadre ${add_class}" id=${array[i].id} href="details.html" onclick="newPage(event)">
 			<span class="definition oncadre">HD</span>
 			<span class="rate oncadre">${array[i].vote_average}</span>
 			<img src="${imgUrl+array[i].poster_path}" alt="" class="image">
-			<p class="title oncadre">${array[i].original_title.toLowerCase()}</p>
+			<p class="title oncadre">${original_title}</p>
 		</div>
 		`
 	}
 }
 
-async function fetchImage()
+async function updatesSlider()
 {
-	try
-	{
-		id = generateNumber(0, 5000)
-		let details = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=fr`)
-		if (details.ok)
+	page += 1
+	let details = await fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&language=fr&sort_by=popularity.desc&page=${page}&include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type=0`)
+	details  = await details.json()
+	fillImages(firstSlide, details.results, "slide")
+	$('.first-slide').slick(
 		{
-			details = await details.json()
-			if (!details.poster_path){throw TypeError(`error while loading this id : ${id}`)}
-			datos = {
-				vote_average: details.vote_average,
-				title: details.title,
-				poster_path: details.poster_path,
-			}
-			fetched.push(datos)
-		} else {throw TypeError(`error while loading this id : ${id}`)}
-	}
-	catch (e){}
-	return fetched
+			infinite: true,
+			slidesToShow: 3,
+			slidesToScroll: 3,
+			autoplay: true,
+		}
+	)
+	page += 1
 }
-
-async function fetchImages()
-{
-	fetched = []
-	while (fetched.length < 20){await fetchImage()}
-}
-
-function generateNumber(min, max){ return Math.floor(Math.random() * (max - min) + min) }
 
 async function extendImages(page, e=null)
 {
+	container.innerHTML = ""
 	currentPage = Number(currentPage)
 	if (isNaN((Number(page))))
 	{
@@ -77,7 +67,7 @@ async function extendImages(page, e=null)
 	let res = await fetch(`${baseUrl}/discover/movie?sort_by=popularity.desc&api_key=${apiKey}&language=fr&page=${page}`)
 	res = await res.json()
 	// container.innerHTML = ""
-	fillImages(res.results)
+	fillImages(container, res.results)
 	if (currentPage <= 1){prev.disabled = true}
 	else (prev.disabled = false)
 	if (e)
@@ -148,15 +138,8 @@ window.addEventListener("load", async () =>
 		localStorage.setItem("is_connected", "false")
 		window.location.href = "login.html"
 	})
-
-	$('.first-slide').slick(
-		{
-			infinite: true,
-			slidesToShow: 3,
-			slidesToScroll: 3,
-		}
-	)
+	await updatesSlider()
 	document.querySelector(".slick-prev.slick-arrow").innerHTML = '<i class="fa-solid fa-circle-arrow-left icones left"></i>'
 	document.querySelector(".slick-next.slick-arrow").innerHTML = '<i class="fa-solid fa-circle-right icones right"></i>'
-	
+	setInterval(updatesSlider, 600000)
 })
