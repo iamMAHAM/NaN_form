@@ -132,11 +132,11 @@ window.addEventListener("load", async () =>
 	loupe.addEventListener("click", show)
 	isConnected = localStorage.getItem("is_connected")
 	if (isConnected == "true"){await extendImages(1)}
-	else {window.location.href = "login.html"}
+	else {window.location.href = "login-register.html"}
 	logout.addEventListener("click", ()=>
 	{
 		localStorage.setItem("is_connected", "false")
-		window.location.href = "login.html"
+		window.location.href = "login-register.html"
 	})
 	await updatesSlider()
 	document.querySelector(".slick-prev.slick-arrow").innerHTML = '<i class="fa-solid fa-circle-arrow-left icones left"></i>'
