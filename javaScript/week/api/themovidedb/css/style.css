@@ -20,6 +20,7 @@ body, *
 	margin: 0 auto;
 	width: 400px;
 	text-align: center;
+	background: #75c4cbc2;
 }
 
 .register-fieldset
@@ -86,6 +87,7 @@ div.left
 	width: 50%;
 	height: 100%;
 	left: 0;
+	z-index: 4;
 }
 
 img
@@ -105,6 +107,7 @@ div.right
 .register-fields.register
 {
 	transform: translate(-100%, -50%);
+	z-index: -1;
 }
 
 .active
