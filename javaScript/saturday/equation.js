@@ -27,8 +27,8 @@ function calculComb(arra1, arra2, unknow)
     }
     else
     {
-        result[inverse] = (arra1[unknow == "x" ? 1 : 0] * (signe[1]?x2:(-x2))) + (arra2[unknow == "x" ? 1 : 0] * (signe[0]?x1:(-x1)))
-        result["="] = arra1[2] * (signe[1]?x2:(-x2)) + arra2[2] * (signe[0]?x1:(-x1))
+        result[inverse] = (arra1[unknow == "x" ? 1 : 0] * (signe[1] ? x2: (-x2))) + (arra2[unknow == "x" ? 1 : 0] * (signe[0] ? x1 : (-x1)))
+        result["="] = arra1[2] * (signe[1] ? x2 : (-x2)) + arra2[2] * (signe[0] ? x1 : (-x1))
     }
     console.log(`${result[inverse]}${inverse} = ${result["="]}`)
     console.log(`${inverse} = ${(result["="]/result[inverse]).toFixed(2)}`)
