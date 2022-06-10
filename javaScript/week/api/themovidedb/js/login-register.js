@@ -31,10 +31,10 @@ function registerF(e)
 	e.preventDefault()
 	for (let i = 1, j = 0; i < 7; i++, j++)
 	{
-        console.log(i, j, keys[j], registerParent.children[0].children[i])
 		localStorage.setItem(keys[j], registerParent.children[0].children[i].value)
 	}
-	window.location.href = "login.html"
+	checkbox.checked = true
+    toggle()
 }
 
 /*-------------- Login Functions---------------------------------*/
