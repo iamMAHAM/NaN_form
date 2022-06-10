@@ -59,14 +59,19 @@ function loginF(e)
 /*-------------- Login Functions---------------------------------*/
 function toggle()
 {
+    console.log(checkbox.checked)
     if (checkbox.checked)
     {
+        console.log("login page --> || <--- register page")
+        loginParent.classList.remove("hide")
         loginParent.classList.add("active")
         registerParent.classList.remove("active")
         registerParent.classList.add("hide")
     }
     else
     {
+        console.log("register page --> || <--- login page")
+        registerParent.classList.remove("hide")
         registerParent.classList.add("active")
         loginParent.classList.remove("active")
         loginParent.classList.add("hide")
