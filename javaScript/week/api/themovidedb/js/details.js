@@ -44,6 +44,9 @@ function fillDetails()
 					</p>
 				</div>
 			</div>
+			<div class="ba">
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/${data.video}" title="${data.original_title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
 		</div>
 		`
 	}
