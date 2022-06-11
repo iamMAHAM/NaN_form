@@ -63,7 +63,6 @@ async function extendImages(page, e=null)
 		else if (page === "next"){page = currentPage + 1}
 	}
 	currentPage = Number(page)
-	console.log("currentPage : ", currentPage)
 	let res = await fetch(`${baseUrl}/discover/movie?sort_by=popularity.desc&api_key=${apiKey}&language=fr&page=${page}`)
 	res = await res.json()
 	// container.innerHTML = ""
@@ -74,7 +73,6 @@ async function extendImages(page, e=null)
 	{
 		for (let i = 0; i < pagination.children.length; i++)
 		{
-			console.log(e.target)
 			if (e.target === pagination.children[i]){pagination.children[i].style.backgroundColor = "green"}
 			else{pagination.children[i].style.backgroundColor = "white"}
 		}
@@ -92,8 +90,9 @@ function joinArray(array)
 async function getDetails(e)
 {
 	id = e.target.parentElement.id
-	let res = await fetch(`${baseUrl}/movie/${id}?api_key=${apiKey}&language=fr`)
+	let res = await fetch(`${baseUrl}/movie/${id}?api_key=${apiKey}&language=fr&append_to_response=videos`)
 	res = await res.json()
+	console.log(res)
 	return {
 		original_title: res.original_title,
 		overview: res.overview,
@@ -101,13 +100,13 @@ async function getDetails(e)
 		gender: joinArray(res.genres),
 		production_companies: joinArray(res.production_companies),
 		release_date: res.release_date.slice(0, 4),
-		poster_path: res.poster_path
+		poster_path: res.poster_path,
+		video: res.videos.results[0].key
 	}
 }
 
 function search(e)
 {
-	console.log("changed value : ", e.target.value)
 	let input = e.target.value
 	let titles = document.querySelectorAll(".title")
 	for (let i = 0; i < titles.length; i++)
@@ -122,7 +121,6 @@ async function newPage(e)
 	datas = await getDetails(e)
 	localStorage.setItem("datas", JSON.stringify(datas))
 	open("details.html", "new url")
-	console.log(datas)
 }
 
 function show(){search_input.style.display = "block"}
