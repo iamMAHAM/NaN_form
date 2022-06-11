@@ -31,7 +31,7 @@ function registerF(e)
 	e.preventDefault()
 	for (let i = 1, j = 0; i < 7; i++, j++)
 	{
-		localStorage.setItem(keys[j], registerParent.children[0].children[i].value)
+		localStorage.setItem(keys[j], registerParent.children[i].value)
 	}
 	checkbox.checked = true
     toggle()
