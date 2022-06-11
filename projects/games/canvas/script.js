@@ -4,6 +4,7 @@ let heightSquare = 25
 let widthSquare = 40
 let bar = [[4, 9], [5, 9]]
 let ball = [5, 8]
+let inter = null
 
 function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height)
@@ -15,11 +16,30 @@ function draw() {
     context.fillStyle = "lime"
     context.beginPath()
     context.arc(ball[0] * widthSquare, ball[1] * heightSquare, 10, 0, Math.PI * 2, false)
-    // context.stroke()
     context.fill()
 }
 
-window.addEventListener("load", draw)
+
+function moveBall()
+{
+
+    inter = setInterval(()=>{
+        if (ball[0] === 0)
+        {
+            ball = [ball[0] + 1, ball[1] - 1]
+            draw()
+        }
+        else
+        {
+            ball = [ball[0] - 1, ball[1] - 1]
+        }
+    }, 200)
+}
+
+window.addEventListener("load", () => {
+    draw()
+    moveBall()
+})
 window.addEventListener("keydown", (e) => {
     if (e.keyCode === 39 &&  bar[1][0] < 9)
     {
