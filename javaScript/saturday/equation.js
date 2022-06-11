@@ -1,17 +1,21 @@
 function equationRxR(arra1, arra2, type)
 {
-    console.log(printEquation(arra1))
-    console.log(printEquation(arra2))
-
+    console.log("============================== DEBUT =======================================")
+    console.log(`\nSYSTEME D'EQUATION (E) :\n{${printEquation(arra1)}\n{${printEquation(arra2)}`)
     if (type === "combinaison")
     {
+        console.log("\nMETHODE CHOISIE : COMBINAISON\n")
         calculComb(arra1, arra2, "x")
         calculComb(arra1, arra2, "y")
     }
+
     else if (type === "substitution")
     {
-        calculSub(arra1, arra2, "y")
+        console.log("\nMETHODE CHOISIE : SUBSTITUTION\n")
+        calculSub(arra1, arra2, "x")
     }
+    console.log("============================== FIN =======================================")
+
 }
 
 function calculComb(arra1, arra2, unknow)
