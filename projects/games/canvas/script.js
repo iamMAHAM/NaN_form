@@ -41,7 +41,7 @@ window.addEventListener("load", () => {
     moveBall()
 })
 window.addEventListener("keydown", (e) => {
-    if (e.keyCode === 39 &&  bar[1][0] < 9)
+    if (e.key === "ArrowRight" &&  bar[1][0] < 9)
     {
         bar.shift()
         bar.push([bar[0][0] + 1, bar[0][1]])
@@ -49,7 +49,7 @@ window.addEventListener("keydown", (e) => {
         draw()
     }
 
-    else if (e.keyCode === 37 && bar[0][0] > 0)
+    else if (e.key === "ArrowLeft" && bar[0][0] > 0)
     {
         bar.pop()
         bar.unshift([bar[0][0] - 1, bar[0][1]])
