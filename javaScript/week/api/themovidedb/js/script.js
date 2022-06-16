@@ -38,7 +38,7 @@ function fillImages(element, array, add_class="")
 
 async function updatesSlider()
 {
-	page += 1
+	page = Math.floor(Math.random() * (100 - 1) + 1)
 	let details = await fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&language=fr&sort_by=popularity.desc&page=${page}&include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type=0`)
 	details  = await details.json()
 	fillImages(firstSlide, details.results, "slide")
