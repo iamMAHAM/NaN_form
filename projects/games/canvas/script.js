@@ -23,6 +23,7 @@ function draw() {
 function backTop()
 {
     console.log("backTop")
+    console.log(ball)
     clearInterval(inter)
     inter = setInterval(() => {
         ball = [ball[0] - 1, ball[1] - 1]
@@ -31,39 +32,42 @@ function backTop()
             moveTop()
         }
         draw()
-    }, 200);
+    }, 300);
 }
 
 function moveTop()
 {
     console.log("moveTop")
+    console.log(ball)
     clearInterval(inter)
     inter = setInterval(() => {
             ball = [ball[0] + 1, ball[1] - 1]
             if (ball[1] === 0){moveDown()}
             draw()
-    }, 200);
+    }, 300);
 }
 function moveDown()
 {
     console.log("moveDown")
+    console.log(ball)
     clearInterval(inter)
     inter = setInterval(() => {
         ball = [ball[0] + 1, ball[1] + 1]
         if (ball[0] === 10){backDown()}
         draw()
-    }, 200)
+    }, 300)
 }
 
 function backDown()
 {
     console.log("backDown")
+    console.log(ball)
     clearInterval(inter)
     inter = setInterval(() => {
         ball = [ball[0] - 1, ball[1] + 1]
         if (ball[1] === 10){interceptBall()}
         draw()
-    }, 200)
+    }, 300)
 }
 
 function moveBall()
@@ -73,16 +77,18 @@ function moveBall()
         else if (ball[1] === 0){moveDown()}
         else if (ball[0] === 10){backDown()}
         else {backTop()}
-    }, 200);
+        draw();
+    }, 300);
 }
 
 function interceptBall()
 {
     if (ball[0] === bar[0][0] || ball[0] === bar[1][0])
     {
+        console.log(ball)
         let r = ball[0] === bar[0][0] ? -1 : 1 /*get appropriate value or r*/
-        console.log("ball before", ball)
-        ball = [ball[0] + r, ball[1]]
+
+        ball = [ball[0] + r, ball[1] - 1.5]
         console.log(bar)
         console.log("ball after", ball)
         backTop()
@@ -102,7 +108,7 @@ window.addEventListener("keydown", (e) => {
     {
         bar.shift()
         bar.push([bar[0][0] + 1, bar[0][1]])
-        console.log(bar)
+        // console.log(bar)
         draw()
     }
 
@@ -110,7 +116,7 @@ window.addEventListener("keydown", (e) => {
     {
         bar.pop()
         bar.unshift([bar[0][0] - 1, bar[0][1]])
-        console.log(bar)
+        // console.log(bar)
         draw()
     }
 })
