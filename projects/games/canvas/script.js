@@ -4,7 +4,21 @@ let heightSquare = 25
 let widthSquare = 40
 let bar = [[4, 9], [5, 9]]
 let ball = [5, 8]
-let inter = null, backTopInter=null, moveTopInter=null, moveDownInter=null, backDownInter = null
+let wall1 = [[1, 1], [2, 1]]
+let wall2 = [[5, 1], [6, 1]]
+let inter = null, moveDownv=null, backDownv = null
+let toBreak = null
+
+Array.prototype.equals = function (other, callback = (x, y) => (x === y)) {
+    // Check the other object is of the same type
+    if (Object.getPrototypeOf(this) !== Object.getPrototypeOf(other)) {
+      return false;
+    }
+    if (this.length === undefined || this.length !== other.length) {
+      return false;
+    }
+    return Array.prototype.every.call(this, (x, i) => callback(x, other[i]));
+  };
 
 function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height)
@@ -13,95 +27,148 @@ function draw() {
         context.fillStyle = "red"
         context.fillRect(bar[i][0] * widthSquare, bar[i][1] * heightSquare, widthSquare, heightSquare)
     }
+    createBrique(wall1)
+    createBrique(wall2)
     context.fillStyle = "lime"
     context.beginPath()
     context.arc(ball[0] * widthSquare, ball[1] * heightSquare, 10, 0, Math.PI * 2, false)
     context.fill()
 }
 
+function createBrique(array)
+{
+    for (let i = 0; i < array.length; i++)
+    {
+        context.fillStyle = "wheat"
+        context.fillRect(array[i][0] * widthSquare, array[i][1] * heightSquare, widthSquare, heightSquare)
+    }
+}
+
 
 function backTop()
 {
     console.log("backTop")
-    console.log(ball)
     clearInterval(inter)
     inter = setInterval(() => {
-        ball = [ball[0] - 1, ball[1] - 1]
-        if (ball[0] === 0)
-        {
-            moveTop()
-        }
+        ball = [ball[0] - 0.25, ball[1] - 0.25]
+        if (ball[0] === 0 && ball[1] > 0){moveTop()}
+        else if (ball[1] <= 0){backDown()}
+        wallBreaker()
         draw()
-    }, 300);
+    }, 50);
+}
+
+
+function backDown()
+{
+    backDownv = 1
+    moveDownv = 0
+    console.log("backDown")
+    clearInterval(inter)
+    inter = setInterval(() => {
+        ball = [ball[0] - 0.25, ball[1] + 0.25]
+        if (Math.floor(ball[1]) === 9){interceptBall()}
+        else if (Math.floor(ball[0]) <= 0)
+        {
+            ball = [0, ball[1]]
+            moveDown()
+        }
+        wallBreaker()
+        draw()
+    }, 50)
 }
 
 function moveTop()
 {
     console.log("moveTop")
-    console.log(ball)
     clearInterval(inter)
     inter = setInterval(() => {
-            ball = [ball[0] + 1, ball[1] - 1]
+            ball = [ball[0] + 0.25, ball[1] - 0.25]
             if (ball[1] === 0){moveDown()}
+            else if (ball[0] === 10){backTop()}
+            wallBreaker()
             draw()
-    }, 300);
+    }, 50);
 }
 function moveDown()
 {
+    moveDownv = 1
+    backDownv = 0
     console.log("moveDown")
-    console.log(ball)
     clearInterval(inter)
     inter = setInterval(() => {
-        ball = [ball[0] + 1, ball[1] + 1]
+        ball = [ball[0] + 0.25, ball[1] + 0.25]
         if (ball[0] === 10){backDown()}
+        else if (ball[1] === 9){interceptBall()}
+        wallBreaker()
         draw()
-    }, 300)
+    }, 50)
 }
 
-function backDown()
-{
-    console.log("backDown")
-    console.log(ball)
-    clearInterval(inter)
-    inter = setInterval(() => {
-        ball = [ball[0] - 1, ball[1] + 1]
-        if (ball[1] === 10){interceptBall()}
-        draw()
-    }, 300)
-}
-
-function moveBall()
-{
-    inter = setInterval(() => {
-        if (ball[0] === 0){moveUp()}
-        else if (ball[1] === 0){moveDown()}
-        else if (ball[0] === 10){backDown()}
-        else {backTop()}
-        draw();
-    }, 300);
-}
+// function moveBall()
+// {
+//     inter = setInterval(() => {
+//         if (ball[0] === 0){moveUp()}
+//         else if (ball[1] === 0){moveDown()}
+//         else if (ball[0] === 10){backDown()}
+//         else {backTop()}
+//         draw();
+//     }, 50);
+// }
 
 function interceptBall()
 {
-    if (ball[0] === bar[0][0] || ball[0] === bar[1][0])
+    clearInterval(inter)
+    if (Math.floor(ball[0]) === bar[0][0] || Math.floor(ball[0]) === bar[1][0])
     {
-        console.log(ball)
         let r = ball[0] === bar[0][0] ? -1 : 1 /*get appropriate value or r*/
+        ball = [ball[0] , ball[1] - 0.25]
 
-        ball = [ball[0] + r, ball[1] - 1]
-        console.log(bar)
-        console.log("ball after", ball)
-        backTop()
+        if (moveDownv){moveTop()}
+        else if (backDownv) {backTop()}
+        else {console.log("Unknow range")}
     }
     else
     {
         // alert("GAME OVER")
+        console.log("LOst ball", " 2 pos bar : ", [bar[0][0], bar[1][0]], "ball:", ball )
         clearInterval(inter)
     }
 }
+
+function removeE(array, tb)
+{
+    if (array)
+    {
+        for (let i = 0; i < array.length; i++)
+        {
+            if (array[i].equals(tb))
+            {
+                if (i === 0)
+                {
+                    array = array.splice(0, 1)
+                    console.log("NEW WALL ", array)
+                }
+                else
+                {
+                    array.splice(1, 1)
+                }
+            }
+        }
+    }
+
+}
+
+function wallBreaker()
+{
+    toBreak = [Math.floor(ball[0]), Math.floor(ball[1])]
+    console.log(toBreak)
+    removeE(wall1, toBreak)
+    removeE(wall2, toBreak)
+}
 window.addEventListener("load", () => {
     draw()
-    moveBall()
+    backTop()
 })
 window.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight" &&  bar[1][0] < 9)
