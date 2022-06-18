@@ -88,14 +88,14 @@ function interceptBall()
         console.log(ball)
         let r = ball[0] === bar[0][0] ? -1 : 1 /*get appropriate value or r*/
 
-        ball = [ball[0] + r, ball[1] - 1.5]
+        ball = [ball[0] + r, ball[1] - 1]
         console.log(bar)
         console.log("ball after", ball)
         backTop()
     }
     else
     {
-        alert("GAME OVER")
+        // alert("GAME OVER")
         clearInterval(inter)
     }
 }
