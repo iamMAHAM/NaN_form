@@ -1,0 +1,142 @@
+body, *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.top-header{
+    background-color: #09a766;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+#logo{
+    width: 70px;
+    height: 50px;
+}
+
+.top-header-right,
+.top-header-left{
+    margin: 10px;
+    width: calc(25%);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.top-header-left{
+    font-size: 20px;
+    border: 2px solid white;
+    background-color: white;
+    border-radius: 10px;
+    height: 50px;
+}
+
+.top-header-center{
+    text-transform: capitalize;
+    align-items: center;
+}
+
+.top-header-right{
+    margin-right: 100px;
+}
+
+#search{
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    width: calc(100% - 30px);
+}
+
+i.lol{
+    cursor: pointer;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+i.pad{
+    padding: 5px; 
+}
+
+.head{
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.items{
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+}
+
+.item{
+    cursor: pointer;
+    position: relative;
+    align-items: center;
+    margin: 15px;
+    transition: box-shadow .5s;
+    margin-top: 25px;
+    border: 2px solid #09a766;
+    width: 20%;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.item:hover
+{
+    box-shadow: 5px 5px 5px #1d1d1d;
+}
+
+.item-image
+{
+    text-align: center;
+    width: 85%;
+    height: 200px;
+}
+
+.item,
+.bottom{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.bottom{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+p.title{
+    width: 100%;
+    font-size: 22px;
+    padding: 5px;
+    color: #09a766;
+}
+
+p.description {
+    font-size: 15px;
+}
+p.prices{
+    float: bottom;
+    background-color: #09a766;
+    color: white;
+    font-weight: bold;
+}
+
+i.add{
+    padding: 5px;
+    cursor: pointer;
+}
