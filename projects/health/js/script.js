@@ -7,9 +7,9 @@ let items = document.querySelector(".items")
 let res = null
 let baseUrl = "https://www.pharma-gdd.com/"
 
-function redirectInfo(e)
+async function redirectInfo(e)
 {
-    
+    let 
 }
 
 function fillPage(array)
@@ -19,6 +19,10 @@ function fillPage(array)
         items.innerHTML += 
         `
         <div class="item" id="${array[i].redirect}">
+            <div class="top">
+                <p class="status"><i class="fa-solid fa-circle-check"></i> en stock</p>
+                <p class="bookmark"><i class="fa-regular fa-heart"></i></p>
+            </div>
             <img class="item-image" src="${array[i].img}" title="${array[i].redirect.split("-").join(" ").replace("/fr/", "")}">
             <div class="bottom">
                 <p class="title">${array[i].title}</p>
@@ -34,9 +38,9 @@ window.addEventListener("load", async ()=>{
     res = await fetch("back/datas.json");
     res = await res.json()
     fillPage(res)
-    console.log(res)
-    for (let i = 0; i < items.children.length; i++)
-    {
-        items.children[i].addEventListener("click", (e)=>console.log(e.target.parentElement.id))
-    }
+    // console.log(res)
+    // for (let i = 0; i < items.children.length; i++)
+    // {
+    //     items.children[i].addEventListener("click", (e)=>console.log(e.target.parentElement.id))
+    // }
 })
