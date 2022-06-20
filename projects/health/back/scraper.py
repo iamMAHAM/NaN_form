@@ -19,7 +19,6 @@ def fetch():
         "user-agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Mobile Safari/537.36"
     }).content
     soup = BeautifulSoup(res, "html.parser").find_all("div", class_="product")
-    print(type(soup))
     for item in soup:
         print("============================ITEM 1\n", item.prettify())
         data = {
