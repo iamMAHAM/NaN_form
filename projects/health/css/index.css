@@ -189,3 +189,7 @@ div.total{
 .bookmark{
     z-index: 2;
 }
+
+.active{
+    color: rgb(243, 85, 85);
+}
