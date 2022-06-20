@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-from numpy import who
 import requests
 from bs4 import BeautifulSoup
 import json
