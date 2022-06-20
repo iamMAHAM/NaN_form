@@ -45,3 +45,17 @@ function detail()
 }
 
 window.addEventListener("load", detail)
+
+if (window.location.href.includes("index.html"))
+{
+    res = await fetch("back/datas.json");
+    res = await res.json()
+    fillPage(res)
+}
+else
+{
+    datas = localStorage.getItem("bookmarks")
+    if (datas){
+        fillPage(JSON.parse(datas))
+    }
+}
