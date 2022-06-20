@@ -8,9 +8,14 @@ let items = document.querySelector(".items")
 let datas = null
 let remove = `<i class="fa-regular fa-trash-can"></i>`
 let add = `<i class="fa-regular fa-heart"></i>`
+
 /*declaring variables*/
+
 let res = null
 let baseUrl = "https://www.pharma-gdd.com/"
+
+
+/*Functions*/
 
 function redirectInfo(e)
 {
@@ -83,8 +88,6 @@ function removeBookmark(e)
     child = e.target.parentElement.parentElement.parentElement
     parent.removeChild(child)
     toRemove = child.outerHTML.replace(remove, add)
-    console.log('\n\n')
-
     for (let i = 0; i < datas.length; i++)
     {
         if (datas[i] === toRemove)
