@@ -4,104 +4,164 @@
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/healthcare-daflon-500mg-60-comprimes-face.jpg",
         "redirect": "/fr/daflon-500-mg",
         "description": "Jambes lourdes, troubles hémorroïdaires - Adultes",
-        "prices": "12,19 €"
+        "prices": "12,19 €",
+        "who": "Adulte",
+        "authw": "Non autorisé",
+        "milk-c": "Non autorisé",
+        "figure": "Comprimés"
     },
     {
         "title": "Pierre Fabre",
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/pierre-fabre-percutafeine-traitement-symptomatique-des-surcharges-adipeuses-sous-cutanees-localisees-gel-192-g-face.jpg",
         "redirect": "/fr/percutafeine-gel-192g",
         "description": "Cellulite - Adultes",
-        "prices": "9,99 €"
+        "prices": "9,99 €",
+        "who": "Adulte",
+        "authw": "Sur avis médical",
+        "milk-c": "Sur avis médical",
+        "figure": "Gel"
     },
     {
         "title": "Bailleul",
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/bailleul-fenticonazole-bailleul-2-creme-face.jpg",
         "redirect": "/fr/fenticonazole-bailleul-2",
         "description": "Infections fongiques de la peau et des muqueuses",
-        "prices": "2,83 €"
+        "prices": "2,83 €",
+        "who": "Adolescent, Adulte",
+        "authw": "Non autorisé",
+        "milk-c": "Non autorisé",
+        "figure": "Crème"
     },
     {
         "title": "Jouvence de l'abbé Soury",
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/omega-pharma-jouvence-abbe-soury-jambes-lourdes-120-comprimes.jpg",
         "redirect": "/fr/jouvence-de-l-abbe-soury-comprimes",
         "description": "Jambes Lourdes",
-        "prices": "13,24 €"
+        "prices": "13,24 €",
+        "who": "Adulte",
+        "authw": "Non autorisé",
+        "milk-c": "Non autorisé",
+        "figure": "Comprimés"
     },
     {
         "title": "EG labo",
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/eg-labo-eurax-10-creme-demangeaisons-piqures-dinsectes-40-g-adulte-et-jeune-enfant-face.jpg",
         "redirect": "/fr/eurax-10-creme-40-g",
         "description": "Démangeaisons, piqûres d'insectes - Dès 3 ans",
-        "prices": "5,57 €"
+        "prices": "5,57 €",
+        "who": "Adolescent, Adulte, Enfant",
+        "authw": "Non autorisé",
+        "milk-c": "Non autorisé",
+        "figure": "Crème"
     },
     {
         "title": "Rogé Cavaillès",
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/726f67652d63617661696c6c65732d67656c2d6261696e2d646f756368652d6875696c652d64652d6d61636164616d69612d70656175782d7365636865732d3430306d6c2d666163654ac6b39d.jpg",
         "redirect": "/fr/roge-cavailles-gel-bain-et-douche-a-l-huile-de-macadamia-bio-1-l",
         "description": "Nettoyant Surgas Végétal sans savon",
-        "prices": "4,99 €"
+        "prices": "4,99 €",
+        "who": "hommes, femmes, enfants",
+        "authw": "Autorisé",
+        "milk-c": "Autorisé",
+        "figure": "Accesoires, huiles"
     },
     {
         "title": "ACM",
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/61636d2d626f72656164652d6d2d736f696e2d6465626f726567756c61746575722d6d6174696669616e742d34306d6c2d6661636597425765.jpg",
         "redirect": "/fr/boreade-m-soin-matifiant-40ml",
         "description": "Matifie, hydrate et apaise - Peaux mixtes à grasses",
-        "prices": "10,02 €"
+        "prices": "10,02 €",
+        "who": "hommes, femmes, enfants",
+        "authw": "Autorisé",
+        "milk-c": "Autorisé",
+        "figure": "Accesoires, huiles"
     },
     {
         "title": "Uriage",
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/uriage-age-protect-creme-nuit-detox-multi-actions-40-ml-face.jpg",
         "redirect": "/fr/uriage-age-protect-creme-nuit-detox-multi-actions-40-ml",
         "description": "Soin de nuit",
-        "prices": "23,66 €"
+        "prices": "23,66 €",
+        "who": "hommes, femmes, enfants",
+        "authw": "Autorisé",
+        "milk-c": "Autorisé",
+        "figure": "Accesoires, huiles"
     },
     {
         "title": "Hartmann",
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/hartmann-veroval-fievre-temperature-auriculaire-ou-frontal-produit.jpg",
         "redirect": "/fr/thermometre-infrarouge-veroval",
         "description": "Prise de température frontale et auriculaire",
-        "prices": "21,51 €"
+        "prices": "21,51 €",
+        "who": "hommes, femmes, enfants",
+        "authw": "Autorisé",
+        "milk-c": "Autorisé",
+        "figure": "Accesoires, huiles"
     },
     {
         "title": "Rapid White",
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/rapid-white-express-5-minutes-bandes-de-blanchissement-face.jpg",
         "redirect": "/fr/rapid-white-express",
         "description": "Dents plus blanches en seulement 5 jours",
-        "prices": "20,11 €"
+        "prices": "20,11 €",
+        "who": "hommes, femmes, enfants",
+        "authw": "Autorisé",
+        "milk-c": "Autorisé",
+        "figure": "Accesoires, huiles"
     },
     {
         "title": "La Roche-Posay",
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6c612d726f6368652d706f7361792d6561752d746865726d616c652d70656175782d73656e7369626c65732d3330306d6c2d6661636576f1c2d6.jpg",
         "redirect": "/fr/la-roche-posay-brumisateur-a-l-eau-thermale-300ml",
         "description": "Apaise la peau sensible ou irritée de toute la famille",
-        "prices": "8,37 €"
+        "prices": "8,37 €",
+        "who": "hommes, femmes, enfants",
+        "authw": "Autorisé",
+        "milk-c": "Autorisé",
+        "figure": "Accesoires, huiles"
     },
     {
         "title": "Arkopharma",
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/61726b6f706861726d612d706879746f62726f6e7a2d736f6c616972652d36302d676f6d6d65732d666163652c0ceb37.jpg",
         "redirect": "/fr/phytobronz-solaire-gummies",
         "description": "Préparateur solaire - Dès 15 ans",
-        "prices": "15,40 €"
+        "prices": "15,40 €",
+        "who": "hommes, femmes, enfants",
+        "authw": "Autorisé",
+        "milk-c": "Autorisé",
+        "figure": "Accesoires, huiles"
     },
     {
         "title": "Clément Thékan",
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/636c656d656e742d7468656b616e2d6c6169742d62696265726f6e732d746574696e652d6d65737572657474652d66616365e42371e8.jpg",
         "redirect": "/fr/clement-thekan-lait-milkkan",
         "description": "Lait maternisé pour chiot, chaton, rongeur, lapin, furet",
-        "prices": "19,49 €"
+        "prices": "19,49 €",
+        "who": "hommes, femmes, enfants",
+        "authw": "Autorisé",
+        "milk-c": "Autorisé",
+        "figure": "Accesoires, huiles"
     },
     {
         "title": "Cellublue",
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/63656c6c75626c75652d76656e746f7573652d65742d6875696c652d66616365d2a8451c.jpg",
         "redirect": "/fr/cellublue-kit-bye-bye-cellulite",
         "description": "Une huile et une ventouse pour faire disparaitre la cellulite",
-        "prices": "19,99 €"
+        "prices": "19,99 €",
+        "who": "hommes, femmes, enfants",
+        "authw": "Autorisé",
+        "milk-c": "Autorisé",
+        "figure": "Accesoires, huiles"
     },
     {
         "title": "Mustela",
         "img": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6d757374656c612d616e74692d6d6f757374697175652d626562652d3130306d6c2d6661636566bd3522.jpg",
         "redirect": "/fr/mustela-spray-anti-moustiques-bebe",
         "description": "Sans parfum - 8h de protection - Dès 2 mois",
-        "prices": "8,87 €"
+        "prices": "8,87 €",
+        "who": "hommes, femmes, enfants",
+        "authw": "Autorisé",
+        "milk-c": "Autorisé",
+        "figure": "Accesoires, huiles"
     }
 ]
