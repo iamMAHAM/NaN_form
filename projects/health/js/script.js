@@ -17,6 +17,7 @@ function redirectInfo(e)
     element = [].slice.call(element.children)
     toStore = element[3].textContent
     localStorage.setItem("detail", toStore)
+    window.open("details.html")
 
 }
 
@@ -38,7 +39,7 @@ function fillPage(array)
                 <p class="prices">${array[i].prices} <i class="fa-solid fa-basket-shopping add"></i></p>
             </div>
             <div class="hidden">
-                ${JSON.stringify(array[i]).replace("\"", "")}
+                ${JSON.stringify(array[i])}
             </div>
         </div>
         `
