@@ -2,14 +2,22 @@
 
 let search = document.querySelector("#search")
 let items = document.querySelector(".items")
+let addToCartButton = document.querySelectorAll(".add")
 
 /*declaring variables*/
 let res = null
 let baseUrl = "https://www.pharma-gdd.com/"
 
-async function redirectInfo(e)
+function redirectInfo(e)
 {
-    let 
+    let element = null
+    let toStore = null
+    if (e.target.className != "item"){element = e.target.parentElement}
+    else {element = e.target}
+    element = [].slice.call(element.children)
+    toStore = element[3].textContent
+    localStorage.setItem("detail", toStore)
+
 }
 
 function fillPage(array)
@@ -18,7 +26,7 @@ function fillPage(array)
     {
         items.innerHTML += 
         `
-        <div class="item" id="${array[i].redirect}">
+        <div class="item" id="${i}" onclick="redirectInfo(event)">
             <div class="top">
                 <p class="status"><i class="fa-solid fa-circle-check"></i> en stock</p>
                 <p class="bookmark"><i class="fa-regular fa-heart"></i></p>
@@ -29,6 +37,9 @@ function fillPage(array)
                 <p class="description">${array[i].description}</p>
                 <p class="prices">${array[i].prices} <i class="fa-solid fa-basket-shopping add"></i></p>
             </div>
+            <div class="hidden">
+                ${JSON.stringify(array[i]).replace("\"", "")}
+            </div>
         </div>
         `
     }
@@ -38,9 +49,5 @@ window.addEventListener("load", async ()=>{
     res = await fetch("back/datas.json");
     res = await res.json()
     fillPage(res)
-    // console.log(res)
-    // for (let i = 0; i < items.children.length; i++)
-    // {
-    //     items.children[i].addEventListener("click", (e)=>console.log(e.target.parentElement.id))
-    // }
+    console.log(res)
 })
