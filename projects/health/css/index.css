@@ -161,3 +161,7 @@ i.add{
     cursor: pointer;
     transition: transform 1s;
 }
+
+.hidden{
+    display: none;
+}
