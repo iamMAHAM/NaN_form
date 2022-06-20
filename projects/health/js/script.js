@@ -7,8 +7,8 @@ let search = document.querySelector("#search")
 let items = document.querySelector(".items")
 let datas = null
 let remove = `<i class="fa-regular fa-trash-can"></i>`
-let add = `<i class="fa-regular fa-heart"></i>`
-
+let add = `<i class="fa-solid fa-heart"></i>`
+let inactive = `<i class="fa-regular fa-heart"></i>`
 /*declaring variables*/
 
 let res = null
@@ -19,10 +19,11 @@ let baseUrl = "https://www.pharma-gdd.com/"
 
 function redirectInfo(e)
 {
-    let element = null
-    let toStore = null
-    if (e.target.className != "item"){element = e.target.parentElement}
-    else {element = e.target}
+    classList = e.target.classList
+    console.log(parent)
+    console.log("className", e.target.className)
+    if (classList.contains("fa-regular") || classList.contains("fa-solid")){return}
+    else {element = e.target.parentElement}
     element = [].slice.call(element.children)
     toStore = element[3].textContent
     localStorage.setItem("detail", toStore)
@@ -57,7 +58,7 @@ function fillPage(array)
         <div class="item" id="${i}" onclick="redirectInfo(event)">
             <div class="top">
                 <p class="status"><i class="fa-solid fa-circle-check"></i> en stock</p>
-                <p class="bookmark" onclick=func(event)>${icone}</p>
+                <p class="bookmark inactive" onclick=func(event)><i class="fa-regular fa-heart"></i></p>
             </div>
             <img class="item-image" src="${array[i].img}" title="${array[i].redirect.split("-").join(" ").replace("/fr/", "")}">
             <div class="bottom">
@@ -85,34 +86,50 @@ function fillBookmark(array)
 function removeBookmark(e)
 {
     parent = e.target.parentElement.parentElement.parentElement.parentElement
+    console.log("parent", parent)
     child = e.target.parentElement.parentElement.parentElement
     parent.removeChild(child)
-    toRemove = child.outerHTML.replace(remove, add)
+    toRemove = child.outerHTML
     for (let i = 0; i < datas.length; i++)
     {
+        console.log("DATAS=====================\n\n",datas[i], "\n\n")
+        console.log("REMOVE=====================\n\n",toRemove, "\n\n")
         if (datas[i] === toRemove)
         {
+            console.log("match")
             index = datas.indexOf(datas[i])
             console.log("index found", index)
             datas.splice(index, 1)
         }
+
     }
     localStorage.setItem("bookmarks", JSON.stringify(datas))
 }
 
 function addBookmark(e)
 {
+    console.log("start", e.target)
     child = e.target.parentElement.parentElement.parentElement
     datas = localStorage.getItem("bookmarks")
     if (datas)
     {
         datas = JSON.parse(datas)
-        datas.push(child.outerHTML)
+        datas.push(child.outerHTML.replace(add, remove).replace(inactive, remove))
     }
     else
     {
         datas = []
-        datas.push(child.outerHTML)
+        datas.push(child.outerHTML.replace(add, remove).replace(inactive, remove))
+    }
+    if (e.target.parentElement.classList.contains("active")){
+        e.target.parentElement.classList.remove("active")
+        e.target.parentElement.classList.add("inactive")
+        e.target.outerHTML = inactive
+    }
+    else{
+        e.target.parentElement.classList.remove("inactive")
+        e.target.parentElement.classList.add("active")
+        e.target.outerHTML = add
     }
     localStorage.setItem("bookmarks", JSON.stringify(datas))
 }
