@@ -34,7 +34,7 @@ function updatePrices(e)
 
 function fillCart(array)
 {
-    if (array.length >= 1)
+    if (array && array.length >= 1)
     {
         for (let i = 0; i < array.length; i++)
         {
