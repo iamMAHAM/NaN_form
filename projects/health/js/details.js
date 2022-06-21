@@ -47,9 +47,7 @@ function detail()
 
 function addToCart(e)
 {
-    console.log("start", e.target)
     parent = e.target.parentElement.parentElement.parentElement
-    console.log(parent)
     imgLink = document.querySelector(".img").src
     quantities = document.querySelector("#number").value
     title = document.querySelector(".green").textContent
@@ -69,8 +67,6 @@ function addToCart(e)
                 <p class="icone-del" onclick="deleteFromCart(event)"><i class="fa-regular fa-trash-can"></i></p>
             </div>
             `
-        
-    console.log(toAdd)
     carts = localStorage.getItem("carts")
     if (carts)
     {
@@ -83,6 +79,8 @@ function addToCart(e)
         carts.push(toAdd)
     }
     localStorage.setItem("carts", JSON.stringify(carts))
+    updateCartAmount()
 }
+
 
 window.addEventListener("load", detail)
