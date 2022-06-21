@@ -60,6 +60,7 @@ function deleteFromCart(e)
     parent = e.target.parentElement.parentElement.parentElement
     toDel = e.target.parentElement.parentElement
     carts = JSON.parse(localStorage.getItem("carts").trim())
+    parent.removeChild(toDel)
     for (let i = 0; i < carts.length; i++)
     {
         if (carts[i].trim() === toDel.outerHTML.trim())
@@ -68,12 +69,12 @@ function deleteFromCart(e)
             index = carts.indexOf(carts[i])
             console.log("index found", index)
             carts.splice(index, 1)
-            parent.removeChild(toDel)
         }
     }
     console.log(carts)
     localStorage.setItem("carts", JSON.stringify(carts))
     countPrices()
+    updateCartAmount()
 }
 window.addEventListener("load", ()=>{
     fillCart(carts)
