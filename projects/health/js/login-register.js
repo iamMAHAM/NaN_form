@@ -11,6 +11,7 @@ let emailLogin = document.querySelector(".email")
 let password = document.querySelector(".passwd")
 
 /*left element */
+let is_connected = false;
 let checkbox = document.querySelector(".apple-switch")
 checkbox.checked = true
 
@@ -37,7 +38,7 @@ function loginF(e)
 	let user = JSON.parse(localStorage.getItem("user"))
 	let eml = user.email
 	let passw = user.password
-	if (eml === email.value && passw === password.value)
+	if (eml === emailLogin.value && passw === password.value)
 	{
 		localStorage.setItem("is_connected", "true")
 		window.location.href = "index.html"
@@ -75,6 +76,14 @@ function toggle()
 /*-------------- Verification---------------------------------*/
 
 /*-------------- Event Listener---------------------------------*/
-checkbox.addEventListener("click", toggle)
-register.addEventListener("click", registerF)
-login.addEventListener("click", loginF)
+
+window.addEventListener("load", ()=>{
+	is_connected = localStorage.getItem("is_connected")
+
+	if (is_connected === "true"){window.location.href = "index.html"}
+	else{
+		checkbox.addEventListener("click", toggle)
+		register.addEventListener("click", registerF)
+		login.addEventListener("click", loginF)
+	}
+})
