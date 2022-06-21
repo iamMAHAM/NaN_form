@@ -146,8 +146,6 @@ function addBookmark(e)
 }
 /*Event Listening*/
 window.addEventListener("load", async ()=>{
-
-
     if (window.location.href.includes("index.html"))
     {
         res = await fetch("back/datas.json");
