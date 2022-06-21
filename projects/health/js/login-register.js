@@ -46,7 +46,7 @@ function loginF(e)
 	else
 	{
 		localStorage.setItem("is_connected", "false")
-		email.style.borderColor = "red"
+		emailLogin.style.borderColor = "red"
 		password.style.borderColor  = "red"
 	}
 }
