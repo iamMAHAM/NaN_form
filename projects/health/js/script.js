@@ -27,7 +27,7 @@ function redirectInfo(e)
     element = [].slice.call(element.children)
     toStore = element[3].textContent
     localStorage.setItem("detail", toStore)
-    window.open("details.html")
+    window.location.href = "details.html"
 
 }
 
