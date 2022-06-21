@@ -5,7 +5,7 @@
 }
 
 .item{
-    height: 25%;
+    height: 35%;
 }
 
 .items{
@@ -24,15 +24,15 @@
     width: 50%;
     position: absolute;
     right: 0;
-    bottom: 10px;
+    top: 0;
     float: right;
 }
 
 #number{
     font-size: 20px;
     margin: 0 auto;
-    height: 20px;
-    width: 30px;
+    height: 30px;
+    width: 50px;
 }
 
 .bottom-d{
@@ -46,6 +46,10 @@
 }
 
 .bottom{
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     font-size: 25px;
 }
 
@@ -85,4 +89,8 @@ button{
     width: 85%;
     margin: auto auto;
     text-align: center;
+}
+
+p.title{
+    text-transform: uppercase;
 }
