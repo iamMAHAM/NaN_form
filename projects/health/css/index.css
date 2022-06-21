@@ -29,6 +29,7 @@ body, *{
 }
 
 .top-header-left{
+    display: none;
     font-size: 20px;
     border: 2px solid white;
     background-color: white;
