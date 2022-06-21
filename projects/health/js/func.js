@@ -5,8 +5,28 @@ function updateCartAmount()
         document.querySelector("div.total").textContent = carts.length
 }
 
-updateCartAmount()
+function checkLogin()
+{
+    is_connected = localStorage.getItem("is_connected")
+    if (is_connected === "true")
+    {
+        document.querySelector(".head.login").innerHTML = `
+        <img class="avatar" src="img/avatar.png">
+        <p onclick="logout()">Logout</p>
+        `
+    }
+    else{
+        window.location.href = "../login-register.html"
+    }
+}
 
+function logout()
+{
+    localStorage.setItem("is_connected", "false")
+}
+
+updateCartAmount()
+checkLogin()
 window.addEventListener("load", () =>{
     /**Targetting common things */
     let account = document.querySelector(".head.login")
