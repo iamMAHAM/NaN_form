@@ -94,3 +94,11 @@ button{
 p.title{
     text-transform: uppercase;
 }
+
+p.icone-del{
+    font-size: 25px;
+    position: absolute;
+    color: red;
+    top: 10px;
+    right: 10px;
+}
