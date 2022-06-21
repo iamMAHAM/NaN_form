@@ -38,7 +38,7 @@ function detail()
                 <input type="number" value="1" min="1" name="0" id="number">
             </div>
             <span class="rt-price">${details.prices}</span>
-            <button>add to cart</button>
+            <button onclick="addToCart(event)">add to cart</button>
         </div>
     </div>
     `
@@ -48,41 +48,40 @@ function detail()
 function addToCart(e)
 {
     console.log("start", e.target)
-    child = e.target.parentElement.parentElement.parentElement
+    parent = e.target.parentElement.parentElement.parentElement
+    console.log(parent)
+    imgLink = document.querySelector(".img").src
+    quantities = document.querySelector("#number").value
+    title = document.querySelector(".green").textContent
+    price = document.querySelector(".rt-price").textContent
+    description = document.querySelector(".center > p").textContent
+
+    let toAdd = 
+            `
+            <div class="item">
+                <img class="item-image" src="${imgLink}" title="${title}">
+                <div class="bottom">
+                    <p class="title">${title}</p>
+                    <p class="description">${description}</p>
+                    <input oninput="updatePrices(event)" type="number" value="${quantities}" min="1" name="0" id="number">
+                    <p class="prices">${price}<span class="m"> x ${quantities}</span></p>
+                </div>
+            </div>
+            `
+        
+    console.log(toAdd)
     carts = localStorage.getItem("carts")
     if (carts)
     {
         carts = JSON.parse(carts)
-        carts.push(child.outerHTML.replace(add, remove).replace(inactive, remove))
+        carts.push(toAdd)
     }
     else
     {
         carts = []
-        carts.push(child.outerHTML.replace(add, remove).replace(inactive, remove))
-    }
-    if (e.target.parentElement.classList.contains("active")){
-        e.target.parentElement.classList.remove("active")
-        e.target.parentElement.classList.add("inactive")
-        e.target.outerHTML = inactive
-    }
-    else{
-        e.target.parentElement.classList.remove("inactive")
-        e.target.parentElement.classList.add("active")
-        e.target.outerHTML = add
+        carts.push(toAdd)
     }
     localStorage.setItem("carts", JSON.stringify(carts))
 }
 
-let toAdd = 
-`
-<div class="item" id="2">
-    <img class="item-image" src="${img}" title="${title-img}">
-    <div class="bottom">
-        <p class="title">${title}</p>
-        <p class="description">${description}</p>
-        <p class="prices">${price}<span class="m"> x ${quantities}</span></p>
-    </div>
-    <input oninput="updatePrices(event)" type="number" value="1" min="1" name="0" id="number">
-</div>
-`
 window.addEventListener("load", detail)

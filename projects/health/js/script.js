@@ -1,9 +1,9 @@
 /*Targetting elements*/
 
-let login = document.querySelector(".login")
-let bookmark = document.querySelector(".bookmark")
-let cart = document.querySelector(".cart")
-let search = document.querySelector("#search")
+// let login = document.querySelector(".login")
+// let bookmark = document.querySelector(".bookmark")
+// let cart = document.querySelector(".cart")
+// let search = document.querySelector("#search")
 let items = document.querySelector(".items")
 let datas = null
 let remove = `<i class="fa-regular fa-trash-can"></i>`
@@ -151,15 +151,4 @@ window.addEventListener("load", async ()=>{
             fillBookmark(datas)
         }
     }
-    login.addEventListener("click", ()=>{
-        window.location.href = "../login-register.html"
-    })
-
-    bookmark.addEventListener("click", ()=>{
-        window.location.href = "../bookmark.html"
-    })
-
-    cart.addEventListener("click", ()=>{
-        window.location.href = "../cart.html"
-    })
 })
