@@ -28,7 +28,7 @@ function countPrices()
 
 function updatePrices(e)
 {
-    e.target.previousElementSibling.children[2].children[0].textContent = "x " + e.target.value
+    e.target.nextElementSibling.children[0].textContent = "x " + e.target.value
     if (e.target.value){countPrices()}
 }
 
