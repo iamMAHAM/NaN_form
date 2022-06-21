@@ -3,22 +3,12 @@
 /*register target */
 let registerParent = document.querySelector(".register-fields.register")
 let register = document.querySelector(".register-button")
-let email = document.querySelector(".email")
-let pass  = document.querySelector(".password")
-let age = document.querySelector(".age")
-let name = document.querySelector(".name")
-let surname  = document.querySelector(".surname")
-let country = document.querySelector(".country")
 
 /*login target */
 let loginParent = document.querySelector(".register-fields.login")
 let login = document.querySelector(".login-button")
 let emailLogin = document.querySelector(".email")
 let password = document.querySelector(".passwd")
-let sessionToken = null
-let sessionId = null
-let config = null
-let res = null
 
 /*left element */
 let checkbox = document.querySelector(".apple-switch")
@@ -27,12 +17,15 @@ checkbox.checked = true
 /*-------------- Register Functions---------------------------------*/
 function registerF(e)
 {
-    let keys = ["name", "surname", "email", "password", "age", "country"]
+	let user = {}
+    let keys = ["name", "surname", "email", "password", "age", "country", "photo"]
 	e.preventDefault()
 	for (let i = 1, j = 0; i < 7; i++, j++)
 	{
-		localStorage.setItem(keys[j], registerParent.children[i].value)
+		user[keys[j]] = registerParent.children[i].value
 	}
+	user[keys[6]] = document.querySelector("#avatar").files[0].name
+	localStorage.setItem("user", JSON.stringify(user))
 	checkbox.checked = true
     toggle()
 }
@@ -41,8 +34,9 @@ function registerF(e)
 function loginF(e)
 {
 	e.preventDefault()
-	let eml = localStorage.getItem("email")
-	let passw = localStorage.getItem("password")
+	let user = JSON.parse(localStorage.getItem("user"))
+	let eml = user.email
+	let passw = user.password
 	if (eml === email.value && passw === password.value)
 	{
 		localStorage.setItem("is_connected", "true")
