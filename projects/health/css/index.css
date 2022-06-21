@@ -197,10 +197,11 @@ div.total{
 
 
 img.avatar{
+    margin: 3px;
     text-align: center;
     border-radius: 50%;
 	width: 40px;
-	height: 40px;
+	height: 25px;
 }
 
 .head.login{
