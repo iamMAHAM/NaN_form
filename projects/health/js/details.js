@@ -66,6 +66,7 @@ function addToCart(e)
                     <input oninput="updatePrices(event)" type="number" value="${quantities}" min="1" name="0" id="number">
                     <p class="prices">${price}<span class="m"> x ${quantities}</span></p>
                 </div>
+                <p class="icone-del" onclick="deleteFromCart(event)"><i class="fa-regular fa-trash-can"></i></p>
             </div>
             `
         
