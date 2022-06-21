@@ -171,10 +171,10 @@ i.add{
 }
 
 div.total{
-    display: none;
     color: white;
-    background-color: #333;
+    background-color: #595858;
     z-index: 1;
+    width: 20px;
     border-radius: 50%;
     position: absolute;
     top: 50%;
