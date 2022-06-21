@@ -22,7 +22,7 @@ body, *
 
 form
 {
-	background-color: #00e5faf8;
+	background-color: #09a766;
 	height: 100%;
 }
 
@@ -38,9 +38,9 @@ form
 .fields
 {
 	border: none;
-	border-left: 2px solid #0078fa;
+	border-left: 2px solid #09a766;
 	font-size: 20px;
-	color: #0078fa;
+	color: #09a766;
 	margin: 9px auto;
 	padding: 8px;
 	border-radius: 5px;
@@ -50,8 +50,8 @@ form
 .register-button
 {
 	font-size: 20px;
-	background-color: #0078fa;
-	color: white;
+	background-color: white;
+	color: #09a766;
 	font-weight: 500;
 	border-radius: 5px;
 	cursor: pointer;
@@ -66,16 +66,11 @@ form
 	color: #333;
 }
 
-.login-from-register:hover
-{
-	color: #0078fa;
-}
-
 .register-legend
 {
 	border-radius: 5px;
 	background-color: white;
-	color: #0078fa;
+	color: #09a766;
 	font-size: 30px;
 }
 
@@ -116,7 +111,7 @@ p.title
 	margin: 10px auto;
 	width: 150px;
 	font-size: 30px;
-	color: #0078fa;
+	color: #09a766;
 }
 
 .login-e
@@ -140,6 +135,8 @@ p.title
 }
 
 div.confirm{
+	color: white;
+	font-weight: 900;
 	margin: 5px;
 	padding: 3px;
 }
