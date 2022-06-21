@@ -23,3 +23,12 @@ window.addEventListener("load", () =>{
         window.location.href = "../index.html"
     })
 })
+
+function updateCartAmount()
+{
+    carts = JSON.parse(localStorage.getItem("carts"))
+    if (carts)
+        document.querySelector("div.total").textContent = carts.length
+}
+
+updateCartAmount()
