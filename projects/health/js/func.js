@@ -1,3 +1,7 @@
+function lol(){
+    window.location.href = "../login-register.html"
+}
+
 function updateCartAmount()
 {
     carts = JSON.parse(localStorage.getItem("carts"))
@@ -10,9 +14,10 @@ function checkLogin()
     is_connected = localStorage.getItem("is_connected")
     if (is_connected === "true")
     {
+        document.querySelector(".head.login").removeEventListener("click", lol)
         document.querySelector(".head.login").innerHTML = `
-        <img class="avatar" src="img/avatar.png">
-        <p onclick="logout()">Logout</p>
+        <img class="avatar" onclick="#" src="img/avatar.png">
+        <span onclick="logout()">Logout</span>
         `
     }
     else{
@@ -23,21 +28,18 @@ function checkLogin()
 function logout()
 {
     localStorage.setItem("is_connected", "false")
+    window.location.href = "../login-register.html"
 }
 
-updateCartAmount()
-checkLogin()
 window.addEventListener("load", () =>{
     /**Targetting common things */
     let account = document.querySelector(".head.login")
     let bookmark = document.querySelector(".bookmark")
     let cart = document.querySelector(".cart")
     let home = document.querySelector(".top-header-center.head")
-    let search = document.querySelector("#search")
+
     /**EventListener */
-    account.addEventListener("click", ()=>{
-        window.location.href = "../login-register.html"
-    })
+    account.addEventListener("click", lol)
 
     bookmark.addEventListener("click", ()=>{
         window.location.href = "../bookmark.html"
@@ -50,4 +52,6 @@ window.addEventListener("load", () =>{
     home.addEventListener("click", ()=>{
         window.location.href = "../index.html"
     })
+    updateCartAmount()
+    checkLogin()
 })
