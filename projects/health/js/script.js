@@ -55,7 +55,7 @@ function fillPage(array)
     {
         items.innerHTML += 
         `
-        <div class="item" id="${i}" onclick="redirectInfo(event)">
+        <div class="item" onclick="redirectInfo(event)">
             <div class="top">
                 <p class="status"><i class="fa-solid fa-circle-check"></i> en stock</p>
                 <p class="bookmark inactive" onclick=func(event)><i class="fa-regular fa-heart"></i></p>
@@ -83,17 +83,24 @@ function fillBookmark(array)
     }
 }
 
-function removeBookmark(e)
+function removeBookmark(e, child=null)
 {
-    parent = e.target.parentElement.parentElement.parentElement.parentElement
-    console.log("parent", parent)
-    child = e.target.parentElement.parentElement.parentElement
-    parent.removeChild(child)
-    toRemove = child.outerHTML
+    if (window.location.href.includes("bookmark.html")) /** we are on bookmark page */{}
+    else{datas = JSON.parse(datas)} /**other */
+    if (!child)
+    {
+        parent = e.target.parentElement.parentElement.parentElement.parentElement
+        child = e.target.parentElement.parentElement.parentElement
+        parent.removeChild(child)
+        toRemove = child.outerHTML
+    }
+    else{
+        toRemove = child.outerHTML.replace(add, remove).replace(inactive, remove)
+    }
+
+    console.log(toRemove)
     for (let i = 0; i < datas.length; i++)
     {
-        console.log("DATAS=====================\n\n",datas[i], "\n\n")
-        console.log("REMOVE=====================\n\n",toRemove, "\n\n")
         if (datas[i] === toRemove)
         {
             console.log("match")
@@ -101,37 +108,41 @@ function removeBookmark(e)
             console.log("index found", index)
             datas.splice(index, 1)
         }
-
+        console.log(datas[i])
     }
     localStorage.setItem("bookmarks", JSON.stringify(datas))
 }
 
 function addBookmark(e)
 {
-    console.log("start", e.target)
-    child = e.target.parentElement.parentElement.parentElement
     datas = localStorage.getItem("bookmarks")
-    if (datas)
+    child = e.target.parentElement.parentElement.parentElement
+    if (e.target.parentElement.classList.contains("active"))/**if already on bookmark */
     {
-        datas = JSON.parse(datas)
-        datas.push(child.outerHTML.replace(add, remove).replace(inactive, remove))
-    }
-    else
-    {
-        datas = []
-        datas.push(child.outerHTML.replace(add, remove).replace(inactive, remove))
-    }
-    if (e.target.parentElement.classList.contains("active")){
         e.target.parentElement.classList.remove("active")
         e.target.parentElement.classList.add("inactive")
+        console.log("BEFORE Bhd REMOVE", child)
+        removeBookmark(e, child)
         e.target.outerHTML = inactive
+        return
     }
     else{
+        if (datas)
+        {
+            datas = JSON.parse(datas)
+            console.log(datas)
+            datas.push(child.outerHTML.replace(add, remove).replace(inactive, remove))
+        }
+        else
+        {
+            datas = []
+            datas.push(child.outerHTML.replace(add, remove).replace(inactive, remove))
+        }
         e.target.parentElement.classList.remove("inactive")
         e.target.parentElement.classList.add("active")
         e.target.outerHTML = add
+        localStorage.setItem("bookmarks", JSON.stringify(datas))
     }
-    localStorage.setItem("bookmarks", JSON.stringify(datas))
 }
 /*Event Listening*/
 window.addEventListener("load", async ()=>{
