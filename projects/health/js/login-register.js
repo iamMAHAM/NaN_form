@@ -25,7 +25,7 @@ function registerF(e)
 	{
 		user[keys[j]] = registerParent.children[i].value
 	}
-	user[keys[6]] = document.querySelector("#avatar").files[0].name
+	user[keys[6]] = document.querySelector("#avatar").value
 	localStorage.setItem("user", JSON.stringify(user))
 	checkbox.checked = true
     toggle()
