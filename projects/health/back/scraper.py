@@ -16,7 +16,7 @@ def write(filename, data):
         fj.write(data)
 
 
-def fetch():
+def scrape():
     res = requests.get(baseUrl, headers=headers).content
     soup = BeautifulSoup(res, "html.parser").find_all("div", class_="product")
     for item in soup:
@@ -65,4 +65,4 @@ def trailing(soup):
     return ", ".join(soup)
 
 if __name__ == "__main__":
-    fetch()
+    scrape()
