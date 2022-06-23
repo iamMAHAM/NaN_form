@@ -227,6 +227,16 @@ img.avatar{
         font-size: 10px;
     }
 
+    div.head i{
+        font-size: 20px;
+    }
+    .top-header-right > div{
+        justify-content: space-between;
+    }
+    div.top-header-right{
+        margin-right: 35px;
+    }
+
     div.item{
         height: 200px;
     }
@@ -239,22 +249,25 @@ img.avatar{
         width: 100%;
     }
 
-    div.top-header-right{
-        display: none;
-        margin-right: 35px;
-        flex-direction: column;
-    }
-
     div.top-header-right.show{
         display: block;
     }
 
-    .icon{
-        display: block;
+    div.top-header-right{
+        flex-direction: row;
     }
 
     @media (max-width: 310px)
     {
+        .icon{
+            display: block;
+        }
+
+        div.top-header-right{
+            display: none;
+            flex-direction: column;
+        }
+
         div.items{
             flex-direction: column;
         }
