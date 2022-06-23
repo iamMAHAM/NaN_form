@@ -178,7 +178,7 @@ div.element >p{
     }
 
     .informations{
-        width: 250px;
+        width: auto;
     }
     a.men{
         font-size: 15px;
