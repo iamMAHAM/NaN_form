@@ -60,7 +60,7 @@
     display: flex;
     flex-direction: column;
     width: 40%;
-    margin: auto auto;
+    margin: 10px auto;
 }
 
 .totals{
@@ -103,4 +103,9 @@ p.icone-del{
     color: red;
     top: 10px;
     right: 10px;
+}
+
+.empty{
+    display: none;
+    font-size: 50px;
 }
