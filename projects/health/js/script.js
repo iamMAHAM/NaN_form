@@ -25,6 +25,7 @@ function redirectInfo(e)
     if (classList.contains("fa-regular") || classList.contains("fa-solid")){return}
     else {element = e.target.parentElement}
     element = [].slice.call(element.children)
+    console.log(element)
     toStore = element[3].textContent
     localStorage.setItem("detail", toStore)
     window.location.href = "details.html"
