@@ -18,9 +18,9 @@ function detail()
     `
     <div class="left">
         <img src="${details.img.replace("product_thumbnail","product_show")}" alt="" class="img">
-        </div>
+    </div>
     
-        <div class="right">
+    <div class="right paddd">
         <div class="top">
             <p>${details.redirect.split("-").join(" ").replace("/fr/", "")}</p>
             <p class="green" style="text-transform: uppercase;">${details.title}</p>
