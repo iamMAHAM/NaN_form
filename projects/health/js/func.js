@@ -31,6 +31,11 @@ function logout()
     window.location.href = "../login-register.html"
 }
 
+function mediaQ()
+{
+    om = document.querySelector("div.top-header-right").classList.toggle("show")
+}
+
 function addToCart(e)
 {
     parent = e.target.parentElement.parentElement.parentElement
@@ -71,6 +76,7 @@ function addToCart(e)
 
 window.addEventListener("load", () =>{
     /**Targetting common things */
+    let menu = document.querySelector(".icon")
     let account = document.querySelector(".head.login")
     let bookmark = document.querySelector(".bookmark")
     let cart = document.querySelector(".cart")
@@ -90,6 +96,8 @@ window.addEventListener("load", () =>{
     home.addEventListener("click", ()=>{
         window.location.href = "../index.html"
     })
+
+    menu.addEventListener("click", mediaQ)
     updateCartAmount()
     checkLogin()
 })
