@@ -1,5 +1,73 @@
+
+@media (max-width: 315px)
+{
+    /*HEADER*/
+    .icon{
+        display: block;
+    }
+
+    div.top-header-right{
+        display: none;
+        flex-direction: column;
+    }
+
+    div.items{
+        flex-direction: column;
+    }
+
+    div.top,
+    div.center,
+    div.bottom,
+    p.title{
+        font-size: 20px;
+    }
+
+    div.item{
+        margin: 0;
+        margin-top: 5px;
+        width: 100%;
+        height: 300px;
+    }
+
+    img.item-image{
+        height: 185px;
+    }
+
+    /*DETAILS.html*/
+    .container{
+        position: relative;
+        flex-direction: column;
+        transform: translate(-50%, 0);
+    }
+
+    .img.img,
+    .right.paddd,
+    .container .left{
+        width: 100%;
+    }
+
+    .bottom-d button,
+    div.right .bottom-d,
+    div.right .center,
+    div.right .top{
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 415px){
+
+    /*DETAILS.HTML*/
+    div.right.paddd{
+        padding: 0;
+    }
+}
+
+
+
 @media (max-width: 815px)
 {
+
+    /* HEADER */
     div.head,
     div.top-header-center.head,
     div.top,
@@ -39,43 +107,24 @@
         flex-direction: row;
     }
 
-    @media (max-width: 310px)
-    {
-        .icon{
-            display: block;
-        }
+    /*END HEADER*/
 
-        div.top-header-right{
-            display: none;
-            flex-direction: column;
-        }
+    /*DETAILS.html*/
 
-        div.items{
-            flex-direction: column;
-        }
-
-        div.top,
-        div.center,
-        div.bottom,
-        p.title{
-            font-size: 20px;
-        }
-
-        div.item{
-            margin: 0;
-            margin-top: 5px;
-            width: 100%;
-            height: 300px;
-        }
-    
-        img.item-image{
-            height: 185px;
-        }
-
-        img.img{
-            height: 200px;
-            width: 200px;
-        }
-
+    .container{
+        top: 35%;
     }
+    img.img{
+        height: 200px;
+        width: 200px;
+    }
+
+    .bottom-d button,
+    div.right .bottom-d,
+    div.right .center,
+    div.right .top{
+        font-size: 10px;
+    }
+
+    /*END DETAILS.html*/
 }
