@@ -5,6 +5,15 @@ const messageEl = document.querySelector("#message");
 
 const form = document.querySelector("#submit-form");
 
+
+if(typeof(String.prototype.trim) === "undefined")
+{
+    String.prototype.trim = function() 
+    {
+        return String(this).replace(/^\s+|\s+$/g, '');
+    };
+}
+
 function checkValidations() {
 	let letters = /^[a-zA-Z\s]*$/;
 	const name = nameEl.value.trim();
