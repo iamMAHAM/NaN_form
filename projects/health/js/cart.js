@@ -65,7 +65,6 @@ function deleteFromCart(e)
     {
         if (carts[i].trim() === toDel.outerHTML.trim())
         {
-            console.log("ëëëëëëëëMMMMMMMMMMATCH")
             index = carts.indexOf(carts[i])
             console.log("index found", index)
             carts.splice(index, 1)
@@ -76,6 +75,8 @@ function deleteFromCart(e)
     countPrices()
     updateCartAmount()
 }
+
+
 window.addEventListener("load", ()=>{
     fillCart(carts)
 })
