@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 
-baseUrl = "test.comd"
+baseUrl = "https://www.pharma-gdd.com/fr/hygiene-beaute"
 datas_list = []
 headers = {
         "accept-language": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ny;q=0.6",
@@ -38,7 +38,7 @@ def scrape():
         datas_list.append(data)
     
     json_to_write = json.dumps(datas_list, indent=4, ensure_ascii=False)
-    write("datas.json", json_to_write)
+    write("datas1.json", json_to_write)
 
 def getDetails(url):
     res = requests.get(url, headers=headers).text
