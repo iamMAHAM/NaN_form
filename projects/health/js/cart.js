@@ -45,12 +45,7 @@ function fillCart(array)
     else
     {
         items.style.margin = "auto auto"
-        let data = document.createElement("p")
-        data.textContent = "EMPTY CART BRO ! :)"
-        data.style.fontSize = "50px"
-        data.style.fontWeight = "bold"
-        data.style.padding = "100px"
-        items.prepend(data)
+        document.querySelector(".empty").style.display = "block"
     }
 }
 
