@@ -18,16 +18,20 @@ div.nav-bar{
     justify-content: space-around;
 }
 
-p.men{
+a.men{
+    text-decoration: none;
+    height: 50px;
     cursor: pointer;
-    color: white;
+    color: black;
+    background-color: white;
     font-weight: 900;
-    font-size: 25px;
     padding: 10px;
+    margin: 10px;
+    font-size: 25px;
     border-radius: 10px;
 }
 
-p.men:hover{
+a.men:hover{
     background-color: #09a766;
 }
 
