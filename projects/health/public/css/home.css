@@ -118,3 +118,22 @@ div.element >p{
     margin-left: 10px;
     border-radius: 50%;
 }
+
+.informations {
+    text-align: center;
+    border-radius: 50px;
+    background-color: white;
+    color: black;
+    font-weight: 900;
+    width: 500px;
+    height: auto;
+    font-size: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.informations >p{
+    padding: 20px;
+}
