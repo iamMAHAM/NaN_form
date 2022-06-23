@@ -104,7 +104,7 @@ div.element{
     height: 100px;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 div.element >p{
@@ -136,4 +136,55 @@ div.element >p{
 
 .informations >p{
     padding: 20px;
+}
+
+@media (max-width: 1015px){
+    div.left{
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 510px)
+{
+    div.element{
+        margin: 5px;
+        width: 100%;
+        height: 100px;
+
+    }
+    div.left{
+        font-size: 30px;
+    }
+
+
+    div.top{
+        flex-direction: column;
+    }
+
+    div.top .left{
+        width: 100%;
+    }
+
+    div.top .right{
+        width: 100%;
+    }
+
+    div.bottom{
+        flex-direction: column;
+    }
+
+    .informations >p{
+        font-size: 15px;
+    }
+
+    .informations{
+        width: 250px;
+    }
+    a.men{
+        font-size: 15px;
+    }
+
+    img.network{
+        margin-right: 0;
+    }
 }
