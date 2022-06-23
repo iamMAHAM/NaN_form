@@ -214,3 +214,84 @@ img.avatar{
 .head.login{
     align-items: center;
 }
+
+.footer{
+    display: flex;
+    flex-direction: column;
+}
+
+.level2,
+.level1
+{
+    background-color: rgb(6, 28, 37);
+    color: rgb(209, 218, 222);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.level1 >p
+{
+    font-size: 20px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.level2
+{
+    background-color: #292929;
+    color: #09a766;
+}
+
+.sug{
+    text-transform: uppercase;
+    font-size: 15px;
+    padding: 30px;
+    text-decoration: none;
+    background-color: #292929;
+    color: white;
+}
+
+.level3
+{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    background-color: #1d1d1d;
+    text-align: center;
+}
+
+.fa-brands
+{
+    border-radius: 50%;
+    margin: 5px;
+    background-color: #292929;
+    padding: 10px;
+}
+.level32
+{
+    padding: 5px;
+}
+
+.level33
+{
+    padding: 10px;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.level34
+{
+    margin: auto auto;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: space-between;
+}
+
+p.logos{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
