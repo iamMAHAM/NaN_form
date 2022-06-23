@@ -1,0 +1,116 @@
+body, *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+div.header{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    width: 100%;
+}
+
+div.nav-right,
+div.nav-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+p.men{
+    cursor: pointer;
+    color: white;
+    font-weight: 900;
+    font-size: 25px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+p.men:hover{
+    background-color: #09a766;
+}
+
+#logo{
+    width: 100px;
+    height: 80px;
+}
+
+img.header-img{
+    z-index: -1;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+div.container{
+    background-color: #09a766;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+div.bottom,
+div.top{
+    display: flex;
+    flex-direction: row;
+}
+
+div.left{
+    color: white;
+    padding: 100px;
+    font-size: 100px;
+}
+
+div.left,
+div.right{
+    width: 50%;
+}
+
+div.right{
+    margin: 5px;
+    margin-left: 0;
+}
+
+img.network{
+    height: 100%;
+    margin-right: 20px;
+    width: 100%;
+    background-color: white;
+}
+
+p.info{
+    width: 100%;
+}
+
+img.lf{
+    width: 50px;
+    height: 100%;
+}
+.bottom{
+    justify-content: space-between;
+}
+
+div.element{
+    border-radius: 50%;
+    background-color: white;
+    width: 300px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+div.element >p{
+    font-weight: bold;
+    font-size: 18px;
+    color: #1d1d1d;
+    margin: auto auto;
+}
+
+.lf.m{
+    margin-left: 10px;
+    border-radius: 50%;
+}
