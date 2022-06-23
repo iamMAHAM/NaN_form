@@ -162,3 +162,34 @@ div.confirm{
 		transform: translate(-110%);
 	}
 }
+
+
+@media (max-width: 850px)
+{
+	.container.log{
+		top: 50%;
+		width: 600px;
+	}
+
+	.fields{
+		font-size: 17px;
+	}
+
+	.login-button,
+	.register-button{
+		font-size: 17px;
+		width: 100px;
+	}
+
+	.register-legend{
+		font-size: 25px;
+	}
+
+}
+
+@media (max-width: 600px)
+{
+	.container.log{
+		width: 300px;
+	}
+}
