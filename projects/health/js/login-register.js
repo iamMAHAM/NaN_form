@@ -36,6 +36,10 @@ function loginF(e)
 {
 	e.preventDefault()
 	let user = JSON.parse(localStorage.getItem("user"))
+	if (!user)
+	{
+		user = {email: "", passw: ""}
+	}
 	let eml = user.email
 	let passw = user.password
 	if (eml === emailLogin.value && passw === password.value)
