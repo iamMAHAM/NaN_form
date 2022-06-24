@@ -149,7 +149,7 @@ function addBookmark(e)
 window.addEventListener("load", async ()=>{
     if (window.location.href.includes("index.html"))
     {
-        res = await fetch("back/datas.json");
+        res = await fetch("../back/datas.json");
         res = await res.json()
         fillPage(res)
     }

@@ -1,5 +1,5 @@
 function lol(){
-    window.location.href = "../login-register.html"
+    window.location.href = "login-register.html"
 }
 
 function updateCartAmount()
@@ -21,14 +21,14 @@ function checkLogin()
         `
     }
     else{
-        window.location.href = "../login-register.html"
+        window.location.href = "login-register.html"
     }
 }
 
 function logout()
 {
     localStorage.setItem("is_connected", "false")
-    window.location.href = "../login-register.html"
+    window.location.href = "login-register.html"
 }
 
 function mediaQ()
@@ -86,15 +86,15 @@ window.addEventListener("load", () =>{
     account.addEventListener("click", lol)
 
     bookmark.addEventListener("click", ()=>{
-        window.location.href = "../bookmark.html"
+        window.location.href = "bookmark.html"
     })
 
     cart.addEventListener("click", ()=>{
-        window.location.href = "../cart.html"
+        window.location.href = "cart.html"
     })
 
     home.addEventListener("click", ()=>{
-        window.location.href = "../index.html"
+        window.location.href = "index.html"
     })
 
     menu.addEventListener("click", mediaQ)
