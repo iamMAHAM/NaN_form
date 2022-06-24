@@ -27,3 +27,12 @@ input.apple-switch:checked:after {
     left: 20px;
     box-shadow: -2px 4px 3px rgba(0,0,0,0.05);
 }
+
+@media (max-width: 500px)
+{
+	input.apple-switch{
+		top: 100%;
+		right: 50%;
+		transform: translate(50%, -100%);
+	}
+}
