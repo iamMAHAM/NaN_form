@@ -1,0 +1,26 @@
+[{
+    "level":1,
+    "bricks":3,
+     "brickSquareLength":2,
+     "speed": 7
+},{
+    "level":2,
+    "bricks":6,
+    "brickSquareLength":2,
+     "speed":6
+},{
+    "level":3,
+    "bricks":8,
+    "brickSquareLength":2,
+     "speed":5
+},{
+    "level":4,
+    "bricks":10,
+    "brickSquareLength":2,
+     "speed":3
+},{
+    "level":5,
+    "bricks":14,
+    "brickSquareLength":2,
+     "speed":2
+}]
