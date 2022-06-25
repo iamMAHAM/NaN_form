@@ -11,7 +11,7 @@ class Apple{
         let baseImg = new Image()
         baseImg.src = '../img/apple.png'
         base_image.onload = ()=>{
-            this.ctx.drawImage(base_image, this.body[0]* this.ws, this.body[1]);
+            this.ctx.drawImage(base_image, this.body[0]* this.ws, this.body[1]* this.hs, this.ws, this.hs);
         }
     }
 
