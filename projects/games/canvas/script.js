@@ -1,5 +1,8 @@
 const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
+let stopB = document.querySelector("button")
+
+console.log(stopB)
 let levels = []
 let currentLevel = {}
 let barre = [
@@ -54,12 +57,44 @@ const draw = () => {
 
 //  eheck if Collision
 const checkCollision = ([x, y]) => {
-    let index = bricks.findIndex((b) =>
-        b.find((v) => v[0] === x - 1 && y - 1 === v[1])
+    let index = bricks.findIndex((b) =>{
+        if (move === 'bottomRight'){
+            b.find((v) => {
+                console.log(`=======BRIQUE [${v}]=======`)
+                console.log("x : ",x, "y : ", y, "v[0] : ", v[0], "v[1] : ", v[1])
+                v[0] === x + 0.25 && y + 0.25 === v[1]
+            })
+        }
+        else if (move === 'bottomLeft'){
+            b.find((v) => v[0] === x - 0.25 && y + 0.25 === v[1])
+        }
+        else if (move === 'topRight'){
+            console.log(`~~~~~~~TopRight~~~~~~~All bricks}`)
+            b.find((v) => {
+                console.log(`=======BRIQUE [${v}]=======`)
+                console.log("x : ",Math.ceil(x) , "y : ", Math.ceil(y)-1, "vx : ", v[0], "vy : ", v[1])
+            v[0] === Math.ceil(x) && Math.ceil(y)-1 === v[1]
+        })
+        }
+        else{//topLeft
+            console.log("x :", x, "y : ", y)
+            b.find((v) => v[0] === x - 0.25 && y - 0.25 === v[1])
+        }
+        draw()
+    } 
     )
+
     if (index !== -1) {
+        console.log("index to be sliced", index)
+        console.log("balle", balle)
+        console.log("brique", bricks)
+        console.log("brique to be splice", bricks[index])
         bricks.splice(index, 1)
+        console.log("new bricks", bricks)
+        clearInterval(inter)
+        // clearInterval(inter)
     }
+
     if (bricks.length === 0) {
         clearInterval(inter)
         currentLevel = levels[currentLevel.level]
@@ -185,3 +220,7 @@ const genBricks = ({ bricks, brickSquareLength }) => {
 
     return output
 }
+
+stopB.addEventListener("click", ()=>{
+    clearInterval(inter)
+})
