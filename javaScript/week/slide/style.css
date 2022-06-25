@@ -5,6 +5,7 @@ body, *{
 }
 
 div.container{
+    /* overflow: hidden; */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -38,10 +39,20 @@ div.container{
     transform: translateY(-50%);
 }
 
+div.slider{
+    justify-content: flex-start;
+    transition: transform 1s;
+    transform: translate(0);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    max-height: 500px;
+    min-width: 500px;
+}
+
 img.img{
-    display: none;
-    height: 500px;
-    width: 500px;
+    min-width: 500px;
+    max-height: 100%;
 }
 
 .img.img.active{
