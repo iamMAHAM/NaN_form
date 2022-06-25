@@ -12,7 +12,6 @@ let inactive = `<i class="fa-regular fa-heart"></i>`
 /*declaring variables*/
 
 let res = null
-let baseUrl = ""
 
 
 /*Functions*/
