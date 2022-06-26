@@ -7,6 +7,7 @@ class Snake
         this.hs = hs
         this.body = body
         this.movement = 'moveRight'
+        this.justEat = false
         this.dead = false
     }
 
@@ -29,7 +30,15 @@ class Snake
 
     checkCollision(){
         let last = this.body[this.body.length -1]
-        if (this.body.slice(0, this.body.length - 1).some((r)=> r === [last[0], last[1]]))
+        this.body.slice(0, this.body.length - 1).forEach(a =>{
+            
+        })
+        console.log("last", JSON.stringify(last))
+        alert("ok")
+        if (this.body.slice(0, this.body.length - 1).find(arr =>{
+            JSON.stringify(arr) === JSON.stringify(last)
+        })
+        )
         {
             alert("game over")
         }
@@ -37,10 +46,28 @@ class Snake
             this.dead = true
         }
     }
-        
+
+    grow(){
+        if (this.justEat){
+            let last = this.body[this.body.length - 1]
+            if (this.movement === 'moveDown'){
+                this.body.push([last[0], last[1]+1])
+            }
+            else if (this.movement === 'moveTop'){
+                this.body.push([last[0], last[1]-1])
+            }
+            else if (this.movement === 'moveLeft'){
+                this.body.push([last[0] -1, last[1]])
+            }
+            else{
+                this.body.push([last[0] + 1, last[1]])
+            }
+        }
+    }
 
     move()
     {
+        this.justEat = false
         let last = this.body[this.body.length - 1]
         switch (this.movement){
             case 'moveDown':
@@ -63,7 +90,13 @@ class Snake
                 this.body.push([last[0] + 1, last[1]])
                 break
         }
+        this.grow()
         this.draw()
         this.checkCollision()
     }
+}
+
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
