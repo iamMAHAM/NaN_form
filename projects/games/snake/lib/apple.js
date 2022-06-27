@@ -25,9 +25,7 @@ class Apple{
 
     checkEat(snake){
         let snakeHead = snake.body[snake.body.length -1]
-        console.log("snake : ", snakeHead, "|| apple : ", this.body)
         if (JSON.stringify(snakeHead) === JSON.stringify(this.body)){
-            // alert("found")
             this.wasEat = true
             snake.justEat = true
             this.genPosition()
