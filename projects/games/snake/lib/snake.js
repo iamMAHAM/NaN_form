@@ -32,17 +32,17 @@ class Snake
         let last = JSON.stringify(this.body[this.body.length -1])
         let str = JSON.stringify(this.body.slice(0, this.body.length - 1))
         let match = str.includes(last)
-        console.log(match)
-        if (match){
-            this.dead = true
-        }
-        if (last[0] === this.cv.width/this.ws || last[1] === this.cv.height / this.ws || last[0] < 0 || last[1] < 0){
-            this.dead = true
+        last = this.body[this.body.length -1]
+        if (match || last[0] === this.cv.width/this.ws || 
+                last[1] === this.cv.height / this.ws ||
+                last[0] < 0 || last[1] < 0){
+                this.dead = true
         }
     }
 
     grow(){
         if (this.justEat){
+            console.log("oklm")
             let last = this.body[this.body.length - 1]
             if (this.movement === 'moveDown'){
                 this.body.push([last[0], last[1]+1])
@@ -57,6 +57,7 @@ class Snake
                 this.body.push([last[0] + 1, last[1]])
             }
         }
+        this.checkCollision()
     }
 
     move()
@@ -85,12 +86,5 @@ class Snake
                 break
         }
         this.draw()
-        this.grow()
-        this.checkCollision()
     }
-}
-
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }

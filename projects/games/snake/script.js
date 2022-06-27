@@ -16,6 +16,7 @@ window.addEventListener("load", ()=>{
     const snake = new Snake([[5, 18], [6, 18], [7, 18], [8, 18], [9, 18]], ctx, canvas, widthSquare, heigthSquare)
     const apple = new Apple([6, 19], ctx, canvas, widthSquare, heigthSquare)
     snake.draw()
+    // 
     apple.draw()
 
     const move = ()=>{
