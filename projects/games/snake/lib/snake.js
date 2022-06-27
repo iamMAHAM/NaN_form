@@ -9,6 +9,7 @@ class Snake
         this.movement = 'moveRight'
         this.justEat = false
         this.dead = false
+        this.wall = false
     }
 
     draw(){
@@ -42,10 +43,27 @@ class Snake
         let match = str.includes(last)
         last = this.body[this.body.length -1]
 
-        if (match || last[0] === this.cv.width/this.ws || 
-                last[1] === this.cv.height / this.ws ||
-                last[0] < 0 || last[1] < 0){
+        if (match){
+            this.dead = true
+        }
+        if (last[0] === this.cv.width/this.ws || last[1] === this.cv.height / this.ws || last[0] < 0 || last[1] < 0){
+            if (this.wall){
                 this.dead = true
+            }
+            else{
+                if (this.movement === 'moveDown'){
+                    this.body.push([last[0], 0])
+                }
+                else if (this.movement === 'moveTop'){
+                    this.body.push([last[0], 19])
+                }
+                else if (this.movement === 'moveLeft'){
+                    this.body.push([19, last[1]])
+                }
+                else{
+                    this.body.push([0, last[1]])
+                }
+            }
         }
     }
 
