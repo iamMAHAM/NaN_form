@@ -21,10 +21,18 @@ class Snake
 
     setPosition(key){
         switch (key){
-            case "ArrowLeft": this.movement = 'moveLeft' ; break
-            case "ArrowRight": this.movement = 'moveRight'; break
-            case "ArrowDown": this.movement = 'moveDown'; break
-            case "ArrowUp": this.movement = 'moveTop'; break
+            case "ArrowLeft":
+                this.movement = this.movement === 'moveRight' ? 'moveRight' : 'moveLeft'
+                break
+            case "ArrowRight":
+                this.movement = this.movement === 'moveLeft' ? 'moveLeft' : 'moveRight'
+                break
+            case "ArrowDown":
+                this.movement = this.movement === 'moveTop' ? 'moveTop' : 'moveDown'
+                break
+            case "ArrowUp":
+                this.movement = this.movement === 'moveDown' ? 'moveDown' : 'moveTop'
+                break
         }
     }
 
@@ -33,6 +41,7 @@ class Snake
         let str = JSON.stringify(this.body.slice(0, this.body.length - 1))
         let match = str.includes(last)
         last = this.body[this.body.length -1]
+
         if (match || last[0] === this.cv.width/this.ws || 
                 last[1] === this.cv.height / this.ws ||
                 last[0] < 0 || last[1] < 0){
