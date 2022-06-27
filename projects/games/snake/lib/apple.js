@@ -12,7 +12,7 @@ class Apple{
         let baseImg = new Image()
         baseImg.src = '../img/apple.png'
         baseImg.onload = ()=>{
-            this.ctx.drawImage(baseImg, this.body[0]* this.ws, this.body[1]* this.hs, this.ws, this.hs);
+            this.ctx.drawImage(baseImg, this.body[0]* this.ws, this.body[1] * this.hs, this.ws, this.hs);
         }
     }
 
@@ -26,6 +26,7 @@ class Apple{
     checkEat(snake){
         let snakeHead = snake.body[snake.body.length -1]
         if (JSON.stringify(snakeHead) === JSON.stringify(this.body)){
+            console.log("JUSTeat")
             this.wasEat = true
             snake.justEat = true
             this.genPosition()
