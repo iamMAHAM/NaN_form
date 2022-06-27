@@ -45,6 +45,7 @@ div.options{
     padding: 10px;
 }
 
+select,
 input{
     font-size: 20px;
     margin-left: 5px;
