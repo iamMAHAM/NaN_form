@@ -29,18 +29,12 @@ class Snake
     }
 
     checkCollision(){
-        let last = this.body[this.body.length -1]
-        this.body.slice(0, this.body.length - 1).forEach(a =>{
-            
-        })
-        console.log("last", JSON.stringify(last))
-        alert("ok")
-        if (this.body.slice(0, this.body.length - 1).find(arr =>{
-            JSON.stringify(arr) === JSON.stringify(last)
-        })
-        )
-        {
-            alert("game over")
+        let last = JSON.stringify(this.body[this.body.length -1])
+        let str = JSON.stringify(this.body.slice(0, this.body.length - 1))
+        let match = str.includes(last)
+        console.log(match)
+        if (match){
+            this.dead = true
         }
         if (last[0] === this.cv.width/this.ws || last[1] === this.cv.height / this.ws || last[0] < 0 || last[1] < 0){
             this.dead = true
@@ -90,8 +84,8 @@ class Snake
                 this.body.push([last[0] + 1, last[1]])
                 break
         }
-        this.grow()
         this.draw()
+        this.grow()
         this.checkCollision()
     }
 }
