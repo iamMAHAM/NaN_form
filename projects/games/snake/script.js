@@ -5,7 +5,9 @@ const widthSquare = 25
 const heigthSquare = 25
 const st = document.querySelector(".st")
 const speed = document.querySelector("#speed")
+const select = document.querySelector("#wall")
 
+let wall = false
 let isPaused = true
 let fps = 1;
 let now;
@@ -21,6 +23,9 @@ window.addEventListener("load", ()=>{
     apple.draw()
     
     const move = ()=>{
+        wall = select.options[select.selectedIndex].value;
+        console.log("wall state : ", wall)
+        snake.wall = wall === "true"
         fps = Number(speed.value)
         interval = 1000/fps;
         if (!snake.dead){
