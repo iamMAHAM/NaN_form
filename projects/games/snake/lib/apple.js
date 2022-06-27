@@ -23,12 +23,11 @@ class Apple{
         this.body = [x, y]
     }
 
-    checkEat(snake){
-        let snakeHead = snake.body[snake.body.length -1]
-        if (JSON.stringify(snakeHead) === JSON.stringify(this.body)){
-            console.log("JUSTeat")
+    checkEat(predator){
+        let predatorHead = predator.body[predator.body.length -1]
+        if (JSON.stringify(predatorHead) === JSON.stringify(this.body)){
             this.wasEat = true
-            snake.justEat = true
+            predator.justEat = true
             this.genPosition()
         }
     }
