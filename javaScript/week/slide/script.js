@@ -28,32 +28,40 @@ window.addEventListener("load", async ()=>{
     let prev = document.querySelector(".prev")
     let next = document.querySelector(".next")
 
-    function prevImg(){
-        if (direction === -1){container.style.direction = 1}
-        container.style.justifyContent = "flex-end"
-        slider.style.transform = `translate(100%)`
-    }
 
-    function nextImg(){
-        direction = -1
-        container.style.justifyContent = "flex-start"
-        slider.style.transform = `translate(-100%)`
-    }
+   const nextImg = ()=> {
+        direction = -1;
+        container.style.justifyContent = 'flex-start';
+        slider.style.transform = 'translate(-100%)';  
+      };
+      
+      const prevImg = ()=> {
+        if (direction === -1) {
+          direction = 1;
+          slider.appendChild(slider.firstElementChild);
+        }
+        container.style.justifyContent = 'flex-end';    
+        slider.style.transform = 'translate(100%)';  
+        
+      };
 
     // setInterval(nextImg, 2000)
     prev.addEventListener("click", prevImg)
     next.addEventListener("click", nextImg)
 
-    slider.addEventListener("transitionend", ()=>{
-        if (direction === 1){
-            slider.appendChild(slider.firstElementChild)
-        } else{
-            slider.prepend(slider.lastElementChild)
+    slider.addEventListener('transitionend', function() {
+        
+        if (direction === 1) {
+          slider.prepend(slider.lastElementChild);
+        } else {
+          slider.appendChild(slider.firstElementChild);
         }
-        slider.style.transition = "none"
-        slider.style.transform = "translate(0)"
-        setTimeout(()=>{
-            slider.style.transition = "all 1s"
-        })
+        
+        slider.style.transition = 'none';
+        slider.style.transform = 'translate(0)';
+        setTimeout(() => {
+          slider.style.transition = 'all 0.5s';
+        }, false)
     })
 })
+
