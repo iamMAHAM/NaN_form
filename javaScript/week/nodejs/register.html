@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/register</title>
+    <style>
+        html {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            background: url("https://images.unsplash.com/photo-1527519135413-1e146b552e10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80") no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Droid Serif', serif;
+        }
+
+        #container {
+            background: rgba(3, 3, 55, 0.5);
+            width: 18.75rem;
+            height: 25rem;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        header {
+            text-align: center;
+            vertical-align: middle;
+            line-height: 3rem;
+            height: 3rem;
+            background: rgba(3, 3, 55, 0.7);
+            font-size: 1.4rem;
+            color: #d3d3d3;
+        }
+
+        fieldset {
+            border: 0;
+            text-align: center;
+        }
+
+        input[type="submit"] {
+            background: rgba(235, 30, 54, 1);
+            border: 0;
+            display: block;
+            width: 70%;
+            margin: 0 auto;
+            color: white;
+            padding: 0.7rem;
+            cursor: pointer;
+        }
+
+        input {
+            background: transparent;
+            border: 0;
+            border-left: 4px solid;
+            border-color: #FF0000;
+            padding: 10px;
+            color: white;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: 0;
+            background: rgba(235, 30, 54, 0.3);
+            border-radius: 1.2rem;
+            border-color: transparent;
+        }
+
+        .fields{
+            width: 60%;
+        }
+
+        ::placeholder {
+            color: #d3d3d3;
+        }
+
+        @media all and (min-width: 481px) and (max-width: 568px) {
+            #container {
+                margin-top: 10%;
+                margin-bottom: 10%;
+            }
+        }
+            @media all and (min-width: 569px) and (max-width: 768px) {
+                #container {
+                    margin-top: 5%;
+                    margin-bottom: 5%;
+                }
+        }
+
+    </style>
+
+    <script>
+        const register = (e)=>{
+            e.preventDefault()
+            let fields = document.querySelectorAll(".fields")
+            let new_user = {}
+            for (let i = 0; i < fields.length; i++){
+                new_user[fields[i].name] = fields[i].value
+            }
+            if (new_user["password"] === new_user["confirm-password"]){
+                localStorage.setItem("new_users", JSON.stringify(new_user))
+                alert("Registration Succès")
+            }else{
+                alert("the passwords are not the same\n\
+                ")
+            }
+        }
+    </script>
+</head>
+<body>
+    <body>
+        <div id="container">
+           <header>Register</header>
+           <form method="">
+              <fieldset>
+                 <br/>
+                 <input type="text" class="fields" name="username" id="username" placeholder="Username" required autofocus>
+                 <br/><br/>
+                 <input type="email" class="fields" name="email" id="email" placeholder="E-mail" required>
+                 <br/><br/>
+                 <input type="password" class="fields" name="password" id="password" placeholder="Password" required>
+                 <br/><br/>
+                 <input type="password" class="fields" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required>
+                 <br/> <br/> <br/>
+                 <label for="submit"></label>
+                 <input type="submit" name="submit" id="submit" value="REGISTER" onclick="register(event)">
+              </fieldset>
+           </form>
+        </div>
+     </body>
+</body>
+</html>
