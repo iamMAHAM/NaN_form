@@ -42,10 +42,8 @@ window.addEventListener("load", async ()=>{
         }
         container.style.justifyContent = 'flex-end';    
         slider.style.transform = 'translate(100%)';  
-        
       };
 
-    // setInterval(nextImg, 2000)
     prev.addEventListener("click", prevImg)
     next.addEventListener("click", nextImg)
 
