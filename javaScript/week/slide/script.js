@@ -49,7 +49,7 @@ window.addEventListener("load", async ()=>{
     prev.addEventListener("click", prevImg)
     next.addEventListener("click", nextImg)
 
-    slider.addEventListener('transitionend', function() {
+    slider.addEventListener('transitionend', ()=> {
         
         if (direction === 1) {
           slider.prepend(slider.lastElementChild);
