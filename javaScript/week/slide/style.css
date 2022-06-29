@@ -17,9 +17,9 @@ div.container{
 
 .fa-regular.fa-circle-left{
     z-index: 15;
-    color: white;
+    color: red;
     cursor: pointer;
-    font-size: 30px;
+    font-size: 50px;
     padding: 5px;
     position: absolute;
     top: 50%;
@@ -29,9 +29,9 @@ div.container{
 
 .fa-regular.fa-circle-right{
     z-index: 15;
-    color: white;
+    color: red;
     cursor: pointer;
-    font-size: 30px;
+    font-size: 50px;
     padding: 5px;
     position: absolute;
     top: 50%;
