@@ -1,0 +1,72 @@
+body, *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+div.container{
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 900px;
+    max-height: 400px;
+    border: 2px solid red;
+}
+
+.fa-regular.fa-circle-left{
+    z-index: 15;
+    color: red;
+    cursor: pointer;
+    font-size: 50px;
+    padding: 5px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.fa-regular.fa-circle-right{
+    z-index: 15;
+    color: red;
+    cursor: pointer;
+    font-size: 50px;
+    padding: 5px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+div.slider{
+    justify-content: flex-start;
+    transition: all 0.5s;
+    transform: translate(0);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    max-height: 400px;
+    min-width: 300px;
+    max-width: 300px;
+}
+
+img.img{
+    min-width: 300px;
+    max-height: 100%;
+}
+
+.img.img.active{
+    display: block;
+    animation: pop 0.8s;
+}
+
+@keyframes pop{
+    from {
+        opacity: 0;
+    }
+
+    to{
+        opacity: 1;
+    }
+}
