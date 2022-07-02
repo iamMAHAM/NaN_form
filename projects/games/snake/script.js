@@ -23,8 +23,7 @@ window.addEventListener("load", ()=>{
     apple.draw()
     
     const move = ()=>{
-        wall = select.options[select.selectedIndex].value;
-        console.log("wall state : ", wall)
+        wall = select.options[select.selectedIndex].value
         snake.wall = wall === "true"
         fps = Number(speed.value)
         interval = 1000/fps;
