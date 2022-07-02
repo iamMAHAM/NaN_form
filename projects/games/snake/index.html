@@ -4,35 +4,47 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="options">
-            <p class="titles">OPTIONS</p>
-            <div class="speed-div">
-                <p class="labels">Speed</p>
-                <input type="number" name="1" value="5" id="speed" min="1" max="30">
-            </div>
+    <div class="modals">
+        <div class="ask">
+            <input type="text" id="ins" placeholder="Entrez votre nom">
+            <button id="ok" class="st">ok</button>
+        </div>
+    </div>
+    <div class="infos-player">
+        <p class="player-id"></p>
+        <p class="player-name"></p>
+    </div>
 
+    <div class="player-games">
+    </div>
+
+    <div class="modal-options">
+        <div class="emplc">
+            <div class="speed">
+                <p>
+                    Choose speed
+                </p>
+                <input type="number" min="5" value="5" max="30" id="speed">
+            </div>
+    
             <div class="wall">
-                <p class="labels">Wall</p>
-                <select name="" id="wall">
+                <p>
+                    Wall ?
+                </p>
+                <select name="" id="select_wall">
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
             </div>
-            <div class="stop-start">
-                <p class="labels">Start/Stop</p>
-                <button class="st">Start</button>
-                <button class="st" onclick="location.reload()">Reload</button>
-            </div>
+
+            <button class="validate st">ok</button>
         </div>
-        <canvas width="500" height="500">Votre navigateur n'est pas supporté</canvas>
     </div>
-    <script src="lib/apple.js"></script>
-    <script src="lib/snake.js"></script>
-    <script src="script.js"></script>
+
+    <script src="dashboard.js"></script>
 </body>
 </html>

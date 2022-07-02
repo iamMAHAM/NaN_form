@@ -7,13 +7,16 @@ const st = document.querySelector(".st")
 const speed = document.querySelector("#speed")
 const select = document.querySelector("#wall")
 
+
 let wall = false
 let isPaused = true
 let fps = 1;
 let now;
-let then = Date.now();
-let interval = 1000/fps;
-let delta;
+let then = Date.now()
+let interval = 1000/fps
+let delta
+
+
 
 window.addEventListener("load", ()=>{
     const snake = new Snake([[5, 18], [6, 18], [7, 18], [8, 18], [9, 18]], ctx, canvas, widthSquare, heigthSquare)

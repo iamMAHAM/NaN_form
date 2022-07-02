@@ -51,11 +51,140 @@ input{
     margin-left: 5px;
 }
 
-button{
+button.st{
     cursor: pointer;
     width: 100px;
     border-radius: 10px;
     padding: 5px;
     font-size: 20px;
     color: rgb(20, 184, 20);
+}
+
+.modals{
+    background-color: #555;
+    display: flex;
+    /* display: none; */
+    justify-content: center;
+    flex-direction: row;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    z-index: 7;
+
+}
+
+#ins{
+    height: 50px;
+    width: 500px;
+}
+
+#ok{
+    height: 50px;
+}
+
+.infos-player{
+    border: .5px solid #1d1d1d;
+    border-radius: 10px;
+    font-size: 25px;
+    width: 25%;
+    position: relative;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%);
+}
+
+.player-id{
+    font-weight: bold;
+}
+
+.infos-player >p{
+    padding: 20px;
+}
+
+.player-games{
+    padding: 10px;
+    margin-top: 5px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    min-height: 600px;
+    height: auto;
+    border: .5px solid #1d1d1d;
+    width: 75%;
+}
+
+.player-request{
+    font-size: 20px;
+    border-radius: 5px;
+    border: .3px solid #1d1d1d;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.name,
+.dual{
+    padding: 5px;
+    margin: 5px;
+}
+
+.dual{
+    background-color: rgb(226, 20, 20);
+    cursor: pointer;
+    color: #fff;
+    border-radius: 5px;
+    width: 7%;
+}
+
+.ask{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-options{
+    display: none;
+    text-align: center;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.wall,
+.speed{
+    margin: 5px;
+    font-size: 20px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.speed p,
+.speed input,
+.wall select,
+.wall p{
+    padding: 5px;
+}
+
+.emplc p{
+    color: #1d1d1d;
+    font-weight: bold;
+}
+
+.emplc{
+    border-radius: 10px;
+    justify-content: center;
+    height: 15%;
+    width: 20%;
+    background-color: rgb(250, 236, 236);
+    padding: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

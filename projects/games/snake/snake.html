@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="options">
+            <p class="titles">OPTIONS</p>
+            <div class="speed-div">
+                <p class="labels">Speed</p>
+                <input type="number" name="1" value="5" id="speed" min="1" max="30">
+            </div>
+
+            <div class="wall">
+                <p class="labels">Wall</p>
+                <select name="" id="wall">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            <div class="stop-start">
+                <p class="labels">Start/Stop</p>
+                <button class="st">Start</button>
+                <button class="st" onclick="location.reload()">Reload</button>
+            </div>
+        </div>
+        <canvas width="500" height="500">Votre navigateur n'est pas supporté</canvas>
+    </div>
+    <script src="lib/apple.js"></script>
+    <script src="lib/snake.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
