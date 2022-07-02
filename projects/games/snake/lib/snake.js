@@ -69,7 +69,6 @@ class Snake
 
     grow(){
         if (this.justEat){
-            console.log("oklm")
             let last = this.body[this.body.length - 1]
             if (this.movement === 'moveDown'){
                 this.body.push([last[0], last[1]+1])
