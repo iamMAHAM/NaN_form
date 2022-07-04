@@ -1,12 +1,12 @@
 const express = require("express")
+// const images = require("../utilities/getimages")
 const router = express.Router()
-const getimages = require("./getimages")
-const imgs = []
+// const imgs = []
 
 
-router.get("/", (req, res)=>{
+router.get("/", async (req, res)=>{
     res.render("index", {
-        images: getimages(imgs),
+        images: JSON.stringify(images),
         title : "slide"
     })
 })
