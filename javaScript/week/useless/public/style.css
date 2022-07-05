@@ -188,7 +188,7 @@ button.m{
     flex-direction: column;
 }
 
-.number{
+p.number{
     color: #555;
     position: absolute;
     top: 5px;
@@ -200,6 +200,7 @@ button.m{
 }
 
 .lm-right .art{
+    min-width: 200px;
     height: 150px;
 }
 
@@ -213,4 +214,17 @@ button.m{
     margin: 5px;
     color: white;
     background-color: #4aa2d1;
+}
+
+.lm-right{
+    overflow: hidden;
+}
+
+.mini-slider{
+    margin-left: 50px;
+    width: 600px;
+}
+
+.lmlmlm{
+    background-color: #fefac7;
 }
