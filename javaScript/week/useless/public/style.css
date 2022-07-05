@@ -1,0 +1,216 @@
+body, *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+h1{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.h-bottom,
+.h-r,
+.h-top p,
+.h-top{
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.h-top{
+    height: 50px;
+}
+
+.h-bottom,
+.h-top{
+    justify-content: space-around;
+}
+
+.h-top{
+    border: .01px solid black;
+}
+
+.p{
+    cursor: pointer;
+}
+
+.em{
+    padding: 10px;
+    height: 100%;
+    border: .001px solid black;
+}
+
+div.h-r{
+    padding: 20px;
+}
+
+.m{
+    color: #1d1d1d;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.vid{
+    overflow: hidden;
+    width: 100%;
+    height: 500px;
+}
+
+video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.text-only{
+    display: inline-flex;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.text-only{
+    font-size: 35px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+#e{
+    font-weight: bold;
+}
+
+button.m{
+    margin: 10px auto;
+    padding: 10px;
+    width: 100px;
+    background-color: transparent;
+    color: white;
+    border-color: white;
+    font-weight: bold;
+}
+
+.articles{
+    margin: 30px 0;
+    left: 20%;
+    gap: 1%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.art.b{
+    background-color: #4aa2d1;
+}
+
+.art.r{
+    background-color: #ef6578;
+}
+
+.art.g{
+    background-color: #53cfc2;
+}
+
+.art.o{
+    background-color: #f5ae56;
+}
+
+.art{
+    width: 250px;
+    height: 250px;
+    display: flex;
+}
+
+.art{
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.art p{
+    margin: 0 auto;
+    text-align: center;
+    width: 150px;
+}
+
+.art .fa-solid{
+    padding: 10px;
+    font-size: 30px;
+    color: white;
+}
+
+.text-only.n{
+    text-align: center;
+    font-size: 17px;
+}
+
+.imgs-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background-image: url("http://www.air-dg.com//wp-content/uploads/2015/05/Ciel-vue-avion1-3.jpg?id=1764");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.imgs-text p{
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    width: 650px;
+    padding: 120px 0;
+}
+
+#l{
+    display: inline-block;
+    padding: 5px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.lm-right,
+.bts,
+.lmlmlm{
+    display: flex;
+    flex-direction: row;
+}
+
+.lm-left{
+    display: flex;
+    flex-direction: column;
+}
+
+.number{
+    color: #555;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.lm-right .art .fa-solid{
+    color: #1d1d1d;
+}
+
+.lm-right .art{
+    height: 150px;
+}
+
+.lm-left{
+    padding: 50px;
+    font-size: 20px;
+}
+
+.bts .fa-solid{
+    padding: 5px;
+    margin: 5px;
+    color: white;
+    background-color: #4aa2d1;
+}
