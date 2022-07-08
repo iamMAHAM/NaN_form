@@ -4,6 +4,10 @@ body, *{
     box-sizing: border-box;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 h1{
     position: relative;
     left: 50%;
@@ -394,4 +398,9 @@ a{
 
 .part_cont{
     overflow: hidden;
+}
+
+.fl,
+.fr{
+    padding: 20px;
 }
