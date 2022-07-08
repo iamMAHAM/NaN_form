@@ -38,13 +38,16 @@ a.m{
 }
 
 .h-top{
-    border: .01px solid black;
+    border: .2px solid #555;
 }
 
 .em{
+    border: .1px solid #555;
+    border-top: none;
+    border-bottom: none;
     padding: 10px;
     height: 100%;
-    border: .001px solid black;
+    
 }
 
 div.h-r{
@@ -375,4 +378,14 @@ a{
 
 .lmlmlm .art{
     width: 250px;
+}
+
+.partslider{
+    display: flex;
+    flex-direction: row;
+    width: 700px;
+}
+.logos{
+    min-width: 200px;
+    height: 50px;
 }
