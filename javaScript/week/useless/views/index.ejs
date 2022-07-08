@@ -89,8 +89,8 @@
                 <p><span class="dg">air dg</span> Compagnie</p>
                 <p>L'aviation au service des entreprises</p>
                 <div class="bts">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <i class="fa-solid fa-arrow-right"></i>
+                    <button class="leftarrow"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="rightarrow"><i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
 
@@ -185,11 +185,13 @@
             <div class="conet s">
                 <p class="tit">Nos Parténaires</p>
                 <p><i style="color: #4aa2d1;" class="fa-solid fa-water"></i></p>
-                <p class="partslider">
-                    <% logos.forEach(logo => { %>
-                        <img src="<%= logo %> " alt="" class="logos">
-                    <% }) %>
-                </p>
+                <div class="part_cont">
+                    <p class="partslider">
+                        <% logos.forEach(logo => { %>
+                            <img src="<%= logo %> " alt="" class="logos">
+                        <% }) %>
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -218,5 +220,6 @@
         </div>
     </footer>
     <i class="fa-solid fa-envelope s"></i>
+    <script src="script.js"></script>
 </body>
 </html>
