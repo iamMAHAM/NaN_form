@@ -2,7 +2,6 @@ body, *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow-x: hidden;
 }
 
 h1{
@@ -223,13 +222,11 @@ p.number{
     background-color: #4aa2d1;
 }
 
-.lm-right{
-    overflow: hidden;
-}
 
 .mini-slider{
+    overflow: hidden;
     margin-left: 50px;
-    width: 600px;
+    width: 750px;
 }
 
 .lmlmlm{
@@ -319,6 +316,9 @@ button.b{
     color: #1d1d1d;
 }
 .conet.s{
+    overflow-x: hidden;
+    align-self: center;
+    text-align: center;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -365,7 +365,6 @@ a{
 }
 
 .art.sd{
-    margin: 5px;
     background-color: white;
 }
 .art.sd p{
@@ -377,10 +376,13 @@ a{
 }
 
 .lmlmlm .art{
-    width: 250px;
+    min-width: 250px;
 }
 
 .partslider{
+    width: 100%;
+    align-self: center;
+    transition: transform .5s;
     display: flex;
     flex-direction: row;
     width: 700px;
@@ -388,4 +390,8 @@ a{
 .logos{
     min-width: 200px;
     height: 50px;
+}
+
+.part_cont{
+    overflow: hidden;
 }
