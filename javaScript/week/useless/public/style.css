@@ -24,6 +24,14 @@ h1{
     height: 50px;
 }
 
+.m{
+    text-transform: uppercase;
+}
+
+a.m{
+    font-size: 17px;
+}
+
 .h-bottom,
 .h-top{
     justify-content: space-around;
@@ -31,10 +39,6 @@ h1{
 
 .h-top{
     border: .01px solid black;
-}
-
-.p{
-    cursor: pointer;
 }
 
 .em{
@@ -118,11 +122,6 @@ button.m{
     background-color: #f5ae56;
 }
 
-.art{
-    width: 250px;
-    height: 250px;
-    display: flex;
-}
 
 .art{
     position: relative;
@@ -133,6 +132,7 @@ button.m{
 }
 
 .art p{
+    color: white;
     margin: 0 auto;
     text-align: center;
     width: 150px;
@@ -183,16 +183,19 @@ button.m{
     flex-direction: row;
 }
 
+.lmlmlm{
+    justify-content: space-around;
+}
 .lm-left{
     display: flex;
     flex-direction: column;
 }
 
 p.number{
+    text-align: left;
+    display: inline;
     color: #555;
-    position: absolute;
-    top: 5px;
-    left: 5px;
+    padding: 5px;
 }
 
 .lm-right .art .fa-solid{
@@ -201,7 +204,7 @@ p.number{
 
 .lm-right .art{
     min-width: 200px;
-    height: 150px;
+    height: 180px;
 }
 
 .lm-left{
@@ -210,6 +213,7 @@ p.number{
 }
 
 .bts .fa-solid{
+    cursor: pointer;
     padding: 5px;
     margin: 5px;
     color: white;
@@ -226,5 +230,149 @@ p.number{
 }
 
 .lmlmlm{
+    background-color: rgb(243, 243, 243);
+}
+
+.parall{
+    background-image: url("http://www.air-dg.com//wp-content/uploads/2015/05/parallax4.jpg?id=136");
+}
+
+
+.conet{
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    text-align: justify;
+    margin: 0 auto;
+    padding: 5%;
+}
+.text-onlys{
+    font-weight: bold;
+}
+.before-end{
+    display: flex;
+    flex-direction: row;
+}
+
+button.b{
+    align-self: center;
+    text-transform: uppercase;
+    color: white;
+    background-color: #FE6C61;
+    padding: 10px;
+}
+
+.be{
+    padding: 20px;
+    width: 33.33%;
+}
+
+.conts{
+    color: white;
+    font-size: 25px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: auto;
+}
+
+.conts .fa-solid{
+    font-size: 50px;
+}
+
+.conts button{
+    font-weight: 900;
+    border: 3px solid white;
+    color: white;
+    padding: 10px;
+    background-color: transparent;
+    align-self: center;
+    width: 120px;
+    margin: 5px;
+    text-transform: uppercase;
+}
+
+.be.l{
+    background-color: #4aa2d1;
+}
+
+.be.c{
+    background-color: #5ec1ae;
+}
+
+.be.r{
+    background-color: #e8b871;
+}
+
+.parall.s{
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.conet.s{
     background-color: #fefac7;
+    color: #1d1d1d;
+}
+.conet.s{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+footer{
+    font-size: 21px;
+    display: flex;
+    flex-direction: row;
+    background-color: #262b2f;
+    color: #ececec;
+    justify-content: space-around;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+.fr :nth-child(1){
+    padding: 5px;
+    color: #677fb5;
+    border: 4px solid #677fb5;
+    border-radius: 50%;
+}
+
+.fr :nth-child(2){
+    color: #70c2e9;
+    padding: 5px;
+    border-radius: 50%;
+    border: 4px solid #70c2e9;
+}
+
+.fa-solid.fa-envelope.s{
+    cursor: pointer;
+    color: white;
+    padding: 5px;
+    background-color: #1d1d1d;
+    font-size: 30px;
+    bottom: 5px;
+    right: 5px;
+    position: fixed;
+}
+
+.art.sd{
+    margin: 5px;
+    background-color: white;
+}
+.art.sd p{
+    color: #555;
+}
+
+.articles .art{
+    width: 250px;
+}
+
+.lmlmlm .art{
+    width: 250px;
 }
