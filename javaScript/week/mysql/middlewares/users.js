@@ -18,20 +18,20 @@ const createUser = (opt={})=>{
 }
 
 const checkLogin = (opt={})=>{
-    let status = null
+    let res = null
     db.query("SELECT * FROM users", (err, result)=>{
         if (err) throw err
-        console.log(opt)
-        res = result.find(user =>{opt.email === user.email && opt.password === user.password})
-        console.log(res)
-        return {
-            status: status,
-            res: res
-        }
+        res = result.find(user => opt.email === user.email && opt.password === user.password)
     })
+    return res !== undefined
+}
+
+const UpdateInfo = (field, value)=>{
+    db.query(`UPDATE \`train\`.\`users\` SET \`${field}\` = '${value}' WHERE (\`id\` = '23');`)
 }
 
 module.exports = {
     createUser: createUser,
     checkLogin: checkLogin,
+    UpdateInfo: UpdateInfo
 }

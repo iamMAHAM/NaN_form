@@ -20,7 +20,7 @@ body, *
 	flex-wrap: nowrap;
 }
 
-form
+.register-fields
 {
 	background-color: #09a766;
 	height: 100%;

@@ -18,18 +18,18 @@
         </div>
     
         <div class="right">
-            <form action="#" method="post" class="register-fields login">
-            <div class="login-e">
-                <p class="title l">Login</p>
-                <input class="fields email" type="email" name="email" placeholder="E-mail">
-                <input class="fields passwd" type="password" name="password" placeholder="password">
-                <div class="bottom">
-                    <button class="login-button">Login</button>
+            <form action="/login" method="POST" class="register-fields login">
+                <div class="login-e">
+                    <p class="title l">Login</p>
+                    <input class="fields email" type="email" name="email" placeholder="E-mail">
+                    <input class="fields passwd" type="password" name="password" placeholder="password">
+                    <div class="bottom">
+                        <button type="submit" class="login-button">Login</button>
+                    </div>
                 </div>
-            </div>
             </form>
     
-            <form action="#" class="register-fields register">
+            <div class="register-fields register">
                 <p class="title l">Register</p>
                 <input class="fields name" type="text" name="name" placeholder="Name" required>
                 <input class="fields surname" type="text" name="surname" placeholder="Surname">
@@ -44,7 +44,7 @@
                 <div class="bottom">
                     <button class="register-button">Register</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
     <script src="js/login-register.js"></script>

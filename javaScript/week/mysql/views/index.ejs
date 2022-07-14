@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <form class="container" action="/update" method="POST">
+        <div class="toto">
+            <h1>CURRENT DATA</h1>
+            <div class="current-info">
+                <p>Name : <span class="special">{name}</span></p>
+                <p>surname : <span class="special">{surname}</span></p>
+                <p>country : <span class="special">{country}</span></p>
+                <p>email : <span class="special">{email}</span></p>
+                <p>passwd : <span class="special">{passwd}</span></p>
+            </div>
+        </div>
+        <div class="top">
+            <h1>UPDATE DATA</h1>
+            <div class="update-infos">
+                <input class="fields name" type="text" name="name" placeholder="Name">
+                <input class="fields surname" type="text" name="surname" placeholder="Surname">
+                <input class="fields email" type="email" name="email" placeholder="E-mail">
+                <input class="fields password" type="password" name="password" placeholder="password">
+                <input class="fields birth" type="date" name="birth">
+                <input class="fields country" type="text" name="country" placeholder="country">
+                <button type="submit">update</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

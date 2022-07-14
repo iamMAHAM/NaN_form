@@ -44,24 +44,10 @@ function registerF(e)
 }
 
 /*-------------- Login Functions---------------------------------*/
-function loginF(e)
+function loginF()
 {
-	e.preventDefault()
-	let user = JSON.parse(localStorage.getItem("user"))
-	if (!user)
+
 	{
-		user = {email: "", passw: ""}
-	}
-	let eml = user.email
-	let passw = user.password
-	if (eml === emailLogin.value && passw === password.value)
-	{
-		localStorage.setItem("is_connected", "true")
-		window.location.href = "index.html"
-	}
-	else
-	{
-		localStorage.setItem("is_connected", "false")
 		emailLogin.style.borderColor = "red"
 		password.style.borderColor  = "red"
 	}
@@ -96,5 +82,4 @@ function toggle()
 window.addEventListener("load", ()=>{
 	checkbox.addEventListener("click", toggle)
 	register.addEventListener("click", registerF)
-	login.addEventListener("click", loginF)
 })
