@@ -13,7 +13,6 @@ const createUser = (opt={})=>{
             return false
         }
     })
-    console.log("greakjhvbhjzvhjrefrehverfergvrebggtt")
     return true
 }
 
@@ -42,8 +41,13 @@ const UpdateInfo = (field, value, id, callback)=>{
     })
 }
 
+const deleteUser = (id)=>{
+    db.query(`DELETE FROM users WHERE (id = '${id}');`)
+}
+
 module.exports = {
     createUser: createUser,
     checkLogin: checkLogin,
-    UpdateInfo: UpdateInfo
+    UpdateInfo: UpdateInfo,
+    deleteUser: deleteUser
 }
