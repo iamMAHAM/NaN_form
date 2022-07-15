@@ -1,6 +1,6 @@
 let infos = document.querySelector(".infos")
 let infosdiv = document.querySelectorAll(".special")
-let submit = document.querySelector("button")
+let del = document.querySelector("button.del")
 let form = document.querySelector("form")
 
 window.addEventListener("DOMContentLoaded", ()=>{
@@ -13,6 +13,19 @@ window.addEventListener("DOMContentLoaded", ()=>{
         infosdiv[i].textContent = message.res[infosdiv[i].id]
     }
 
+    del.addEventListener("click", async (e)=>{
+        e.preventDefault()
+        res = await fetch("/delete", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({message: message})
+        })
+        res = await res.json()
+        window.location.href = "/"
+        
+    })
     console.log("type", message.type)
     // if (message.type === 'update'){location.reload()}
 })
