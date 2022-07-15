@@ -81,3 +81,9 @@ button{
 .infos{
     display: none;
 }
+
+.del{
+    width: max-content;
+    background-color: red;
+    color: white;
+}
