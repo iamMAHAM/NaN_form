@@ -27,26 +27,34 @@ router.post("/create", (req, res)=>{
 
 router.post("/login", (req, res)=>{
     console.log(req.body)
-    result = users.checkLogin(req.body)
-    if (result) res.redirect("/index")
-    else res.render("login-register")
+    users.checkLogin(req.body, (result)=>{
+        if (result.res){
+            req.app.set("user", result)
+            res.redirect("/index")
+        }
+        else res.render("login-register")
+    })
 })
 
 
 router.get("/index", (req, res)=>{
-    res.render("index")
+    console.log("((((==========))))")
+    console.log(req.app.get("user"))
+    console.log("((((==========))))")
+    res.render("index", {
+        user_data: req.app.get("user")
+    })
 })
 
 router.post("/update", (req, res)=>{
-    console.log(req.body)
     for (prop in req.body){
         if (req.body[prop] !== ''){
-            users.UpdateInfo(prop, req.body[prop])
+            users.UpdateInfo(prop, req.body[prop], req.app.get("user").res.id, (new_user)=>{
+                req.app.set("user", new_user)
+            })
         }
     }
-    res.render("index", {
-        message: "update successfull"
-    })
+    res.redirect("/index")
 })
 
 module.exports = router

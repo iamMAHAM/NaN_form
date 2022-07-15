@@ -17,17 +17,29 @@ const createUser = (opt={})=>{
     return true
 }
 
-const checkLogin = (opt={})=>{
+const checkLogin = (opt={}, callback)=>{
     let res = null
     db.query("SELECT * FROM users", (err, result)=>{
         if (err) throw err
         res = result.find(user => opt.email === user.email && opt.password === user.password)
+        res = {
+            res: res,
+            type: 'login'
+        }
+        return callback(res)
     })
-    return res !== undefined
+    
 }
 
-const UpdateInfo = (field, value)=>{
-    db.query(`UPDATE \`train\`.\`users\` SET \`${field}\` = '${value}' WHERE (\`id\` = '23');`)
+const UpdateInfo = (field, value, id, callback)=>{
+    db.query(`UPDATE \`train\`.\`users\` SET \`${field}\` = '${value}' WHERE (\`id\` = '${id}');`)
+    db.query(`SELECT * from users WHERE (id='${id}')`, (err, result)=>{
+        res = {
+            res: result,
+            type: 'update'
+        }
+        return callback(res)
+    })
 }
 
 module.exports = {

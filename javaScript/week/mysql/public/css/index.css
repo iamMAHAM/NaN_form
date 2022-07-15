@@ -1,7 +1,7 @@
 .container{
     display: flex;
-    flex-direction: column;
-    gap: 3%;
+    flex-direction: row;
+    justify-content: space-around;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -19,6 +19,7 @@
 }
 
 .fields{
+    font-size: 20px;
     border-radius: 5px;
     width: 200px;
     padding: 5px;
@@ -31,18 +32,37 @@
     flex-direction: column;
     justify-content: center;
 }
+
+.top,
+.toto{
+    font-size: 20px;
+    border-radius: 5px;
+    margin: auto;
+    height: 50%;
+    width: 35%;
+    border: .2px solid black;
+}
+
+.toto{
+    width: 55%;
+}
+
 .current-info{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     width: 80%;
 }
 
 .special{
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-weight: bold;
 }
 
+h1{
+    color: red;
+    font-size: 25px;
+}
 .update-infos{
     display: flex;
     flex-direction: column;
@@ -50,9 +70,14 @@
 }
 
 button{
+    margin-top: 10px;
     cursor: pointer;
     padding: 5px;
     border-radius: 5px;
     width: 100px;
     font-size: 17px;
+}
+
+.infos{
+    display: none;
 }

@@ -12,11 +12,11 @@
         <div class="toto">
             <h1>CURRENT DATA</h1>
             <div class="current-info">
-                <p>Name : <span class="special">{name}</span></p>
-                <p>surname : <span class="special">{surname}</span></p>
-                <p>country : <span class="special">{country}</span></p>
-                <p>email : <span class="special">{email}</span></p>
-                <p>passwd : <span class="special">{passwd}</span></p>
+                <p>Name : <span class="special" id="name"> </span></p>
+                <p>surname : <span class="special" id="surname"></span></p>
+                <p>country : <span class="special" id="country"></span></p>
+                <p>email : <span class="special" id="email"></span></p>
+                <p>passwd : <span class="special" id="password"></span></p>
             </div>
         </div>
         <div class="top">
@@ -32,5 +32,7 @@
             </div>
         </div>
     </form>
+    <div class="infos"><%= JSON.stringify(user_data) %></div>
+    <script src="js/dashboard.js"></script>
 </body>
 </html>
