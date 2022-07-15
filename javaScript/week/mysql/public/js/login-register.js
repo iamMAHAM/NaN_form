@@ -18,13 +18,14 @@ checkbox.checked = true
 
 
 /*-------------- Send Request ---------------------------------*/
-function check(path="/", data={}){
-	fetch(path, {
+async function check(path="/", data={}){
+	res = await fetch(path, {
 		method: 'POST',
 		headers: {'content-type': 'application/json'},
 		body: JSON.stringify(data)
 	})
-	.then(res=>console.log(res))
+	res = await res.json()
+	console.log(res)
 }
 
 /*-------------- Register Functions---------------------------------*/
