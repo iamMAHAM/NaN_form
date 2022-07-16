@@ -1,3 +1,5 @@
+const app = require("../server/server")
+
 /*welcome modal selections*/
 const ok = document.querySelector("#ok")
 const input_pseudo = document.querySelector("#ins")
@@ -104,6 +106,10 @@ const handle = (e)=>{
                 requests.removeChild(child)
             }
         })
+    }else{//accept
+        setTimeout(()=>{
+            window.location.href = "snake.html"
+        }, 5000)
     }
 }
 
@@ -155,7 +161,16 @@ window.addEventListener("load", ()=>{
                 case 'global':
                         console.log('global', rcv)
                         if (rcv.status === 'Accept'){
-
+                            modal_dual.style.display = "none"
+                            ws.send(JSON.stringify({
+                                type: 'ready',
+                                
+                            }))
+                            alert("your pair has accepted your request\n\
+                            you will be redirected in 5 seconds")
+                            setTimeout(() => {
+                                window.location.href = "snake.html"
+                            }, 5000);
                         }else{//in case of refusal
                             alert("you pair has refused your request")
                             clearInterval(inter)
