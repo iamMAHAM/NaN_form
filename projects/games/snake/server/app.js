@@ -1,11 +1,11 @@
 const http = require("node:http")
 const ws = require("ws")
-const genId = require("./lib/func")
-const server = http.createServer()
+const genId = require("../lib/func")
+const app = require("./server")
+const server = http.createServer(app)
 let users = []
 const wss = new ws.WebSocketServer({server})
 let sessions = {}
-
 wss.on("connection", (ws)=>{
     ws.on("message", (i)=>{
         const message = JSON.parse(i.toString())
@@ -71,11 +71,9 @@ wss.on("connection", (ws)=>{
             
             case 'global':
                 console.log("global message", message)
-
+                client = sessions[message.session_id].players[0].route
                 if (message.status === 'Accept'){
-                    client = ws
                 }else{//in case of refusal
-                    client = sessions[message.session_id].players[0].route
                     delete sessions[message.session_id]
                 }
                 client.send(JSON.stringify({
@@ -83,6 +81,10 @@ wss.on("connection", (ws)=>{
                     status: message.status
                 }))
                 break
+            
+            case 'ready':
+                console.log('ready')
+                console.log(message)
         }
     })
 })

@@ -10,12 +10,8 @@ canvas{
 
 div.container{
     align-items: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 div.options{
@@ -287,4 +283,66 @@ p.request{
     padding: 5px;
     border-radius: 5px;
     border: 1px dotted black;
+}
+
+div.players-infos-rules{
+    margin: 20px;
+    border: .1px solid black;
+    width: 67%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div.players-infos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.infos p{
+    font-size: 20px;
+}
+
+.username{
+    font-weight: bold;
+}
+
+table{
+    margin: 10px;
+    border: .5px solid black;
+    text-align: center;
+    min-width: 30%;
+    width: auto;
+    border-collapse: collapse;
+    box-shadow: 0 5px 50px rgba(0, 0, 0, .15);
+}
+thead tr{
+    color: white;
+    background-color: midnightblue;
+}
+
+th, td{
+    padding: 10px 20px;
+}
+
+tbody, th, td, th{
+    border: .5px solid #ddd;
+}
+
+tbody tr:nth-child(even){
+    background-color: #f3f3f3;
+}
+
+tr :nth-child(1){
+    font-weight: bold;
+}
+
+tr:last-of-type{
+    border-bottom: 2px solid midnightblue;
+}
+
+.infos.tables{
+    display: flex;
+    flex-direction: row;
 }

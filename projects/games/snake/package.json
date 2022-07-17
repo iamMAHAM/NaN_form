@@ -2,7 +2,7 @@
   "name": "snake",
   "version": "1.0.0",
   "description": "the snake game",
-  "main": "app.js",
+  "main": "./server/app.js",
   "directories": {
     "lib": "lib"
   },
@@ -13,6 +13,8 @@
   "author": "@iamMAHAM",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
     "ws": "^8.8.0"
   }
 }
