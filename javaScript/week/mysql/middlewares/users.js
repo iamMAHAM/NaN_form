@@ -1,4 +1,4 @@
-const db = require("./mysql")
+const db = require("../config/db")
 
 const createUser = (opt={})=>{
     

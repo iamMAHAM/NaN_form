@@ -9,14 +9,13 @@ window.addEventListener("DOMContentLoaded", ()=>{
     console.log(infosdiv)
     if (message instanceof Array){message = message.res[0]}
     for (let i = 0; i < infosdiv.length; i++){
-        console.log("name: ", infosdiv[i].id)
         infosdiv[i].textContent = message.res[infosdiv[i].id]
     }
 
     del.addEventListener("click", async (e)=>{
         e.preventDefault()
-        res = await fetch("/delete", {
-            method: "POST",
+        res = await fetch("/user/delete", {
+            method: "DELETE",
             headers: {
                 "content-type": "application/json"
             },

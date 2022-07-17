@@ -1,4 +1,7 @@
 /*-------------- Targetting elements---------------------------------*/
+
+const e = require("express")
+
 /*register target */
 let registerParent = document.querySelector(".register-fields.register")
 let register = document.querySelector(".register-button")
@@ -40,18 +43,20 @@ function registerF(e)
 	user[keys[6]] = avatar.files[0].name
 	checkbox.checked = true
 	console.log(user)
-	check("/create", user)
+	check("/user/create", user)
     toggle()
 }
 
 /*-------------- Login Functions---------------------------------*/
-function loginF()
+function loginF(e)
 {
+	e.preventDefault()
+	check("/user/login")
 
-	{
-		emailLogin.style.borderColor = "red"
-		password.style.borderColor  = "red"
-	}
+	// {
+	// 	emailLogin.style.borderColor = "red"
+	// 	password.style.borderColor  = "red"
+	// }
 }
 
 /*-------------- Login Functions---------------------------------*/
@@ -83,4 +88,5 @@ function toggle()
 window.addEventListener("load", ()=>{
 	checkbox.addEventListener("click", toggle)
 	register.addEventListener("click", registerF)
+	login.addEventListener("click", loginF)
 })
