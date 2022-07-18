@@ -38,11 +38,7 @@ class userController{
     }
 
     static updateUser = (req, res)=>{
-        console.log("------")
-        console.log("new update")
-        console.log("------")
         let user = null
-        console.log(req.body)
         for (let prop in req.body){
             if (req.body[prop] !== '' && prop !== "id"){
                 users.UpdateInfo(prop, req.body[prop], req.body.id, (new_user)=>{
@@ -55,10 +51,9 @@ class userController{
     }
 
     static deleteUser = (req, res)=>{
-        users.deleteUser(req.body.message.res.id)
-        res.send(JSON.stringify({
-            status: "success"
-        }))
+        console.log(req.body)
+        users.deleteUser(req.body.id)
+        res.send(JSON.stringify({status: "ok"}))
     }
 }
 
