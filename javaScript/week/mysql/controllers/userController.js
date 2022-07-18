@@ -51,11 +51,9 @@ class userController{
     }
 
     static deleteUser = (req, res)=>{
-        console.log(req.body)
         users.deleteUser(req.body.id)
         res.send(JSON.stringify({status: "ok"}))
     }
 }
-
 
 module.exports = userController
