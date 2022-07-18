@@ -4,7 +4,18 @@
 let registerParent = document.querySelector(".register-fields.register")
 let register = document.querySelector(".register-button")
 let avatar = document.querySelector("#avatar")
-console.log(avatar)
+let hasSession = null
+
+/*check if there is already a session*/
+hasSession = sessionStorage.getItem("session")
+console.log(hasSession)
+if (hasSession){
+	try {
+		JSON.parse(hasSession)
+		window.location.href = "index"
+	} catch {
+	}
+}
 
 /*login target */
 let loginParent = document.querySelector(".register-fields.login")
@@ -17,7 +28,6 @@ let is_connected = false;
 let checkbox = document.querySelector(".apple-switch")
 checkbox.checked = true
 
-
 /*-------------- Send Request ---------------------------------*/
 async function check(path="/", data={}){
 	console.log("new request on ", path)
@@ -28,7 +38,6 @@ async function check(path="/", data={}){
 		body: JSON.stringify(data)
 	})
 	res = await res.json()
-	console.log(res)
 	return res
 }
 
@@ -44,25 +53,31 @@ async function registerF()
 	user[keys[6]] = avatar.files[0].name
 	console.log(user)
 	res = await check("/user/create", user)
-    if (res.status === "true"){
+    if (res.status === "ok"){
 		checkbox.checked = true
 		toggle()
 	}
 }
 
 /*-------------- Login Functions---------------------------------*/
-function loginF(e)
+async function loginF(e)
 {
 	credential = {
 		email: emailLogin.value,
 		password: password.value
 	}
-	check("/user/login", credential)
-
-	// {
-	// 	emailLogin.style.borderColor = "red"
-	// 	password.style.borderColor  = "red"
-	// }
+	res = await check("/user/login", credential)
+	if (res.status === "true"){
+		window.location.href = "http://localhost:3000/index"
+		sessionStorage.setItem("session", JSON.stringify(res.message))
+	}else{
+		emailLogin.style.borderColor = "red"
+		password.style.borderColor  = "red"
+		setTimeout(()=>{
+			emailLogin.style.borderColor = "white"
+			password.style.borderColor  = "white"
+		}, 3000)
+	}
 }
 
 /*-------------- Login Functions---------------------------------*/
@@ -91,7 +106,7 @@ function toggle()
 
 /*-------------- Event Listener-------------------------------*/
 
-window.addEventListener("load", ()=>{
+window.addEventListener("DOMContentLoaded", ()=>{
 	checkbox.addEventListener("click", toggle)
 	register.addEventListener("click", registerF)
 	login.addEventListener("click", loginF)

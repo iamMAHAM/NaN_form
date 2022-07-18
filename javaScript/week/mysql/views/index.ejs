@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-    <form class="container" action="/user/update" method="PUT">
+    <form class="container" action="/user/update" method="POST">
         <div class="toto">
             <h1>CURRENT DATA</h1>
             <div class="current-info">
@@ -33,7 +33,6 @@
             </div>
         </div>
     </form>
-    <div class="infos"><%= JSON.stringify(user_data) %></div>
     <script src="js/dashboard.js"></script>
 </body>
 </html>
