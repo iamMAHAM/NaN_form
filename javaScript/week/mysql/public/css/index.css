@@ -7,7 +7,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border: .2px solid black;
-    width: 70%;
+    width: 80%;
     height: 80%;
 }
 
@@ -33,20 +33,20 @@
     justify-content: center;
 }
 
-.top,
+/* .top,
 .toto{
     font-size: 20px;
     border-radius: 5px;
     margin: auto;
-    height: 50%;
-    width: 35%;
-    border: .2px solid black;
-}
+    border: .2px solid red;
+} */
 
 .toto{
-    width: 55%;
+    width: 45%;
 }
-
+.top{
+    width: 45%;
+}
 .current-info{
     display: flex;
     flex-direction: column;
@@ -86,4 +86,11 @@ button{
     width: max-content;
     background-color: red;
     color: white;
+}
+
+.submit{
+    border: 1px solid white;
+    margin: 5px;
+    color: white;
+    background-color: #1b1b32;
 }
