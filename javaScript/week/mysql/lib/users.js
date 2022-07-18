@@ -38,8 +38,8 @@ const UpdateInfo = (field, value, id, callback)=>{
     })
 }
 
-const deleteUser = (id)=>{
-    db.query(`DELETE FROM users WHERE (id = '${id}');`)
+const deleteUser = (email)=>{
+    db.query(`DELETE FROM users WHERE (\`email\` = '${email}');`)
 }
 
 module.exports = {
