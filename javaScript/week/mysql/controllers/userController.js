@@ -38,14 +38,20 @@ class userController{
     }
 
     static updateUser = (req, res)=>{
-        for (prop in req.body){
-            if (req.body[prop] !== ''){
-                users.UpdateInfo(prop, req.body[prop], req.app.get("user").res.id, (new_user)=>{
-                    req.app.set("user", new_user)
+        console.log("------")
+        console.log("new update")
+        console.log("------")
+        let user = null
+        console.log(req.body)
+        for (let prop in req.body){
+            if (req.body[prop] !== '' && prop !== "id"){
+                users.UpdateInfo(prop, req.body[prop], req.body.id, (new_user)=>{
+                    console.log("new user", new_user)
+                    new_user !== undefined ? user = new_user : null
+                    res.send(JSON.stringify(new_user))
                 })
             }
         }
-        res.redirect("/index")
     }
 
     static deleteUser = (req, res)=>{
