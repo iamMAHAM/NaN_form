@@ -8,16 +8,13 @@ const createUser = (opt={}, callback)=>{
         VALUES ("${opt.name}", "${opt.email}", "${opt.password}", "${opt.birth}", "${opt.country}", "${opt.avatar}", "${opt.surname}")
         `
     , (err)=>{
-        if (err){
-            console.log(err)
-            res = false
-        }else{res = true}
+        err ? res = false : res = true
+        return callback(res)
     })
-    return callback(res)
 }
 
 const checkLogin = (opt={}, callback)=>{
-    let res = null
+    console.log("opt", opt)
     db.query("SELECT * FROM users", (err, result)=>{
         if (err) throw err
         res = result.find(user => opt.email === user.email && opt.password === user.password)
