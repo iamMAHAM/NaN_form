@@ -1,5 +1,5 @@
-const users = require("../middlewares/users")
-const validate = require("../middlewares/validate")
+const users = require("../lib/users")
+const validate = require("../lib/validate")
 const template = (status="", data={})=>{
     return {
         status: status,
@@ -22,6 +22,7 @@ class userController{
     }
 
     static loginUser = (req, res)=>{
+        console.log("new reqt login", req.body)
         users.checkLogin(req.body, (result)=>{
             if (result.res){
                 req.app.set("user", result)

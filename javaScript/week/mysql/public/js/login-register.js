@@ -1,7 +1,5 @@
 /*-------------- Targetting elements---------------------------------*/
 
-const e = require("express")
-
 /*register target */
 let registerParent = document.querySelector(".register-fields.register")
 let register = document.querySelector(".register-button")
@@ -11,7 +9,7 @@ console.log(avatar)
 /*login target */
 let loginParent = document.querySelector(".register-fields.login")
 let login = document.querySelector(".login-button")
-let emailLogin = document.querySelector(".email")
+let emailLogin = document.querySelector(".email.login")
 let password = document.querySelector(".passwd")
 
 /*left element */
@@ -22,6 +20,8 @@ checkbox.checked = true
 
 /*-------------- Send Request ---------------------------------*/
 async function check(path="/", data={}){
+	console.log("new request on ", path)
+	console.log("with data : ", data)
 	res = await fetch(path, {
 		method: 'POST',
 		headers: {'content-type': 'application/json'},
@@ -29,10 +29,11 @@ async function check(path="/", data={}){
 	})
 	res = await res.json()
 	console.log(res)
+	return res
 }
 
 /*-------------- Register Functions---------------------------------*/
-function registerF(e)
+async function registerF()
 {
 	let user = {}
     let keys = ["name", "surname", "email", "password", "birth", "country", "avatar"]
@@ -41,17 +42,22 @@ function registerF(e)
 		user[keys[j]] = registerParent.children[i].value
 	}
 	user[keys[6]] = avatar.files[0].name
-	checkbox.checked = true
 	console.log(user)
-	check("/user/create", user)
-    toggle()
+	res = await check("/user/create", user)
+    if (res.status === "true"){
+		checkbox.checked = true
+		toggle()
+	}
 }
 
 /*-------------- Login Functions---------------------------------*/
 function loginF(e)
 {
-	e.preventDefault()
-	check("/user/login")
+	credential = {
+		email: emailLogin.value,
+		password: password.value
+	}
+	check("/user/login", credential)
 
 	// {
 	// 	emailLogin.style.borderColor = "red"

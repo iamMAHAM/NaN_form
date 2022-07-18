@@ -1,7 +1,7 @@
 const db = require("../config/db")
 
-const createUser = (opt={})=>{
-    
+const createUser = (opt={}, callback)=>{
+    let res=  null
     db.query(
         `
         INSERT INTO train.users (\`name\`, \`email\`, \`password\`, \`birth\`, \`country\`, \`avatar\`, \`surname\`)
@@ -10,10 +10,10 @@ const createUser = (opt={})=>{
     , (err)=>{
         if (err){
             console.log(err)
-            return false
-        }
+            res = false
+        }else{res = true}
     })
-    return true
+    return callback(res)
 }
 
 const checkLogin = (opt={}, callback)=>{
