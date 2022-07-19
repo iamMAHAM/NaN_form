@@ -78,3 +78,9 @@ input.register {
 input[type="date"]{
     text-transform: lowercase;
 }
+
+.error{
+    display: none;
+    color: crimson;
+    text-align: center;
+}
