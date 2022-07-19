@@ -9,6 +9,7 @@ const loginF = async (e)=>{
         password: datas.children[1].value
     }
     res = await fetchData("/user/login", options)
+    res = await res.json()
     if (res.status === "true"){
 		window.location.href = "/user/dashboard"
 		sessionStorage.setItem("session", JSON.stringify(res.message))
