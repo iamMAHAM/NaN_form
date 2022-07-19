@@ -5,7 +5,6 @@ const fetchData = async (path="/", datas={})=>{
         headers: {"content-type": "application/json"}
     })
     res = await res.json()
-    console.log(res)
     return res
 }
 
