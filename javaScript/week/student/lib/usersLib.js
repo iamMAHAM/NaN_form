@@ -6,10 +6,11 @@ class usersLib{
         let res=  null
         db.query(
             `
-            INSERT INTO train.users (\`name\`, \`email\`, \`password\`, \`birth\`, \`country\`, \`avatar\`, \`surname\`)
-            VALUES ("${opt.name}", "${opt.email}", "${opt.password}", "${opt.birth}", "${opt.country}", "${opt.avatar}", "${opt.surname}")
+            INSERT INTO \`student\`.\`users\` (\`username\`, \`email\`, \`password\`, \`birthday\`, \`phone\`, \`avatar\`)
+            VALUES ('${opt.username}', '${opt.email}', '${opt.password}', '${opt.birthday}', '${opt.phone}', '${opt.avatar}');
             `
         , (err)=>{
+            console.log(err)
             err ? res = false : res = true
             return callback(res)
         })
@@ -30,7 +31,7 @@ class usersLib{
     }
 
     static UpdateInfo = (field, value, id, callback)=>{
-        db.query(`UPDATE \`train\`.\`users\` SET \`${field}\` = '${value}' WHERE (\`id\` = '${id}');`)
+        db.query(`UPDATE \`student\`.\`users\` SET \`${field}\` = '${value}' WHERE (\`id\` = '${id}');`)
         db.query(`SELECT * from users WHERE (id='${id}')`, (err, result)=>{
             res = {
                 res: result,
