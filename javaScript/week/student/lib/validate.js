@@ -3,15 +3,13 @@ const validator = require("./validator")
 const validate = (data={})=>{
     // console.log("email", validator.validateEmail(data.email))
     // console.log("pass", validator.validatePassword(data.password))
-    // console.log("name", validator.validateString(data.name))
-    // console.log("username", validator.validateString(data.surname))
-    // console.log("country", validator.validateString(data.country))
+    // console.log("username", validator.validateString(data.username))
+    // console.log("birthday", validator.validateString(data.birthday))
 
     return (validator.validateEmail(data.email)
         && validator.validatePassword(data.password)
-        && validator.validateString(data.name)
-        && validator.validateString(data.surname)
-        && validator.validateString(data.country)
+        && validator.validateString(data.username)
+        && validator.validateString(data.birthday)
     )
 }
 
