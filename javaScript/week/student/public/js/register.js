@@ -21,8 +21,8 @@ const registerF = async (e)=>{
     info.style.display = "block"
     setTimeout(()=>{
         info.style.display = "none"
+        res.status === "ok" ? window.location.href = "/" : null
     },3000)
-    res.status === "ok" ? window.location.href = "/login" : null
 
 }
 

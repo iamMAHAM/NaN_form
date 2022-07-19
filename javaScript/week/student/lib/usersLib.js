@@ -18,16 +18,16 @@ class usersLib{
 
     static checkLogin = (opt={}, callback)=>{
         console.log("opt", opt)
-        db.query("SELECT * FROM users", (err, result)=>{
-            if (err) throw err
-            res = result.find(user => opt.email === user.email && opt.password === user.password)
+        db.query(`SELECT * FROM users WHERE (\`email\`= '${opt.email}'
+        && \`password\`='${opt.password}')`, (result)=>{
+            console.log("result", result)
             res = {
                 res: res,
                 type: 'login'
             }
             return callback(res)
+
         })
-        
     }
 
     static UpdateInfo = (field, value, id, callback)=>{
