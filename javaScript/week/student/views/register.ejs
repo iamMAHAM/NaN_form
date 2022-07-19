@@ -9,11 +9,11 @@
 	</head>
 	<body>
 		<div class="container">
-			<form action="" id="form">
+			<form id="form">
 				<div class="column one">
 					<div class="field username">
 						<label for="Username_">Username</label>
-						<input type="text" name="Username" id="Username_" placeholder="your name" required>
+						<input type="text" name="username" id="Username_" placeholder="your name" required>
 					</div>
 					<div class="field password">
 						<label for="Password_">password</label>
@@ -31,7 +31,7 @@
 					</div>
 					<div class="field birth">
 						<label for="birth">birthday</label>
-						<input type="date" name="" id="birth">
+						<input type="date" name="birthday" id="birth" required>
 					</div>
 					
 					<div class="field Brief">
@@ -42,5 +42,7 @@
 				<input type="submit" value="register" class="register">
 			</form>
 		</div>
+		<script src="js/lib.js"></script>
+        <script src="js/register.js"></script>
 	</body>
 </html>
