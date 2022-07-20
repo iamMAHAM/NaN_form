@@ -19,13 +19,12 @@ class usersLib{
     static checkLogin = (opt={}, callback)=>{
         console.log("opt", opt)
         db.query(`SELECT * FROM users WHERE (\`email\`= '${opt.email}'
-        && \`password\`='${opt.password}')`, (result)=>{
-            console.log("result", result)
-            res = {
-                res: res,
+        && \`password\`='${opt.password}')`, (err, result)=>{
+            result = {
+                res: result,
                 type: 'login'
             }
-            return callback(res)
+            return callback(result)
 
         })
     }
