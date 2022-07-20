@@ -25,11 +25,11 @@ class userController{
     static loginUser = (req, res)=>{
         console.log("login", req.body)
         usersLib.checkLogin(req.body, (result)=>{
-            if (result.res){
-                req.app.set("user", result)
+            console.log(result)
+            if (result.res.length){
                 res.send(JSON.stringify({
                     status: "true",
-                    message: result.res
+                    message: result.res[0]
                 }))
             }
             else res.send(JSON.stringify({
