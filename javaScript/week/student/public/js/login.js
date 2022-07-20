@@ -9,9 +9,9 @@ const loginF = async (e)=>{
         password: datas.children[1].value
     }
     res = await fetchData("/user/login", options)
-    res = await res.json()
+	console.log(res)
     if (res.status === "true"){
-		window.location.href = "/user/dashboard"
+		// window.location.href = "/user/dashboard"
 		sessionStorage.setItem("session", JSON.stringify(res.message))
 	}else{
 		datas.children[0].style.borderColor = "red"
