@@ -19,7 +19,6 @@ mysqlConnection.connect((err)=>{
 //     \`birthday\` VARCHAR(10) NOT NULL,
 //     \`phone\` VARCHAR(20) NULL DEFAULT 'CURRENT',
 //     \`avatar\` VARCHAR(50) NOT NULL,
-//     \`registered_at\` VARCHAR(50) GENERATED ALWAYS AS (CURRENT_TIMESTAMP),
-//     PRIMARY KEY (`id`));`)
+//     PRIMARY KEY (\`id\`));`)
 
 module.exports = mysqlConnection
