@@ -45,7 +45,7 @@ class usersLib{
         })
     }
 
-    static addSubject()
+    static addSubject(){}
 }
 
 module.exports = usersLib
