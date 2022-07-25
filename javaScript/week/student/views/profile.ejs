@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <form class="container">
+        <table>
+            <tr>
+            <td>
+                <section>
+                    <label for="avatar">
+                    <i class="fa fa-camera"></i>
+                    <input type="file" id="avatar" style="visibility:hidden;" accept=".png,.jpg,jpeg,.PNG,.JPEG" name="avatar">
+                    </label>
+                    <!-- <img src="https://i.imgur.com/9pNffkj.png" id="preview" alt="Avatar"> -->
+                    <img src="/images/user_default.png" id="preview" alt="Avatar">
+                </section>
+                <h1>Abdul Maham</h1>
+                <h3>iamMAHAM</h3>
+            </td>
+            <td>
+                <ul id="fields">
+                    <li>
+                        <b>Full name</b>
+                        <input type="text" name="fullname" id="fullname" class="fields" maxlength="100" value="admin"/>
+                        <i class="fa fa-edit"></i>
+                    </li>
+                    <li>
+                        <b>Email</b>
+                        <input type="email" name="email" id="email" class="fields" maxlength="150" value="admin@admin.com" required />
+                    </li>
+                    <li>
+                        <b>Contact number</b>
+                        <input type="tel" name="phone" id="phone" class="fields" maxlength="10" value="0123456789"/>
+                        <i class="fa fa-edit"></i></li>
+                    <li>
+                        <b>Birthday</b>
+                        <input type="text" name="birthday" id="birthday" class="fields" maxlength="250" value="2022-01-01"/> <i class="fa fa-edit"></i>
+                    </li>
+
+                    <li>
+                        <b>Change Password</b>
+                        <input type="password" name="password" id="password" class="fields" maxlength="50"/> <i class="fa fa-edit" ></i>
+                    </li>
+                </ul>
+                <div class="input">
+                    <input type="submit" value="submit" id="submit">
+                </div>
+            </td>
+            </tr>
+        </table>
+    </form>
+    <script src="js/profile.js"></script>
+</body>
+</html>
