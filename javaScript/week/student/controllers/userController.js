@@ -1,63 +1,51 @@
 const usersLib = require("../lib/usersLib")
 const validate = require("../lib/validate")
-const template = (status="", data={})=>{
-    return {
-        status: status,
-        results: data
-    }
-}
+const format = require("../lib/formatter")
 
 class userController{
-
     static insertUser = (req, res)=>{
-        console.log("insert", req.body)
         if (validate(req.body)){
             usersLib.createUser(req.body, resl=>{
-                if (resl) res.send(JSON.stringify(template("ok", {message: 'account created successfully'})))
-                else res.send(JSON.stringify(template("false", {message: 'error with database'})))
+                if (resl) res.json(format("success", "account created successfully"))
+                else res.json(format("false", "error with database"))
             })
         }
         else{
-            res.send(template("false", {message: 'some incorrect entries'}))
+            res.json(format("false", "some incorrect entries"))
         }
     }
 
     static loginUser = (req, res)=>{
-        console.log("login", req.body)
         usersLib.checkLogin(req.body, (result)=>{
             console.log(result)
-            if (result.res.length){
-                res.send(JSON.stringify({
-                    status: "true",
-                    message: result.res[0]
-                }))
+            if (result.content.length){
+                res.json(format("success", result.content[0]))
             }
-            else res.send(JSON.stringify({
-                status: "false",
-                message: "bad credential"
-            }))
+            else res.json(format("false", "bad credential"))
         })
     }
 
     static updateUser = (req, res)=>{
-        console.log("update", req.body)
-        // let user = null
-        // for (let prop in req.body){
-        //     if (req.body[prop] !== '' && prop !== "id"){
-        //         usersLib.UpdateInfo(prop, req.body[prop], req.body.id, (new_user)=>{
-        //             console.log("new user", new_user)
-        //             new_user !== undefined ? user = new_user : null
-        //             res.send(JSON.stringify(new_user))
-        //         })
-        //     }
-        // }
+        for (let prop in req.body){
+            if (req.body[prop] !== '' && prop !== "id"){
+                usersLib.UpdateInfo(prop, req.body)
+            }
+        }
+        usersLib.selectUser(req.body.id, (user)=>{
+            res.json(user)
+        })
     }
 
     static deleteUser = (req, res)=>{
         console.log("delete", req.body)
-        // usersLib.deleteUser(req.body.id)
-        // res.send(JSON.stringify({status: "ok"}))
+        usersLib.deleteUser(req.body.id, (resl)=>{
+            if (resl){
+                res.json(format("success", "Account deleted Successfully"))
+            }else res.json(format("error", "Can't delete your account currently"))
+        })
     }
+
+    
 }
 
 module.exports = userController
