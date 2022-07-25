@@ -10,7 +10,7 @@ const loginF = async (e)=>{
     }
     res = await fetchData("/user/login", options)
 	console.log(res)
-    if (res.status === "true"){
+    if (res.status === "success"){
 		window.location.href = "/user/dashboard"
 		sessionStorage.setItem("session", JSON.stringify(res.message))
 	}else{
