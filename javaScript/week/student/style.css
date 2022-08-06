@@ -1,0 +1,261 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    background-color: #ff004c;
+    min-height: 100vh;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 0 1rem 1rem;
+    overflow: hidden;
+    border-right: 1px solid #1f2034;
+    transition: width 0.2s linear;
+}
+
+.header .nav {
+}
+
+.header .nav-list {
+  list-style: none;
+}
+
+
+.header .nav-list .nav-link {
+    text-decoration: none;
+    padding: 5px 15px 5px 5px;
+    border-radius: 10px 0 0 10px;
+    width: 100%;
+    transition: all 0.2s linear;
+}
+
+.header .nav-list .nav-item:hover .nav-link,
+.header .nav-list .nav-item.active .nav-link {
+    background-color: #1f2034;
+}
+
+.header .nav-list .nav-link {
+    display: flex;
+    align-items: center;
+}
+.header .nav-list .nav-link > * {
+    color: #fff;
+}
+.header .nav-list .nav-link .icon {
+    width: 35px;
+    text-align: center;
+    line-height: 35px;
+    height: 35px;
+    margin-right: 7px;
+    font-size: 18px;
+}
+.header .nav-list .nav-link .text {
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    overflow: hidden;
+    transition: width 0.2s linear;
+    width: 90px;
+    white-space: nowrap;
+}
+
+.header .btn-navig {
+    color: #fff;
+    height: 40px;
+    width: 40px;
+    background-color: #1f2034;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 40px;
+    text-decoration: none;
+}
+
+.header .btn-navig .open,
+.header.optimize .btn-navig .close {
+  display: none;
+}
+
+.header.optimize .btn-navig .open {
+  display: inline-block;
+}
+
+#img{
+    padding: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+	background: linear-gradient(135deg, #0d0e20, #222343);
+}
+
+h1 {
+	color: #ffffff;
+}
+
+.container {
+    width: 100%;
+	display: flex;
+	flex-direction: column;
+    justify-content: center;
+	justify-content: center;
+	align-items: center;
+	gap: 3rem;
+}
+
+.cards {
+	display: flex;
+	gap: 1rem;
+}
+
+.card {
+	background-position: center;
+	background-size: cover;
+	display: flex;
+	align-items: flex-end;
+	height: 22rem;
+	width: 16rem;
+	border-radius: 1rem;
+	box-shadow: 0 0 2px #ffffff80;
+}
+
+/* .card.one {
+	background-image: url("https://images.unsplash.com/photo-1633538475696-a93e30810e09");
+} */
+
+
+.details {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	background-color: #ffffff10;
+	border-top: 1px solid #ffffff30;
+	border-radius: 1rem;
+	-webkit-backdrop-filter: blur(0.75rem);
+	backdrop-filter: blur(0.75rem);
+	transition: ease 0.5s;
+}
+
+.details:hover {
+	padding-bottom: 0.5rem;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 2rem 1rem;
+}
+
+.content h2 {
+	color: #ffffffdd;
+	font-size: 1.25rem;
+	margin-bottom: 0.5rem;
+}
+
+.content p {
+	color: #ffffffaa;
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+
+.content a {
+	background-image: linear-gradient(
+		90deg,
+		#ffffffaa 0%,
+		#ffffffee 50%,
+		#ffffffaa 100%
+	);
+	background-size: 200%;
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 0.1rem;
+	color: #000000bb;
+	text-decoration: none;
+	text-transform: uppercase;
+	padding: 0.75rem 4rem;
+	border-radius: 0.5rem;
+	box-shadow: 0 0.5rem 10px -3px #00000025;
+	transition: 0.5s;
+}
+
+.content a:hover {
+	background-position: right;
+}
+
+.add_subject{
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.modals{
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+}
+
+form.form{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+select{
+    border-style: dotted;
+    cursor: pointer;
+    margin: 5px;
+    text-align: center;
+    padding: 10px;
+}
+
+#area{
+
+}
+
+.infos{
+    margin: 5px;
+    font-size: 25px;
+}
+
+#submit{
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 8px;
+    width: 100px;
+}
+
+.fa-solid.fa-xmark{
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px;
+    color: red;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}

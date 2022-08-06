@@ -2,6 +2,8 @@ let edit_buttons = document.querySelectorAll(".fa.fa-edit")
 let conf_edit = null
 let change_avatar = document.querySelector("#avatar")
 let preview = document.querySelector("#preview")
+let fields = document.querySelector("#fields")
+let form = document.querySelector("form")
 
 const updateEvent = (flag, array, listener)=>{
     if (flag){
@@ -44,4 +46,21 @@ window.addEventListener("DOMContentLoaded", ()=>{
         console.log(preview.src)
         preview.src = window.URL.createObjectURL(change_avatar.files[0])
     })
+
+    // form.addEventListener("submit", async(e)=>{
+    //     e.preventDefault()
+    //     datas = {}
+    //     Array.from(fields.children).forEach(child=>{
+    //         datas[child.children[1].name] = child.children[1].value
+    //     })
+    //     upload(change_avatar.files[0])
+    //     // datas["avatar"] = avatar.files[0]
+    //     res = await fetch("/user/update", {
+    //         method: "PUT",
+    //         headers: {"content-type": "application/json"},
+    //         body: JSON.stringify(datas)
+    //     })
+    //     res = await res.json()
+    //     console.log(res)
+    // })
 })

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/3d7d1bcca5.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header id="header" class="header">
+        <nav class="nav">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-home icon"></i>
+                <span class="text">Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-user icon"></i>
+                <span class="text">User</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-sign-out-alt icon"></i>
+                <span class="text">Sign out</span>
+              </a>
+            </li>
+          </ul>
+          <img src="/public/images/profile.png" id="img" alt="">
+        </nav>
+    </header>
+    <div class="container">
+        <div class="add_work">
+            <button class="add_subject">Add new Subjects</button>
+        </div>
+        <h1>Subjects</h1>
+        <div class="cards">
+            <div class="card one">
+                <div class="details">
+                    <div class="content">
+                        <h2>Blue</h2>
+                        <p>This is the description.</p>
+                        <a href="#" class="button">Get</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modals">
+            <form class="form">
+                <i class="fa-solid fa-xmark"></i>
+                <p class="infos">Choose your Subjects</p>
+                <select name="" id="">
+                    <option value="">Math</option>
+                    <option value="">French</option>
+                    <option value="">Physique</option>
+                </select>
+                <p class="infos">Your Remark</p>
+                <textarea name="" id="area" cols="30" rows="15"></textarea>
+                <button id="submit" type="submit">submit</button>
+            </form>
+        </div>
+
+    </div>
+    <script src="dashboard.js"></script>
+</body>
+</html>

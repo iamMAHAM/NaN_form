@@ -26,14 +26,15 @@ class userController{
     }
 
     static updateUser = (req, res)=>{
-        for (let prop in req.body){
-            if (req.body[prop] !== '' && prop !== "id"){
-                usersLib.UpdateInfo(prop, req.body)
-            }
-        }
-        usersLib.selectUser(req.body.id, (user)=>{
-            res.json(user)
-        })
+        console.log(req.body)
+        // for (let prop in req.body){
+        //     if (req.body[prop] !== '' && prop !== "id"){
+        //         usersLib.UpdateInfo(prop, req.body)
+        //     }
+        // }
+        // usersLib.selectUser(req.body.id, (user)=>{
+        //     res.json(user)
+        // })
     }
 
     static deleteUser = (req, res)=>{
