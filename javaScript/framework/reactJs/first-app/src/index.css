@@ -1,0 +1,35 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#logo{
+  width: 30px;
+  height: 30px;
+}
+
+.navbar{
+  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+}
+
+.liens{
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+}
+
+.liens li {
+  width: 50px;
+  list-style-type: none;
+}
+
+div.container{
+  position: relative;
+  left: 30%;
+  width: 600px;
+  height: 200px;
+  border: 1px solid black;
+}
