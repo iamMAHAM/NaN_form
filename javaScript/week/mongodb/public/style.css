@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+div.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+div.user{
+    width: 300px;
+    border: .5px solid black;
+    height: 500px;
+}
