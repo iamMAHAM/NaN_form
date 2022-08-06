@@ -6,6 +6,8 @@ const server = http.createServer(app)
 let users = []
 const wss = new ws.WebSocketServer({server})
 let sessions = {}
+
+
 wss.on("connection", (ws)=>{
     ws.on("message", (i)=>{
         const message = JSON.parse(i.toString())

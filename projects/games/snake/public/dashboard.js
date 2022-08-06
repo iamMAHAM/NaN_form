@@ -1,5 +1,3 @@
-const app = require("../server/server")
-
 /*welcome modal selections*/
 const ok = document.querySelector("#ok")
 const input_pseudo = document.querySelector("#ins")
@@ -115,7 +113,7 @@ const handle = (e)=>{
 
 window.addEventListener("load", ()=>{
     // socket
-    ws = new WebSocket("ws://192.168.88.33:3000")
+    ws = new WebSocket("ws://192.168.88.92:3000")
     ws.onopen = ()=>{
         ws.onmessage =  (i)=>{
             const rcv = JSON.parse(i.data)
@@ -200,5 +198,4 @@ window.addEventListener("load", ()=>{
           }))
         }
     })
-
 })
