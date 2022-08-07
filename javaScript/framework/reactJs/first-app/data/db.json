@@ -1,0 +1,36 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "title": "First Article",
+      "realeaseDate": "01/01/2020",
+      "author": "iamMAHAM"
+    },
+    {
+      "id": 2,
+      "title": "Second Article",
+      "realeaseDate": "02/01/2020",
+      "author": "iamMAHAM2"
+    },
+    {
+      "id": 3,
+      "title": "Third Article",
+      "realeaseDate": "03/01/2020",
+      "author": "iamMAHAM3"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "title": "Third Article",
+      "realeaseDate": "03/01/2020",
+      "author": "iamMAHAM3"
+    },
+    {
+      "id": 2,
+      "title": "Third Article",
+      "realeaseDate": "03/01/2020",
+      "author": "iamMAHAM3"
+    }
+  ]
+}
