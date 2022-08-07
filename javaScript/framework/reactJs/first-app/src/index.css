@@ -46,6 +46,8 @@ div.container{
 }
 
 .blog-card{
+	cursor: pointer;
+	transition: box-shadow .5s;
   margin: 20px !important;
   width: 400px;
   height: 100px;
@@ -54,6 +56,7 @@ div.container{
 }
 
 .blog-title{
+	text-decoration: none;
   color: blue;
   font-size: 35px;
 }
@@ -66,4 +69,9 @@ div.container{
   font-size: 20px;
   font-weight: bold;
   opacity: .9;
+}
+
+.blog-card:hover{
+  -webkit-box-shadow: -10px 8px 15px 8px rgba(0,0,0,0.65); 
+  box-shadow: -10px 8px 15px 8px rgba(0,0,0,0.65);
 }
