@@ -8,7 +8,7 @@ const Add = () => {
     const [content, setContent] = useState("write your content here")
     const [isPosting, setIsPositing] = useState(false)
     const [addSuccess, setAddSuccess] = useState(false)
-    
+
     const handleAddArticle = (e)=>{
         e.preventDefault()
         const tmp = new Date().toISOString().split("T")
@@ -26,6 +26,7 @@ const Add = () => {
                 console.log(res)
                 setIsPositing(false)
                 setAddSuccess(true)
+                window.location.href = "/"
             })
         }, 2000)
     }
