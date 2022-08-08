@@ -1,5 +1,6 @@
 import { useState } from "react";
 import postData from "./postData";
+import {useNavigate} from "react-router-dom"
 
 const Add = () => {
 
@@ -8,6 +9,7 @@ const Add = () => {
     const [content, setContent] = useState("write your content here")
     const [isPosting, setIsPositing] = useState(false)
     const [addSuccess, setAddSuccess] = useState(false)
+    const navigate = useNavigate()
 
     const handleAddArticle = (e)=>{
         e.preventDefault()
@@ -26,7 +28,7 @@ const Add = () => {
                 console.log(res)
                 setIsPositing(false)
                 setAddSuccess(true)
-                window.location.href = "/"
+                navigate("/")
             })
         }, 2000)
     }
@@ -35,15 +37,22 @@ const Add = () => {
             <h2>Add a new article</h2>
             <div className="addFormular">
                 <form onSubmit={ handleAddArticle} className="form">
-                    <input type="text" name="title" 
-                    onChange={((e)=>{setTitle(e.target.value)})}
-                    value={title} placeholder="A title"/>
-                    <input type="text" name="author" 
-                    onChange={((e)=>{setAuthor(e.target.value)})}
-                    value={author} placeholder="author Name"/>
-                    <textarea name="content" cols="50" 
-                    onChange={((e)=>{setContent(e.target.value)})}
-                    value={content} rows="10"></textarea>
+                    <input
+                        type="text" name="title" 
+                        onChange={((e)=>{setTitle(e.target.value)})}
+                        value={title} placeholder="A title"
+                    />
+                    <input
+                        type="text" name="author" 
+                        onChange={((e)=>{setAuthor(e.target.value)})}
+                        value={author} placeholder="author Name"
+                    />
+                    <textarea
+                        name="content" cols="50" 
+                        onChange={((e)=>{setContent(e.target.value)})}
+                        value={content} rows="10">
+                    </textarea>
+
                     <button type="submit">Submit</button>
                     {isPosting && <div className="error">posting your data</div>}
                     {addSuccess && <div className="error">Article ajouté avec success</div>}
