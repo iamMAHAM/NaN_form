@@ -6,34 +6,6 @@
       "realeaseDate": "01/01/2020",
       "content": "loremrlkgnroeuirejdfddddddddddddddddddddddddddddderzrfzfezfezfez",
       "author": "iamMAHAM"
-    },
-    {
-      "id": 2,
-      "title": "Second Article",
-      "realeaseDate": "02/01/2020",
-      "content": "kcbjhisebezbuifbezuife",
-      "author": "iamMAHAM2"
-    },
-    {
-      "id": 3,
-      "title": "Third Article",
-      "realeaseDate": "03/01/2020",
-      "content": "lfhuoizehfçhezàifjpoezjfpoezj,fiopeznfen zfez",
-      "author": "iamMAHAM3"
-    },
-    {
-      "id": 4,
-      "title": "New Title",
-      "realeaseDate": "2022-08-08 15:16:52.980Z",
-      "content": "write your content here        postData(\"http://localhost:8000/blogs/\", new_article, (res)=>{\n            console.log(res)\n            setIsPositing(false)\n            setAddSuccess(true)\n        })",
-      "author": "iamMAHAM"
-    },
-    {
-      "id": 5,
-      "title": "New Title",
-      "realeaseDate": "2022-08-08 15:25:14.549Z",
-      "content": "write your content here",
-      "author": "iamMAHAM"
     }
   ],
   "users": [
