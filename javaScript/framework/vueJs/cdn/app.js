@@ -26,6 +26,11 @@ const app = Vue.createApp({
     methods:{
         toggleFav(book){
             book.isFav = !book.isFav
+        },
+
+        handle(e, nom){
+            console.log(e)
+            console.log(nom)
         }
     },
     computed: {
