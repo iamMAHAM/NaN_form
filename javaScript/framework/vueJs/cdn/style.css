@@ -38,3 +38,18 @@ img{
     text-transform: uppercase;
     font-weight: bold;
 }
+
+.cards{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.card{
+    text-align: center;
+    margin: auto;
+    margin: 16px;
+    background-color: antiquewhite;
+    width: 300px;
+    height: 300px;
+}
