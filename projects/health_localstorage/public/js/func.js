@@ -31,7 +31,7 @@ function logout()
     window.location.href = "login-register.html"
 }
 
-function mediaQ()
+function  mediaQ()
 {
     om = document.querySelector("div.top-header-right").classList.toggle("show")
 }
