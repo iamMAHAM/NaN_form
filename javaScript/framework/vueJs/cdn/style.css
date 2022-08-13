@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.books{
+    display: flex;
+    flex-direction: row;
+}
+
+.book{
+    text-align: center;
+    align-items: center;
+    border-radius: 5px;
+    margin: 5px;
+    border: 1px solid black;
+    width: 250px;
+    height: 300px;
+}
+
+.title{
+    font-size: 25px;
+    color: blue;
+}
+
+img{
+    width: 230px;
+    height: 200px;
+    object-fit: contain;
+}
+
+.fav{
+    border: 10px solid pink;
+}
+
+.author{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.cards{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.card{
+    text-align: center;
+    margin: auto;
+    margin: 16px;
+    background-color: antiquewhite;
+    width: 300px;
+    height: 300px;
+}
