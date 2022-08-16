@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ios.css">
+    <link rel="stylesheet" href="css/media_queries.css">
+</head>
+<body>
+    <div class="container log">
+
+        <div class="left">
+            <img src="https://images.unsplash.com/photo-1566355832516-3644f7b47818?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80" alt="image page de connexion">
+            <input class="apple-switch" type="checkbox">
+        </div>
+    
+        <div class="right">
+            <div class="register-fields login">
+                <div class="login-e">
+                    <p class="title l">Login</p>
+                    <input class="fields email login" type="email" name="email" placeholder="E-mail">
+                    <input class="fields passwd" type="password" name="password" placeholder="password">
+                    <div class="bottom">
+                        <button class="login-button">Login</button>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="register-fields register">
+                <p class="title l">Register</p>
+                <input class="fields name" type="text" name="name" placeholder="Name" required>
+                <input class="fields surname" type="text" name="surname" placeholder="Surname">
+                <input class="fields email" type="email" name="email" placeholder="E-mail" required>
+                <input class="fields password" type="password" name="password" placeholder="password" required>
+                <input class="fields birth" type="date" name="age"required>
+                <input class="fields country" type="text" name="country" placeholder="country">
+                <div class="confirm">
+                    <label for="avatar" aria-required="true">Choose a profile picture:</label>
+                    <input type="file" name="" id="avatar">
+                </div>
+                <div class="bottom">
+                    <button class="register-button">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/login-register.js"></script>
+</body>
+</html>
