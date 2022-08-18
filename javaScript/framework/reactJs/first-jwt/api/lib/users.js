@@ -1,15 +1,21 @@
 const db = require("../config/db")
+const bcrypt = require('bcrypt')
+const saltRounds = 10
 
 const createUser = (opt={}, callback)=>{
     let res=  null
-    db.query(
-        `
-        INSERT INTO jwt.users (\`name\`, \`email\`, \`password\`, \`birth\`, \`surname\`)
-        VALUES ("${opt.name}", "${opt.email}", "${opt.password}", "${opt.birth}", "${opt.surname}")
-        `
-    , (err)=>{
-        err ? res = false : res = true
-        return callback(res)
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(opt.password, salt, function(err, hash) {
+            db.query(
+                `
+                INSERT INTO jwt.users (\`name\`, \`email\`, \`password\`, \`birth\`, \`surname\`)
+                VALUES ("${opt.name}", "${opt.email}", "${hash}", "${opt.birth}", "${opt.surname}")
+                `
+            , (err)=>{
+                err ? res = false : res = true
+                return callback(res)
+            })
+        })
     })
 }
 

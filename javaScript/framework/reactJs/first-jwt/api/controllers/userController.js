@@ -2,6 +2,32 @@ const users = require("../lib/users")
 const validate = require("../lib/validate")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
+const nodemailer = require('nodemailer')
+
+const sendEmail = (user="", pass="", sender="", to="", content="")=>{
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: user,
+            pass: pass
+        }
+    })
+
+    const mailOptions = {
+        from: sender,
+        to: to,
+        subject: 'Registration',
+        text: content
+    }
+
+    transporter.sendMail(mailOptions, (error, info)=>{
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    })
+}
 
 const template = (status="", data={})=>{
     return {
@@ -60,9 +86,32 @@ class userController{
 
     static requestCreate = (req, res)=>{
         console.log(req.body)
-        const token = jwt.sign(req.body, process.env.JWT_SECRET)
-        console.log(token)
-        res.send(token)
+        if (validate(req.body)){
+            const token = jwt.sign(req.body, process.env.JWT_SECRET)
+            console.log(token)
+            sendEmail( 
+                'abdul.kabore@uvci.edu.ci',
+                'abdulmaham10',
+                "user@service.com",
+                req.body.email,
+               `confirm your email by clicking with this link\n" + "http://192.168.88.92:8000/user/${token}`
+                )
+            res.json({status: "ok"})
+            return
+        }
+        res.json({status: "false"})
+    }
+
+    static insert = (req, res)=>{
+        try{
+            const decoded = jwt.verify(req.params.token, process.env.JWT_SECRET)
+            users.createUser(decoded, resl=>{
+                if (resl) res.send(JSON.stringify(template("ok", {message: 'account created successfully'})))
+                else res.send(JSON.stringify(template("false", {message: 'error with database'})))
+            })
+        } catch(e){
+            res.send("404 page not found")
+        }
     }
 }
 
