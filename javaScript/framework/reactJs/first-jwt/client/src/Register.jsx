@@ -8,7 +8,7 @@ const RegisterLogin = () => {
 
     const submit = (e)=>{
         e.preventDefault()
-        fetch("/user/create",{
+        fetch("/user/test",{
             method: "POST",
             headers: {
                 "content-type" : "application/json",
@@ -17,7 +17,9 @@ const RegisterLogin = () => {
             },
             body: JSON.stringify(formData)
         }).then(res => res.json())
-        .then(data => data.status === 'ok' ? setIsValidated(true) : setError(true))
+        .then(data => {
+            console.log(data)
+            data.status === 'ok' ? setIsValidated(true) : setError(true)})
     }
 
     const [formData, setFormData] = useState({})
@@ -27,7 +29,7 @@ const RegisterLogin = () => {
         <form className="container">
             {error && !isvalidated && <div className="error"> some incorrect entries </div>}
             
-            {!isvalidated && 
+            {!isvalidated &&
             <div className="register-fields register">
                 <p className="title l">Register</p>
                 <input
