@@ -14,13 +14,15 @@
         <div class="nav-start">
           <img src="/public/img/logo.png" alt="logo image" class="logo">
         </div>
+        <li class="nav-item">
+          <div class="search">
+            <input type="search" id="search" placeholder="search your product" role="search">
+            <a href="#" class="item" style="margin: auto;">
+              <i class="material-icons loupe">search</i>
+            </a>
+          </div>
+        </li>
         <div class="nav-end">
-          <li class="nav-item">
-            <div class="search">
-              <input type="search" id="search" placeholder="search your product" role="search">
-              <i class="material-icons" style="cursor: pointer;">search</i>
-            </div>
-          </li>
           <li class="nav-item">
             <a href="#" class="item">
               <i class="material-icons item">login</i>
@@ -46,32 +48,72 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="item">
+            <a href="#" class="item" style="position: relative;">
               <i class="material-icons item">shopping_cart</i>
               Cart
+              <span class="cart-article">0</span>
             </a>
           </li>
         </div>
       </nav>
-
+      
       <div class="container">
-        <div class="card">
-          <div class="card-top">
-            <i class="material-icons status">check_circle</i>
-            <i class="material-icons favorite">favorite</i>
+        <div class="side-bar">
+          <div class="side-content">
+            <a href="#" class="side-row">
+              <i class="material-icons">medication</i>
+              <span class="side-content">Drugs</span>
+            </a>
+            <a href="#" class="side-row">
+              <i class="material-icons">health_and_safety</i>
+              <span class="side-content">Health</span>
+            </a>
+            <a href="#" class="side-row">
+              <i class="material-icons">spa</i>
+              <span class="side-content">Beauty and Hygiene</span>
+            </a>
+            <a href="#" class="side-row">
+              <i class="material-icons">pregnant_woman</i>
+              <span class="side-content">Baby and Pregnancy</span>
+            </a>
+            <a href="#" class="side-row">
+              <i class="material-icons">sports_hockey</i>
+              <span class="side-content">Slimming and Sport</span>
+            </a>
+            <a href="#" class="side-row">
+              <i class="material-icons">pets</i>
+              <span class="side-content">Veterinary</span>
+            </a>
+            <a href="#" class="side-row">
+              <i class="material-icons">medical_services</i>
+              <span class="side-content">Medical Materials</span>
+            </a>
           </div>
-          <div class="card-main">
-            <img src="/assets/med.png" alt="medoc image" class="card-images">
-            <p class="card-description">
-              <p class="medoc-title">doliprane</p>
-              <small class="medoc-desc">Lorem ipsum dolor sit, amet consectetur adipisicing</small>
+        </div>
+        <div class="article-content">
+          <div class="banner">
+            <p class="banner-text">
+              First Ivory Coast Online Pharmacy
             </p>
+            <img src="/public/img/network.png" alt="pharma network" class="banner-image">
           </div>
-          <div class="pricing">
-            <p class="price">9.99 €</p>
-            <i class="material-icons">add_shopping_cart</i>
+          <div class="card">
+            <div class="card-top">
+              <i class="material-icons pointer" style="color: var(--green);">check_circle</i>
+              <i class="material-icons pointer favorite">favorite</i>
+            </div>
+            <div class="card-main">
+              <img src="/assets/med.png" alt="medoc image" class="card-images">
+              <p class="card-description">
+                <p class="medoc-title">doliprane</p>
+                <small class="medoc-desc">Lorem ipsum dolor sit, amet consectetur adipisicing</small>
+              </p>
+            </div>
+            <div class="pricing">
+              <p class="price">9.99 €</p>
+              <i class="material-icons pointer">add_shopping_cart</i>
+            </div>
           </div>
-
         </div>
       </div>
     

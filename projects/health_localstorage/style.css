@@ -1,3 +1,5 @@
+/*-------------------INDEX-------------------*/
+
 *{
     margin: 0;
     padding: 0;
@@ -17,6 +19,10 @@ body{
     --white: #fefefe;
     --green: #04a750;
     --gray: #E0E0E0;
+}
+
+a{
+    text-decoration: none;
 }
 
 /*-------------------NAVBAR-------------------*/
@@ -53,18 +59,14 @@ div.nav-end, .search, nav.navbar{
     text-decoration: none;
 }
 
-/* .nav-item:hover{
-    background-color: #00a884;
-} */
-
 .search{
     justify-content: flex-start;
-    width: 35rem;
+    width: 50rem;
     height: 4rem;
     background-color: var(--white);
     overflow: hidden;
     border-radius: 1rem;
-    border: 1px solid var(--black);
+    border: .5px solid var(--white);
     align-items: center;
 }
 
@@ -77,19 +79,42 @@ div.nav-end, .search, nav.navbar{
     border: none;
 }
 
+.cart-article{
+    position: absolute;
+    left: 50%;
+    color: red;
+}
+
+.material-icons.loupe{
+    color: var(--white);
+    font-size: 4rem;
+    background-color: var(--black);
+}
+
 .material-icons.item{
     font-size: 3.5rem;
 }
 
+/*---------------------- CONTAINER ---------------*/
+div.container{
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+}
+
+/*---------------------- BANNER --------------------*/
+
+
 /*---------------------- CARD --------------------*/
 
 div.card{
+    overflow: hidden;
     border-radius: .5rem;
     text-align: center;
     border: .5px solid black;
     position: relative;
-    height: 20rem;
-    margin: 10rem auto;
+    height: 22rem;
+    /* margin: 10rem auto; */
     width: 30rem;
     flex-direction: column;
 }
@@ -102,25 +127,75 @@ div.card-top{
 }
 
 i.status{
-    color: #04a750;
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
 }
 
+i.favorite{
+    color: rgb(88, 87, 87);
+    cursor: pointer;
+}
+
+i.favorite:hover{
+    color: red;
+}
+
 img.card-images{
     width: 70%;
-    height: calc(100% - 50px);
+    height: calc(100% - 5rem);
 }
 
 .medoc-title{
-    color: var(--black);
-    font-size: 2rem;
+    font-size: 2.3rem;
 }
 
 div.pricing{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-size: 1.8rem;
     align-items: center;
-    background-color: var(--green);
+    background-color: var(--black);
     justify-content: center;
     color: var(--white);
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+/*---------------------- SIDE BAR --------------------*/
+div.side-bar{
+    height: max-content;
+    position: sticky;
+    top: 30%;
+    left: 2%;
+}
+
+.side-row,
+div.side-content{
+    display: flex;
+    flex-direction: column;
+}
+
+div.side-content{
+    background-color: var(--black);
+    margin-top: 2rem;
+    padding: 1.5rem;
+    width: max-content;
+    border-radius: .5rem;
+}
+
+.side-row{
+    color: var(--white);
+    margin: 1rem 0;
+    width: max-content;
+    flex-direction: row;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.side-row .material-icons{
+    margin: 0 .6rem;
 }
