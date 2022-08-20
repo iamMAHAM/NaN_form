@@ -1,0 +1,78 @@
+div.modal-register{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.register-fields{
+    background-color: #1b1b32;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 5px;
+    width: 500px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  .fields{
+    font-style: oblique;
+    margin: 10px;
+    font-size: 20px;
+    padding: 10px;
+  }
+  
+  .title{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 25px;
+  }
+  
+  .register-button{
+    cursor: pointer;
+    border-radius: 5px;
+    color: #fefefe;
+    background-color: #1b1b32;
+    margin: 10px;
+    font-size: 22px;
+    padding: 10px;
+  }
+  
+  .error{
+    text-align: center;
+    color: red;
+    font-size: 25px;
+  }
+  
+  .validated{
+    text-align: center;
+    padding: 25px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: 200px;
+    background-color: #fefefe;
+  }
+  
+  .rs{
+    color: lawngreen;
+  }
+  
+  .v{
+    width: 100px;
+    height: 100px;
+  }
+  
+  .message{
+    font-size: 22px;
+  }
+  
+  .em{
+    font-weight: bold;
+  }

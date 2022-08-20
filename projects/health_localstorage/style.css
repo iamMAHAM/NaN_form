@@ -19,6 +19,7 @@ body{
     --white: #fefefe;
     --green: #04a750;
     --gray: #E0E0E0;
+    --red: red;
 }
 
 a{
@@ -82,7 +83,7 @@ div.nav-end, .search, nav.navbar{
 .cart-article{
     position: absolute;
     left: 50%;
-    color: red;
+    color: var(--green);
 }
 
 .material-icons.loupe{
@@ -96,13 +97,62 @@ div.nav-end, .search, nav.navbar{
 }
 
 /*---------------------- CONTAINER ---------------*/
+div.banner,
+.article-content,
 div.container{
     display: flex;
     flex-direction: row;
     gap: 5%;
 }
 
+.article-content{
+    flex-direction: column;
+    margin: 0 3rem;
+}
+
 /*---------------------- BANNER --------------------*/
+div.banner{
+    margin-top: 1rem;
+    border: 1px solid black;
+}
+
+div.banner-content{
+    font-size: 2.5rem;
+    margin: auto;
+}
+
+.banner-content div{
+    display: flex;
+    margin: 1rem 0;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.banner-content .material-icons{
+    padding: 1rem;
+    background-color: var(--green);
+    color: var(--white);
+    font-size: 4rem;
+    border-radius: 50%;
+    border: .1rem solid var(--green);
+}
+
+.banner-content span{
+    margin: 0 1rem;
+}
+
+.t{
+    color: var(--black);
+    font-weight: bold;
+    font-size: 3.5rem;
+}
+
+img.banner-image{
+    margin: auto;
+    width: 50%;
+    height: 70%;
+}
+
 
 
 /*---------------------- CARD --------------------*/
@@ -113,8 +163,8 @@ div.card{
     text-align: center;
     border: .5px solid black;
     position: relative;
-    height: 22rem;
-    /* margin: 10rem auto; */
+    height: 27rem;
+    margin: auto;
     width: 30rem;
     flex-direction: column;
 }
@@ -138,7 +188,7 @@ i.favorite{
 }
 
 i.favorite:hover{
-    color: red;
+    color: var(--red);
 }
 
 img.card-images{
@@ -166,6 +216,8 @@ div.pricing{
 }
 
 /*---------------------- SIDE BAR --------------------*/
+
+
 div.side-bar{
     height: max-content;
     position: sticky;
@@ -198,4 +250,109 @@ div.side-content{
 
 .side-row .material-icons{
     margin: 0 .6rem;
+}
+
+
+/*--------------- REGISTER -----------------*/
+
+div.modal-register{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.register-fields{
+    background-color: var(--black);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    border-radius: 5px;
+    width: 500px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    display: none;
+}
+
+.fields{
+    font-style: oblique;
+    margin: 1rem;
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+.register-title{
+    padding: 1rem;
+    color: var(--white);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.register-button{
+    cursor: pointer;
+    border-radius: 5px;
+    color: var(--black);
+    background-color: var(--white);
+    margin: 1rem;
+    font-size: 2.2rem;
+    padding: 1rem;
+}
+
+.error{
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    position: absolute;
+    text-align: center;
+    color: var(--red);
+    font-size: 2.5rem;
+}
+
+.validated{
+    z-index: 3;
+    color: var(--white);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: 25rem;
+    background-color: var(--black);
+}
+
+.close{
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: var(--red);
+    position: absolute;
+    top: 0;
+    right: 1.8rem;
+}
+
+.register-success{
+    color: var(--green);
+}
+
+.v{
+    width: 10rem;
+    height: 10rem;
+}
+
+.message{
+    font-size: 2.2rem;
+}
+
+#email{
+    font-style: italic;
+    font-weight: bold;
 }

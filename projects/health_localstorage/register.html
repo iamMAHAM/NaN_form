@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="modal-register">
+        <div class="register-fields register">
+            <span class="close">x</span>
+            <p class="register-title">Register</p>
+            <input
+                class="fields name"
+                type="text"
+                name="name"
+                placeholder="name"
+                value= formData?.name
+                onChange=handleChange
+                required
+            />
+            <input
+                class="fields surname"
+                type="text"
+                name="surname"
+                placeholder="surname"
+                value= formData?.username
+                onChange=handleChange
+                required
+            />
+            <input
+                class="fields email"
+                type="text"
+                name="email"
+                placeholder="email"
+                value= formData?.email
+                onChange=handleChange
+                required
+            />
+            <input
+                class="fields password"
+                type="password"
+                name="password"
+                placeholder="password"
+                value= formData?.password
+                onChange=handleChange
+                required
+            />
+            <input
+                class="fields birth"
+                type="date"
+                name="birth"
+                value= formData?.password
+                onChange=handleChange
+                required 
+            />
+            <div class="bottom">
+                <button
+                class="register-button"
+                onClick= submit
+                >
+                    register
+                </button>
+            </div>
+            <div class="error"> some incorrect entries </div>
+        </div>
+        <div class="validated">
+            <span class="close">x</span>
+            <h1 class="register-success">Registration Successfull</h1>
+            <img class="v" src="/assets/v.png" alt="" />
+            <p class="message">
+                We've sent you an email to <span id="email">{ formData?.email }.</span><br />
+                You need to confirm your account ...
+            </p>
+        </div>
+    </div>
+</body>
+</html>
