@@ -1,7 +1,11 @@
 <template>
-    <div class="modal">
+    <div class="modal" v-if="register || login">
         <div class="register-fields register" v-if="register">
-            <span class="close">x</span>
+            <span class="close"
+			:onclick="closeModal"
+			>
+				x
+			</span>
             <p class="register-title">Register</p>
             <input
                 class="fields"
@@ -44,8 +48,8 @@
 				>
 					already registred ? <span
 											class="reg"
-											ref="login"
-											:onclick="handleChange"
+											ref="log"
+											:onclick="loginRegister"
 										>
 											login
 										</span>
@@ -68,7 +72,12 @@
             </p>
         </div>
 		<div class="login" v-if="login">
-			<span class="close">x</span>
+			<span
+				class="close"
+				:onclick="closeModal"
+			>
+				x
+			</span>
             <p class="register-title">LOGIN</p>
             <input
                 class="fields"
@@ -88,7 +97,13 @@
 				<p
 					class="not-registred"
 				>
-					not registred yet ? <span class="reg" ref="register">register</span>
+					not registred yet ? <span
+											class="reg"
+											ref="reg"
+											:onclick="loginRegister"
+										>
+											register
+										</span>
 				</p>
                 <button
                 class="register-button"
@@ -115,7 +130,7 @@ export default {
 			},
 			login: false,
 			register: true,
-			error: true,
+			error: false,
 			registrated: false
 		}
 	},
@@ -126,12 +141,19 @@ export default {
 		submit(){
 			// do something here !!!
 		},
-		loginRegister(){
-			console.log(this.$refs.login)
-			// if (this.$refs.login){
-			// 	this.register = false
-			// 	this.login = true
-			// }
+		loginRegister(e){
+			const target = e.target
+			if (target === this.$refs.log){
+				this.register = false
+				this.login = true
+			} else if (target === this.$refs.reg){
+				this.register = true,
+				this.login = false
+			}
+		},
+		closeModal(){
+			this.register = false
+			this.login = false
 		}
 	}
 
@@ -153,18 +175,19 @@ export default {
 		left: 50%;
 		transform: translate(-50%, -50%);
 		padding: 2rem;
-		border-radius: 5px;
-		width: 50rem;
+		border-radius: .5rem;
+		width: 40rem;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-around;
-		/* display: none; */
+		align-items: center;
 	}
 
 	.fields{
+		border-radius: .5rem;
+		width: 30rem;
 		font-style: oblique;
-		margin: 1rem;
+		margin: .8rem;
 		font-size: 2rem;
 		padding: 1rem;
 	}
@@ -179,12 +202,12 @@ export default {
 
 	.register-button{
 		cursor: pointer;
-		border-radius: 5px;
+		border-radius: .5rem;
 		color: var(--black);
 		background-color: var(--white);
-		margin: 1rem;
+		margin: .5rem 1rem;
 		font-size: 2.2rem;
-		padding: 1rem;
+		padding: .8rem;
 	}
 
 	.error{
