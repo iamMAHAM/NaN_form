@@ -126,6 +126,10 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
+import { db } from "@/lib/firebaseConfig"
+import { collection, getDocs } from "firebase/firestore"; 
+
 export default {
 	name: 'register',
 	props: ['show'],
@@ -173,6 +177,16 @@ export default {
 		registerCheck(){
 			console.log("register check")
 		}
+	},
+	setup(){
+		onMounted(async ()=>{
+			console.log("mounted")
+
+			const querySnapshot = await getDocs(collection(db, "users"))
+			querySnapshot.forEach((doc) => {
+			console.log(doc.id, " => ", doc.data());
+			});
+		})
 	}
 }
 </script>
