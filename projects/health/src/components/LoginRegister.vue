@@ -1,6 +1,7 @@
 <template>
-    <div class="modal" v-if="register || login">
-        <div class="register-fields register" v-if="register">
+<transition>
+    <div class="modal">
+        <div class="register-fields" v-if="register">
             <span class="close"
 			:onclick="closeModal"
 			>
@@ -55,7 +56,8 @@
 										</span>
 				</p>
                 <button
-                class="register-button"
+                	class="register-button"
+					:onclick="registerCheck"
                 >
                     register
                 </button>
@@ -63,7 +65,12 @@
             <div class="error" v-if="error"> some incorrect entries </div>
         </div>
         <div class="validated" v-if="registrated">
-            <span class="close">x</span>
+            <span
+				class="close"
+				:onclick="closeModal"
+			>
+				x
+			</span>
             <h1 class="register-success">Registration Successfull</h1>
             <img class="v" src="../assets/v.png" alt="" />
             <p class="message">
@@ -106,19 +113,22 @@
 										</span>
 				</p>
                 <button
-                class="register-button"
+                	class="register-button"
+					:onclick="loginCheck"
                 >
-                    Login
+                    login
                 </button>
             </div>
 			<div class="error" v-if="error">Bad Credentials</div>
 		</div>
     </div>
+</transition>
 </template>
 
 <script>
 export default {
 	name: 'register',
+	props: ['show'],
 	data(){
 		return {
 			fields: {
@@ -128,10 +138,10 @@ export default {
 				password: '',
 				birth: '',
 			},
-			login: false,
-			register: true,
+			login: true,
+			register: false,
 			error: false,
-			registrated: false
+			registrated: false,
 		}
 	},
 	methods: {
@@ -152,17 +162,27 @@ export default {
 			}
 		},
 		closeModal(){
+			this.$emit("close")
+			this.login = true
+			this.registrated = false
 			this.register = false
-			this.login = false
+		},
+		loginCheck(){
+			console.log("login check")
+		},
+		registerCheck(){
+			console.log("register check")
 		}
 	}
-
 }
 </script>
 
 <style>
 	div.modal{
-		position: relative;
+		background: rgba(0, 0, 0, 0.3);
+		z-index: 5;
+		top: 0;
+		position: absolute;
 		width: 100vw;
 		height: 100vh;
 	}
@@ -174,9 +194,9 @@ export default {
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		padding: 2rem;
-		border-radius: .5rem;
-		width: 40rem;
+		padding: 1.5rem;
+		border-radius: 1rem;
+		width: 35rem;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
@@ -184,12 +204,17 @@ export default {
 	}
 
 	.fields{
+		color: var(--black);
 		border-radius: .5rem;
-		width: 30rem;
+		width: 25rem;
 		font-style: oblique;
 		margin: .8rem;
-		font-size: 2rem;
-		padding: 1rem;
+		font-size: 1.8rem;
+		padding: .5rem;
+	}
+
+	.fields::placeholder{
+		color: var(--black);
 	}
 
 	.register-title{
@@ -206,8 +231,8 @@ export default {
 		color: var(--black);
 		background-color: var(--white);
 		margin: .5rem 1rem;
-		font-size: 2.2rem;
-		padding: .8rem;
+		font-size: 2rem;
+		padding: .5rem;
 	}
 
 	.error{
@@ -235,7 +260,6 @@ export default {
 		flex-direction: column;
 		height: 25rem;
 		background-color: var(--black);
-		display: none;
 	}
 
 	.close{
@@ -266,11 +290,12 @@ export default {
 	}
 
 	.login{
+		opacity: 1;
 
 	}
 
 	.not-registred{
-		font-size: 2rem;
+		font-size: 1.8rem;
 		color: var(--white);
 	}
 
@@ -282,5 +307,17 @@ export default {
 
 	.reg:hover{
 		color: var(--green);
+	}
+
+	.enter-from{
+		opacity: 0;
+	}
+
+	.enter-to{
+		opacity: 1;
+	}
+
+	.enter-active{
+		transition: opacity 5s ease-in-out;
 	}
 </style>

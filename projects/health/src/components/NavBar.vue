@@ -12,19 +12,26 @@
 		</div>
 		</li>
 		<div class="nav-end">
-		<li class="nav-item">
-			<a href="#" class="item">
+		<li
+			class="nav-item"
+			
+		>
+			<a
+				href="#"
+				class="item"
+				@click="showLogin"
+			>
 			<i class="material-icons item">login</i>
 			Login
 			</a>
 		</li>
-		<li class="nav-item">
-			<a href="#" class="item">
+		<li class="nav-item" v-if="isLogged">
+			<a href="#" class="item" v-if="isLogged">
 			<i class="material-icons item">logout</i>
 			Logout
 			</a>
 		</li>
-		<li class="nav-item">
+		<li class="nav-item" v-if="isLogged">
 			<a href="#" class="item">
 			<i class="material-icons item">account_circle</i>
 			Profile
@@ -44,12 +51,44 @@
 			</a>
 		</li>
 		</div>
+		<LoginRegister v-if="modal" @close="closeModal" />
 	</nav>
 </template>
 
 <script>
+import { ref } from '@vue/reactivity';
+import LoginRegister from './LoginRegister.vue';
+
 export default {
-	
+	components:{
+		LoginRegister
+	},
+
+	setup(){
+		let modal = ref(false)
+		let isLogged = ref(false)
+		
+		const showLogin = ()=>{
+			modal.value = true
+		}
+
+		const closeModal = ()=>{
+			console.log("close event")
+			modal.value = false
+		}
+
+		const addToCart = ()=>{
+			
+		}
+
+		return { 
+			modal,
+			isLogged,
+			showLogin,
+			closeModal,
+		}
+	}
+
 }
 </script>
 
