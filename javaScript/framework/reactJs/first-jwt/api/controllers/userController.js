@@ -90,8 +90,8 @@ class userController{
             const token = jwt.sign(req.body, process.env.JWT_SECRET)
             console.log(token)
             sendEmail( 
-                'abdul.kabore@uvci.edu.ci',
-                'abdulmaham10',
+                'ahahah@test.com',
+                'azerty123',
                 "user@service.com",
                 req.body.email,
                `confirm your email by clicking with this link\n" + "http://192.168.88.92:8000/user/${token}`
