@@ -1,5 +1,4 @@
 <template>
-	<NavBar />
 	<div class="container">
 		<SideBar />
 		<ArticleContent />
@@ -7,7 +6,6 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
 import SideBar from '@/views/home/SideBar.vue'
 import ArticleContent from './home/ArticleContent.vue';
 // @ is an alias to /src
@@ -15,7 +13,6 @@ import ArticleContent from './home/ArticleContent.vue';
 export default {
   name: 'Home',
   components: {
-    NavBar,
     SideBar,
     ArticleContent
 }
