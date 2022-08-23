@@ -1,7 +1,7 @@
 
 import { db } from "./firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
-import { collection, doc, addDoc, getDoc, getDocs, where, query } from "firebase/firestore"; 
+import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc } from "firebase/firestore"; 
 
 const auth = getAuth()
 
@@ -16,11 +16,15 @@ export const getOne = async (collect="", id="")=>{
     }
 }
 
-export const getAll = async (collect)=>{
+export const getAll = async (collect, callback)=>{
+    let result = []
     const querySnapshot = await getDocs(collection(db, collect))
     querySnapshot.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data())
+        let toPush = doc.data()
+        toPush.id = doc.id
+        result.push(toPush)
     })
+    return callback(result)
 }
 
 export const saveDoc = async (collect="", doc)=>{
@@ -33,6 +37,10 @@ export const saveDocs = (collect="", docs=[])=>{
         const docRef = await addDoc(collection(db, collect), doc)
         console.log(docRef.id)
     })
+}
+
+export const unSaveDoc = async (collect="", doct)=>{
+    await deleteDoc(doc(db, collect, doct))
 }
 
 export const signUp = (data, callback)=>{
