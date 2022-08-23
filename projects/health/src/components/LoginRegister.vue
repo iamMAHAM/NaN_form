@@ -62,7 +62,7 @@
                     register
                 </button>
             </div>
-            <div class="error" v-if="error"> some incorrect entries </div>
+            <div class="error" v-if="error"> {{ errorMessage}}</div>
         </div>
         <div class="validated" v-if="registrated">
             <span
@@ -91,14 +91,14 @@
                 type="text"
                 placeholder="email"
                 required
-				v-model="fields.firstName"
+				v-model="fields.email"
             />
             <input
                 class="fields"
-                type="text"
+                type="password"
                 placeholder="password"
                 required
-				v-model="fields.lastName"
+				v-model="fields.password"
             />
 			<div class="bottom">
 				<p
@@ -119,16 +119,14 @@
                     login
                 </button>
             </div>
-			<div class="error" v-if="error">Bad Credentials</div>
+			<div class="error" v-if="error">{{ errorMessage}}</div>
 		</div>
     </div>
 </transition>
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
-import { db } from "@/lib/firebaseConfig"
-import { collection, getDocs } from "firebase/firestore"; 
+import {signIn, signUp} from "@/lib/firestoreLib"
 
 export default {
 	name: 'register',
@@ -141,7 +139,9 @@ export default {
 				email: '',
 				password: '',
 				birth: '',
+				role: 'user'
 			},
+			errorMessage: "",
 			login: true,
 			register: false,
 			error: false,
@@ -149,9 +149,6 @@ export default {
 		}
 	},
 	methods: {
-		handleChange(){
-			console.log(this.fields)
-		},
 		submit(){
 			// do something here !!!
 		},
@@ -172,21 +169,28 @@ export default {
 			this.register = false
 		},
 		loginCheck(){
-			console.log("login check")
+			console.log("loginCheck")
+			signIn(this.fields, (res)=>{
+				console.log(res)
+				if (res.user){
+					console.log(res)
+					localStorage.setItem("user",JSON.stringify(res.user))
+					this.$emit("loggedIn")
+				}else{
+					this.errorMessage = res.error.replace("auth/", '').replace("-", ' ')
+					this.error = true
+					setTimeout(()=>this.error = false, 5000)
+				}
+			})
 		},
 		registerCheck(){
-			console.log("register check")
+			signUp(this.fields, (res)=>{
+				res.error === 'auth/email-already-in-use'
+				this.errorMessage = err.error.replace("auth/", '').replace("-", ' ')
+				this.error = true
+				setTimeout(()=>this.error = false, 5000)
+			})
 		}
-	},
-	setup(){
-		onMounted(async ()=>{
-			console.log("mounted")
-
-			const querySnapshot = await getDocs(collection(db, "users"))
-			querySnapshot.forEach((doc) => {
-			console.log(doc.id, " => ", doc.data());
-			});
-		})
 	}
 }
 </script>
@@ -250,9 +254,14 @@ export default {
 	}
 
 	.error{
+		width: 70%;
+		/* border-top-right-radius: 1rem;
+		border-top-left-radius: 1rem; */
+		border-radius: 1rem;
+		background-color: var(--white);
 		top: 0;
 		left: 50%;
-		transform: translate(-50%, -100%);
+		transform: translate(-50%, -50%);
 		position: absolute;
 		text-align: center;
 		color: var(--red);
