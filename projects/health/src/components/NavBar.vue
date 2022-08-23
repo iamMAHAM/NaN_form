@@ -50,13 +50,13 @@
 			Favorite
 			</a>
 		</li>
-		<li class="nav-item">
+		<router-link to="/cart" class="nav-item">
 			<a href="#" class="item" style="position: relative;">
 			<i class="material-icons item">shopping_cart</i>
 			Cart
 			<span class="cart-article">0</span>
 			</a>
-		</li>
+		</router-link>
 		</div>
 		<LoginRegister
 			v-if="modal"
@@ -89,10 +89,6 @@ export default {
 		const closeModal = ()=>{
 			console.log("close event")
 			modal.value = false
-		}
-
-		const addToCart = ()=>{
-			
 		}
 
 		const logOut = ()=>{
