@@ -1,7 +1,7 @@
 <template>
     <div class="detail">
         <div class="left">
-          <img src="https://www.pharma-gdd.com/media/cache/resolve/product_show/daflon-500-mg-120-comprimes-face.jpg" alt="" class="img">
+          <img src="https://www.pharma-gdd.com/media/cache/resolve/product_show/daflon-500-mg-120-comprimes-face.jpg" class="img">
         </div>
 
         <div class="right">
@@ -37,13 +37,14 @@
               <input
                 type="number"
                 min="1"
-                name="0"
+                max="10"
                 id="number"
+                step="1"
                 v-model="nb"
                 :onchange="updatePrice"
                 >
             </div>
-            <span class="rt-price">{{ price }} €</span>
+            <span class="rt-price">{{ total }} €</span>
             <button>add to cart</button>
           </div>
         </div>
@@ -52,24 +53,35 @@
 
 <script>
 import { ref } from '@vue/reactivity'
+import { getOne, getAll, signUp, signIn } from "@/lib/firestoreLib"
+
 export default {
     name: 'Detail',
     setup(){
-        let price = ref(5)
+        let ab = {
+            state: "in stock",
+            title: "",
+            image: "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/masque-tissu-pliant-logo.jpg",
+            description: "Anti projections",
+            price: "0,90 €"
+        }
+        // postData(ab)
+        let price = 5
         let nb = ref(1)
+        let total = ref(5)
 
         const updatePrice = ()=>{
-            
+            total.value = price * nb.value
         }
 
         return {
-            price,
+            total,
             nb,
             updatePrice
         }
     }
-
 }
+
 </script>
 
 <style scoped>
