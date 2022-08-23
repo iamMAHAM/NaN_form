@@ -1,7 +1,9 @@
 <template>
 	<nav class="navbar">
 		<div class="nav-start">
-		<img src="../assets/logo.png" alt="logo image" class="logo">
+			<router-link to="/">
+				<img src="../assets/logo.png" alt="logo image" class="logo">
+			</router-link>
 		</div>
 		<li class="nav-item">
 		<div class="search">
@@ -20,13 +22,18 @@
 				href="#"
 				class="item"
 				@click="showLogin"
+				v-if="!isLogged"
 			>
 			<i class="material-icons item">login</i>
 			Login
 			</a>
 		</li>
-		<li class="nav-item" v-if="isLogged">
-			<a href="#" class="item" v-if="isLogged">
+		<li
+			class="nav-item"
+			v-if="isLogged"
+			@click="logOut"
+		>
+			<a href="#" class="item">
 			<i class="material-icons item">logout</i>
 			Logout
 			</a>
@@ -37,7 +44,7 @@
 			Profile
 			</a>
 		</li>
-		<li class="nav-item">
+		<li class="nav-item" v-if="false">
 			<a href="#" class="item">
 			<i class="material-icons item">favorite</i>
 			Favorite
@@ -51,7 +58,11 @@
 			</a>
 		</li>
 		</div>
-		<LoginRegister v-if="modal" @close="closeModal" />
+		<LoginRegister
+			v-if="modal"
+			@close="closeModal"
+			@loggedIn="loggedIn"
+		/>
 	</nav>
 </template>
 
@@ -65,9 +76,12 @@ export default {
 	},
 
 	setup(){
+
 		let modal = ref(false)
 		let isLogged = ref(false)
 		
+		let user = localStorage.getItem("user")
+
 		const showLogin = ()=>{
 			modal.value = true
 		}
@@ -81,11 +95,28 @@ export default {
 			
 		}
 
+		const logOut = ()=>{
+			localStorage.removeItem("user")
+			isLogged.value = false
+		}
+
+		const loggedIn = (user)=>{
+			isLogged.value = true
+			closeModal()
+		}
+
+		if (user){
+			user = JSON.parse(user)
+			loggedIn()
+		}
+
 		return { 
 			modal,
 			isLogged,
 			showLogin,
 			closeModal,
+			loggedIn,
+			logOut
 		}
 	}
 
