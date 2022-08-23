@@ -18,7 +18,12 @@
                 </div>
             </div> -->
         <div class="cart-item" v-for="cart in cartItems" :id="cart.id" :key="cart.id">
-            <i class="material-icons delete">delete</i>
+            <i
+                class="material-icons delete"
+                :onclick="unSaveDoc"
+            >
+                delete
+            </i>
             <img class="item-image" :src=cart.image>
             <div class="infos">
                 <span class="green">{{ cart.title }}</span>
