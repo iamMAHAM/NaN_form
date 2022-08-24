@@ -1,6 +1,6 @@
 <template>
 	<img src="../assets/loading.gif" v-if="isLoading" class="loading" />
-    <div class="detail" v-if="!isLoading" :id="data.id">
+    <div class="detail" v-if="!isLoading" :id="data.id" ref="product">
         <div class="left">
           <img :src="data.image" class="img">
         </div>
@@ -41,12 +41,15 @@
                 max="10"
                 id="number"
                 step="1"
-                v-model="nb"
-                :onchange="updatePrice"
+                v-model="amount"
                 >
             </div>
             <span class="rt-price">{{ data.price }} FCFA</span>
-            <button>add to cart</button>
+            <button
+				:onclick="addToCart"
+			>
+				add to cart
+			</button>
           </div>
         </div>
     </div>
@@ -54,7 +57,7 @@
 
 <script>
 import { ref } from '@vue/reactivity'
-import { getOne } from '@/lib/firestoreLib'
+import { getOne, saveDoc } from '@/lib/firestoreLib'
 
 export default {
     name: 'Detail',
@@ -62,12 +65,23 @@ export default {
 		return {
 			data: {
 			},
-			isLoading: true
+			isLoading: true,
+			amount: 1,
 		}
 	},
 	methods:{
-		addToCart(e){
-			
+		addToCart(){
+			const user = JSON.parse(localStorage.getItem("user"))
+			if (!user){
+				// display login bar
+				return
+			}
+			console.log(user)
+			this.data.amount = this.amount
+			saveDoc(`users/${user.id}/cart`, this.data, (res)=>{
+				console.log("saved successfully")
+				this.$emit("newAdd")
+			})
 		}
 	},
 
@@ -79,30 +93,7 @@ export default {
 			this.data = data
 			this.isLoading = false
 		})
-	},
-    setup(){
-        let ab = {
-            state: "in stock",
-            title: "",
-            image: "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/masque-tissu-pliant-logo.jpg",
-            description: "Anti projections",
-            price: "0,90 €"
-        }
-        // postData(ab)
-        let price = 5
-        let nb = ref(1)
-        let total = ref(5)
-
-        const updatePrice = ()=>{
-            total.value = price * nb.value
-        }
-
-        return {
-            total,
-            nb,
-            updatePrice
-        }
-    }
+	}
 }
 
 </script>
