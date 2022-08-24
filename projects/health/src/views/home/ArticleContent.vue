@@ -30,7 +30,7 @@ export default {
 		}
 	},
 	mounted(){
-		getAll("data/Ho21xA8W3774097vSXhU/home", (result)=>{
+		getAll(`data/Ho21xA8W3774097vSXhU/${this.$route.params.route}`, (result)=>{
 			this.cards = result
 			this.isLoading = false
 		})
