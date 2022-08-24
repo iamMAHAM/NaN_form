@@ -5,18 +5,34 @@
     <router-link to="/contact">About</router-link>
     <router-link to="/contact">Contact</router-link>
   </nav> -->
-    <NavBar />
+    <NavBar :cart="cart"/>
     <router-view :key="$route.fullPath"/>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue'
+import { getAll } from './lib/firestoreLib'
 
 export default{
     name:'App',
     components: {
         NavBar
-    }
+    },
+	data(){
+		return {
+			cart: 0
+		}
+	},
+	updated(){
+		const user = JSON.parse(localStorage.getItem("user"))
+		console.log(user)
+		if (user){
+			getAll(`users/${user.id}/cart`, (res)=>{
+				console.log("res", res)
+				this.cart = res.length
+			})
+		}
+	}
 }
 
 </script>
