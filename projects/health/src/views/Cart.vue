@@ -3,6 +3,15 @@
 	<img src="../assets/loading.gif" v-if="loaded" class="loading">
     <div class="cart" v-if="!loaded">
         <div class="cart-items" ref="cardItems">
+			<div class="empty-cart" v-if="!loaded && !cartItems.length">
+				<span class="material-icons">production_quantity_limits</span>
+				<p>Panier vide :(</p>
+				<button
+					:onclick="()=>{$router.push('/')}"
+				>
+					Commencez vos Achats
+				</button>
+			</div>
 			<div class="cart-item" v-for="cart in cartItems" :id="cart.id" :key="cart.id">
 				<i
 					class="material-icons delete"
@@ -178,5 +187,24 @@ export default {
 		top: 20%;
 		left: 50%;
 		transform: translateX(-50%);
+	}
+
+	.empty-cart{
+		font-size: 2.2rem;
+		text-align: center;
+	}
+
+	.empty-cart .material-icons{
+		color: var(--black);
+		font-size: 10rem;
+	}
+
+	.empty-cart button{
+		margin: 2rem;
+		cursor: pointer;
+		border-radius: .5rem;
+		color: var(--white);
+		background-color: var(--black);
+		padding: 1rem;
 	}
 </style>
