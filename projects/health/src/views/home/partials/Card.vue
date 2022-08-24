@@ -1,18 +1,20 @@
 <template>
-	<div class="card">
+	<div to="/detail" class="card" :id="card.id" v-if="card.image">
 		<div class="card-top">
 			<i class="material-icons pointer" style="color: var(--green);">check_circle</i>
 			<i class="material-icons pointer favorite">favorite</i>
 		</div>
 		<div class="card-main">
-			<img src="../../../assets/med.png" alt="medoc image" class="card-images" />
+			<router-link to="/detail" class="router">
+				<img :src="card.image" alt="medoc image" class="card-images" />
+			</router-link>
 			<div class="card-description">
-				<p class="medoc-title">doliprane</p>
-				<small class="medoc-desc">Lorem ipsum dolor sit, amet consectetur adipisicing</small>
+				<p class="medoc-title">{{ card.title }}</p>
+				<small class="medoc-desc">{{ card.description }}</small>
 			</div>
 		</div>
 		<div class="pricing">
-			<p class="price">9.99 €</p>
+			<p class="price">{{ card.price }} FCFA</p>
 			<i class="material-icons pointer">add_shopping_cart</i>
 		</div>
 	</div>
@@ -20,20 +22,21 @@
 
 <script>
 export default {
+	props: ['card']
 
 }
 </script>
 
 <style>
-	div.card{
+	.card{
 		overflow: hidden;
 		border-radius: .5rem;
 		text-align: center;
 		border: .5px solid black;
 		position: relative;
 		height: 27rem;
-		margin: auto;
-		width: 30rem;
+		margin: 1rem auto;
+		width: 18%;
 		flex-direction: column;
 	}
 
@@ -59,13 +62,19 @@ export default {
 		color: red;
 	}
 
-	img.card-images{
+	.card-images{
+		display: block;
+		margin: 0 auto;
 		width: 70%;
-		height: calc(100% - 5rem);
+		height: 15rem;
 	}
 
 	.medoc-title{
 		font-size: 2.3rem;
+	}
+
+	div.card-description{
+		color: var(--black);
 	}
 
 	div.pricing{
@@ -77,6 +86,12 @@ export default {
 		background-color: var(--black);
 		justify-content: center;
 		color: var(--white);
+	}
+
+	.router{
+		position: relative;
+		display: block;
+		height: calc(100% - 5rem);
 	}
 
 	.pointer{

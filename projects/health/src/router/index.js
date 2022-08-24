@@ -6,6 +6,12 @@ import Cart from "@/views/Cart.vue"
 const routes = [
   {
     path: '/',
+    name: 'root',
+    // alias: '/home',
+	redirect: '/home'
+  },
+  {
+    path: '/home',
     name: 'home',
     component: Home
   },
@@ -20,7 +26,7 @@ const routes = [
   },
   {
     path: '/detail',
-    name: 'Detail',
+    name: 'detail',
 	  component: Detail
   }
 ]

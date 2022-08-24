@@ -57,6 +57,11 @@ import { getOne, getAll, signUp, signIn } from "@/lib/firestoreLib"
 
 export default {
     name: 'Detail',
+	methods:{
+		addToCart(e){
+			
+		}
+	},
     setup(){
         let ab = {
             state: "in stock",

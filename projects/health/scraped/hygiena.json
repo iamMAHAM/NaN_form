@@ -1,0 +1,436 @@
+[
+  {
+    "state": "stock",
+    "title": "Bioderma",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/62696f6465726d612d6e6f64652d612d7368616d706f6f696e672d6170616973616e742d3430306d6c2d66616365cf1467db.jpg",
+    "description": "Cuirs chevelus sensibles et irrités",
+    "price": 6418.23
+  },
+  {
+    "state": "stock",
+    "title": "Bioderma",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/62696f6465726d612d6e6f64652d64732d7368616d706f6f696e672d616e746970656c6c6963756c616972652d3132356d6c2d6661636553c1d5c5.jpg",
+    "description": "Etats pelliculaires sévères, démangeaisons",
+    "price": 7532.73
+  },
+  {
+    "state": "stock",
+    "title": "Bioderma",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/62696f6465726d612d6e6f64652d702d7368616d706f6f696e672d616e746970656c6c6963756c616972652d6170616973616e742d3430306d6c2d6661636552709254.jpg",
+    "description": "Cuirs chevelus sensibles et fragilisés",
+    "price": 6287.11
+  },
+  {
+    "state": "stock",
+    "title": "Bioderma",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/62696f6465726d612d6e6f64652d6b2d7368616d706f6f696e672d6b657261746f2d7265647563746575722d3135306d6c2d666163655eda0384.jpg",
+    "description": "États squameux en plaques",
+    "price": 7572.06
+  },
+  {
+    "state": "stock",
+    "title": "Bioderma",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/62696f6465726d612d6e6f64652d7368616d706f6f696e672d666c756964652d6e6f6e2d646574657267656e742d3230306d6c2d6661636561e13fb3.jpg",
+    "description": "Tous types de cheveux",
+    "price": 4025.32
+  },
+  {
+    "state": "stock",
+    "title": "Bioderma",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/62696f6465726d612d6e6f64652d672d7368616d706f6f696e672d707572696669616e742d3430306d6c2d66616365633ae0bb.jpg",
+    "description": "Cheveux à tendance grasse",
+    "price": 6431.34
+  },
+  {
+    "state": "stock",
+    "title": "Bioderma",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/bioderma-node-k-concentre-kerato-reducteur-100-ml-face.jpg",
+    "description": "Etats squameux en plaques",
+    "price": 7867.08
+  },
+  {
+    "state": "stock",
+    "title": "Bioderma",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/62696f6465726d612d6e6f64652d702d616e746970656c6c6963756c616972652d6e6f726d616c6973616e742d7368616d706f6f696e672d3430306d6c2d66616365f9a6b01d.jpg",
+    "description": "Tous types de cheveux",
+    "price": 6287.11
+  },
+  {
+    "state": "stock",
+    "title": "Bioderma",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/62696f6465726d612d6e6f64652d702d7368616d706f6f696e672d616e746970656c6c6963756c616972652d707572696669616e742d3430306d6c2d66616365be1c4ce4.jpg",
+    "description": "Cheveux à tendance grasse",
+    "price": 6287.11
+  },
+  {
+    "state": "stock",
+    "title": "Eucerin",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6575636572696e2d6465726d6f2d707572652d676f6d6d6167652d3130306d6c2d6661636546ec4de8.jpg",
+    "description": "Peaux à imperfections",
+    "price": 6516.56
+  },
+  {
+    "state": "stock",
+    "title": "Eucerin",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6575636572696e2d6465726d6f707572652d736572756d2d747269706c652d616374696f6e2d34306d6c2d666163654efb0dca.jpg",
+    "description": "Soin  anti-marques, anti-imperfections et anti-brillance - Post-acné",
+    "price": 8791.46
+  },
+  {
+    "state": "stock",
+    "title": "Eucerin",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6575636572696e2d6465726d6f707572652d67656c2d6e6574746f79616e742d3430306d6c2d666163659579c53e.jpg",
+    "description": "Peaux à imperfections",
+    "price": 8116.2
+  },
+  {
+    "state": "stock",
+    "title": "Eucerin",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6575636572696e2d6465726d6f707572652d68796472612d6372656d652d636f6d70656e736174726963652d6170616973616e74652d666163652d5b3bf8.jpg",
+    "description": "Complément des traitements desséchants",
+    "price": 8647.23
+  },
+  {
+    "state": "stock",
+    "title": "Eucerin",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6575636572696e2d6465726d6f707572652d736f696e2d72656e6f7661746575722d637574616e652d33306d6c2d666163658d00162f.jpg",
+    "description": "Exfoliant, désobstrue les pores, astringent",
+    "price": 8791.46
+  },
+  {
+    "state": "stock",
+    "title": "Eucerin",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6575636572696e2d6465726d6f707572652d6d61742d666c756964652d6d6174696669616e742d6661636548be2642.jpg",
+    "description": "Réduit les imperfections - Anti-brillance 8h",
+    "price": 8647.23
+  },
+  {
+    "state": "stock",
+    "title": "René Furterer",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/66757274657265722d6b61726974652d7368616d706f6f696e672d6e7574726974696f6e2d696e74656e73652d35306d6c2d66616365d3515aa0.jpg",
+    "description": "Cheveux très secs & cuir chevelu très sec",
+    "price": 2150.34
+  },
+  {
+    "state": "stock",
+    "title": "René Furterer",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/66757274657265722d6b61726974652d6372656d652d64652d6a6f75722d636865766575782d747265732d736563732d3130306d6c2d66616365c3913c8a.jpg",
+    "description": "Cheveux très secs",
+    "price": 10194.42
+  },
+  {
+    "state": "stock",
+    "title": "René Furterer",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/66757274657265722d6b61726974652d7368616d706f6f696e672d6879647261746174696f6e2d6272696c6c616e63652d35306d6c2d66616365744b2b8f.jpg",
+    "description": "Cheveux secs",
+    "price": 2150.34
+  },
+  {
+    "state": "stock",
+    "title": "René Furterer",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/66757274657265722d6b61726974652d6372656d652d64652d6a6f75722d636865766575782d736563732d3130306d6c2d66616365fc52912e.jpg",
+    "description": "Soin nutritif pour cheveux secs et fragilisés",
+    "price": 10194.42
+  },
+  {
+    "state": "stock",
+    "title": "René Furterer",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/66757274657265722d6b61726974652d6d61737175652d6e7574726974696f6e2d696e74656e73652d3130306d6c2d66616365676c9c1e.jpg",
+    "description": "Gaine et répare - Protège les cheveux",
+    "price": 11092.58
+  },
+  {
+    "state": "stock",
+    "title": "René Furterer",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/furterer-karite-huile-nutri-100-ml.jpg",
+    "description": "Cheveux très secs",
+    "price": 16474.98
+  },
+  {
+    "state": "stock",
+    "title": "René Furterer",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/66757274657265722d6b61726974652d6d61737175652d687964726174616e742d6272696c6c616e63652d636865766575782d736563732d3130306d6c2d66616365cc7bc3e4.jpg",
+    "description": "Cheveux secs",
+    "price": 11092.58
+  },
+  {
+    "state": "stock",
+    "title": "René Furterer",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/66757274657265722d6b61726974652d6e7569742d636170696c6c616972652d736f696e2d64652d6e7569742d6e7574726974696f6e2d696e74656e73652d37356d6c2d666163658917dbb3.jpg",
+    "description": "Cheveux très secs",
+    "price": 13452.71
+  },
+  {
+    "state": "stock",
+    "title": "Dr Hauschka",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/64722d6861757363686b612d6372656d652d707572696669616e74652d706f75722d6c652d7669736167652d35306d6c2d666163657f209e92.jpg",
+    "description": "Soin nettoyant - Affine le grain de peau et éclaircit le teint",
+    "price": 10528.78
+  },
+  {
+    "state": "stock",
+    "title": "Dr Hauschka",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/64722d6861757363686b612d7368616d706f6f696e672d3135306d6c2d66616365f5f3b3a8.jpg",
+    "description": "Nettoie et prend soin des cheveux et du cuir chevelu",
+    "price": 12370.98
+  },
+  {
+    "state": "stock",
+    "title": "Dr Hauschka",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/dr-hauschka-creme-de-jour-a-la-rose-30-ml-face.jpg",
+    "description": "Soin nourrissant riche - Peau sèche, peau sensible",
+    "price": 18710.54
+  },
+  {
+    "state": "stock",
+    "title": "Dr Hauschka",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/dr-hauschka-creme-de-jour-legere-a-la-rose-30-ml-face.jpg",
+    "description": "Soin hydratant et adoucissant",
+    "price": 18710.54
+  },
+  {
+    "state": "stock",
+    "title": "Dr Hauschka",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/dr-hauschka-creme-de-a-la-melisse-30-ml-face.jpg",
+    "description": "Soin matifiant pour le visage",
+    "price": 17832.05
+  },
+  {
+    "state": "stock",
+    "title": "Dr Hauschka",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/64722d6861757363686b612d6875696c652d706f75722d6c65732d636865766575782d37356d6c2d66616365083bf584.jpg",
+    "description": "Sublime, nourrit les cheveux abîmés - Apaise le cuir chevelu",
+    "price": 12685.67
+  },
+  {
+    "state": "stock",
+    "title": "Dr Hauschka",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/dr-hauschka-deodorant-sauge-menthe-50-ml-face.jpg",
+    "description": "Soin rafraichissant, longue durée",
+    "price": 9833.85
+  },
+  {
+    "state": "stock",
+    "title": "Dr Hauschka",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/64722d6861757363686b612d6d61737175652d6372656d652d6e6f757272697373616e742d33306d6c2d66616365d8c521eb.jpg",
+    "description": "Soin hydratant intensif - Peaux sèches",
+    "price": 30196.48
+  },
+  {
+    "state": "stock",
+    "title": "Dr Hauschka",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/dr-hauschka-huile-de-soin-bouleau-arnica-75-ml-face.jpg",
+    "description": "Soin vivifiant après l'exercice ou le sport",
+    "price": 12239.87
+  },
+  {
+    "state": "stock",
+    "title": "Rogé Cavaillès",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/726f67652d63617661696c6c65732d6372656d652d687964726174616e742d3335306d6c2d666163657c5e860d.jpg",
+    "description": "Nourrit la peau pour plus de douceur",
+    "price": 7336.05
+  },
+  {
+    "state": "stock",
+    "title": "Rogé Cavaillès",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/726f67652d63617661696c6c65732d6c6169742d636f7270732d6e6f757272697373616e742d3430306d6c2d6661636513ba00ce.jpg",
+    "description": "Nourrit en profondeur - Protège du dessèchement",
+    "price": 7316.38
+  },
+  {
+    "state": "stock",
+    "title": "Rogé Cavaillès",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/726f67652d63617661696c6c65732d6261756d652d726570617261746575722d636f7270732d3430306d6c2d666163659b7353be.jpg",
+    "description": "Relipide et protège - Peaux très sèches",
+    "price": 8306.33
+  },
+  {
+    "state": "stock",
+    "title": "Krème",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6b72656d652d687964726174616e74652d766974616d696e65652d62696f2d66616365210b9075.jpg",
+    "description": "Soin quotidien hydratant et revitalisant",
+    "price": 15353.92
+  },
+  {
+    "state": "stock",
+    "title": "Krème",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6b72656d652d6372656d652d6e6574746f79616e74652d736f6c6964652d7669736167652d62696f2d66616365b3f7e3bf.jpg",
+    "description": "Nettoyant solide sans savon enrichi en probiotique au pH neutre",
+    "price": 10233.76
+  },
+  {
+    "state": "stock",
+    "title": "Krème",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6b72656d652d6261756d652d612d6c65767265732d6e6f6973657474652d62696f2d66616365afd6e090.jpg",
+    "description": "Baume réparateur au beurre de noisette et probiotiques",
+    "price": 8961.92
+  },
+  {
+    "state": "stock",
+    "title": "Krème",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6b72656d652d6875696c652d736f732d657175696c696272616e74652d62696f2d66616365510a72a1.jpg",
+    "description": "Assouplit, apaise et nourrit - Tous types de peau",
+    "price": 18553.2
+  },
+  {
+    "state": "stock",
+    "title": "Krème",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6b72656d652d67656c65652d667261696368652d6e6574746f79616e74652d3135306d6c2d666163658de901be.jpg",
+    "description": "Complexe probiotique, thym et spiruline - Tous types de peau",
+    "price": 12154.64
+  },
+  {
+    "state": "stock",
+    "title": "Krème",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6b72656d652d7061696e2d6c6176616e742d636f7270732d6661636509d42329.jpg",
+    "description": "Pain dermatologique ultra doux - Tous types de peau",
+    "price": 6083.88
+  },
+  {
+    "state": "stock",
+    "title": "Krème",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6b72656d652d6578666f6c69616e742d7669736167652d65636c61742d62696f2d36306d6c2d66616365d15d3b98.jpg",
+    "description": "Gommage pour l'éclat du teint - Bio et vegan",
+    "price": 14082.07
+  },
+  {
+    "state": "stock",
+    "title": "Ducray",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6475637261792d6b657261636e796c2d67656c2d6d6f757373616e742d3230306d6c2d6661636568636087.jpg",
+    "description": "Pour peaux à tendance acnéique",
+    "price": 3867.98
+  },
+  {
+    "state": "stock",
+    "title": "Avène",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6176656e652d67656c2d646f756368652d646f75636575722d3130306d6c2d66616365ccbb34fb.jpg",
+    "description": "Toilette des peaux délicates",
+    "price": 2386.35
+  },
+  {
+    "state": "stock",
+    "title": "Vichy",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/76696368792d6361706974616c2d736f6c65696c2d73706635302d6372656d652d6f6e637475657573652d35306d6c2d666163650da91778.jpg",
+    "description": "Peaux normales à sèches",
+    "price": 6798.47
+  },
+  {
+    "state": "stock",
+    "title": "Krème",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6b72656d652d687964726174616e74652d766974616d696e65652d62696f2d66616365210b9075.jpg",
+    "description": "Soin quotidien hydratant et revitalisant",
+    "price": 15353.92
+  },
+  {
+    "state": "stock",
+    "title": "Rogé Cavaillès",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/726f67652d63617661696c6c65732d6875696c652d64652d646f756368652d736174696e616e74652d617267616e2d62696f2d70656175782d73656e7369626c65732d3235306d6c2d6661636581ceff8d.jpg",
+    "description": "Nettoie et nourrit intensément les peaux sensibles",
+    "price": 4877.59
+  },
+  {
+    "state": "stock",
+    "title": "SVR",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/7376722d746f7069616c7973652d67656c2d6c6176616e742d316c2d72656368617267652d666163657bd09abb.jpg",
+    "description": "Gel douche apaisant - Anti-dessèchement 24h",
+    "price": 1822.54
+  },
+  {
+    "state": "stock",
+    "title": "Ricqlès",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/726963716c65732d6d656e7468652d666f7274652d70617374696c6c65732d66616365d31759d4.jpg",
+    "description": "Fraîcheur intense",
+    "price": 2996.05
+  },
+  {
+    "state": "stock",
+    "title": "Weleda",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/77656c6564612d6372656d652d6d61696e732d65742d6f6e676c65732d6e6f757272697373616e74652d636974726f6e2d666163659504b107.jpg",
+    "description": "Mains & Ongles",
+    "price": 4156.44
+  },
+  {
+    "state": "stock",
+    "title": "Rapid White",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/72617069642d77686974652d6c756d696572652d626c6575652d73797374656d652d626c616e6368696d656e742d64656e742d66616365fca86569.jpg",
+    "description": "Jusqu'à 12 teintes plus blanches en 2 semaines",
+    "price": 31796.12
+  },
+  {
+    "state": "stock",
+    "title": "Klorane",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6b6c6f72616e652d6272756d652d6d656e7468652d33306d6c2d66616365b7fb6a18.jpg",
+    "description": "Purifie et Neutralise les odeurs des cheveux exposés",
+    "price": 8162.1
+  },
+  {
+    "state": "stock",
+    "title": "Avène",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6176656e652d636c65616e616e63652d636f6d65646f6d65642d636f6e63656e7472652d616e74692d696d70657266656374696f6e732d33306d6c2d666163654e239643.jpg",
+    "description": "Concentré anti-imperfections",
+    "price": 9060.25
+  },
+  {
+    "state": "stock",
+    "title": "Avène",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6176656e652d6561752d746865726d616c652d35306d6c2d66616365f137fab9.jpg",
+    "description": "Peaux sensibles",
+    "price": 2360.12
+  },
+  {
+    "state": "stock",
+    "title": "GDD",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/706861726d616764642d767261692d636f6c642d637265616d2d7669736167652d65742d636f7270732d616d616e64652d646f7563652d3132306d6c2d6661636551a03561.jpg",
+    "description": "Répare et protège grâce à l'huile d'amande douce",
+    "price": 7204.93
+  },
+  {
+    "state": "stock",
+    "title": "Parodontax",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/67736b2d7061726f646f6e7461782d6f726967696e616c2d64656e746966726963652d37356d6c2d66616365a1966846.jpg",
+    "description": "Contre le saignement occasionnel gingival dès 12 ans",
+    "price": 3527.07
+  },
+  {
+    "state": "stock",
+    "title": "Saugella",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/mylan-saugella-antiseptique-naturel-soin-lavant-intime-250ml-face.jpg",
+    "description": "Antiseptique naturel à base de sauge et de thym",
+    "price": 4097.44
+  },
+  {
+    "state": "stock",
+    "title": "Hydralin",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/bayer-hydralin-gyn-gel-lavant-calmant-irritation-face.jpg",
+    "description": "Calme et préserve l'équilibre intime",
+    "price": 3946.65
+  },
+  {
+    "state": "stock",
+    "title": "Avène",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/avene-cleanance-gel-200ml-fcae3d79c684.jpg",
+    "description": "Gel moussant purifiant et matifiant",
+    "price": 5048.04
+  },
+  {
+    "state": "stock",
+    "title": "Avène",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6176656e652d636963616c666174652d6372656d652d72657061726174726963652d69736f6c616e74652d3130306d6c2d666163655649a292.jpg",
+    "description": "Crème réparatrice isolante - Mains très sèches et irritées",
+    "price": 6372.33
+  },
+  {
+    "state": "stock",
+    "title": "Cooper",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/cooper-etiaxil-detranspirant-traitement-transpiration-excessive-roll-on-peaux-sensibles-face.jpg",
+    "description": "Traitement de la transpiration excessive - Sans parfum",
+    "price": 5887.2
+  },
+  {
+    "state": "stock",
+    "title": "Ducray",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6475637261792d6b656c75616c2d64732d65746174732d70656c6c6963756c61697265732d736576657265732d3130306d6c2d66616365db9492fb.jpg",
+    "description": "Shampoing pour états pelliculaires sévères avec démangeaisons",
+    "price": 7342.61
+  }
+]

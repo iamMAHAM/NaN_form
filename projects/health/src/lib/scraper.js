@@ -12,28 +12,26 @@ price: div.querySelector(".listing-price span").textContent
 
 */
 const scraper = (
-    url="http://google.com",
-    selector,
-    state="",
-    title="",
-    image="",
-    description="",
-    price="",
+    url="https://www.pharma-gdd.com/fr/medicaments"
     )=>{
         axios.get(url).then((res)=>{
             const { document } = new JSDOM(res.data).window
-            document.querySelectorAll(selector).map(div=>{
-                    cardInfos.push({
-                        state: state ? state : '' ,
-                        title: title ? title : '',
-                        image: image,
-                        description: description,
-                        price: price
-                    })
-                })
-                fs.writeFile("data.json", JSON.stringify(cardInfos, null, space=4), (err)=>{
-                    err ? console.log(err) : console.log("write done !")
-                })
+            Array.from(document.querySelectorAll(".product")).map(div=>{
+				const price = parseFloat((parseFloat(div.querySelector(".listing-price span").textContent.replace("&nbsp;€").replace(",", ".")) * 655.59).toFixed(2))
+				cardInfos.push({
+					state: 'stock',
+					title: div.querySelector(".product-brand") ? div.querySelector(".product-brand").textContent : 'product',
+					image: div.querySelector(".thumbnail img").getAttribute("data-src"),
+					description: div.querySelector(".product-subtitle").textContent,
+					price: price ? price :
+						parseFloat((parseFloat(div.querySelector(".listing-price:nth-child(2)").textContent.replace("&nbsp;€").replace(",", ".").replace("A partir de", '')) * 655.59).toFixed(2))
+				})
+			})
+			fs.writeFile("drugs.json", JSON.stringify(cardInfos, null, space=2), (err)=>{
+				err ? console.log(err) : console.log("write done !")
+			})
             })
 }
+
+scraper()
 

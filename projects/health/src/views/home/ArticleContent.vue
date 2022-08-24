@@ -1,11 +1,19 @@
 <template>
   <div class="article-content">
 	<Banner />
-	<Card />
+	<img src="../../assets/loading.gif" v-if="isLoading" class="loading">
+	<div class="cards" v-if="!isLoading">
+		<Card
+			v-for="card in cards"
+			:key="card.id"
+			:card="card"
+		/>
+	</div>
   </div>
 </template>
 
 <script>
+import { getAll } from '@/lib/firestoreLib';
 import Banner from './partials/Banner.vue';
 import Card from './partials/Card.vue';
 
@@ -14,10 +22,33 @@ export default {
 	components: {
 		Banner,
 		Card
+	},
+	data(){
+		return {
+			cards: [],
+			isLoading: true
+		}
+	},
+	mounted(){
+		getAll("data/Ho21xA8W3774097vSXhU/home", (result)=>{
+			this.cards = result
+			this.isLoading = false
+		})
 	}
 }
 </script>
 
-<style>
+<style scoped>
+	.cards{
+		margin: auto;
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+	}
 
+	.loading{
+		margin: auto;
+		width: 20rem;
+		border-radius: 1rem;
+	}
 </style>

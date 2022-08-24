@@ -41,6 +41,7 @@ export const saveDocs = (collect="", docs=[])=>{
 
 export const unSaveDoc = async (collect="", doct)=>{
     await deleteDoc(doc(db, collect, doct))
+	console.log("doc with", doct, "deleted")
 }
 
 export const signUp = (data, callback)=>{

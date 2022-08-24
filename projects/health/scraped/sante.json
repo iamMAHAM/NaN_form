@@ -1,0 +1,149 @@
+[
+  {
+    "state": "stock",
+    "title": "Euphytose",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6575706879746f73652d7a656e2d33302d636f6d7072696d65732d66616365e6c36979.jpg",
+    "description": "Résistance au stress - Sans dépendance ni accoutumance",
+    "price": 5552.85
+  },
+  {
+    "state": "stock",
+    "title": "Pileje",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/pileje-formag-magnesium-marin-90-comprimes-face.jpg",
+    "description": "Magnésium, vitamine B6 et taurine",
+    "price": 12449.65
+  },
+  {
+    "state": "stock",
+    "title": "Naturactive",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/naturactive-urisanol-gelules-cranberry-30-gelules.jpg",
+    "description": "Inconfort urinaire",
+    "price": 7211.49
+  },
+  {
+    "state": "stock",
+    "title": "Nutrisanté",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/766974612d726f79616c2d67656c65652d726f79616c652d666f7274696669616e742d62696f2d313830302d6d672d31302d616d706f756c65732d666163655935e9cb.jpg",
+    "description": "Gelée royale haute concentration",
+    "price": 3861.43
+  },
+  {
+    "state": "stock",
+    "title": "Naturactive",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/naturactive-sticks-cranberry-x28-face.jpg",
+    "description": "Prévention des infections urinaires",
+    "price": 7716.29
+  },
+  {
+    "state": "stock",
+    "title": "Intimy",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/696e74696d792d70686f7370686f2d372d7072657365727661746966732d66616365f687b797.jpg",
+    "description": "Brillez de mille feux !",
+    "price": 4038.43
+  },
+  {
+    "state": "stock",
+    "title": "DulcoSoft",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/73616e6f66692d64756c636f2d736f66742d62616c6c6f6e6e656d656e74732d6d656e7468652d706f69767265652d31382d736163686574732d6661636525b2de29.jpg",
+    "description": "Elimine les gaz intestinaux dès 6 ans",
+    "price": 4871.03
+  },
+  {
+    "state": "stock",
+    "title": "product",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/67656c6f766f782d32302d70617374696c6c65732d6661636509f7b67e.jpg",
+    "description": "Soulage les enrouements et extinctions de voix - Dès 6 ans",
+    "price": 4451.46
+  },
+  {
+    "state": "stock",
+    "title": "Berocca",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/62617965722d6265726f6363612d696d6d756e6974652d646566656e73652d327832382d67656c756c65732d666163651520fdc0.jpg",
+    "description": "Formule unique pour préserver les défenses naturelles - Dès 15 ans",
+    "price": 8299.77
+  },
+  {
+    "state": "stock",
+    "title": "Arkopharma",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/61726b6f706861726d612d616c6f652d766572612d73616e74652d67617374726f2d696e74657374696e616c652d333067656c756c65732d666163656a474a98.jpg",
+    "description": "Santé gastro-intestinale - Dès 12 ans",
+    "price": 5093.93
+  },
+  {
+    "state": "stock",
+    "title": "Cooper",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/636f6f7065722d61726e6963616e2d6d6173736167652d6362642d6372656d652d64652d6d6173736167652d6661636578dd15e8.jpg",
+    "description": "Apaisant et relaxant - Adulte",
+    "price": 9807.63
+  },
+  {
+    "state": "stock",
+    "title": "Avène",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6176656e652d636963616c666174652d6372656d652d72657061726174726963652d70726f74656374726963652d34306d6c2d666163652023a8d4.jpg",
+    "description": "Peaux sensibles et irritées",
+    "price": 5008.71
+  },
+  {
+    "state": "stock",
+    "title": "Novanuit",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/73616e6f66692d6e6f76616e7569742d747269706c652d616374696f6e2d33302d636f6d7072696d65732d666163652a30d454.jpg",
+    "description": "Favorise le sommeil sans dépendance : mélatonine 1 mg et plantes",
+    "price": 6529.68
+  },
+  {
+    "state": "stock",
+    "title": "Symbiosys",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/73796d62696f7379732d616c666c6f7265782d333067656c756c65732d6661636581d72f44.jpg",
+    "description": "Syndrome de l'intestin irritable",
+    "price": 15668.6
+  },
+  {
+    "state": "stock",
+    "title": "Euphytose",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/bayer-euphytose-nuit-30-comprimes-endormissement-face.jpg",
+    "description": "Mélatonine 1 mg et passiflore - Sommeil",
+    "price": 7867.08
+  },
+  {
+    "state": "stock",
+    "title": "Pileje",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/pileje-lactibiane-reference-10-gelules.jpg",
+    "description": "Renforce la flore intestinale",
+    "price": 5933.09
+  },
+  {
+    "state": "stock",
+    "title": "Arkopharma",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/61726b6f706861726d612d617a696e632d766974616c6974652d36302d67656c756c65732d66616365f0f744b3.jpg",
+    "description": "Vitamines et minéraux - Dès 15 ans",
+    "price": 4149.88
+  },
+  {
+    "state": "stock",
+    "title": "Biosynex",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/62696f73796e65782d6175746f746573742d696e66656374696f6e732d766167696e616c65732d78332d66616365284dc0d6.jpg",
+    "description": "Dépistage de vaginoses ou mycoses en fonction du pH vaginal",
+    "price": 4340.01
+  },
+  {
+    "state": "stock",
+    "title": "Alvityl",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/616c766974796c2d6d656c612d736f6d6d65696c2d33302d67656c756c65732d66616365c5e54fd5.jpg",
+    "description": "1.85 mg de mélatonine - Réduit le temps d'endormissement",
+    "price": 4340.01
+  },
+  {
+    "state": "stock",
+    "title": "Biosynex",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/62696f73796e65782d6175746f746573742d696e66656374696f6e2d7572696e616972652d332d74657374732d66616365e3c8f073.jpg",
+    "description": "Détection des infections urinaires",
+    "price": 4156.44
+  },
+  {
+    "state": "stock",
+    "title": "Dexeryl",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/6465786572796c2d6372656d652d323030672d666163654da793d0.jpg",
+    "description": "Hydrate et répare la peau sèche ou atopique",
+    "price": 4018.77
+  }
+]

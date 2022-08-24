@@ -1,5 +1,6 @@
 <template>
-    <div class="loading" v-if="loaded">Loading ...</div>
+    <!-- <div class="loading" v-if="loaded">Loading ...</div> -->
+	<img src="../assets/loading.gif" v-if="loaded" class="loading">
     <div class="cart" v-if="!loaded">
         <div class="cart-items" ref="cardItems">
             <!-- <div class="cart-item" id="5.83">
@@ -18,9 +19,10 @@
                 </div>
             </div> -->
         <div class="cart-item" v-for="cart in cartItems" :id="cart.id" :key="cart.id">
+		
             <i
                 class="material-icons delete"
-                :onclick="unSaveDoc"
+                :onclick="removeToCart"
             >
                 delete
             </i>
@@ -32,6 +34,7 @@
                     type="number"
                     min="1"
                     max="10"
+					:value="cart.amount"
                     :onchange="updateTotal"
                 >
                 <p class="article-price"> <span>{{ cart.price }}</span> € * <span>{{ cart.amount }}</span></p>
@@ -67,7 +70,14 @@ export default {
             console.log(target.nextElementSibling.children[1].textContent)
             target.nextElementSibling.children[1].textContent = target.value
             this.update()
-        }
+        },
+		removeToCart(e){
+			const id = JSON.parse(localStorage.getItem("user")).id
+			const parent = e.target.parentElement
+			unSaveDoc(`users/${id}/cart`, parent.id)
+			parent.remove()
+			this.update()
+		}
     },
     data(){
         return {
@@ -88,7 +98,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     div.cart{
         position: relative;
         padding: 3rem;
@@ -177,4 +187,11 @@ export default {
     .green{
         color: var(--green)
     }
+
+	.loading{
+		position: absolute;
+		top: 20%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 </style>
