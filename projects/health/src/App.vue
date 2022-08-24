@@ -6,7 +6,7 @@
     <router-link to="/contact">Contact</router-link>
   </nav> -->
     <NavBar />
-    <router-view/>
+    <router-view :key="$route.fullPath"/>
 </template>
 
 <script>
