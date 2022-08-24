@@ -76,6 +76,9 @@ export default {
 	},
 	props: ["cart"]
 	,
+	mounted(){
+		console.log("navbar mounted")
+	},
 	setup(){
 
 		let modal = ref(false)
