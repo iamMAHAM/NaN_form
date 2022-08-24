@@ -54,7 +54,7 @@
 			<a href="#" class="item" style="position: relative;">
 			<i class="material-icons item">shopping_cart</i>
 			Cart
-			<span class="cart-article">0</span>
+			<span class="cart-article"> {{ cart }}</span>
 			</a>
 		</router-link>
 		</div>
@@ -74,7 +74,8 @@ export default {
 	components:{
 		LoginRegister
 	},
-
+	props: ["cart"]
+	,
 	setup(){
 
 		let modal = ref(false)
@@ -87,7 +88,6 @@ export default {
 		}
 
 		const closeModal = ()=>{
-			console.log("close event")
 			modal.value = false
 		}
 
