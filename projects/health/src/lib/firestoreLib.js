@@ -5,15 +5,10 @@ import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc } fro
 
 const auth = getAuth()
 
-export const getOne = async (collect="", id="")=>{
+export const getOne = async (collect="", id="", callback=null)=>{
     const docRef = doc(db, collect, id)
     const docSnap = await getDoc(docRef)
-
-    if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data())
-    } else {
-        console.log("No such document!")
-    }
+	return callback(docSnap.data())
 }
 
 export const getAll = async (collect, callback)=>{
