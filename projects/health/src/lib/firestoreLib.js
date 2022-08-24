@@ -8,7 +8,10 @@ const auth = getAuth()
 export const getOne = async (collect="", id="", callback=null)=>{
     const docRef = doc(db, collect, id)
     const docSnap = await getDoc(docRef)
-	return callback(docSnap.data())
+	let toPush = docSnap.data()
+	toPush.id = docSnap.id
+	console.log(toPush)
+	return callback(toPush)
 }
 
 export const getAll = async (collect, callback)=>{
@@ -22,8 +25,9 @@ export const getAll = async (collect, callback)=>{
     return callback(result)
 }
 
-export const saveDoc = async (collect="", doc)=>{
-    await addDoc(collection(db, collect), doc)
+export const saveDoc = async (collect="", doc, callback)=>{
+    const docRef = await addDoc(collection(db, collect), doc)
+	return callback(docRef.id)
 }
 
 export const saveDocs = (collect="", docs=[])=>{
