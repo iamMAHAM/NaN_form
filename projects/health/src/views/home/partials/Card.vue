@@ -1,11 +1,11 @@
 <template>
-	<div to="/detail/:id" class="card" :id="`${path}/${card.id}`" v-if="card.image">
+	<div class="card" :id="card.id" v-if="card.image">
 		<div class="card-top">
 			<i class="material-icons pointer" style="color: var(--green);">check_circle</i>
 			<i class="material-icons pointer favorite">favorite</i>
 		</div>
 		<div class="card-main">
-			<router-link to="/detail" class="router">
+			<router-link tag="div" :to="`detail/${path}/${card.id}`" class="router">
 				<img :src="card.image" alt="medoc image" class="card-images" />
 			</router-link>
 			<div class="card-description">
