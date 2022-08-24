@@ -59,8 +59,7 @@ export default {
 			const id = JSON.parse(localStorage.getItem("user")).id
 			const parent = e.target.parentElement
 			unSaveDoc(`users/${id}/cart`, parent.id)
-			parent.remove()
-			this.$emit("newDelete")
+			this.cartItems = this.cartItems.filter(c => c.id !== parent.id)
 			this.update()
 		}
     },
