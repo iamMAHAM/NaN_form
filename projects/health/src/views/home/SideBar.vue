@@ -1,34 +1,34 @@
 <template>
 	<div class="side-bar">
 		<div class="side-content">
-			<a href="#" class="side-row">
+			<router-link to="/drugs" class="side-row">
 				<i class="material-icons">medication</i>
 				<span class="side-content">Drugs</span>
-			</a>
-			<a href="#" class="side-row">
+			</router-link>
+			<router-link to="/healthy" class="side-row">
 				<i class="material-icons">health_and_safety</i>
 				<span class="side-content">Health</span>
-			</a>
-			<a href="#" class="side-row">
+			</router-link>
+			<router-link to="/beautyHi" class="side-row">
 				<i class="material-icons">spa</i>
 				<span class="side-content">Beauty and Hygiene</span>
-			</a>
-			<a href="#" class="side-row">
+			</router-link>
+			<router-link to="/babyP" class="side-row">
 				<i class="material-icons">pregnant_woman</i>
 				<span class="side-content">Baby and Pregnancy</span>
-			</a>
-			<a href="#" class="side-row">
+			</router-link>
+			<router-link to="/slimmingSport" class="side-row">
 				<i class="material-icons">sports_hockey</i>
 				<span class="side-content">Slimming and Sport</span>
-			</a>
-			<a href="#" class="side-row">
+			</router-link>
+			<router-link to="/veterinary" class="side-row">
 				<i class="material-icons">pets</i>
 				<span class="side-content">Veterinary</span>
-			</a>
-			<a href="#" class="side-row">
+			</router-link>
+			<router-link to="/medicalMaterials" class="side-row">
 				<i class="material-icons">medical_services</i>
 				<span class="side-content">Medical Materials</span>
-			</a>
+			</router-link>
 		</div>
 	</div>
 </template>
