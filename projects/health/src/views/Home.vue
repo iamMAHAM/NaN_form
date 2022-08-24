@@ -11,11 +11,11 @@ import ArticleContent from './home/ArticleContent.vue';
 // @ is an alias to /src
 
 export default {
-  name: 'Home',
-  components: {
-    SideBar,
-    ArticleContent
-}
+	name: 'Home',
+	components: {
+		SideBar,
+		ArticleContent
+	}
 }
 </script>
 
