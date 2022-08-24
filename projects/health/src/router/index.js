@@ -5,15 +5,14 @@ import Cart from "@/views/Cart.vue"
 
 const routes = [
   {
-    path: '/',
+    path: '/:route',
     name: 'root',
-    // alias: '/home',
-	redirect: '/home'
+	component: Home
   },
   {
-    path: '/home',
+    path: '/',
     name: 'home',
-    component: Home
+	redirect: '/home'
   },
   {
     path: '/cart',
