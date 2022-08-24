@@ -3,48 +3,32 @@
 	<img src="../assets/loading.gif" v-if="loaded" class="loading">
     <div class="cart" v-if="!loaded">
         <div class="cart-items" ref="cardItems">
-            <!-- <div class="cart-item" id="5.83">
-                 <i class="material-icons delete">delete</i>
-                <img class="item-image" src="../assets/med.png">
-                <div class="infos">
-                    <span class="green">DOLIPRANE</span>
-                    <small class="medoc-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</small>
-                    <input
-                        type="number"
-                        min="1"
-                        max="10"
-                        :onchange="updateTotal"
-                    >
-                    <p class="article-price"> <span>{{ price }}</span> € * <span>{{ nb }}</span></p>
-                </div>
-            </div> -->
-        <div class="cart-item" v-for="cart in cartItems" :id="cart.id" :key="cart.id">
-		
-            <i
-                class="material-icons delete"
-                :onclick="removeToCart"
-            >
-                delete
-            </i>
-            <img class="item-image" :src=cart.image>
-            <div class="infos">
-                <span class="green">{{ cart.title }}</span>
-                <small class="medoc-desc">{{ cart.description }}</small>
-                <input
-                    type="number"
-                    min="1"
-                    max="10"
-					:value="cart.amount"
-                    :onchange="updateTotal"
-                >
-                <p class="article-price"> <span>{{ cart.price }}</span> € * <span>{{ cart.amount }}</span></p>
-        </div>
-        </div>
+			<div class="cart-item" v-for="cart in cartItems" :id="cart.id" :key="cart.id">
+				<i
+					class="material-icons delete"
+					:onclick="removeToCart"
+				>
+					delete
+				</i>
+				<img class="item-image" :src=cart.image>
+				<div class="infos">
+					<span class="green">{{ cart.title }}</span>
+					<small class="medoc-desc">{{ cart.description }}</small>
+					<input
+						type="number"
+						min="1"
+						max="10"
+						v-model="cart.amount"
+						:onchange="updateTotal"
+					>
+					<p class="article-price"> <span>{{ cart.price }}</span> FCFA * <span>{{ cart.amount }}</span></p>
+				</div>
+			</div>
         </div>
 
         <div class="total-orders">
             <span>TOTAL ORDERS</span>
-            <p>{{ total }} €</p>
+            <p>{{ total }} FCFA</p>
             <button>order</button>
         </div>
     </div>
@@ -61,7 +45,7 @@ export default {
             const all = document.querySelectorAll(".article-price")
             this.total = 0
             Array.from(all).forEach(cmd=>{
-                this.total += eval(cmd.textContent.replace("€", ''))
+                this.total += eval(cmd.textContent.replace("FCFA", ''))
             })
             this.total = this.total.toFixed(2)
         },
@@ -76,6 +60,7 @@ export default {
 			const parent = e.target.parentElement
 			unSaveDoc(`users/${id}/cart`, parent.id)
 			parent.remove()
+			this.$emit("newDelete")
 			this.update()
 		}
     },
