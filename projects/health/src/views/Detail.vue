@@ -80,7 +80,6 @@ export default {
 			this.data.amount = this.amount
 			saveDoc(`users/${user.id}/cart`, this.data, (res)=>{
 				console.log("saved successfully")
-				this.$emit("newAdd")
 			})
 		}
 	},
