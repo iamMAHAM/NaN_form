@@ -4,30 +4,30 @@ import Detail from '@/views/Detail.vue'
 import Cart from "@/views/Cart.vue"
 
 const routes = [
-  {
-    path: '/:route',
-    name: 'root',
-	component: Home
-  },
-  {
-    path: '/',
-    name: 'home',
-	redirect: '/home'
-  },
-  {
-    path: '/cart',
-    name: 'cart',
-    component: Cart
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    // component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
-  {
-    path: '/detail',
-    name: 'detail',
-	  component: Detail
-  }
+	{
+		path: '/',
+		name: 'home',
+		redirect: '/home'
+	},
+	{
+		path: '/cart',
+		name: 'cart',
+		component: Cart
+		// route level code-splitting
+		// this generates a separate chunk (about.[hash].js) for this route
+		// which is lazy-loaded when the route is visited.
+		// component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+	},
+	{
+		path: '/detail/:doc/:id',
+		name: 'detail',
+		component: Detail
+	},
+	{
+	  path: '/:route',
+	  name: 'root',
+	  component: Home
+	}
 ]
 
 const router = createRouter({
