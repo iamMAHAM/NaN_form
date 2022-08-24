@@ -176,7 +176,9 @@ export default {
 	}
 
 	.cart-article{
+		font-size: 2.2rem;
 		position: absolute;
+		top: 0;
 		left: 50%;
 		color: var(--green);
 	}
