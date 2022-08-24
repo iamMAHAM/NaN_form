@@ -94,6 +94,7 @@ export default {
 		const logOut = ()=>{
 			localStorage.removeItem("user")
 			isLogged.value = false
+			window.location.href = "/"
 		}
 
 		const loggedIn = (user)=>{
