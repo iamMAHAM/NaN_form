@@ -25,7 +25,7 @@ export default{
 	},
 	updated(){
 		const user = JSON.parse(localStorage.getItem("user"))
-		console.log(user)
+		console.log("app updated")
 		if (user){
 			getAll(`users/${user.id}/cart`, (res)=>{
 				console.log("res", res)
