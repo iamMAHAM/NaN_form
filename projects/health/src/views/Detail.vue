@@ -56,7 +56,6 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
 import { getOne, saveDoc } from '@/lib/firestoreLib'
 
 export default {
@@ -79,7 +78,7 @@ export default {
 			console.log(user)
 			this.data.amount = this.amount
 			saveDoc(`users/${user.id}/cart`, this.data, (res)=>{
-				console.log("saved successfully")
+				this.$root.$forceUpdate()
 			})
 		}
 	},
