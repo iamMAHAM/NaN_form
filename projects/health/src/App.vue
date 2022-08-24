@@ -49,6 +49,7 @@ html{
 
 body{
     font-size: 1.6rem;
+	background: #f4f4f4;
 }
 
 :root{
