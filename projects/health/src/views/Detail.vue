@@ -1,16 +1,17 @@
 <template>
-    <div class="detail">
+	<img src="../assets/loading.gif" v-if="isLoading" class="loading" />
+    <div class="detail" v-if="!isLoading" :id="data.id">
         <div class="left">
-          <img src="https://www.pharma-gdd.com/media/cache/resolve/product_show/daflon-500-mg-120-comprimes-face.jpg" class="img">
+          <img :src="data.image" class="img">
         </div>
 
         <div class="right">
           <div class="top">
-            <p class="green">DAFLON</p>
+            <p class="green"> {{ data.title }}</p>
           </div>
 
           <div class="center">
-            <p>Jambes lourdes, troubles hémorroidaires</p>
+            <p>{{ data.description }}</p>
             <div class="row">
                 <p class="bold">Pour qui : </p>
                 <p>Adulte</p>
@@ -44,7 +45,7 @@
                 :onchange="updatePrice"
                 >
             </div>
-            <span class="rt-price">{{ total }} €</span>
+            <span class="rt-price">{{ data.price }} FCFA</span>
             <button>add to cart</button>
           </div>
         </div>
@@ -53,14 +54,31 @@
 
 <script>
 import { ref } from '@vue/reactivity'
-import { getOne, getAll, signUp, signIn } from "@/lib/firestoreLib"
+import { getOne } from '@/lib/firestoreLib'
 
 export default {
     name: 'Detail',
+	data(){
+		return {
+			data: {
+			},
+			isLoading: true
+		}
+	},
 	methods:{
 		addToCart(e){
 			
 		}
+	},
+
+	mounted(){
+		const route = this.$route.params
+		console.log(route)
+		console.log(`data/${route.doc}`)
+		getOne(`data/Ho21xA8W3774097vSXhU/${route.doc}`, route.id, (data)=>{
+			this.data = data
+			this.isLoading = false
+		})
 	},
     setup(){
         let ab = {
@@ -179,4 +197,11 @@ export default {
         display: flex;
         margin-top: .5rem;
     }
+
+	.loading{
+		position: absolute;
+		top: 20%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 </style>
