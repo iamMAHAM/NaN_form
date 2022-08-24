@@ -1,5 +1,5 @@
 <template>
-	<div to="/detail" class="card" :id="card.id" v-if="card.image">
+	<div to="/detail/:id" class="card" :id="`${path}/${card.id}`" v-if="card.image">
 		<div class="card-top">
 			<i class="material-icons pointer" style="color: var(--green);">check_circle</i>
 			<i class="material-icons pointer favorite">favorite</i>
@@ -21,9 +21,9 @@
 </template>
 
 <script>
-export default {
-	props: ['card']
 
+export default {
+	props: ['card', 'path']
 }
 </script>
 
