@@ -47,6 +47,7 @@ export default {
             Array.from(all).forEach(cmd=>{
                 this.total += eval(cmd.textContent.replace("FCFA", ''))
             })
+			console.log(this.total)
             this.total = this.total.toFixed(2)
         },
         updateTotal(e){
@@ -55,10 +56,10 @@ export default {
             target.nextElementSibling.children[1].textContent = target.value
             this.update()
         },
-		removeToCart(e){
+		async removeToCart(e){
 			const id = JSON.parse(localStorage.getItem("user")).id
 			const parent = e.target.parentElement
-			unSaveDoc(`users/${id}/cart`, parent.id)
+			await unSaveDoc(`users/${id}/cart`, parent.id)
 			this.cartItems = this.cartItems.filter(c => c.id !== parent.id)
 			this.update()
 		}
@@ -76,7 +77,7 @@ export default {
             this.loaded = false
             setTimeout(()=>{
                 this.update()
-            }, 2000)
+            }, 200)
         })
     }
 }
