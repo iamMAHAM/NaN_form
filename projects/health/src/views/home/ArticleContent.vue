@@ -7,6 +7,7 @@
 			v-for="card in cards"
 			:key="card.id"
 			:card="card"
+			:path="$route.params.route"
 		/>
 	</div>
   </div>
