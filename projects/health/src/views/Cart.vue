@@ -44,7 +44,6 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 import { unSaveDoc, getAll } from "@/lib/firestoreLib"
 
 export default {
@@ -66,28 +65,38 @@ export default {
             this.update()
         },
 		async removeToCart(e){
-			const id = JSON.parse(localStorage.getItem("user")).id
 			const parent = e.target.parentElement
-			await unSaveDoc(`users/${id}/cart`, parent.id)
-			this.cartItems = this.cartItems.filter(c => c.id !== parent.id)
+			if (!this.user){
+				this.cartItems = this.cartItems.filter(c => c.id !== parent.id)
+				localStorage.setItem("cart", JSON.stringify(this.cartItems))
+			} else{
+				await unSaveDoc(`users/${id}/cart`, parent.id)
+				this.cartItems = this.cartItems.filter(c => c.id !== parent.id)
+			}
 			this.update()
+			this.$root.$forceUpdate()
 		}
     },
     data(){
         return {
             total: 0,
             cartItems: [],
-            loaded: true
+            loaded: true,
+			user: JSON.parse(localStorage.getItem("user"))
         }
     },
     mounted(){
-        getAll("users/jhzGn5dE2kNLZOT4lUu2/cart", carts=> {
-            this.cartItems = carts
-            this.loaded = false
-            setTimeout(()=>{
-                this.update()
-            }, 200)
-        })
+		if (this.user){
+			getAll("users/jhzGn5dE2kNLZOT4lUu2/cart", carts=> {
+				this.cartItems = carts
+			})
+		} else{ 
+			this.cartItems = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : []
+		}
+		this.loaded = false
+		setTimeout(()=>{
+			this.update()
+		}, 200)
     }
 }
 </script>
