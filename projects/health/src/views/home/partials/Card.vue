@@ -4,11 +4,11 @@
 			<i class="material-icons pointer" style="color: var(--green);">check_circle</i>
 			<i :class="`material-icons pointer favorite ${card.isFav ? 'isfav' : ''}`"
 				@click="favoriteHandler"
-				v-if="!card.load"
+				v-if="!card.isLoad"
 			>
 				favorite
 			</i>
-			<img src="../../../assets/loading.gif" v-if="card.load" class="wait waitd">
+			<img src="../../../assets/loading.gif" v-if="card.isLoad" class="wait waitd">
 		</div>
 		<div class="card-main">
 			<router-link tag="div" :to="`detail/${path}/${card.id}`" class="router">
