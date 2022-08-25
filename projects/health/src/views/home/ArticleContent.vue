@@ -32,7 +32,7 @@ export default {
 	methods: {
 		addFavs: function (card){ // add to favorite
 			const index = this.cards.indexOf(card)
-			this.cards[index].load = true
+			this.cards[index].isLoad = true
 			const user =  JSON.parse(localStorage.getItem("user"))
 			if (!user){
 				this.$emit('fav')
@@ -40,16 +40,16 @@ export default {
 			}
 			saveOrOverride(`users/${user.id}/favorites`, card.id, card, ()=>{
 				this.cards[index].isFav = true
-				this.cards[index].load = false
+				this.cards[index].isLoad = false
 			})
 		},
 		removeFavs: async function (card){ // remove to favorite
 			const user =  JSON.parse(localStorage.getItem("user"))
 			const index = this.cards.indexOf(card)
-			this.cards[index].load = true
+			this.cards[index].isLoad = true
 			await unSaveDoc(`users/${user.id}/favorites`, card.id)
 			this.cards[index].isFav = false
-			this.cards[index].load = false
+			this.cards[index].isLoad = false
 
 		}
 	},
@@ -61,7 +61,14 @@ export default {
 	},
 	mounted(){
 		const user =  JSON.parse(localStorage.getItem("user"))
-		getAll(`data/Ho21xA8W3774097vSXhU/${this.$route.params.route}`, (result)=>{
+		console.log(this.$route.params.route)
+		let collect = null
+		if (this.$route.params.route != 'favorites'){
+			collect = `data/Ho21xA8W3774097vSXhU/${this.$route.params.route}`
+		}else {
+			collect = `users/${user.id}/favorites`
+		}
+		getAll(collect, (result)=>{
 			if (user){
 				getAll(`users/${user.id}/favorites`, (favorites)=>{
 					result.map((c, i) => {
@@ -70,6 +77,7 @@ export default {
 						}else{
 							result[i].isFav = false
 						}
+						result[i].isLoad = false
 					})
 					this.cards = result
 					this.isLoading = false
