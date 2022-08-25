@@ -45,7 +45,9 @@
                 >
             </div>
             <span class="rt-price">{{ data.price }} FCFA</span>
+			<img src="../assets/loading.gif" class="wait" v-if="wait">
             <button
+				v-if="!wait"
 				:onclick="addToCart"
 			>
 				add to cart
@@ -66,27 +68,32 @@ export default {
 			},
 			isLoading: true,
 			amount: 1,
+			wait: false
 		}
 	},
 	methods:{
 		addToCart(){
+			this.wait = true
 			const user = JSON.parse(localStorage.getItem("user"))
+			this.data.amount = this.amount
 			if (!user){
-				// display login bar
+				console.log("no user")
+				const cart = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : []
+				cart.push(this.data)
+				localStorage.setItem("cart", JSON.stringify(cart))
+				this.wait = false
+				this.$root.$forceUpdate()
 				return
 			}
-			console.log(user)
-			this.data.amount = this.amount
 			saveDoc(`users/${user.id}/cart`, this.data, (res)=>{
 				this.$root.$forceUpdate()
+				this.wait = false
 			})
 		}
 	},
 
 	mounted(){
 		const route = this.$route.params
-		console.log(route)
-		console.log(`data/${route.doc}`)
 		getOne(`data/Ho21xA8W3774097vSXhU/${route.doc}`, route.id, (data)=>{
 			this.data = data
 			this.isLoading = false
@@ -96,6 +103,11 @@ export default {
 
 </script>
 
+<style>
+	.wait{
+		width: 2.5rem;
+	}
+</style>
 <style scoped>
     .detail{
         position: absolute;
