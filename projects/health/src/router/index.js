@@ -3,6 +3,8 @@ import Home from '../views/Home.vue'
 import Detail from '@/views/Detail.vue'
 import Cart from "@/views/Cart.vue"
 import NotFound from "@/views/404.vue"
+import Profile from "@/views/Profile.vue"
+
 const routes = [
 	{
 		path: '/',
@@ -27,6 +29,11 @@ const routes = [
 	  path: '/:route',
 	  name: 'root',
 	  component: Home
+	},
+	{
+	  path: '/user/profile',
+	  name: 'profile',
+	  component: Profile
 	},
 	{
 		path: '/404',
