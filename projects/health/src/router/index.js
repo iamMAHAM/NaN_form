@@ -30,7 +30,7 @@ const routes = [
 	},
 	{
 		path: '/404',
-		name: 'NotFound'
+		name: 'NotFound',
 		component: NotFound
 	},
 	{
