@@ -34,7 +34,7 @@
 			@click="logOut"
 		>
 			<a href="#" class="item">
-			<i class="material-icons item">Déconnexion</i>
+			<i class="material-icons item">logout</i>
 			Logout
 			</a>
 		</li>
