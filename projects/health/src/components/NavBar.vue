@@ -38,12 +38,12 @@
 			Déconnexion
 			</a>
 		</li>
-		<li class="nav-item" v-if="isLogged">
+		<router-link to="/user/profile" tag="li" class="nav-item" v-if="isLogged">
 			<a href="#" class="item">
 			<i class="material-icons item">account_circle</i>
 			Profile
 			</a>
-		</li>
+		</router-link>
 		<router-link to="/favorites" tag="li" class="nav-item" v-if="isLogged">
 			<a href="#" class="item">
 			<i class="material-icons item">favorite</i>
