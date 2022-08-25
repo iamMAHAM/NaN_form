@@ -25,12 +25,15 @@ export default{
 	},
 	updated(){
 		const user = JSON.parse(localStorage.getItem("user"))
+		const length = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")).length : 0
 		console.log("app updated")
 		if (user){
 			getAll(`users/${user.id}/cart`, (res)=>{
 				console.log("res", res)
 				this.cart = res.length
 			})
+		}else{ //no logged in user
+			this.cart = length
 		}
 	}
 }

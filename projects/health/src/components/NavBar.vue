@@ -7,7 +7,7 @@
 		</div>
 		<li class="nav-item">
 		<div class="search">
-			<input type="search" id="search" placeholder="search your product" role="search">
+			<input type="search" id="search" placeholder="rechercher votre produit" role="search">
 			<a href="#" class="item" style="margin: auto;">
 			<i class="material-icons loupe">search</i>
 			</a>
@@ -25,7 +25,7 @@
 				v-if="!isLogged"
 			>
 			<i class="material-icons item">login</i>
-			Login
+			Connexion
 			</a>
 		</li>
 		<li
@@ -34,7 +34,7 @@
 			@click="logOut"
 		>
 			<a href="#" class="item">
-			<i class="material-icons item">logout</i>
+			<i class="material-icons item">Déconnexion</i>
 			Logout
 			</a>
 		</li>
@@ -47,13 +47,13 @@
 		<li class="nav-item" v-if="false">
 			<a href="#" class="item">
 			<i class="material-icons item">favorite</i>
-			Favorite
+			Favoris
 			</a>
 		</li>
 		<router-link to="/cart" class="nav-item">
 			<a href="#" class="item" style="position: relative;">
 			<i class="material-icons item">shopping_cart</i>
-			Cart
+			Panier
 			<span class="cart-article"> {{ cart }}</span>
 			</a>
 		</router-link>
@@ -176,11 +176,16 @@ export default {
 	}
 
 	.cart-article{
+		text-align: center;
+		height: 2.2rem;
+		width: 2.2rem;
 		font-size: 2.2rem;
 		position: absolute;
-		top: 0;
+		/* top: -20%; */
 		left: 50%;
-		color: var(--green);
+		background-color: var(--white);
+		border-radius: 50%;
+		color: var(--black);
 	}
 
 	.material-icons.loupe{
