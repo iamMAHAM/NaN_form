@@ -2,7 +2,13 @@
 	<div class="card" :id="card.id" v-if="card.image">
 		<div class="card-top">
 			<i class="material-icons pointer" style="color: var(--green);">check_circle</i>
-			<i class="material-icons pointer favorite">favorite</i>
+			<i :class="`material-icons pointer favorite ${card.isFav ? 'isfav' : ''}`"
+				@click="favoriteHandler"
+				v-if="!card.load"
+			>
+				favorite
+			</i>
+			<img src="../../../assets/loading.gif" v-if="card.load" class="wait waitd">
 		</div>
 		<div class="card-main">
 			<router-link tag="div" :to="`detail/${path}/${card.id}`" class="router">
@@ -23,7 +29,19 @@
 <script>
 
 export default {
-	props: ['card', 'path']
+	props: ['card', 'path', 'fav', 'load'],
+	methods: {
+		favoriteHandler(e){
+			if (e.target.classList.contains("isfav")){
+				this.$emit("removeFav", this.card)
+			}else{
+				this.$emit("addFav", this.card)
+			}
+		}
+	},
+	updated(){
+		console.log("card updated")
+	}
 }
 </script>
 
@@ -96,5 +114,13 @@ export default {
 
 	.pointer{
 		cursor: pointer;
+	}
+
+	.isfav{
+		color: var(--red) !important;
+	}
+
+	.waitd{
+		border-radius: 50%;
 	}
 </style>
