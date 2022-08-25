@@ -163,6 +163,7 @@ export default {
 			}
 		},
 		closeModal(){
+			console.log("close event")
 			this.$emit("close")
 			this.login = true
 			this.registrated = false
