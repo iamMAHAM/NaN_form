@@ -19,6 +19,7 @@
 				>
 					delete
 				</i>
+				<img src="../assets/loading.gif" v-if="cart.load" class="wait waitd" />
 				<img class="item-image" :src=cart.image>
 				<div class="infos">
 					<span class="green">{{ cart.title }}</span>
@@ -52,6 +53,7 @@ export default {
         update(){
             const all = document.querySelectorAll(".article-price")
             this.total = 0
+			console.log("all", all)
             Array.from(all).forEach(cmd=>{
                 this.total += eval(cmd.textContent.replace("FCFA", ''))
             })
@@ -70,8 +72,11 @@ export default {
 				this.cartItems = this.cartItems.filter(c => c.id !== parent.id)
 				localStorage.setItem("cart", JSON.stringify(this.cartItems))
 			} else{
-				await unSaveDoc(`users/${id}/cart`, parent.id)
+				const matchingCart = this.cartItems.filter(cart=> cart.id === parent.id)[0]
+				matchingCart.load = true
+				await unSaveDoc(`users/${this.user.id}/cart`, parent.id)
 				this.cartItems = this.cartItems.filter(c => c.id !== parent.id)
+				matchingCart.load = false
 			}
 			this.update()
 			this.$root.$forceUpdate()
@@ -85,9 +90,9 @@ export default {
 			user: JSON.parse(localStorage.getItem("user"))
         }
     },
-    mounted(){
+    async mounted(){
 		if (this.user){
-			getAll("users/jhzGn5dE2kNLZOT4lUu2/cart", carts=> {
+			await getAll("users/jhzGn5dE2kNLZOT4lUu2/cart", carts=> {
 				this.cartItems = carts
 			})
 		} else{ 
@@ -102,6 +107,10 @@ export default {
 </script>
 
 <style scoped>
+
+	.waitd{
+		height: 2.4rem;
+	}
     div.cart{
         position: relative;
         padding: 3rem;
@@ -175,6 +184,7 @@ export default {
         width: 30%;
     }
 
+	.waitd,
     .delete{
         cursor: pointer;
         color: red;

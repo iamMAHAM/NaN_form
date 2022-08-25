@@ -197,4 +197,8 @@ export default {
 	.material-icons.item{
 		font-size: 3.5rem;
 	}
+
+	.router-link-active{
+		color: var(--green);
+	}
 </style>
