@@ -47,10 +47,11 @@ export default {
 
 <style>
 	.card{
+		background-color: var(--white);
 		overflow: hidden;
 		border-radius: .5rem;
 		text-align: center;
-		border: .5px solid black;
+		/* border: .5px solid black; */
 		position: relative;
 		height: 27rem;
 		margin: 1rem auto;
