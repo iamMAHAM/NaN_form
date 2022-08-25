@@ -35,7 +35,7 @@
 		>
 			<a href="#" class="item">
 			<i class="material-icons item">logout</i>
-			Logout
+			Déconnexion
 			</a>
 		</li>
 		<li class="nav-item" v-if="isLogged">
@@ -44,12 +44,12 @@
 			Profile
 			</a>
 		</li>
-		<li class="nav-item" v-if="false">
+		<router-link to="/favorites" tag="li" class="nav-item" v-if="isLogged">
 			<a href="#" class="item">
 			<i class="material-icons item">favorite</i>
 			Favoris
 			</a>
-		</li>
+		</router-link>
 		<router-link to="/cart" class="nav-item">
 			<a href="#" class="item" style="position: relative;">
 			<i class="material-icons item">shopping_cart</i>
