@@ -4,31 +4,31 @@
 		<div class="side-content">
 			<router-link tag="div" to="/drugs" class="side-row">
 				<i class="material-icons">medication</i>
-				<span class="side-content">Drugs</span>
+				<span class="side-content">Médicaments</span>
 			</router-link>
 			<router-link tag="div" to="/healthy" class="side-row">
 				<i class="material-icons">health_and_safety</i>
-				<span class="side-content">Health</span>
+				<span class="side-content">Soins et Santé</span>
 			</router-link>
 			<router-link tag="div" to="/beautyHi" class="side-row">
 				<i class="material-icons">spa</i>
-				<span class="side-content">Beauty and Hygiene</span>
+				<span class="side-content">Beauté et Hygiène</span>
 			</router-link>
 			<router-link tag="div" to="/babyP" class="side-row">
 				<i class="material-icons">pregnant_woman</i>
-				<span class="side-content">Baby and Pregnancy</span>
+				<span class="side-content">Bebe et Grossesse</span>
 			</router-link>
 			<router-link tag="div" to="/slimmingSport" class="side-row">
 				<i class="material-icons">sports_hockey</i>
-				<span class="side-content">Slimming and Sport</span>
+				<span class="side-content">Sport</span>
 			</router-link>
 			<router-link tag="div" to="/veterinary" class="side-row">
 				<i class="material-icons">pets</i>
-				<span class="side-content">Veterinary</span>
+				<span class="side-content">Véterinaires</span>
 			</router-link>
 			<router-link tag="div" to="/medicalMaterials" class="side-row">
 				<i class="material-icons">medical_services</i>
-				<span class="side-content">Medical Materials</span>
+				<span class="side-content">Matériels Médicals</span>
 			</router-link>
 		</div>
 	</div>
