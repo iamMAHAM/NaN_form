@@ -1,7 +1,7 @@
 
 import { db } from "./firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
-import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc } from "firebase/firestore"; 
+import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc } from "firebase/firestore"; 
 
 const auth = getAuth()
 
@@ -30,6 +30,10 @@ export const saveDoc = async (collect="", doc, callback)=>{
 	return callback(docRef.id)
 }
 
+export const saveOrOverride = async(collect, id, doct, callback)=>{
+	const docRef = await setDoc(doc(db, collect, id), doct)
+	return callback()
+}
 export const saveDocs = (collect="", docs=[])=>{
     // Add a new document with a generated id.
     docs.forEach(async (doc) =>{
