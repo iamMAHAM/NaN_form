@@ -27,6 +27,8 @@ export default {
 
 <style>
 	div.banner{
+		border-radius: 1rem;
+		padding: 5rem;
 		background-color: var(--white);
 		margin-top: 1rem;
 	}
