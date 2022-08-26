@@ -7,9 +7,14 @@
 		</div>
 		<li class="nav-item">
 		<div class="search">
-			<input type="search" id="search" placeholder="rechercher votre produit" role="search">
-			<a href="#" class="item" style="margin: auto;">
-			<i class="material-icons loupe">search</i>
+			<input type="search" id="search" placeholder="rechercher votre produit" role="search" v-model="searchQuery">
+			<a
+				class="item"
+				style="margin: auto; cursor: pointer;"
+				ref="search"
+				@click="search"
+			>
+				<i class="material-icons loupe">search</i>
 			</a>
 		</div>
 		</li>
@@ -67,17 +72,31 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity';
-import LoginRegister from './LoginRegister.vue';
+import { ref } from '@vue/reactivity'
+import LoginRegister from './LoginRegister.vue'
+import { getAll } from '@/lib/firestoreLib'
 
 export default {
 	components:{
 		LoginRegister
 	},
+	data(){
+		return {
+			searchQuery: '',
+		}
+	},
 	props: ["cart"]
 	,
-	mounted(){
+	methods:{
+		search(){
+			const searchButton = this.$refs.search
+			console.log(searchButton, this.searchQuery)
+			this.$emit("search", this.searchQuery)
+		}
+	},
+	async mounted(){
 		console.log("navbar mounted")
+
 	},
 	setup(){
 
