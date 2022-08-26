@@ -6,15 +6,15 @@
 				<i class="material-icons">medication</i>
 				<span class="side-content">Médicaments</span>
 			</router-link>
-			<router-link tag="div" to="/healthy" class="side-row">
+			<router-link tag="div" to="/health" class="side-row">
 				<i class="material-icons">health_and_safety</i>
 				<span class="side-content">Soins et Santé</span>
 			</router-link>
-			<router-link tag="div" to="/beautyHi" class="side-row">
+			<router-link tag="div" to="/beautyHygiene" class="side-row">
 				<i class="material-icons">spa</i>
 				<span class="side-content">Beauté et Hygiène</span>
 			</router-link>
-			<router-link tag="div" to="/babyP" class="side-row">
+			<router-link tag="div" to="/babyPregnancy" class="side-row">
 				<i class="material-icons">pregnant_woman</i>
 				<span class="side-content">Bebe et Grossesse</span>
 			</router-link>
