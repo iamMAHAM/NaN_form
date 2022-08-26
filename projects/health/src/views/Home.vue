@@ -2,8 +2,11 @@
 	<div class="container">
 		<SideBar />
 		<ArticleContent
+			:data="searchResult"
+			:isSearch="isSearch"
 			@fav="checkLog"
 		/>
+		
 		<LoginRegister
 			v-if="modal"
 			@close="closeModal"
@@ -16,21 +19,22 @@
 import SideBar from '@/views/home/SideBar.vue'
 import ArticleContent from './home/ArticleContent.vue';
 import LoginRegister from '@/components/LoginRegister.vue';
-// @ is an alias to /src
 
 export default {
 	name: 'Home',
+	props: ['searchResult', 'isSearch'],
 	data(){
 		return {
 			modal: false,
 			isLogged: false,
-			user: JSON.parse(localStorage.getItem("user"))
+			search: true,
 		}
 	},
 	methods: {
 
 		checkLog(){
-			if (!this.user){
+			const user = JSON.parse(localStorage.getItem("user"))
+			if (!user){
 				this.modal = true
 			}
 		},
@@ -43,6 +47,12 @@ export default {
 			closeModal()
 		}
 	},
+	setup(){
+		defineProps:{
+
+		}
+	},
+
 	components: {
 		SideBar,
 		ArticleContent,

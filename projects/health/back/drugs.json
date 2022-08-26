@@ -1,0 +1,107 @@
+[
+  {
+    "state": "stock",
+    "title": "Charbon de Belloc",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/charbon-belloc-ballonnement-intestinal-flatulences-36-capsules-face-1.jpg",
+    "description": "Digestion difficile, ballonnement intestinal - A partir de 15 ans",
+    "price": 3684.42
+  },
+  {
+    "state": "stock",
+    "title": "Omega Pharma",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/666f726d6f63617262696e652d31352d6772616e756c65732d666163659292d67c.jpg",
+    "description": "Charbon activé - Ballonnements, digestion difficile",
+    "price": 5179.16
+  },
+  {
+    "state": "stock",
+    "title": "product",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/63616e64617a6f6c2d67652d6d79636f73652d766167696e616c652d316f76756c652d6661636546ce8fd9.jpg",
+    "description": "Traitement de la mycose vaginale",
+    "price": 2124.11
+  },
+  {
+    "state": "stock",
+    "title": "Boiron",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/626f69726f6e2d7468796d756c696e652d3963682d34756e69646f7365732d66616365316a1abc.jpg",
+    "description": "4 Unidoses",
+    "price": 5893.75
+  },
+  {
+    "state": "stock",
+    "title": "Cooper",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/636f6f7065722d73656465726d796c2d64656d616e67656169736f6e732d6372656d652d313030672d66616365a9154858.jpg",
+    "description": "Démangeaisons : piqûres d'insectes - Dès 30 mois",
+    "price": 2943.6
+  },
+  {
+    "state": "stock",
+    "title": "Efferalgan",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/upsa-efferalganmed-paracetamol-1000-mg-douleurs-et-fievre-8-comprimes-face.jpg",
+    "description": "Douleurs et fièvre - Adultes et adolescents >50kg",
+    "price": 1429.19
+  },
+  {
+    "state": "stock",
+    "title": "Cooper",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/cooper-sedorrhoide-creme-face.jpg",
+    "description": "Hémorroïdes - Adultes",
+    "price": 2156.89
+  },
+  {
+    "state": "stock",
+    "title": "Gaviscon",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/gaviscon-suspension-buvable-traitement-symptomatique-du-reflux-gastro-oesophagien-menthe-sans-sucre-24-sachets-de-10-ml-face.jpg",
+    "description": "Brûlures d'estomac, remontées acides",
+    "price": 1992.99
+  },
+  {
+    "state": "stock",
+    "title": "Spasfon",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/teva-spasfon-lyoc-douleurs-spasmodiques-5-lyophilisats-face.jpg",
+    "description": "Douleurs spasmodiques - Adultes",
+    "price": 1606.2
+  },
+  {
+    "state": "stock",
+    "title": "Viatris",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/mylan-douleurs-et-fievre-migraine-chez-ladulte-ibuprofene-400-mg-12-comprimes-face.jpg",
+    "description": "Douleurs et fièvre - Adultes et enfants > 30 kg",
+    "price": 1540.64
+  },
+  {
+    "state": "stock",
+    "title": "Sanofi",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/sanofi-iprafeine-400-mg-100-mg-adulte-12-comprimes.jpg",
+    "description": "Douleurs aiguës d'intensité modérée : ibuprofène + caféine",
+    "price": 2583.02
+  },
+  {
+    "state": "stock",
+    "title": "Titanoréine",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/titanreine-crise-hemorroidaire-20-g-face.jpg",
+    "description": "Soulage la douleur des hémorroïdes - Adultes",
+    "price": 2838.7
+  },
+  {
+    "state": "stock",
+    "title": "Bailleul",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/bailleul-minoxidil-chute-de-cheveux-moderee-5-homme-3-flacons-de-60-ml-face.jpg",
+    "description": "Chute de cheveux - Homme adultes",
+    "price": 11138.47
+  },
+  {
+    "state": "stock",
+    "title": "Viatris",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/mylan-doxylamine-15-mg-insomnie-occasionnelle-chez-ladulte-10-comprimes-face.jpg",
+    "description": "Insomnie occasionnelle - Adultes",
+    "price": 1042.39
+  },
+  {
+    "state": "stock",
+    "title": "Nurofen",
+    "image": "https://www.pharma-gdd.com/media/cache/resolve/product_thumbnail/nurofen-flash-400-mg-ibuprofene-douleurs-et-fievre-migraine-12-comprimes-face.jpg",
+    "description": "Douleurs et fièvre - Adultes et enfants >30kg",
+    "price": 3310.73
+  }
+]

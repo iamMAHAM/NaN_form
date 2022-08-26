@@ -5,31 +5,68 @@
     <router-link to="/contact">About</router-link>
     <router-link to="/contact">Contact</router-link>
   </nav> -->
-    <NavBar :cart="cart"/>
-    <router-view :key="$route.fullPath"/>
+    <NavBar :cart="cart" @search="perfSearch" />
+    <router-view
+		:key="$route.fullPath"
+		:searchResult="result"
+		:isSearch="isSearch"
+	/>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue'
-import { getAll } from './lib/firestoreLib'
+import { getAll, searchEveryWhere } from './lib/firestoreLib'
 
 export default{
     name:'App',
     components: {
         NavBar
     },
+
+	methods:{
+		perfSearch(queryString){
+			this.isSearch = true
+			this.result = []
+			searchEveryWhere("data/Ho21xA8W3774097vSXhU", this.allCategories, 'title', queryString, (res)=>{
+				console.log(res)
+			})
+			// let inter = []
+			// this.allCategories.forEach(async (cat)=>{
+			// 	await getAll(`data/Ho21xA8W3774097vSXhU/${cat}`, (data)=>{
+			// 		const filtered = data.filter(el => el.title ? el.title.toLowerCase().includes(queryString.toLowerCase()) : '')
+			// 		filtered.length ? inter.push(...filtered) : null
+			// 		}
+			// 	)
+			// 	console.log("inter", inter)
+			// 	this.result = inter
+			// })
+		}
+	},
+	mounted(){
+		this.$emit("great")
+	},
 	data(){
 		return {
-			cart: 0
+			cart: 0,
+			result: [],
+			allCategories: [
+				'healthy',
+				'home',
+				'medicalMaterials',
+				'slimmingSport',
+				'veterinary',
+				'beautyHi',
+				'babyP',
+				'drugs'
+			],
+			isSearch: false
 		}
 	},
 	updated(){
 		const user = JSON.parse(localStorage.getItem("user"))
 		const length = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")).length : 0
-		console.log("app updated")
 		if (user){
 			getAll(`users/${user.id}/cart`, (res)=>{
-				console.log("res", res)
 				this.cart = res.length
 			})
 		}else{ //no logged in user
@@ -52,7 +89,7 @@ html{
 
 body{
     font-size: 1.6rem;
-	background: #f4f4f4;
+	background: #e2dcdc;
 }
 
 :root{

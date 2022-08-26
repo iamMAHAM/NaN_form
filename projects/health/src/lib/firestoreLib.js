@@ -24,7 +24,22 @@ export const getAll = async (collect, callback)=>{
     })
     return callback(result)
 }
-
+export const searchEveryWhere = (
+		root_path,
+		categories,
+		property,
+		queryString,
+		callback) =>{
+			let inter = []
+			categories.forEach(async (cat)=>{
+				await getAll(`${root_path}/${cat}`, (data)=>{
+					const filtered = data.filter(el => el[property] ? el[property].toLowerCase().includes(queryString.toLowerCase()) : '')
+					filtered.length ? inter.push(...filtered) : null
+					}
+				)
+			})
+			return callback(inter)
+}
 export const saveDoc = async (collect="", doc, callback)=>{
     const docRef = await addDoc(collection(db, collect), doc)
 	return callback(docRef.id)

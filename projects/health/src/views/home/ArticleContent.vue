@@ -2,7 +2,7 @@
   <div class="article-content">
 	<Banner />
 	<img src="../../assets/loading.gif" v-if="isLoading" class="loading">
-	<div class="cards" v-if="!isLoading">
+	<div class="cards" v-if="!isLoading && cards.length">
 		<Card
 			v-for="card in cards"
 			:key="card.id"
@@ -11,6 +11,14 @@
 			@addFav="addFavs"
 			@removeFav="removeFavs"
 		/>
+	</div>
+	<div
+		class="nosearch"
+		v-if="isSearch && !cardLength
+		&&
+		!isLoading"
+	>
+		Oups ! Il n y'a aucun resultat
 	</div>
   </div>
 </template>
@@ -26,9 +34,7 @@ export default {
 		Banner,
 		Card
 	},
-	updated(){
-		console.log("updated")
-	},
+	props: ['data', 'isSearch'],
 	methods: {
 		addFavs: function (card){ // add to favorite
 			const index = this.cards.indexOf(card)
@@ -57,6 +63,7 @@ export default {
 		return {
 			cards: [],
 			isLoading: true,
+			cardLength: 0,
 			allCategories: [
 				'healthy',
 				'home',
@@ -93,6 +100,16 @@ export default {
 				})
 			}
 		})
+	},
+	updated(){
+		if (!this.isSearch){ //no search case
+			console.log("no search so i do nothing")
+		} else{
+			this.cards = this.data
+			// const target_copy = JSON.parse(JSON.stringify(this.data))
+			// console.log(target_copy)
+			// // this.cards.forEach(card=> console.log(card))
+		}
 	}
 }
 </script>
@@ -109,5 +126,11 @@ export default {
 		margin: auto;
 		width: 20rem;
 		border-radius: 1rem;
+	}
+
+	.nosearch{
+		color: var(--black);
+		text-align: center;
+		font-size: 3rem;
 	}
 </style>
