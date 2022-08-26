@@ -15,7 +15,7 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue'
-import { getAll, searchEveryWhere } from './lib/firestoreLib'
+import { getAll } from './lib/firestoreLib'
 
 export default{
     name:'App',
@@ -27,19 +27,18 @@ export default{
 		perfSearch(queryString){
 			this.isSearch = true
 			this.result = []
-			searchEveryWhere("data/Ho21xA8W3774097vSXhU", this.allCategories, 'title', queryString, (res)=>{
-				console.log(res)
+			let inter = []
+			this.allCategories.forEach(async (cat)=>{
+				await getAll(`data/Ho21xA8W3774097vSXhU/${cat}`, (data)=>{
+					const filtered = data.filter(el => el.title ? el.title.toLowerCase().includes(queryString.toLowerCase()) : '')
+					if (filtered.length){
+						inter.push(...filtered)
+					}
+				}
+				)
+				console.log(inter.length)
+				this.result = inter
 			})
-			// let inter = []
-			// this.allCategories.forEach(async (cat)=>{
-			// 	await getAll(`data/Ho21xA8W3774097vSXhU/${cat}`, (data)=>{
-			// 		const filtered = data.filter(el => el.title ? el.title.toLowerCase().includes(queryString.toLowerCase()) : '')
-			// 		filtered.length ? inter.push(...filtered) : null
-			// 		}
-			// 	)
-			// 	console.log("inter", inter)
-			// 	this.result = inter
-			// })
 		}
 	},
 	mounted(){

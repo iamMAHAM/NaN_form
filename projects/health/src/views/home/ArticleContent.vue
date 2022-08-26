@@ -2,7 +2,7 @@
   <div class="article-content">
 	<Banner />
 	<img src="../../assets/loading.gif" v-if="isLoading" class="loading">
-	<div class="cards" v-if="!isLoading && cards.length">
+	<div class="cards" v-if="!isLoading">
 		<Card
 			v-for="card in cards"
 			:key="card.id"
@@ -12,14 +12,14 @@
 			@removeFav="removeFavs"
 		/>
 	</div>
-	<div
+	<!-- <div
 		class="nosearch"
 		v-if="isSearch && !cardLength
 		&&
 		!isLoading"
 	>
 		Oups ! Il n y'a aucun resultat
-	</div>
+	</div> -->
   </div>
 </template>
 
@@ -106,6 +106,7 @@ export default {
 			console.log("no search so i do nothing")
 		} else{
 			this.cards = this.data
+			console.log("data length", this.data.length)
 			// const target_copy = JSON.parse(JSON.stringify(this.data))
 			// console.log(target_copy)
 			// // this.cards.forEach(card=> console.log(card))
