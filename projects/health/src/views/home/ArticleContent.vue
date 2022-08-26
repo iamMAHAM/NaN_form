@@ -57,11 +57,20 @@ export default {
 		return {
 			cards: [],
 			isLoading: true,
+			allCategories: [
+				'healthy',
+				'home',
+				'medicalMaterials',
+				'slimmingSport',
+				'veterinary',
+				'beautyHi',
+				'babyP',
+				'drugs'
+			]
 		}
 	},
 	mounted(){
 		const user =  JSON.parse(localStorage.getItem("user"))
-		console.log(this.$route.params.route)
 		let collect = null
 		if (this.$route.params.route != 'favorites'){
 			collect = `data/Ho21xA8W3774097vSXhU/${this.$route.params.route}`
