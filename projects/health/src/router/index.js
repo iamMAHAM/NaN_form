@@ -28,7 +28,8 @@ const routes = [
 	{
 	  path: '/:route',
 	  name: 'root',
-	  component: Home
+	  component: Home,
+	  props: true
 	},
 	{
 	  path: '/user/profile',
@@ -40,6 +41,11 @@ const routes = [
 		name: 'NotFound',
 		component: NotFound
 	},
+	// {
+	// 	path: 'search/:string',
+	// 	name: 'search',
+	// 	component: Search
+	// },
 	{
 		path: '/:pathMatch(.*)*',
 		name: '404',

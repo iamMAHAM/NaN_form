@@ -186,7 +186,7 @@ ul{
 ul li{
     padding: 20px 0;
     color: gray; 
-    border-bottom:1px solid #1d1d1d;
+    border-bottom:1px solid var(--black);
 }
 
 b{
@@ -212,7 +212,7 @@ b{
     border-radius:5px;
     box-shadow:0px 6px 16px -6px rgba(1,1,1,0.5);
     padding:30px;
-    background-color:#000;
+    background-color: var(--black);
     color:#fff;
     vertical-align:top;
 }
@@ -267,15 +267,21 @@ b{
 }
 
 #submit{
-    color: black;
+	margin-top: 1rem;
+    color: var(--black);
     font-weight: bold;
     cursor: pointer;
     padding: 10px;
     font-size: 18px;
     width: auto;
-    background-color: var(--green);
-    border: .5px solid white;
+    background-color: var(--white);
+    border: .5px solid var(--black);
     border-radius: 5px;
+}
+
+#submit:hover{
+	color: var(--white);
+	background-color: var(--green);
 }
 
 @media (max-width:820px){
