@@ -38,9 +38,6 @@ export default {
 				this.$emit("addFav", this.card)
 			}
 		}
-	},
-	updated(){
-		console.log("card updated")
 	}
 }
 </script>
