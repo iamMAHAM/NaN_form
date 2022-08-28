@@ -14,12 +14,13 @@ export const getOne = async (collect="", id="", callback=null)=>{
 	return callback(toPush)
 }
 
-export const getAll = async (collect, callback)=>{
+export const getAll = async (collect, callback, origin="")=>{
     let result = []
     const querySnapshot = await getDocs(collection(db, collect))
     querySnapshot.forEach((doc) => {
         let toPush = doc.data()
         toPush.id = doc.id
+        toPush.origin = origin
         result.push(toPush)
     })
     return callback(result)
@@ -36,6 +37,7 @@ export const matchFields = async (categories=[], value="", callback)=>{
         querySnapshot.forEach((doc) => {
             let toPush = doc.data()
             toPush.id = doc.id
+            toPush.origin = cat
             result.push(toPush)
         })
     }

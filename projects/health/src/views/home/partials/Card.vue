@@ -11,7 +11,7 @@
 			<img src="../../../assets/loading.gif" v-if="card.isLoad" class="wait waitd">
 		</div>
 		<div class="card-main">
-			<router-link tag="div" :to="`detail/${path}/${card.id}`" class="router">
+			<router-link tag="div" :to="`detail/${card.origin}/${card.id}`" class="router">
 				<img :src="card.image" alt="medoc image" class="card-images" />
 			</router-link>
 			<div class="card-description">
@@ -29,7 +29,7 @@
 <script>
 
 export default {
-	props: ['card', 'path', 'fav', 'load'],
+	props: ['card', 'fav', 'load'],
 	methods: {
 		favoriteHandler(e){
 			if (e.target.classList.contains("isfav")){
@@ -38,6 +38,9 @@ export default {
 				this.$emit("addFav", this.card)
 			}
 		}
+	},
+	mounted(){
+		console.log(this.card)
 	}
 }
 </script>

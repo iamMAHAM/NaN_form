@@ -90,6 +90,7 @@ export default {
 	methods:{
 		search(){
 			const searchButton = this.$refs.search
+			if (this.searchQuery)
 			this.$emit("search", this.searchQuery)
 		}
 	},

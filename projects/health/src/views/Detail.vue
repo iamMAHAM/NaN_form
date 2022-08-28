@@ -94,6 +94,7 @@ export default {
 
 	mounted(){
 		const route = this.$route.params
+        console.log(route)
 		getOne(`data/Ho21xA8W3774097vSXhU/${route.doc}`, route.id, (data)=>{
 			this.data = data
 			this.isLoading = false

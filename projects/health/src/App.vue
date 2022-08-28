@@ -10,12 +10,13 @@
 		:key="$route.fullPath"
 		:searchResult="result"
 		:isSearch="isSearch"
+		:load="load"
 	/>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue'
-import { getAll } from './lib/firestoreLib'
+import { getAll, matchFields, allCategories } from './lib/firestoreLib'
 
 export default{
     name:'App',
@@ -24,25 +25,14 @@ export default{
     },
 
 	methods:{
-		perfSearch(queryString){
+		async perfSearch(queryString){
 			this.isSearch = true
 			this.result = []
-			let inter = []
-			this.allCategories.forEach(async (cat)=>{
-				await getAll(`data/Ho21xA8W3774097vSXhU/${cat}`, (data)=>{
-					const filtered = data.filter(el => el.title ? el.title.toLowerCase().includes(queryString.toLowerCase()) : '')
-					if (filtered.length){
-						inter.push(...filtered)
-					}
-				}
-				)
-				console.log(inter.length)
-				this.result = inter
+			this.load = true
+			await matchFields(allCategories, queryString, (result)=>{
+				this.result = result
 			})
 		}
-	},
-	mounted(){
-		this.$emit("great")
 	},
 	data(){
 		return {
@@ -58,7 +48,8 @@ export default{
 				'babyP',
 				'drugs'
 			],
-			isSearch: false
+			isSearch: false,
+			load: false
 		}
 	},
 	updated(){

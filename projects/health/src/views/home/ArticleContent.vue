@@ -1,30 +1,30 @@
 <template>
   <div class="article-content">
 	<Banner />
-	<img src="../../assets/loading.gif" v-if="isLoading" class="loading">
+	<img
+		src="../../assets/loading.gif"
+		v-if="isLoading"
+		class="loading">
 	<div class="cards" v-if="!isLoading">
 		<Card
 			v-for="card in cards"
 			:key="card.id"
 			:card="card"
-			:path="$route.params.route"
 			@addFav="addFavs"
 			@removeFav="removeFavs"
 		/>
 	</div>
-	<!-- <div
+	<div
 		class="nosearch"
-		v-if="isSearch && !cardLength
-		&&
-		!isLoading"
+		v-if="isSearch && !cardLength"
 	>
 		Oups ! Il n y'a aucun resultat
-	</div> -->
+	</div>
   </div>
 </template>
 
 <script>
-import { getAll, saveOrOverride, unSaveDoc, auth } from '@/lib/firestoreLib';
+import { getAll, saveOrOverride, unSaveDoc, isLoggedUser, allCategories } from '@/lib/firestoreLib';
 import Banner from './partials/Banner.vue';
 import Card from './partials/Card.vue';
 
@@ -34,7 +34,7 @@ export default {
 		Banner,
 		Card
 	},
-	props: ['data', 'isSearch'],
+	props: ['data', 'isSearch', 'load'],
 	methods: {
 		addFavs: function (card){ // add to favorite
 			const index = this.cards.indexOf(card)
@@ -64,24 +64,17 @@ export default {
 			cards: [],
 			isLoading: true,
 			cardLength: 0,
-			allCategories: [
-				'healthy',
-				'home',
-				'medicalMaterials',
-				'slimmingSport',
-				'veterinary',
-				'beautyHi',
-				'babyP',
-				'drugs'
-			]
+			isLogged: false,
 		}
 	},
-	mounted(){
-		console.log(auth.currentUser)
+	async mounted(){
+		await isLoggedUser(status=>{
+			this.isLogged = status
+		})
 		const user =  JSON.parse(localStorage.getItem("user"))
 		const route = this.$route.params.route
 		let collect = null
-		if (this.allCategories.includes(route)){
+		if (allCategories.includes(route)){
 			collect = `data/Ho21xA8W3774097vSXhU/${route}`
 		}else if(route === "favorites"){
 			collect = `users/${user.id}/favorites`
@@ -103,17 +96,15 @@ export default {
 			}
 			this.cards = result
 			this.isLoading = false
-		})
+		}, origin=route)
 	},
 	updated(){
 		if (!this.isSearch){ //no search case
-			console.log("no search so i do nothing")
 		} else{
+			this.isLoading = this.load
 			this.cards = this.data
-			console.log("data length", this.data.length)
-			// const target_copy = JSON.parse(JSON.stringify(this.data))
-			// console.log(target_copy)
-			// // this.cards.forEach(card=> console.log(card))
+			this.cardLength = this.cards.length
+			console.log("boo")
 		}
 	}
 }

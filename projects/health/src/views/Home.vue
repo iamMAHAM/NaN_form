@@ -47,11 +47,6 @@ export default {
 			closeModal()
 		}
 	},
-	setup(){
-		defineProps:{
-
-		}
-	},
 
 	components: {
 		SideBar,
