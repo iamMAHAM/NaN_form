@@ -16,7 +16,7 @@
 	</div>
 	<div
 		class="nosearch"
-		v-if="isSearch && !cardLength"
+		v-if="isSearch && !isLoading && flag"
 	>
 		Oups ! Il n y'a aucun resultat
 	</div>
@@ -63,8 +63,8 @@ export default {
 		return {
 			cards: [],
 			isLoading: true,
-			cardLength: 0,
 			isLogged: false,
+			flag: 0
 		}
 	},
 	async mounted(){
@@ -101,10 +101,10 @@ export default {
 	updated(){
 		if (!this.isSearch){ //no search case
 		} else{
-			this.isLoading = this.load
+			this.isLoading = true
 			this.cards = this.data
-			this.cardLength = this.cards.length
-			console.log("boo")
+			this.isLoading = false
+			this.cards?.length ? this.flag = false : this.flag = true
 		}
 	}
 }
