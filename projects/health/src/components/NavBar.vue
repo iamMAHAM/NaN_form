@@ -74,6 +74,7 @@
 <script>
 import { ref } from '@vue/reactivity'
 import LoginRegister from './LoginRegister.vue'
+import { signOutUser } from '@/lib/firestoreLib'
 
 export default {
 	components:{
@@ -89,13 +90,8 @@ export default {
 	methods:{
 		search(){
 			const searchButton = this.$refs.search
-			console.log(searchButton, this.searchQuery)
 			this.$emit("search", this.searchQuery)
 		}
-	},
-	async mounted(){
-		console.log("navbar mounted")
-
 	},
 	setup(){
 
@@ -112,7 +108,8 @@ export default {
 			modal.value = false
 		}
 
-		const logOut = ()=>{
+		const logOut = async ()=>{
+			signOutUser()
 			localStorage.removeItem("user")
 			isLogged.value = false
 			window.location.href = "/"
