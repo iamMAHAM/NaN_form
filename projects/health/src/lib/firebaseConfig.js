@@ -1,15 +1,6 @@
 import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
-
-import { getDatabase, connectDatabaseEmulator } from "firebase/database";
-
-//local firebase
-
-// const db = getDatabase();
-// if (location.hostname === "localhost") {
-//   // Point to the RTDB emulator running on localhost.
-//   connectDatabaseEmulator(db, "localhost", 9000);
-// } 
+import { getDatabase } from "firebase/database";
 
 // /************* ABK CONFIG **********/
 // const firebaseConfig = {
@@ -30,8 +21,13 @@ const firebaseConfig = {
 	storageBucket: "health-4d90f.appspot.com",
 	messagingSenderId: "679428405651",
 	appId: "1:679428405651:web:f3194609735edf4debd066",
-	measurementId: "G-LC4QDT4RSW"
+	measurementId: "G-LC4QDT4RSW",
+	databaseURL: "https://health-4d90f-default-rtdb.firebaseio.com",
 }
 
 const app = initializeApp(firebaseConfig)
+
+// Initialize Realtime Database and get a reference to the service
+
+export const database = getDatabase(app)
 export const db = getFirestore(app)

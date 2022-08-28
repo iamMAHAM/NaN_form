@@ -6,22 +6,25 @@
     <router-link to="/contact">Contact</router-link>
   </nav> -->
     <NavBar :cart="cart" @search="perfSearch" />
-    <router-view
+    <!-- <router-view
 		:key="$route.fullPath"
 		:searchResult="result"
 		:isSearch="isSearch"
 		:load="load"
-	/>
+	/> -->
+	<Discussion />
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue'
+import Discussion from './components/Discussion.vue'
 import { getAll, matchFields, allCategories } from './lib/firestoreLib'
 
 export default{
     name:'App',
     components: {
-        NavBar
+        NavBar,
+        Discussion
     },
 
 	methods:{
