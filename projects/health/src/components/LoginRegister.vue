@@ -55,7 +55,12 @@
 											login
 										</span>
 				</p>
+				<img src="../assets/loading.gif"
+					v-if="request"
+					class="wait"
+				>
                 <button
+					v-if="!request"
                 	class="register-button"
 					:onclick="registerCheck"
                 >
@@ -74,7 +79,7 @@
             <h1 class="register-success">Registration Successfull</h1>
             <img class="v" src="../assets/v.png" alt="" />
             <p class="message">
-                We've sent you an email to <span id="email">{ formData?.email }.</span><br />
+                We've sent you an email to <span id="email">{{ fields.email }}.</span><br />
                 You need to confirm your account ...
             </p>
         </div>
@@ -112,7 +117,12 @@
 											register
 										</span>
 				</p>
+				<img src="../assets/loading.gif"
+					v-if="request"
+					class="wait"
+				>
                 <button
+					v-if="!request"
                 	class="register-button"
 					:onclick="loginCheck"
                 >
@@ -120,6 +130,7 @@
                 </button>
             </div>
 			<div class="error" v-if="error">{{ errorMessage}}</div>
+			<div class="success" v-if="success">login success</div>
 		</div>
     </div>
 </transition>
@@ -145,7 +156,9 @@ export default {
 			login: true,
 			register: false,
 			error: false,
+			success: false,
 			registrated: false,
+			request: false,
 		}
 	},
 	methods: {
@@ -171,13 +184,17 @@ export default {
 		},
 		loginCheck(){
 			console.log("loginCheck")
+			this.request = true
 			signIn(this.fields, (res)=>{
 				console.log(res)
 				if (res.user){
-					console.log(res)
 					localStorage.setItem("user",JSON.stringify(res.user))
+					this.success = true
+					this.request = false
+					setTimeout(()=>this.success = false, 4000)
 					this.$emit("loggedIn")
 				}else{
+					console.log(res)
 					this.errorMessage = res.error.replace("auth/", '').replace("-", ' ')
 					this.error = true
 					setTimeout(()=>this.error = false, 5000)
@@ -185,10 +202,19 @@ export default {
 			})
 		},
 		registerCheck(){
+			this.request = true
 			signUp(this.fields, (res)=>{
-				res.error === 'auth/email-already-in-use'
-				this.errorMessage = err.error.replace("auth/", '').replace("-", ' ')
+				if (res.status){ // register success
+					this.register = false,
+					this.login = false,
+					this.registrated = true
+					this.request = false
+					return
+				}
+				// case of failure
+				this.errorMessage = res.message.replace("auth/", '').replace("-", ' ')
 				this.error = true
+				this.request = false
 				setTimeout(()=>this.error = false, 5000)
 			})
 		}
@@ -254,6 +280,7 @@ export default {
 		padding: .5rem;
 	}
 
+	.success,
 	.error{
 		width: 70%;
 		/* border-top-right-radius: 1rem;
@@ -267,6 +294,10 @@ export default {
 		text-align: center;
 		color: var(--red);
 		font-size: 2.5rem;
+	}
+
+	.success{
+		color: var(--green);
 	}
 
 	.validated{
@@ -327,6 +358,11 @@ export default {
 		cursor: pointer;
 		font-size: 2.2rem;
 		text-decoration: underline;
+	}
+
+	.bottom .wait{
+		height: 1rem;
+		width: 7.5rem;
 	}
 
 	.reg:hover{

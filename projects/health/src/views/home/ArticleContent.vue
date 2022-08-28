@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { getAll, saveOrOverride, unSaveDoc } from '@/lib/firestoreLib';
+import { getAll, saveOrOverride, unSaveDoc, auth } from '@/lib/firestoreLib';
 import Banner from './partials/Banner.vue';
 import Card from './partials/Card.vue';
 
@@ -77,16 +77,20 @@ export default {
 		}
 	},
 	mounted(){
+		console.log(auth.currentUser)
 		const user =  JSON.parse(localStorage.getItem("user"))
+		const route = this.$route.params.route
 		let collect = null
-		if (this.$route.params.route != 'favorites'){
-			collect = `data/Ho21xA8W3774097vSXhU/${this.$route.params.route}`
-		}else {
+		if (this.allCategories.includes(route)){
+			collect = `data/Ho21xA8W3774097vSXhU/${route}`
+		}else if(route === "favorites"){
 			collect = `users/${user.id}/favorites`
+		}else{
+			this.$router.push("/404")
 		}
-		getAll(collect, (result)=>{
+		getAll(collect, async (result)=>{
 			if (user){
-				getAll(`users/${user.id}/favorites`, (favorites)=>{
+				await getAll(`users/${user.id}/favorites`, (favorites)=>{
 					result.map((c, i) => {
 						if (favorites.some(fav => c.id === fav.id )){
 							result[i].isFav = true
@@ -94,11 +98,11 @@ export default {
 							result[i].isFav = false
 						}
 						result[i].isLoad = false
-					})
-					this.cards = result
-					this.isLoading = false
+					})	
 				})
 			}
+			this.cards = result
+			this.isLoading = false
 		})
 	},
 	updated(){

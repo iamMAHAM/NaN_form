@@ -1,9 +1,9 @@
 
 import { db } from "./firebaseConfig";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged } from "firebase/auth"
 import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, collectionGroup } from "firebase/firestore"; 
 
-const auth = getAuth()
+export const auth = getAuth()
 
 export const getOne = async (collect="", id="", callback=null)=>{
     const docRef = doc(db, collect, id)
@@ -25,9 +25,17 @@ export const getAll = async (collect, callback)=>{
     return callback(result)
 }
 
-export const saveDoc = async (collect="", doc, callback)=>{
-    const docRef = await addDoc(collection(db, collect), doc)
-	return callback(docRef.id)
+export const queryAll = async (id="", property, operator, value)=>{
+    const ref = collection(db, id)
+    const q = query(ref, where(property, operator, value))
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach((doc) => {
+    console.log(doc.id, " => ", doc.data())
+    })
+}
+
+export const saveDoc = async (collect="", doc)=>{
+    await addDoc(collection(db, collect), doc)
 }
 
 export const saveOrOverride = async(collect, id, doct, callback)=>{
@@ -48,12 +56,22 @@ export const unSaveDoc = async (collect="", doct)=>{
 }
 
 export const signUp = (data, callback)=>{
-    console.log(data)
+    let result = {
+        status: null,
+        message: null
+    }
     createUserWithEmailAndPassword(auth, data.email, data.password)
-    .then(userCredential=>{
-        console.log(userCredential)
-        saveDoc("users", data)
-    }).catch(e=> {return callback(e.code)})
+    .then(async (u)=>{
+        await sendEmailVerification(u.user)
+        await saveDoc("users", data)
+        result.status = true
+        result.message = "register success"
+        return callback(result)
+    }).catch(e=> {
+        result.status = false,
+        result.message = e.code
+        return callback(result)
+    })
 }
 
 export const signIn = async (data, callback)=>{
@@ -66,7 +84,6 @@ export const signIn = async (data, callback)=>{
         const users = collection(db, "users")
         const q = query(users, where("email", "==", data.email))
         const querySnapshot = await getDocs(q)
-        console.log("query", querySnapshot)
         querySnapshot.forEach(doc=>{
             let user = doc.data()
             user["id"] = doc.id
@@ -79,3 +96,13 @@ export const signIn = async (data, callback)=>{
         return callback(result)
     })
 }
+
+export const handleUser = onAuthStateChanged(auth, (user) => {
+    if (user) {
+        console.log("user is connected")
+        console.log(user)
+      // ...
+    } else {
+        console.log("not login")
+    }
+})

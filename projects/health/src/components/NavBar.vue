@@ -74,7 +74,6 @@
 <script>
 import { ref } from '@vue/reactivity'
 import LoginRegister from './LoginRegister.vue'
-import { getAll } from '@/lib/firestoreLib'
 
 export default {
 	components:{

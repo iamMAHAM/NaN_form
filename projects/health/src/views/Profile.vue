@@ -167,7 +167,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .profile a, li, em, button, input, textarea, select{
     text-decoration: none;

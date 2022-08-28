@@ -1,6 +1,16 @@
 import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
 
+import { getDatabase, connectDatabaseEmulator } from "firebase/database";
+
+//local firebase
+
+// const db = getDatabase();
+// if (location.hostname === "localhost") {
+//   // Point to the RTDB emulator running on localhost.
+//   connectDatabaseEmulator(db, "localhost", 9000);
+// } 
+
 // /************* ABK CONFIG **********/
 // const firebaseConfig = {
 //   apiKey: "AIzaSyAIpsPKlW3Xo3OlB1L3xHLCpMg_LCvhS3I",
@@ -24,8 +34,4 @@ const firebaseConfig = {
 }
 
 const app = initializeApp(firebaseConfig)
-const db = getFirestore(app)
-
-export {
-    db
-}
+export const db = getFirestore(app)
