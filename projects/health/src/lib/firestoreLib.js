@@ -1,6 +1,6 @@
 
 import { db } from "./firebaseConfig";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged,signOut } from "firebase/auth"
 import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, collectionGroup } from "firebase/firestore"; 
 
 export const auth = getAuth()
@@ -25,13 +25,21 @@ export const getAll = async (collect, callback)=>{
     return callback(result)
 }
 
-export const queryAll = async (id="", property, operator, value)=>{
-    const ref = collection(db, id)
-    const q = query(ref, where(property, operator, value))
-    const querySnapshot = await getDocs(q)
-    querySnapshot.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data())
-    })
+export const matchFields = async (categories=[], value="", callback)=>{
+    let result = []
+    for (const cat of categories){
+        const q = query(collection(db, `data/Ho21xA8W3774097vSXhU/${cat}`),
+        where("title", ">=", value),
+        where("title", "<=", value + "\uf8ff")
+        )
+        const querySnapshot = await getDocs(q)
+        querySnapshot.forEach((doc) => {
+            let toPush = doc.data()
+            toPush.id = doc.id
+            result.push(toPush)
+        })
+    }
+    return callback(result)
 }
 
 export const saveDoc = async (collect="", doc)=>{
@@ -97,12 +105,25 @@ export const signIn = async (data, callback)=>{
     })
 }
 
-export const handleUser = onAuthStateChanged(auth, (user) => {
-    if (user) {
-        console.log("user is connected")
-        console.log(user)
-      // ...
-    } else {
-        console.log("not login")
-    }
-})
+export const signOutUser = async ()=>{
+    const data = await signOut(auth)
+    console.log(data)
+}
+export const isLoggedUser = async (callback)=>{
+    onAuthStateChanged(auth, (user) => {
+        const status = user ? true : false
+        return callback(status)
+    })
+   
+}
+
+export const allCategories = [
+	'health',
+	'home',
+	'medicalMaterials',
+	'slimmingSport',
+	'veterinary',
+	'beautyHygiene',
+	'babyPregnacy',
+	'drugs'
+]
