@@ -12,7 +12,7 @@
 		:isSearch="isSearch"
 		:load="load"
 	/> -->
-	<Discussion />
+	<Discussion v-if="user"/>
 </template>
 
 <script>
@@ -52,18 +52,30 @@ export default{
 				'drugs'
 			],
 			isSearch: false,
-			load: false
+			load: false,
+			user: false,
 		}
 	},
 	updated(){
+		console.log("updated")
 		const user = JSON.parse(localStorage.getItem("user"))
 		const length = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")).length : 0
+		console.log("user")
 		if (user){
+			this.user = true
 			getAll(`users/${user.id}/cart`, (res)=>{
 				this.cart = res.length
 			})
 		}else{ //no logged in user
 			this.cart = length
+		}
+	},
+	mounted(){
+		const user = JSON.parse(localStorage.getItem("user"))
+		console.log("mounted")
+		console.log(user)
+		if (user){
+			this.user = true
 		}
 	}
 }
