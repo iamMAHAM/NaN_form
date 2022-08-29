@@ -119,14 +119,6 @@ export const isLoggedUser = async (callback)=>{
    
 }
 
-// export const unsub = ()=>{
-// 	onSnapshot(collection(db, "chat/wVYmZOn83YCicA78AUQh/messages"), (querySnapshot) => {
-// 		querySnapshot.forEach(doc=>{
-// 			console.log("doc", doc.data())
-// 		})
-// 	});
-
-// }
 export const realTimeListener = (id, callback)=>{
 	console.log("listening for changes ...")
 	let messages = []
