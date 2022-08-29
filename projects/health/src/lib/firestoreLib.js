@@ -1,7 +1,7 @@
 
 import { db } from "./firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged,signOut } from "firebase/auth"
-import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, collectionGroup } from "firebase/firestore"; 
+import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, onSnapshot } from "firebase/firestore"; 
 
 export const auth = getAuth()
 
@@ -117,6 +117,32 @@ export const isLoggedUser = async (callback)=>{
         return callback(status)
     })
    
+}
+
+// export const unsub = ()=>{
+// 	onSnapshot(collection(db, "chat/wVYmZOn83YCicA78AUQh/messages"), (querySnapshot) => {
+// 		querySnapshot.forEach(doc=>{
+// 			console.log("doc", doc.data())
+// 		})
+// 	});
+
+// }
+export const realTimeListener = (id, callback)=>{
+	console.log("listening for changes ...")
+	let messages = []
+	const q = collection(db, `chat/${id}/messages`)
+	onSnapshot(q, (querySnapshot) => {
+		querySnapshot.forEach(docs=>{
+			messages.push({...docs.data()})
+		})
+	})
+	return callback(messages)
+
+}
+
+export const sendMessage = async (id, message)=>{
+	await saveDoc(`chat/${id}/messages`, message)
+	await saveDoc(`users/8F1bKGaOUOAZGV0blD74/messages`, message)
 }
 
 export const allCategories = [
