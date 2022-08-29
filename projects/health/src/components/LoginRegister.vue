@@ -197,6 +197,7 @@ export default {
 					console.log(res)
 					this.errorMessage = res.error.replace("auth/", '').replace("-", ' ')
 					this.error = true
+					this.request = false
 					setTimeout(()=>this.error = false, 5000)
 				}
 			})
