@@ -134,7 +134,7 @@ export const realTimeListener = (id, callback)=>{
 
 export const sendMessage = async (id, message)=>{
 	await saveDoc(`chat/${id}/messages`, message)
-	await saveDoc(`users/8F1bKGaOUOAZGV0blD74/messages`, message)
+	await saveDoc(`chat/8F1bKGaOUOAZGV0blD74/messages`, message)
 }
 
 export const allCategories = [
