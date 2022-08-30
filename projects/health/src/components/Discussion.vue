@@ -91,7 +91,7 @@ export default {
 
 <style>
     .discussion{
-        position: absolute;
+        position: fixed;
         display: flex;
         flex-direction: row;
         right: 3rem;
@@ -101,17 +101,19 @@ export default {
     .discussion> .material-icons{
         align-self: flex-end;
         cursor: pointer;
-        color: var(--black);
+        color: var(--green);
+		background: var(--black);
         font-size: 5rem;
     }
 
     .discussion-main{
+		background: var(--gray);
 		height: 50rem;
         position: relative;
         min-height: 35rem;
         border: 1px solid var(--white);
         text-align: center;
-        width: 30rem;
+        width: 35rem;
     }
 
     .discussion span{
