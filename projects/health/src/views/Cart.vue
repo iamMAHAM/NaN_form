@@ -29,9 +29,8 @@
 						min="1"
 						max="10"
 						v-model="cart.amount"
-						:onchange="updateTotal"
 					>
-					<p class="article-price"> <span>{{ cart.price }}</span> FCFA * <span>{{ cart.amount }}</span></p>
+					<p class="article-price"> <span>{{ cart.price }}</span> FCFA x <span>{{ cart.amount }}</span></p>
 				</div>
 			</div>
         </div>
@@ -49,32 +48,25 @@ import { unSaveDoc, getAll } from "@/lib/firestoreLib"
 
 export default {
     name: 'Cart',
+	props: ["searchResult", "isSearch", "load"],
     methods: {
         update(){
-            const all = document.querySelectorAll(".article-price")
-            this.total = 0
-			console.log("all", all)
-            Array.from(all).forEach(cmd=>{
-                this.total += eval(cmd.textContent.replace("FCFA", ''))
-            })
-			console.log(this.total)
-            this.total = this.total.toFixed(2)
-        },
-        updateTotal(e){
-            const target = e.target
-            console.log(target.nextElementSibling.children[1].textContent)
-            target.nextElementSibling.children[1].textContent = target.value
-            this.update()
+			let inter = 0
+			this.cartItems.map(c=>{
+				inter += c.amount * c.price
+			})
+			this.total = inter.toFixed(2)
         },
 		async removeToCart(e){
+			const user = JSON.parse(localStorage.getItem("user"))
 			const parent = e.target.parentElement
-			if (!this.user){
+			if (!user){
 				this.cartItems = this.cartItems.filter(c => c.id !== parent.id)
 				localStorage.setItem("cart", JSON.stringify(this.cartItems))
 			} else{
 				const matchingCart = this.cartItems.filter(cart=> cart.id === parent.id)[0]
 				matchingCart.load = true
-				await unSaveDoc(`users/${this.user.id}/cart`, parent.id)
+				await unSaveDoc(`users/${user.id}/cart`, parent.id)
 				this.cartItems = this.cartItems.filter(c => c.id !== parent.id)
 				matchingCart.load = false
 			}
@@ -87,12 +79,12 @@ export default {
             total: 0,
             cartItems: [],
             loaded: true,
-			user: JSON.parse(localStorage.getItem("user"))
         }
     },
     async mounted(){
-		if (this.user){
-			await getAll("users/jhzGn5dE2kNLZOT4lUu2/cart", carts=> {
+		const user = JSON.parse(localStorage.getItem("user"))
+		if (user){
+			await getAll(`users/${user.id}/cart`, carts=> {
 				this.cartItems = carts
 			})
 		} else{ 
@@ -102,7 +94,10 @@ export default {
 		setTimeout(()=>{
 			this.update()
 		}, 200)
-    }
+    },
+	updated(){
+		this.update()
+	}
 }
 </script>
 
@@ -125,10 +120,12 @@ export default {
     }
 
     div.cart-item{
+		margin: 1rem;
+		border-radius: 1rem;
+		background: var(--white);
         position: relative;
         padding: 2rem;
         justify-content: space-around;
-        border-bottom: .1rem solid var(--black);
         display: flex;
         flex-direction: row;
     }
