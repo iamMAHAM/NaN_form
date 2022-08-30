@@ -83,12 +83,10 @@ export default {
 				const cart = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : []
 				cart.push(this.data)
 				localStorage.setItem("cart", JSON.stringify(cart))
-				this.wait = false
-				// this.$root.$forceUpdate()
-				return
+			} else {
+				await saveDoc(`users/${user.id}/cart`, this.data)
 			}
-			await saveDoc(`users/${user.id}/cart`, this.data)
-			// this.$root.$forceUpdate()
+			this.$root.$forceUpdate()
 			this.wait = false
 		}
 	},
