@@ -18,7 +18,7 @@
 				</a>
 			</div>
 		</li>
-		<div class="nav-end">
+		<div class="nav-end" v-show="show">
 			<li
 				class="nav-item"
 				
@@ -66,6 +66,7 @@
 		<i
 			class="material-icons element"
 			v-if="rss"
+			@click="showItems"
 		>
 			dialpad
 		</i>
@@ -91,19 +92,34 @@ export default {
 		return {
 			searchQuery: '',
 			rss: null,
-			s300to500: window.matchMedia("(min-width: 320px) and (max-width: 500px)")
+			s1to500: window.matchMedia("(min-width: 1px) and (max-width: 500px)"),
+			show: false
+		}
+	},
+	mounted(){
+		if (this.s1to500.matches){
+			console.log("matches")
+			this.rss = true;
+		}
+		window.onresize = ()=>{
+			if (this.s1to500.matches) this.rss = true
+			else this.rss = false
 		}
 	},
 	updated(){
-		console.log("rss", this.rs)
+		console.log("rss", this.rss)
 	},
 	props: ["cart", "rs"]
 	,
 	methods:{
 		search(){
-			const searchButton = this.$refs.search
 			if (this.searchQuery)
 			this.$emit("search", this.searchQuery)
+		},
+		showItems(){
+			console.log("rss", this.show)
+			this.show =! this.show
+			console.log(this.show)
 		}
 	},
 	setup(){
