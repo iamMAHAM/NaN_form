@@ -6,63 +6,70 @@
 			</router-link>
 		</div>
 		<li class="nav-item">
-		<div class="search">
-			<input type="search" id="search" placeholder="rechercher votre produit" role="search" v-model="searchQuery">
-			<a
-				class="item"
-				style="margin: auto; cursor: pointer;"
-				ref="search"
-				@click="search"
-			>
-				<i class="material-icons loupe">search</i>
-			</a>
-		</div>
+			<div class="search">
+				<input type="search" id="search" placeholder="rechercher votre produit" role="search" v-model="searchQuery">
+				<a
+					class="item"
+					style="margin: auto; cursor: pointer;"
+					ref="search"
+					@click="search"
+				>
+					<i class="material-icons loupe">search</i>
+				</a>
+			</div>
 		</li>
 		<div class="nav-end">
-		<li
-			class="nav-item"
-			
-		>
-			<a
-				href="#"
-				class="item"
-				@click="showLogin"
-				v-if="!isLogged"
+			<li
+				class="nav-item"
+				
 			>
-			<i class="material-icons item">login</i>
-			Connexion
-			</a>
-		</li>
-		<li
-			class="nav-item"
-			v-if="isLogged"
-			@click="logOut"
-		>
-			<a href="#" class="item">
-			<i class="material-icons item">logout</i>
-			Déconnexion
-			</a>
-		</li>
-		<router-link to="/user/profile" tag="li" class="nav-item" v-if="isLogged">
-			<a href="#" class="item">
-			<i class="material-icons item">account_circle</i>
-			Profile
-			</a>
-		</router-link>
-		<router-link to="/favorites" tag="li" class="nav-item" v-if="isLogged">
-			<a href="#" class="item">
-			<i class="material-icons item">favorite</i>
-			Favoris
-			</a>
-		</router-link>
-		<router-link to="/cart" class="nav-item">
-			<a href="#" class="item" style="position: relative;">
-			<i class="material-icons item">shopping_cart</i>
-			Panier
-			<span class="cart-article"> {{ cart }}</span>
-			</a>
-		</router-link>
+				<a
+					href="#"
+					class="item"
+					@click="showLogin"
+					v-if="!isLogged"
+				>
+				<i class="material-icons item">login</i>
+				<span>Connexion</span>
+				</a>
+			</li>
+			<li
+				class="nav-item"
+				v-if="isLogged"
+				@click="logOut"
+			>
+				<a href="#" class="item">
+				<i class="material-icons item">logout</i>
+				<span v-if="!rs">Déconnexion</span>
+				</a>
+			</li>
+			<router-link to="/profile" tag="li" class="nav-item" v-if="isLogged">
+				<a href="#" class="item">
+				<i class="material-icons item">account_circle</i>
+				<span v-if="!rs">Profile</span>
+				</a>
+			</router-link>
+			<router-link to="/favorites" tag="li" class="nav-item" v-if="isLogged">
+				<a href="#" class="item">
+				<i class="material-icons item">favorite</i>
+				<span v-if="!rs">Favoris</span>
+				</a>
+			</router-link>
+			<router-link to="/cart" class="nav-item">
+				<a href="#" class="item" style="position: relative;">
+				<i class="material-icons item">shopping_cart</i>
+				<span v-if="!rs">Panier</span>
+				<span class="cart-article"> {{ cart }}</span>
+				</a>
+			</router-link>
 		</div>
+		<i
+			class="material-icons element"
+			v-if="rss"
+		>
+			dialpad
+		</i>
+
 		<LoginRegister
 			v-if="modal"
 			@close="closeModal"
@@ -83,9 +90,14 @@ export default {
 	data(){
 		return {
 			searchQuery: '',
+			rss: null,
+			s300to500: window.matchMedia("(min-width: 320px) and (max-width: 500px)")
 		}
 	},
-	props: ["cart"]
+	updated(){
+		console.log("rss", this.rs)
+	},
+	props: ["cart", "rs"]
 	,
 	methods:{
 		search(){
@@ -198,7 +210,7 @@ export default {
 		width: 2.2rem;
 		font-size: 2.2rem;
 		position: absolute;
-		/* top: -20%; */
+		top: 0%;
 		left: 50%;
 		background-color: var(--white);
 		border-radius: 50%;

@@ -1,0 +1,82 @@
+@media all and (min-width: 1024px) and (max-width: 1280px) {
+	html{
+		font-size: 55%;
+	}
+
+	.card{
+		width: 22%;
+	}
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px){
+	html{
+		font-size: 45%;
+	}
+
+	.card{
+		width: 40%;
+	}
+
+	body{
+		font-size: 2rem;
+	}
+
+	.cart-article{
+		top: 0;
+	}
+}
+
+@media all and (min-width: 300px) and (max-width: 768px){
+
+	html{
+		font-size: 50%;
+	}
+	div.side-content{
+		/* display: none; */
+		padding: 5px;
+	}
+
+	div.side-bar{
+		top: 8%;
+		left: 0;
+	}
+
+	.side-bar > p{
+		content: "lol";
+		display: none;
+	}
+
+	div.container{
+		gap: 0;
+	}
+
+	.search{
+		width: 20rem;
+	}
+
+	.side-row .material-icons{
+		margin: 0 0;
+	}
+
+	div.side-contents{
+		padding: 5px;
+		border-radius: 10px;
+	}
+}
+
+.apps{
+	color: var(--black);
+	position: absolute;
+	transform: translateY(-100%);
+	left: 10%;
+	font-size: 30px;
+}
+
+.element{
+	font-size: 3.5rem;
+	color: var(--white);
+}
+
+div.active{
+	display: block;
+}

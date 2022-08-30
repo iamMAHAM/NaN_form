@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<SideBar />
+		<SideBar @rs="emittoo"/>
 		<ArticleContent
 			:data="searchResult"
 			:isSearch="isSearch"
@@ -45,6 +45,9 @@ export default {
 		loggedIn(){
 			this.isLogged = true
 			closeModal()
+		},
+		emittoo(rs){
+			this.$emit("rs", rs)
 		}
 	},
 

@@ -67,37 +67,37 @@ export default {
 			flag: 0
 		}
 	},
-	async mounted(){
-		await isLoggedUser(status=>{
-			this.isLogged = status
-		})
-		const user =  JSON.parse(localStorage.getItem("user"))
-		const route = this.$route.params.route
-		let collect = null
-		if (allCategories.includes(route)){
-			collect = `data/Ho21xA8W3774097vSXhU/${route}`
-		}else if(route === "favorites"){
-			collect = `users/${user.id}/favorites`
-		}else{
-			this.$router.push("/404")
-		}
-		getAll(collect, async (result)=>{
-			if (user){
-				await getAll(`users/${user.id}/favorites`, (favorites)=>{
-					result.map((c, i) => {
-						if (favorites.some(fav => c.id === fav.id )){
-							result[i].isFav = true
-						}else{
-							result[i].isFav = false
-						}
-						result[i].isLoad = false
-					})	
-				})
-			}
-			this.cards = result
-			this.isLoading = false
-		}, origin=route)
-	},
+	// async mounted(){
+	// 	await isLoggedUser(status=>{
+	// 		this.isLogged = status
+	// 	})
+	// 	const user =  JSON.parse(localStorage.getItem("user"))
+	// 	const route = this.$route.params.route
+	// 	let collect = null
+	// 	if (allCategories.includes(route)){
+	// 		collect = `data/Ho21xA8W3774097vSXhU/${route}`
+	// 	}else if(route === "favorites"){
+	// 		collect = `users/${user.id}/favorites`
+	// 	}else{
+	// 		this.$router.push("/404")
+	// 	}
+	// 	getAll(collect, async (result)=>{
+	// 		if (user){
+	// 			await getAll(`users/${user.id}/favorites`, (favorites)=>{
+	// 				result.map((c, i) => {
+	// 					if (favorites.some(fav => c.id === fav.id )){
+	// 						result[i].isFav = true
+	// 					}else{
+	// 						result[i].isFav = false
+	// 					}
+	// 					result[i].isLoad = false
+	// 				})	
+	// 			})
+	// 		}
+	// 		this.cards = result
+	// 		this.isLoading = false
+	// 	}, origin=route)
+	// },
 	updated(){
 		if (!this.isSearch){ //no search case
 		} else{

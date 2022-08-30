@@ -44,16 +44,17 @@ export default {
 
 <style>
 	.card{
+		display: flex;
 		background-color: var(--white);
 		overflow: hidden;
 		border-radius: .5rem;
 		text-align: center;
-		/* border: .5px solid black; */
 		position: relative;
-		height: 27rem;
+		min-height: max-content;
 		margin: 1rem auto;
 		width: 18%;
 		flex-direction: column;
+		justify-content: space-between;
 	}
 
 	div.pricing,
@@ -94,7 +95,6 @@ export default {
 	}
 
 	div.pricing{
-		position: absolute;
 		bottom: 0;
 		width: 100%;
 		font-size: 1.8rem;

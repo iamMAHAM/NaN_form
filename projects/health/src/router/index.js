@@ -32,7 +32,7 @@ const routes = [
 	  props: true
 	},
 	{
-	  path: '/user/profile',
+	  path: '/profile',
 	  name: 'profile',
 	  component: Profile
 	},

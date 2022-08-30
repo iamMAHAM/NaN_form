@@ -1,10 +1,11 @@
 <template>
-    <NavBar :cart="cart" @search="perfSearch" />
+    <NavBar :cart="cart" @search="perfSearch" :rs="rs"/>
     <router-view
 		:key="$route.fullPath"
 		:searchResult="result"
 		:isSearch="isSearch"
 		:load="load"
+		@rs="es"
 	/>
 	<Discussion v-if="user"/>
 </template>
@@ -29,6 +30,10 @@ export default{
 			await matchFields(allCategories, queryString, (result)=>{
 				this.result = result
 			})
+		},
+		es(rs){
+			console.log("rs received", rs)
+			this.rs = rs
 		}
 	},
 	data(){
@@ -48,6 +53,7 @@ export default{
 			isSearch: false,
 			load: false,
 			user: false,
+			rs: null
 		}
 	},
 	updated(){
