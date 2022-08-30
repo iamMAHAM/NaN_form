@@ -1,17 +1,11 @@
 <template>
-  <!-- <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/store">Store</router-link>
-    <router-link to="/contact">About</router-link>
-    <router-link to="/contact">Contact</router-link>
-  </nav> -->
     <NavBar :cart="cart" @search="perfSearch" />
-    <!-- <router-view
+    <router-view
 		:key="$route.fullPath"
 		:searchResult="result"
 		:isSearch="isSearch"
 		:load="load"
-	/> -->
+	/>
 	<Discussion v-if="user"/>
 </template>
 
