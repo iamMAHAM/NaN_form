@@ -53,7 +53,6 @@ export default{
 	updated(){
 		const user = JSON.parse(localStorage.getItem("user"))
 		const length = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")).length : 0
-		console.log("user")
 		if (user){
 			this.user = true
 			getAll(`users/${user.id}/cart`, (res)=>{
