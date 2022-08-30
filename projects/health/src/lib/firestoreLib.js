@@ -14,7 +14,6 @@ export const getOne = async (collect="", id="", callback=null)=>{
     const docSnap = await getDoc(docRef)
 	let toPush = docSnap.data()
 	toPush.id = docSnap.id
-	console.log(toPush)
 	return callback(toPush)
 }
 
@@ -60,18 +59,15 @@ export const saveDocs = (collect="", docs=[])=>{
     // Add a new document with a generated id.
     docs.forEach(async (doc) =>{
         const docRef = await addDoc(collection(db, collect), doc)
-        console.log(docRef.id)
     })
 }
 
 export const unSaveDoc = async (collect="", doct)=>{
     await deleteDoc(doc(db, collect, doct))
-	console.log("doc with", doct, "deleted")
 }
 
 export const updateUserInfo = async(user_id, new_data)=>{
 	await updateDoc(doc(db, "users", user_id), new_data)
-	console.log("doc updated success")
 }
 
 export const signUp = (data, callback)=>{
@@ -117,8 +113,7 @@ export const signIn = async (data, callback)=>{
 }
 
 export const signOutUser = async ()=>{
-    const data = await signOut(auth)
-    console.log(data)
+    await signOut(auth)
 }
 export const isLoggedUser = async (callback)=>{
     onAuthStateChanged(auth, (user) => {
@@ -126,19 +121,6 @@ export const isLoggedUser = async (callback)=>{
         return callback(status, user)
     })
    
-}
-
-export const realTimeListener = (id, callback)=>{
-	console.log("listening for changes ...")
-	let messages = []
-	const q = collection(db, `chat/${id}/messages`)
-	onSnapshot(q, (querySnapshot) => {
-		querySnapshot.forEach(docs=>{
-			messages.push({...docs.data()})
-		})
-	})
-	return callback(messages)
-
 }
 
 export const sendMessage = async (id, message)=>{
