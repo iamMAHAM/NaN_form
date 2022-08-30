@@ -44,7 +44,7 @@
                 v-model="amount"
                 >
             </div>
-            <span class="rt-price">{{ data.price }} FCFA</span>
+            <span class="rt-price" ref="price">{{ data.price }} FCFA</span>
 			<img src="../assets/loading.gif" class="wait" v-if="wait">
             <button
 				v-if="!wait"
@@ -62,17 +62,19 @@ import { getOne, saveDoc } from '@/lib/firestoreLib'
 
 export default {
     name: 'Detail',
+	props: ["searchResult", "isSearch", "load"],
 	data(){
 		return {
 			data: {
 			},
 			isLoading: true,
 			amount: 1,
-			wait: false
+			wait: false,
+			price: 0
 		}
 	},
 	methods:{
-		addToCart(){
+		async addToCart(){
 			this.wait = true
 			const user = JSON.parse(localStorage.getItem("user"))
 			this.data.amount = this.amount
@@ -82,20 +84,28 @@ export default {
 				cart.push(this.data)
 				localStorage.setItem("cart", JSON.stringify(cart))
 				this.wait = false
-				this.$root.$forceUpdate()
+				// this.$root.$forceUpdate()
 				return
 			}
-			saveDoc(`users/${user.id}/cart`, this.data, (res)=>{
-				this.$root.$forceUpdate()
-				this.wait = false
-			})
+			await saveDoc(`users/${user.id}/cart`, this.data)
+			// this.$root.$forceUpdate()
+			this.wait = false
 		}
 	},
-
+	updated(){
+		const price  = this.$refs.price
+		this.price = this.data.price
+		price.textContent = (this.amount * this.price).toFixed(2) + ' FCFA'
+	},
 	mounted(){
 		const route = this.$route.params
+		const user = JSON.parse(localStorage.getItem("user"))
+		let fullPath = `data/Ho21xA8W3774097vSXhU/${route.doc}`
         console.log(route)
-		getOne(`data/Ho21xA8W3774097vSXhU/${route.doc}`, route.id, (data)=>{
+		if (route.doc === "favorites"){
+			fullPath = `users/${user.id}/favorites`
+		}
+		getOne(fullPath, route.id, (data)=>{
 			this.data = data
 			this.isLoading = false
 		})
@@ -134,11 +144,14 @@ export default {
     }
     .right{
         color: var(--white);
-        border: .1rem solid var(--green);
         background-color: var(--black);
         width: 45%;
         padding: 2rem;
     }
+
+	.left{
+		background: var(--white);
+	}
 
     .bottom-d{
         justify-content: space-between;
