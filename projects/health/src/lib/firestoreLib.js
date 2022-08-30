@@ -1,10 +1,14 @@
 
-import { db } from "./firebaseConfig";
+import { db, storage } from "./firebaseConfig";
+import { ref, uploadBytes,getDownloadURL } from "firebase/storage"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged,signOut } from "firebase/auth"
-import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, onSnapshot } from "firebase/firestore"; 
+import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, onSnapshot, updateDoc } from "firebase/firestore"; 
 
+
+/**********CONST VARIABLES********************/
 export const auth = getAuth()
 
+/*************FUNCTIONS*********************/
 export const getOne = async (collect="", id="", callback=null)=>{
     const docRef = doc(db, collect, id)
     const docSnap = await getDoc(docRef)
@@ -65,6 +69,11 @@ export const unSaveDoc = async (collect="", doct)=>{
 	console.log("doc with", doct, "deleted")
 }
 
+export const updateUserInfo = async(user_id, new_data)=>{
+	await updateDoc(doc(db, "users", user_id), new_data)
+	console.log("doc updated success")
+}
+
 export const signUp = (data, callback)=>{
     let result = {
         status: null,
@@ -114,7 +123,7 @@ export const signOutUser = async ()=>{
 export const isLoggedUser = async (callback)=>{
     onAuthStateChanged(auth, (user) => {
         const status = user ? true : false
-        return callback(status)
+        return callback(status, user)
     })
    
 }
@@ -137,6 +146,13 @@ export const sendMessage = async (id, message)=>{
 	await saveDoc(`chat/8F1bKGaOUOAZGV0blD74/messages`, message)
 }
 
+export const uploadImage = async (path, file, callback)=>{
+	const Imagesref = ref(storage, path)
+	await uploadBytes(Imagesref, file).then((snapshot) => {
+		getDownloadURL(snapshot.ref)
+		.then(url=>{return callback(url)})
+	  });
+}
 export const allCategories = [
 	'health',
 	'home',
