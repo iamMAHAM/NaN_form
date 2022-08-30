@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
-import { getDatabase } from "firebase/database";
+import { getStorage } from "firebase/storage";
 
 // /************* ABK CONFIG **********/
 // const firebaseConfig = {
@@ -29,5 +29,5 @@ const app = initializeApp(firebaseConfig)
 
 // Initialize Realtime Database and get a reference to the service
 
-export const database = getDatabase(app)
+export const storage = getStorage(app)
 export const db = getFirestore(app)
