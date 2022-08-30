@@ -66,7 +66,6 @@ export default{
 	},
 	mounted(){
 		const user = JSON.parse(localStorage.getItem("user"))
-		console.log("mounted")
 		console.log(user)
 		if (user){
 			this.user = true
