@@ -191,13 +191,11 @@ export default {
 				if (res.user){
 					localStorage.setItem("user",JSON.stringify(res.user))
 					this.success = true
-					this.$refs.login.disabled = true
 					this.request = false
 					setTimeout(()=>{
 						this.success = false
 						this.$emit("loggedIn")
 						this.$root.$forceUpdate()
-						this.$refs.login.disabled = false
 				}, 2000)
 				}else{
 					console.log(res)
