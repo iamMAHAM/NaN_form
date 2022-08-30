@@ -143,11 +143,12 @@ export default {
 	img.logo{
 		background-color: var(--white);
 		border-radius: 20%;
-		width: 8rem;
-		height: 7rem;
+		width: 5rem;
+		height: 4.5rem;
 	}
 
 	nav.navbar{
+		height: 6rem;
 		background-color: var(--black);
 	}
 
