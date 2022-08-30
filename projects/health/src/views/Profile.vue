@@ -15,10 +15,12 @@
 						style="visibility:hidden;"
 						accept=".png,.jpg,jpeg,.PNG,.JPEG" 
 						name="avatar"
+						@change="handleChange"
 					>
                     </label>
                     <img
-						src="https://raw.githubusercontent.com/iamMAHAM/NaN/master/javaScript/week/student/public/images/user_default.png"
+						:src="form.avatar ? form.avatar : '../H.png'"
+						ref="preview"
 						id="preview"
 						alt="Avatar"
 					>
@@ -36,7 +38,7 @@
 							:value='`${form.firstName} ${form.lastName}`'
 						/>
                         <i v-if="ok"
-							class="material-icons fa"
+							class="material-icons fa edit"
 						>
 							edit_square
 						</i>
@@ -48,7 +50,7 @@
 							maxlength="150"
 							v-model="form.email" 
 						/>
-                        <i class="material-icons fa"
+                        <i class="material-icons fa edit"
 							>
 							edit_square
 						</i>
@@ -60,7 +62,7 @@
 							maxlength="10"
 							v-model="form.contact"
 						/>
-                        <i class="material-icons fa"
+                        <i class="material-icons fa edit"
 							>
 							edit_square
 						</i>
@@ -73,7 +75,7 @@
 							maxlength="250"
 							v-model="form.birth"
 						/>
-                        <i class="material-icons fa"
+                        <i class="material-icons fa edit"
 							>
 							edit_square
 						</i>
@@ -85,9 +87,9 @@
 							type="password" 
 							class="fields"
 							maxlength="50"
-							v-model="form.password"
+							v-model="form.new_password"
 						/>
-                        <i class="material-icons fa"
+                        <i class="material-icons fa edit"
 							>
 							edit_square
 						</i>
@@ -97,9 +99,17 @@
 					class="input"
 				>
                     <input
+						ref="submit"
 						type="submit"
 						value="submit"
 						id="submit"
+						@click="submitForm"
+						v-if="!request"
+					>
+					<img
+						src="../assets/loading.gif"
+						class="wait"
+						v-if="request"
 					>
                 </div>
             </td>
@@ -109,23 +119,29 @@
 </template>
 
 <script>
+import { uploadImage, updateUserInfo } from '@/lib/firestoreLib'
+import { v4 } from "uuid"
 export default {
 	name: 'profile',
 	data(){
 		return {
 			form: {
-				email: 'dddd',
-				password: 'dddd',
-				birth: '01/01/2000',
-				contact: ''
+				id: '',
+				avatar: null,
+				email: '',
+				password: '',
+				birth: '',
+				contact: '',
+				new_password: ''
 			},
 			ok: false,
 			edit_buttons: null,
-			edit_conf: null
+			edit_conf: null,
+			request: false
 		}
 	},
 	mounted(){
-		this.edit_buttons = document.querySelectorAll(".fa")
+		this.edit_buttons = document.querySelectorAll(".fa.edit")
 		const user = JSON.parse(localStorage.getItem("user"))
 		this.form = user
 		this.updateEvent(1, this.edit_buttons, this.editEvent)
@@ -161,6 +177,23 @@ export default {
 					child.removeEventListener("click", listener)
 				})
 			}
+		},
+		handleChange(e){
+			const target = e.target
+			const cleanName = target.files[0].name + v4()
+			this.$refs.preview.src = URL.createObjectURL(target.files[0])
+			uploadImage(`profiles/${cleanName}`, target.files[0], async url=>{
+				this.form.avatar = url
+				await updateUserInfo(this.form.id, {avatar: url})
+				localStorage.setItem("user", JSON.stringify(this.form))
+			})
+		},
+		async submitForm(e){
+			this.request = true
+			e.preventDefault()
+			await updateUserInfo(this.form.id, this.form)
+			localStorage.setItem("user", JSON.stringify(this.form))
+			this.request = false
 		}
 
 	}
@@ -168,72 +201,24 @@ export default {
 </script>
 
 <style scoped>
-
 .profile a, li, em, button, input, textarea, select{
-    text-decoration: none;
-    list-style: none;
-    font-style: normal;
-    outline: none !important;
-    transition: 0.5s;
-    resize: none;
-}
-
-ul{
-    position: relative;
-    left: -20px;
-}
-
-ul li{
-    padding: 20px 0;
-    color: gray; 
-    border-bottom:1px solid var(--black);
-}
-
-b{
-    color:#fff;
-}
-
-.fa{
-    color:var(--green);
-    cursor: pointer;
-}
-
-.profile{
-    width:90%;
-    margin:10vh auto;
-}
-
-.profile table{
-    width:100%;
-}
-
-.profile table td{
-    margin:30px;
-    border-radius:5px;
-    box-shadow:0px 6px 16px -6px rgba(1,1,1,0.5);
-    padding:30px;
-    background-color: var(--black);
-    color:#fff;
-    vertical-align:top;
-}
-
-.profile table td:nth-child(1){
-    text-align:Center;
-}
-
-.profile table td:nth-child(2) .fa{
-    float:right;
+	text-decoration: none;
+	list-style: none;
+	font-style: normal;
+	outline: none !important;
+	transition: 0.5s;
+	resize: none;
 }
 
 .fields{
-    text-align: justify;
-    background:none;
-    font-size: 16px;
-    outline:none;
-    border:0;
-    color:gray;
-    width:60%;
-    pointer-events:none;
+	text-align: justify;
+	background:none;
+	font-size: 16px;
+	outline:none;
+	border:0;
+	color:gray;
+	width:60%;
+	pointer-events:none;
 }
 
 .profile table td:nth-child(1) section{
@@ -278,6 +263,62 @@ b{
     border: .5px solid var(--black);
     border-radius: 5px;
 }
+
+ul{
+    position: relative;
+    left: -20px;
+}
+
+ul li{
+    padding: 20px 0;
+    color: gray; 
+    border-bottom:1px solid var(--black);
+}
+
+b{
+    color:#fff;
+}
+
+.input .wait{
+	width: 5rem;
+	height: .5rem;
+}
+</style>
+
+<style>
+
+.fa{
+    color:var(--green);
+    cursor: pointer;
+}
+
+.profile{
+    width:90%;
+    margin:10vh auto;
+}
+
+.profile table{
+    width:100%;
+}
+
+.profile table td{
+    margin:30px;
+    border-radius:5px;
+    box-shadow:0px 6px 16px -6px rgba(1,1,1,0.5);
+    padding:30px;
+    background-color: var(--black);
+    color:#fff;
+    vertical-align:top;
+}
+
+.profile table td:nth-child(1){
+    text-align:Center;
+}
+
+.profile table td:nth-child(2) .fa{
+    float:right;
+}
+
 
 #submit:hover{
 	color: var(--white);
