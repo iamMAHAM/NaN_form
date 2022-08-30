@@ -1,7 +1,10 @@
 <template>
     <div class="discussion">
-        <i class="material-icons">chat_bubble</i>
-        <div class="discussion-main">
+        <i class="material-icons"
+			@click="show = !show"
+			>chat_bubble
+		</i>
+        <div class="discussion-main" v-show="show">
             <span>Health Chat</span>
             <div class="messages" ref="messages">
 				<div class="row"
@@ -48,7 +51,9 @@ export default {
 			message: '',
 			messages: [],
 			user_id: '',
-			target_id: '' //admin variable only
+			target_id: '', //admin variable only,
+			show: false
+			
 		}
 	},
 	methods:{
@@ -166,7 +171,7 @@ export default {
 	}
 
 	.me{
-		justify-content: end;
+		justify-content: center;
 		background: #d9fdd2;
 		float: right;
 	}
