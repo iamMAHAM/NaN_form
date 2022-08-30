@@ -51,7 +51,6 @@ export default{
 		}
 	},
 	updated(){
-		console.log("updated")
 		const user = JSON.parse(localStorage.getItem("user"))
 		const length = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")).length : 0
 		console.log("user")
@@ -65,10 +64,14 @@ export default{
 		}
 	},
 	mounted(){
-		const user = JSON.parse(localStorage.getItem("user"))
-		console.log(user)
-		if (user){
-			this.user = true
+		try {
+			const user = JSON.parse(localStorage.getItem("user"))
+			if (user){
+				this.user = true
+			}
+		} catch (e) {
+			console.log(e)
+			this.user = false
 		}
 	}
 }
