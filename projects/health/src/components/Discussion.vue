@@ -5,7 +5,15 @@
 			>chat_bubble
 		</i>
         <div class="discussion-main" v-show="show">
-            <span>Health Chat</span>
+            <span>Health Chat
+				<!-- <i
+					class="material-icons"
+					style="color: var(--red); cursor: pointer;"
+					@click="deleteAll"
+				>
+					delete_forever
+				</i> -->
+			</span>
             <div class="messages" ref="messages">
 				<div class="row"
 					:id="message.id"
@@ -50,7 +58,7 @@
 
 <script>
 
-import {sendMessage} from '@/lib/firestoreLib'
+import {sendMessage, deleteAll} from '@/lib/firestoreLib'
 import { onSnapshot, collection, orderBy, query, serverTimestamp } from 'firebase/firestore'
 import { db } from '@/lib/firebaseConfig'
 
@@ -75,10 +83,21 @@ export default {
 				lastName: this.user.lastName,
 				role: this.user.role
 			}
-			if (this.user.id === "8F1bKGaOUOAZGV0blD74"){ // admin to user
+			if (this.user.role === "admin"){ // admin to user
+				console.log("admin detected")
 				await sendMessage(this.target_id, message)
-			} else{
-				await sendMessage(this.user.id, message) // user to admin and user
+			} else if (this.user.role === "doctor"){ // doctor to user
+				if (!this.target_id){
+					await sendMessage(this.user.id, message)
+					alert("warn : you sent a diffusion message")
+					return
+				}
+				await sendMessage(this.user.id, message)
+				await sendMessage(this.target_id, message)
+
+			}
+			else{
+				await sendMessage(this.user.id, message) // user to admin and doctors
 			}
 			this.message = ''
 		},
