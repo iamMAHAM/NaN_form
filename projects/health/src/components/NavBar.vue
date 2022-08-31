@@ -95,36 +95,6 @@ export default {
 			show: false
 		}
 	},
-	mounted(){
-	// 	if (this.s1to500.matches){
-	// 		console.log("matches")
-	// 		this.rss = true
-	// 		this.show = false
-	// 	}
-	// 	window.onresize = ()=>{
-	// 		if (this.s1to500.matches){
-	// 			this.rss = true
-	// 			this.show = false
-	// 		}
-	// 		else {
-	// 			this.rss = false
-	// 			this.show = true
-	// 		}
-	// 	}
-	// },
-	// updated(){
-	// 	console.log("updated")
-	// 	if (this.s1to500.matches){
-	// 		console.log("matches")
-	// 		this.rss = true
-	// 		this.show = false
-	// 	}else{
-	// 		this.rss = false,
-	// 		this.show = true
-	// 	}
-	// 	console.log("rss", this.rss)
-	// },
-	},
 	props: ["cart", "rs"]
 	,
 	methods:{
