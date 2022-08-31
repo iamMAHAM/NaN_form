@@ -96,14 +96,18 @@ export const signIn = async (data, callback)=>{
     }
     signInWithEmailAndPassword(auth, data.email, data.password)
     .then(async (user)=>{
-        const users = collection(db, "users")
-        const q = query(users, where("email", "==", data.email))
-        const querySnapshot = await getDocs(q)
-        querySnapshot.forEach(doc=>{
-            let user = doc.data()
-            user["id"] = doc.id
-            result.user = user
-        })
+		if (user.user.emailVerified){
+			const users = collection(db, "users")
+			const q = query(users, where("email", "==", data.email))
+			const querySnapshot = await getDocs(q)
+			querySnapshot.forEach(doc=>{
+				let user = doc.data()
+				user["id"] = doc.id
+				result.user = user
+			})
+		}else{//not confirm mail
+			result.error = "confirm email first"
+		}
         return callback(result)
     })
     .catch(err=>{
