@@ -327,7 +327,8 @@ b{
 
 @media (max-width:820px){
     .profile{
-        width:100%;
+		position: relative;
+		left: 5%;
     }
     .profile table td{
         display:block;
