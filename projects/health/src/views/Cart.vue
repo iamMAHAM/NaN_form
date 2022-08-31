@@ -2,6 +2,7 @@
 	<LoginRegister
 		v-if="modal"
 		@loggedIn="modal = false"
+		@close="modal = false"
 	/>
     <!-- <div class="loading" v-if="loaded">Loading ...</div> -->
 	<img src="../assets/loading.gif" v-if="loaded" class="loading">
