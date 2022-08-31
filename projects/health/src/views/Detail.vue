@@ -126,6 +126,7 @@ export default {
         height: auto;
         display: flex;
         flex-direction: row;
+		justify-content: center;
     }
 
     .top,
