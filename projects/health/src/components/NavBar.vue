@@ -1,9 +1,12 @@
 <template>
 	<nav class="navbar">
 		<div class="nav-start">
-			<router-link to="/">
+			<div
+				class="goHome"
+				@click="goHome"
+			>
 				<img src="../assets/logo.png" alt="logo image" class="logo">
-			</router-link>
+			</div>
 		</div>
 		<li class="nav-item">
 			<div class="search">
@@ -104,6 +107,9 @@ export default {
 		},
 		showItems(){
 			this.$refs.navend.classList.toggle("active")
+		},
+		goHome(){
+			window.location.href="/"
 		}
 	},
 	setup(){
@@ -157,6 +163,10 @@ export default {
 		border-radius: 20%;
 		width: 5rem;
 		height: 4.5rem;
+	}
+
+	.goHome{
+		cursor: pointer;
 	}
 
 	nav.navbar{
