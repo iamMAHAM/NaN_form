@@ -228,18 +228,18 @@ export default {
 		border-radius: 5px;
 	}
 
-	.row :nth-child(2){
-	}
+	/* .row :nth-child(2){
+	} */
 
 	.row.me .row-r{
 		justify-content: end;
 	}
 
-	.row.me .row-r div{
+	/* .row.me .row-r div{
 	}
 
 	.row.you .row-r div{
-	}
+	} */
 
 	.row.you .row-r{
 		justify-content: start;
