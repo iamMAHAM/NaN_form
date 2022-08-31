@@ -1,4 +1,8 @@
 <template>
+	<LoginRegister
+		v-if="modal"
+		@loggedIn="modal = false"
+	/>
     <!-- <div class="loading" v-if="loaded">Loading ...</div> -->
 	<img src="../assets/loading.gif" v-if="loaded" class="loading">
     <div class="cart" v-if="!loaded">
@@ -38,17 +42,25 @@
         <div class="total-orders">
             <span>TOTAL ORDERS</span>
             <p>{{ total }} FCFA</p>
-            <button>order</button>
+            <button
+				@click="handleClick"
+				>
+				order
+			</button>
         </div>
     </div>
 </template>
 
 <script>
 import { unSaveDoc, getAll } from "@/lib/firestoreLib"
+import LoginRegister from "@/components/LoginRegister.vue"
 
 export default {
     name: 'Cart',
 	props: ["searchResult", "isSearch", "load"],
+	components:{
+		LoginRegister
+	},
     methods: {
         update(){
 			let inter = 0
@@ -72,6 +84,12 @@ export default {
 			}
 			this.update()
 			this.$root.$forceUpdate()
+		},
+		handleClick(){
+			const user = JSON.parse(localStorage.getItem("user"))
+			if (!user){
+				this.modal = true
+			}
 		}
     },
     data(){
@@ -79,6 +97,7 @@ export default {
             total: 0,
             cartItems: [],
             loaded: true,
+			modal: false
         }
     },
     async mounted(){
