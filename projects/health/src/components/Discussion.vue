@@ -92,7 +92,6 @@ export default {
 	async mounted(){
 		const user = JSON.parse(localStorage.getItem("user"))
 		this.user = user
-		console.log(user)
 		const q = query(collection(db, `chat/${user.id}/messages`), orderBy('timestamp'))
 		onSnapshot(q, (snap)=>{
 			this.messages = []

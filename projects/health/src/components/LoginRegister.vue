@@ -178,17 +178,14 @@ export default {
 			}
 		},
 		closeModal(){
-			console.log("close event")
 			this.$emit("close")
 			this.login = true
 			this.registrated = false
 			this.register = false
 		},
 		loginCheck(){
-			console.log("loginCheck")
 			this.request = true
 			signIn(this.fields, (res)=>{
-				console.log(res)
 				if (res.user){
 					localStorage.setItem("user",JSON.stringify(res.user))
 					this.success = true
@@ -199,7 +196,6 @@ export default {
 						this.$root.$forceUpdate()
 				}, 2000)
 				}else{
-					console.log(res)
 					this.errorMessage = res.error.replace("auth/", '').replace("-", ' ')
 					this.error = true
 					this.request = false

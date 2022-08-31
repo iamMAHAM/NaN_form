@@ -32,7 +32,6 @@ export default{
 			})
 		},
 		es(rs){
-			console.log("rs received", rs)
 			this.rs = rs
 		}
 	},
@@ -75,7 +74,6 @@ export default{
 				this.user = true
 			}
 		} catch (e) {
-			console.log(e)
 			this.user = false
 		}
 	}

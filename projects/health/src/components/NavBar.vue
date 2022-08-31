@@ -160,6 +160,9 @@ export default {
 	}
 
 	nav.navbar{
+		z-index: 10;
+		position: sticky;
+		top: 0;
 		height: 6rem;
 		background-color: var(--black);
 	}

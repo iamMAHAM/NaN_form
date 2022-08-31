@@ -61,7 +61,6 @@ export default {
 	},
 	mounted(){
 		if (this.s1to768.matches){
-			console.log("match")
 			this.match = true
 			this.$emit("rs", this.match)
 		}
@@ -74,59 +73,8 @@ export default {
 	},
 	updated(){
 		if (this.s1to768.matches){
-			console.log(!this.show)
 		}
 	}
-	// ,
-	// setup(){
-		
-	// 	window.addEventListener("DOMContentLoaded", ()=>{
-	// 	const container = document.querySelector(".container")
-	// 	const sideBar = document.querySelector(".side-bar")
-	// 	const sideContent = document.querySelector(".side-content")
-	// 	const sideContents = Array.from(document.querySelectorAll(".side-row .side-content"))
-	// 	const contents = []
-
-	// 	sideContents.forEach(child=>{
-	// 		contents.push(child.textContent)
-	// 	})
-
-	// 	const i = document.createElement("i")
-	// 	i.className = "material-icons apps"
-	// 	i.textContent = "apps"
-	// 	container.prepend(i)
-
-	// 	if (s300to768.matches){
-	// 		sideContents.forEach(child=>{
-	// 			contents.push(child.textContent)
-	// 			child.textContent = ''
-	// 		})
-	// 	}
-
-	// 	window.onresize = ()=>{
-	// 		container.prepend(i)
-	// 		if (s300to768.matches){
-	// 			i.style.display = "block"
-	// 			sideContents.forEach(child=>{
-	// 				contents.push(child.textContent)
-	// 				child.textContent = ''
-	// 			})
-	// 		}else{
-	// 			console.log(window.screen)
-	// 			i.style.display = "none"
-	// 			sideContents.map((c, i)=>{
-	// 				c.textContent = contents[i]
-	// 			})
-	// 		}
-	// 	}
-
-	// 	i.addEventListener("click", ()=>{
-	// 		console.log("clicked")
-	// 		console.log(sideContent)
-	// 		sideContent.classList.toggle("active")
-	// 	})
-	// })
-	// }
 }
 </script>
 

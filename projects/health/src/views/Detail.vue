@@ -79,7 +79,6 @@ export default {
 			const user = JSON.parse(localStorage.getItem("user"))
 			this.data.amount = this.amount
 			if (!user){
-				console.log("no user")
 				const cart = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : []
 				cart.push(this.data)
 				localStorage.setItem("cart", JSON.stringify(cart))
@@ -99,7 +98,6 @@ export default {
 		const route = this.$route.params
 		const user = JSON.parse(localStorage.getItem("user"))
 		let fullPath = `data/Ho21xA8W3774097vSXhU/${route.doc}`
-        console.log(route)
 		if (route.doc === "favorites"){
 			fullPath = `users/${user.id}/favorites`
 		}
