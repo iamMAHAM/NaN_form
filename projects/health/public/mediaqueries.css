@@ -112,6 +112,14 @@
 		right: 0;
 		display: none;
 	}
+
+	.router{
+		height: calc(100% - 50px);
+	}
+
+	.medoc-title{
+		transform: translateY(2px);
+	}
 	.nav-item{
 		justify-content: flex-start;
 		padding: 0;
