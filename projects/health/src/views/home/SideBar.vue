@@ -49,7 +49,8 @@ export default {
 		return {
 			mounted: true,
 			match: false,
-			s300to768 : window.matchMedia("(min-width: 300px) and (max-width: 768px)"),
+			s1to768 : window.matchMedia("(min-width: 1px) and (max-width: 768px)"),
+			s1to500: window.matchMedia("(min-width: 1px) and (max-width: 500px)"),
 			show: true
 		}
 	},
@@ -59,20 +60,20 @@ export default {
 		}
 	},
 	mounted(){
-		if (this.s300to768.matches){
+		if (this.s1to768.matches){
 			console.log("match")
 			this.match = true
 			this.$emit("rs", this.match)
 		}
 
 		window.onresize = ()=>{
-			if (this.s300to768.matches) this.match = true
+			if (this.s1to768.matches) this.match = true
 			else this.match = false
 			this.$emit("rs", this.match)
 		}
 	},
 	updated(){
-		if (this.s300to768.matches){
+		if (this.s1to768.matches){
 			console.log(!this.show)
 		}
 	}

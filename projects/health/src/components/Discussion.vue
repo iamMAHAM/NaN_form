@@ -11,9 +11,19 @@
 					:id="message.id"
 					v-for="message in messages"
 					:key="message.id"
-					:class="message.id === user_id ? 'me' : 'you'"
+					:class="message.id === user.id ? 'me' : 'you'"
 					@dblclick="handleClick"
 				>
+					<div class="row-r">
+						<img
+							class="user_img"
+							:src="message.avatar"
+							>
+						<div>
+							<p>{{ message.role }}</p>
+							<p class="username">{{message.lastName}}</p>
+						</div>
+					</div>
 					<p
 						>
 						{{ message.content}}
@@ -50,23 +60,25 @@ export default {
 		return {
 			message: '',
 			messages: [],
-			user_id: '',
+			user: {},
 			target_id: '', //admin variable only,
 			show: false
-			
 		}
 	},
 	methods:{
 		async sendMessage(){
 			const message = {
-				id: this.user_id,
+				avatar: this.user.avatar,
+				id: this.user.id,
 				timestamp: serverTimestamp(),
-				content: this.message
+				content: this.message,
+				lastName: this.user.lastName,
+				role: this.user.role
 			}
-			if (this.user_id === "8F1bKGaOUOAZGV0blD74"){ // admin to user
+			if (this.user.id === "8F1bKGaOUOAZGV0blD74"){ // admin to user
 				await sendMessage(this.target_id, message)
 			} else{
-				await sendMessage(this.user_id, message) // user to admin and user
+				await sendMessage(this.user.id, message) // user to admin and user
 			}
 			this.message = ''
 		},
@@ -79,7 +91,8 @@ export default {
 	},
 	async mounted(){
 		const user = JSON.parse(localStorage.getItem("user"))
-		this.user_id = user.id
+		this.user = user
+		console.log(user)
 		const q = query(collection(db, `chat/${user.id}/messages`), orderBy('timestamp'))
 		onSnapshot(q, (snap)=>{
 			this.messages = []
@@ -102,7 +115,6 @@ export default {
         align-self: flex-end;
         cursor: pointer;
         color: var(--green);
-		background: var(--black);
         font-size: 5rem;
     }
 
@@ -127,7 +139,6 @@ export default {
 
     .discussion-main .bottom{
 		border: none;
-        justify-content: center;
         display: flex;
         width: 100%;
         position: absolute;
@@ -162,18 +173,21 @@ export default {
 		width: 100%;
 		position: relative;
 		display: flex;
+		flex-direction: column;
 		min-height: 3rem;
+		margin: 5px;
+		flex-wrap: wrap;
 	}
 
 	.me, .you{
-		margin: .5rem;
-		padding: .5rem;
+		/* margin: .5rem;
+		padding: .5rem; */
 		border-radius: .5rem;
 		max-width: 20rem;
 	}
 
 	.me{
-		justify-content: center;
+		justify-content: right;
 		background: #d9fdd2;
 		float: right;
 	}
@@ -183,6 +197,7 @@ export default {
 		height: calc(100% - 7rem);
 	}
 	.you{
+		justify-content: left;
 		float: left;
 		background: var(--white);
 	}
@@ -193,7 +208,49 @@ export default {
 		position: absolute;
 		content: '\e5c4';
 		right: 0;
-		top: -10%;
+		bottom: 0;
+	}
+
+	.user_img{
+		width: 20px;
+		height: 20px;
+	}
+
+	.row-r{
+		background: var(--gray);
+		color: var(--black);
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.row .row-r{
+		border-radius: 5px;
+	}
+
+	.row :nth-child(2){
+	}
+
+	.row.me .row-r{
+		justify-content: end;
+	}
+
+	.row.me .row-r div{
+	}
+
+	.row.you .row-r div{
+	}
+
+	.row.you .row-r{
+		justify-content: start;
+	}
+
+	.row-r div :nth-child(1){
+		font-weight: bold;
+	}
+
+	p.username{
+		background-color: none;
 	}
 
 </style>

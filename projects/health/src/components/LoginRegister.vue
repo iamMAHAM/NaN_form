@@ -151,7 +151,8 @@ export default {
 				email: '',
 				password: '',
 				birth: '',
-				role: 'user'
+				role: 'user',
+				avatar: "https://firebasestorage.googleapis.com/v0/b/health-4d90f.appspot.com/o/profiles%2FH.png?alt=media&token=26a56bca-e537-4c1f-8e91-0a466b686e63"
 			},
 			errorMessage: "",
 			login: true,

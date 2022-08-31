@@ -18,7 +18,7 @@
 				</a>
 			</div>
 		</li>
-		<div class="nav-end" v-show="show">
+		<div class="nav-end" ref="navend">
 			<li
 				class="nav-item"
 				
@@ -40,32 +40,31 @@
 			>
 				<a href="#" class="item">
 				<i class="material-icons item">logout</i>
-				<span v-if="!rs">Déconnexion</span>
+				<span >Déconnexion</span>
 				</a>
 			</li>
 			<router-link to="/profile" tag="li" class="nav-item" v-if="isLogged">
 				<a href="#" class="item">
 				<i class="material-icons item">account_circle</i>
-				<span v-if="!rs">Profile</span>
+				<span >Profile</span>
 				</a>
 			</router-link>
 			<router-link to="/favorites" tag="li" class="nav-item" v-if="isLogged">
 				<a href="#" class="item">
 				<i class="material-icons item">favorite</i>
-				<span v-if="!rs">Favoris</span>
+				<span >Favoris</span>
 				</a>
 			</router-link>
 			<router-link to="/cart" class="nav-item">
 				<a href="#" class="item" style="position: relative;">
 				<i class="material-icons item">shopping_cart</i>
-				<span v-if="!rs">Panier</span>
+				<span>Panier</span>
 				<span class="cart-article"> {{ cart }}</span>
 				</a>
 			</router-link>
 		</div>
 		<i
 			class="material-icons element"
-			v-if="rss"
 			@click="showItems"
 		>
 			dialpad
@@ -97,17 +96,34 @@ export default {
 		}
 	},
 	mounted(){
-		if (this.s1to500.matches){
-			console.log("matches")
-			this.rss = true;
-		}
-		window.onresize = ()=>{
-			if (this.s1to500.matches) this.rss = true
-			else this.rss = false
-		}
-	},
-	updated(){
-		console.log("rss", this.rss)
+	// 	if (this.s1to500.matches){
+	// 		console.log("matches")
+	// 		this.rss = true
+	// 		this.show = false
+	// 	}
+	// 	window.onresize = ()=>{
+	// 		if (this.s1to500.matches){
+	// 			this.rss = true
+	// 			this.show = false
+	// 		}
+	// 		else {
+	// 			this.rss = false
+	// 			this.show = true
+	// 		}
+	// 	}
+	// },
+	// updated(){
+	// 	console.log("updated")
+	// 	if (this.s1to500.matches){
+	// 		console.log("matches")
+	// 		this.rss = true
+	// 		this.show = false
+	// 	}else{
+	// 		this.rss = false,
+	// 		this.show = true
+	// 	}
+	// 	console.log("rss", this.rss)
+	// },
 	},
 	props: ["cart", "rs"]
 	,
@@ -117,9 +133,7 @@ export default {
 			this.$emit("search", this.searchQuery)
 		},
 		showItems(){
-			console.log("rss", this.show)
-			this.show =! this.show
-			console.log(this.show)
+			this.$refs.navend.classList.toggle("active")
 		}
 	},
 	setup(){
@@ -245,5 +259,9 @@ export default {
 
 	.router-link-active{
 		color: var(--green);
+	}
+
+	.element{
+		display: none;
 	}
 </style>

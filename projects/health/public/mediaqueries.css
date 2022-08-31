@@ -26,7 +26,7 @@
 	}
 }
 
-@media all and (min-width: 300px) and (max-width: 768px){
+@media all and (min-width: 31px) and (max-width: 768px){
 
 	html{
 		font-size: 50%;
@@ -62,10 +62,97 @@
 		padding: 5px;
 		border-radius: 10px;
 	}
+
+	.apps{
+		color: var(--white);
+		top: 5%;
+	}
+
+	div.active{
+		display: flex;
+	}
+
+	.nav-end{
+		flex-direction: row;
+	}
+	.item{
+		display: block;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	div.total-orders span{
+		font-size: 1.5rem;
+	}
+
+	div.total-orders button{
+		font-size: 1.5rem;
+	}
+
 }
 
+@media all and (min-width: 1px) and (max-width: 500px){
+	div.nav-end{
+		/* width: 34px; */
+		font-size: 24px;
+		border-radius: 5px;
+		background-color: var(--black);
+		position: absolute;
+		top: 6%;
+		right: 5%;
+		display: none;
+	}
+	.nav-item{
+		justify-content: flex-start;
+		padding: 0;
+		margin: 0;
+	}
+
+	div.active{
+		display: block;
+	}
+
+	.material-icons.item {
+		font-size: 24px;
+	}
+
+	.item{
+		margin: 1px 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.element{
+		color: var(--white);
+		display: block;
+	}
+
+	.cart-article{
+		width: 10px;
+		height: 10px;
+		font-size: 10px;
+		left: -10%;
+	}
+
+	div.banner{
+		gap: 0;
+		margin-top: 5px;
+		padding: 5px;
+		flex-direction: column;
+	}
+
+	div.banner-content,
+	.t,
+	.banner-content .material-icons{
+		font-size: 2rem;
+	}
+
+	input[type="search"]::placeholder{
+		font-size: 1.1rem;
+	}
+}
 .apps{
-	color: var(--black);
 	position: absolute;
 	transform: translateY(-100%);
 	left: 10%;
@@ -75,8 +162,4 @@
 .element{
 	font-size: 3.5rem;
 	color: var(--white);
-}
-
-div.active{
-	display: block;
 }

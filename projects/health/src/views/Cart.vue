@@ -102,10 +102,19 @@ export default {
 </script>
 
 <style scoped>
-
 	.waitd{
 		height: 2.4rem;
 	}
+
+	.loading{
+		position: absolute;
+		top: 20%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+</style>
+
+<style>
     div.cart{
         position: relative;
         padding: 3rem;
@@ -197,13 +206,6 @@ export default {
     .green{
         color: var(--green)
     }
-
-	.loading{
-		position: absolute;
-		top: 20%;
-		left: 50%;
-		transform: translateX(-50%);
-	}
 
 	.empty-cart{
 		font-size: 2.2rem;
