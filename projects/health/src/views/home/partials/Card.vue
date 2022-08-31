@@ -42,7 +42,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 	.card{
 		display: flex;
 		background-color: var(--white);

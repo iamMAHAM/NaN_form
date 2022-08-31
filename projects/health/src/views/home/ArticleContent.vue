@@ -108,7 +108,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 	.cards{
 		margin: auto;
 		width: 100%;

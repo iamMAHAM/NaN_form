@@ -33,7 +33,6 @@ export default {
 	},
 	updated(){
 		this.search = this.isSearch
-		console.log("updated home for test")
 	},
 	methods: {
 
@@ -49,7 +48,7 @@ export default {
 		,
 		loggedIn(){
 			this.isLogged = true
-			closeModal()
+			this.closeModal()
 		},
 		emittoo(rs){
 			this.$emit("rs", rs)
