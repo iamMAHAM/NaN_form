@@ -285,7 +285,7 @@ b{
 }
 </style>
 
-<style>
+<style scoped>
 
 .fa{
     color:var(--green);

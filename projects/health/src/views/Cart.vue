@@ -40,7 +40,7 @@
 			</div>
         </div>
 
-        <div class="total-orders">
+        <div class="total-orders" v-if="cartItems.length">
             <span>TOTAL ORDERS</span>
             <p>{{ total }} FCFA</p>
             <button
@@ -228,7 +228,7 @@ export default {
     }
 
 	.empty-cart{
-		font-size: 2.2rem;
+		font-size: 10rem;
 		text-align: center;
 	}
 

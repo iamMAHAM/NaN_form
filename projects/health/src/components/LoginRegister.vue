@@ -229,7 +229,7 @@ export default {
 		background: rgba(0, 0, 0, 0.3);
 		z-index: 5;
 		top: 0;
-		position: absolute;
+		position: fixed;
 		width: 100vw;
 		height: 100vh;
 	}

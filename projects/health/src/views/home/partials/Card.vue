@@ -8,7 +8,7 @@
 			>
 				favorite
 			</i>
-			<img src="../../../assets/loading.gif" v-if="card.isLoad" class="wait waitd">
+			<img src="../../../assets/loading.gif" v-if="card.isLoad" class="waitds">
 		</div>
 		<div class="card-main">
 			<router-link tag="div" :to="`detail/${card.origin}/${card.id}`" class="router">
@@ -42,7 +42,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 	.card{
 		display: flex;
 		background-color: var(--white);
@@ -118,7 +118,9 @@ export default {
 		color: var(--red) !important;
 	}
 
-	.waitd{
+	.waitds{
+		height: 2rem;
+		width: 2rem;
 		border-radius: 50%;
 	}
 </style>

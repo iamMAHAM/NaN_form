@@ -14,12 +14,12 @@
 			@removeFav="removeFavs"
 		/>
 	</div>
-	<div
+	<!-- <div
 		class="nosearch"
 		v-if="isSearch && !isLoading && flag"
 	>
 		Oups ! Il n y'a aucun resultat
-	</div>
+	</div> -->
   </div>
 </template>
 
