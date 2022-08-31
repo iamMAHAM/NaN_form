@@ -4,6 +4,7 @@ import Detail from '@/views/Detail.vue'
 import Cart from "@/views/Cart.vue"
 import NotFound from "@/views/404.vue"
 import Profile from "@/views/Profile.vue"
+import PresentationVideo from "@/components/PresentationVideo"
 
 const routes = [
 	{
@@ -41,11 +42,11 @@ const routes = [
 		name: 'NotFound',
 		component: NotFound
 	},
-	// {
-	// 	path: 'search/:string',
-	// 	name: 'search',
-	// 	component: Search
-	// },
+	{
+		path: '/pres/video',
+		name: 'presentation',
+		component: PresentationVideo
+	},
 	{
 		path: '/:pathMatch(.*)*',
 		name: '404',
