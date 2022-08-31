@@ -3,7 +3,7 @@
 	<Banner />
 	<img
 		src="../../assets/loading.gif"
-		v-if="isLoading"
+		v-if="isLoading || load"
 		class="loading">
 	<div class="cards" v-if="!isLoading">
 		<Card
@@ -14,12 +14,12 @@
 			@removeFav="removeFavs"
 		/>
 	</div>
-	<!-- <div
+	<div
 		class="nosearch"
-		v-if="isSearch && !isLoading && flag"
+		v-if="isSearch && !load && flag"
 	>
 		Oups ! Il n y'a aucun resultat
-	</div> -->
+	</div>
   </div>
 </template>
 
@@ -101,9 +101,7 @@ export default {
 	updated(){
 		if (!this.isSearch){ //no search case
 		} else{
-			this.isLoading = true
 			this.cards = this.data
-			this.isLoading = false
 			this.cards?.length ? this.flag = false : this.flag = true
 		}
 	}

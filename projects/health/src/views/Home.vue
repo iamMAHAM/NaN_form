@@ -3,6 +3,7 @@
 		<SideBar @rs="emittoo"/>
 		<ArticleContent
 			:data="searchResult"
+			:load="load"
 			:isSearch="isSearch"
 			@fav="checkLog"
 		/>
@@ -22,7 +23,7 @@ import LoginRegister from '@/components/LoginRegister.vue';
 
 export default {
 	name: 'Home',
-	props: ['searchResult', 'isSearch'],
+	props: ['searchResult', 'isSearch', 'load'],
 	data(){
 		return {
 			modal: false,

@@ -29,6 +29,7 @@ export default{
 			this.load = true
 			await matchFields(allCategories, queryString, (result)=>{
 				this.result = result
+				this.load = false
 			})
 		},
 		es(rs){

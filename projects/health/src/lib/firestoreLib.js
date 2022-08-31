@@ -37,7 +37,7 @@ export const matchFields = async (categories=[], value="", callback)=>{
         where("title", "<=", value + "\uf8ff")
         )
         const querySnapshot = await getDocs(q)
-        querySnapshot.forEach((doc) => {
+        querySnapshot.docs.map((doc) => {
             let toPush = doc.data()
             toPush.id = doc.id
             toPush.origin = cat
