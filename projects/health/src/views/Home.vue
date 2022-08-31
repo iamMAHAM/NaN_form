@@ -4,7 +4,7 @@
 		<ArticleContent
 			:data="searchResult"
 			:load="load"
-			:isSearch="isSearch"
+			:isSearch="search"
 			@fav="checkLog"
 		/>
 		
@@ -28,8 +28,12 @@ export default {
 		return {
 			modal: false,
 			isLogged: false,
-			search: true,
+			search: false,
 		}
+	},
+	updated(){
+		this.search = this.isSearch
+		console.log("updated home for test")
 	},
 	methods: {
 
