@@ -14,13 +14,11 @@
 import NavBar from '@/components/NavBar.vue'
 import Discussion from './components/Discussion.vue'
 import { getAll, matchFields, allCategories } from './lib/firestoreLib'
-import AdminPanel from './components/AdminPanel.vue'
 export default{
     name:'App',
     components: {
         NavBar,
         Discussion,
-		AdminPanel
     },
 
 	methods:{
