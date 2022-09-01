@@ -55,6 +55,7 @@ export const saveOrOverride = async(collect, id, doct, callback)=>{
 	const docRef = await setDoc(doc(db, collect, id), doct)
 	return callback()
 }
+
 export const saveDocs = (collect="", docs=[])=>{
     // Add a new document with a generated id.
     docs.forEach(async (doc) =>{
@@ -119,12 +120,12 @@ export const signIn = async (data, callback)=>{
 export const signOutUser = async ()=>{
     await signOut(auth)
 }
+
 export const isLoggedUser = async (callback)=>{
     onAuthStateChanged(auth, (user) => {
         const status = user ? true : false
         return callback(status, user)
     })
-   
 }
 
 export const sendMessage = async (id, message)=>{
