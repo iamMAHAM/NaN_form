@@ -58,7 +58,7 @@
 
 <script>
 
-import {sendMessage, deleteAll} from '@/lib/firestoreLib'
+import {sendMessage} from '@/lib/firestoreLib'
 import { onSnapshot, collection, orderBy, query, serverTimestamp } from 'firebase/firestore'
 import { db } from '@/lib/firebaseConfig'
 
@@ -111,7 +111,12 @@ export default {
 	async mounted(){
 		const user = JSON.parse(localStorage.getItem("user"))
 		this.user = user
-		const q = query(collection(db, `chat/${user.id}/messages`), orderBy('timestamp'))
+		if (this.user.role ==="doctor" || this.user.role === "admin"){
+			const q = query(collection(db, `chat/8F1bKGaOUOAZGV0blD74/messages`), orderBy('timestamp'))
+			return
+		}else{
+			const q = query(collection(db, `chat/${user.id}/messages`), orderBy('timestamp'))
+		}
 		onSnapshot(q, (snap)=>{
 			this.messages = []
 			snap.docs.map(m => this.messages.push({...m.data()}))
