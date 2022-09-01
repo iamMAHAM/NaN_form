@@ -22,20 +22,24 @@
 			</div>
 		</div>
 		<div class="c2-dash">
-			<p class="currentTitle">USERS</p>
-			<div class="c2-users">
-				<div class="user">
-					<img src="">
-					<span>Name</span>
-					<span>role</span>
-					<select>
-						<option value="user">user</option>
-						<option value="doctor">doctor</option>
-						<option value="vendor">vendor</option>
-					</select>
-					<i class="material-icons">delete</i>
-					<button>Update</button>
+			<h1 class="currentTitle">DASHBOARD</h1>
+			<div class="statistique">
+				<div class="normal">
+					<span>users : </span>
+					<span>{{ users.length }}</span>
 				</div>
+				<div class="doctors">
+
+				</div>
+				<div class="vendors">
+
+				</div>
+				<div class="total">
+
+				</div>
+			</div>
+			<div class="c2-users">
+				<User v-for="user in users" :user="user" :key="user.id"/>
 			</div>
 		</div>
 	</div>
@@ -43,18 +47,53 @@
 
 <script>
 import { getAll} from '@/lib/firestoreLib';
+import User from './partials/User.vue';
+
 export default {
-	name: 'AdminPanel'
+	name: 'AdminPanel',
+	data(){
+		return {
+			users: [
+				{
+					names: "Tapsoba Parfait",
+					role: "User",
+					avatar: "https://firebasestorage.googleapis.com/v0/b/health-4d90f.appspot.com/o/profiles%2Fadmin.png82159c80-f49d-474b-9b23-aea81e1ef1ea?alt=media&token=52836ca1-b282-449b-a4ce-ead71fdb4c58",
+				},
+				{
+					names: "Affou Ouattara",
+					role: "Doctor",
+					avatar: "https://firebasestorage.googleapis.com/v0/b/health-4d90f.appspot.com/o/profiles%2Fadmin.png82159c80-f49d-474b-9b23-aea81e1ef1ea?alt=media&token=52836ca1-b282-449b-a4ce-ead71fdb4c58",
+				},
+				{
+					names: "Kionou Mohamed",
+					role: "Doctor",
+					avatar: "https://firebasestorage.googleapis.com/v0/b/health-4d90f.appspot.com/o/profiles%2Fadmin.png82159c80-f49d-474b-9b23-aea81e1ef1ea?alt=media&token=52836ca1-b282-449b-a4ce-ead71fdb4c58",
+				},
+				{
+					names: "Beugre Desnos Jeremie",
+					role: "Vendor",
+					avatar: "https://firebasestorage.googleapis.com/v0/b/health-4d90f.appspot.com/o/profiles%2Fadmin.png82159c80-f49d-474b-9b23-aea81e1ef1ea?alt=media&token=52836ca1-b282-449b-a4ce-ead71fdb4c58",
+				}
+			]
+		}
+	},
+	components: {
+		User
+	}
 }
 </script>
 
 <style>
+	.user,
 	.c2-dash,
 	.r2-dash-row,
 	.dashboard{
-		align-items: center;
 		display: flex;
 		flex-direction: row;
+	}
+
+	.dashboard{
+		height: 90vh;
 	}
 
 	.c1-dash{
@@ -79,9 +118,39 @@ export default {
 	}
 
 	.c2-dash{
+		background: #f3f4f6;
 		width: calc(100% - 20rem);
+		/* align-items: unset; */
+		align-items: center;
 		flex-direction: column;
-		justify-content: space-between;
 	}
+
+	.currentTitle{
+		padding: 2rem;
+		text-align: center;
+	}
+
+	.c2-users{
+		overflow: scroll;
+	}
+
+	::-webkit-scrollbar {
+  width: .5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: red;
+}
 
 </style>
