@@ -5,6 +5,8 @@ import Cart from "@/views/Cart.vue"
 import NotFound from "@/views/404.vue"
 import Profile from "@/views/Profile.vue"
 import PresentationVideo from "@/components/PresentationVideo"
+import DashBoard from "@/components/DashBoard"
+
 
 const routes = [
 	{
@@ -41,6 +43,11 @@ const routes = [
 		path: '/404',
 		name: 'NotFound',
 		component: NotFound
+	},
+	{
+		path: '/admin/dashboard',
+		name: 'Dashboard',
+		component: DashBoard
 	},
 	{
 		path: '/pres/video',
