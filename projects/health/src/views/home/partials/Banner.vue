@@ -1,18 +1,18 @@
 <template>
 	<div class="banner">
 		<div class="banner-content">
-			<p class="t">The first Ivory Coast online pharmacy</p>
+			<p class="t">La premiere pharmacie en ligne de Côte d'Ivoire</p>
 			<div>
 			<i class="material-icons">local_shipping</i>
 			<span>24/7</span>
 			</div>
 			<div>
 			<i class="material-icons">map</i>
-			<span>Everywhere in Ivory Coast</span>
+			<span>Partout en Côte d'Ivoire</span>
 			</div>
 			<div>
 			<i class="material-icons">medication</i>
-			<span>More than 30.000 products</span>
+			<span>Plus de 5000 produits </span>
 			</div>
 		</div>
 		<img src="../../../assets/network.png" alt="pharma network" class="banner-image">

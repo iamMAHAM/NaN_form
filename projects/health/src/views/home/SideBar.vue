@@ -35,7 +35,7 @@
 			</router-link>
 			<router-link tag="div" to="/medicalMaterials" class="side-row">
 				<i class="material-icons">medical_services</i>
-				<span class="side-content" v-if="!match">Matériels Médicals</span>
+				<span class="side-content" v-if="!match">Matériels Médicaux</span>
 			</router-link>
 		</div>
 	</div>
