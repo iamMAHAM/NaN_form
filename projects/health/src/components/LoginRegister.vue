@@ -138,7 +138,8 @@
 </template>
 
 <script>
-import {signIn, signUp} from "@/lib/firestoreLib"
+import {signIn, signUp, auth} from "@/lib/firestoreLib"
+import { deleteUser } from '@firebase/auth'
 
 export default {
 	name: 'register',
@@ -195,11 +196,15 @@ export default {
 						this.$emit("loggedIn")
 						this.$root.$forceUpdate()
 				}, 2000)
-				}else{
+				}else if (res.error){
 					this.errorMessage = res.error.replace("auth/", '').replace("-", ' ')
 					this.error = true
 					this.request = false
 					setTimeout(()=>this.error = false, 5000)
+				}else{
+					deleteUser(auth.currentUser)
+					alert("account deleted")
+					this.$router.push("/deleted")
 				}
 			})
 		},

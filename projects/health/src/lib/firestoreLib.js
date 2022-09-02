@@ -23,7 +23,7 @@ export const getAll = async (collect, callback, origin="")=>{
     querySnapshot.forEach((doc) => {
         let toPush = doc.data()
         toPush.id = doc.id
-        toPush.origin = origin
+		origin ? toPush.origin = origin :  ''
         result.push(toPush)
     })
     return callback(result)
@@ -102,6 +102,10 @@ export const signIn = async (data, callback)=>{
 			const q = query(users, where("email", "==", data.email))
 			const querySnapshot = await getDocs(q)
 			querySnapshot.forEach(doc=>{
+				if (!doc.exists()){
+					console.log("not exist")
+					return callback(result)
+				}
 				let user = doc.data()
 				user["id"] = doc.id
 				result.user = user

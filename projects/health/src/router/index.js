@@ -5,13 +5,18 @@ import Cart from "@/views/Cart.vue"
 import NotFound from "@/views/404.vue"
 import Profile from "@/views/Profile.vue"
 import DashBoard from "@/components/DashBoard"
-
+import Deleted from "@/views/Deleted"
 
 const routes = [
 	{
 		path: '/',
 		name: 'home',
 		redirect: '/home'
+	},
+	{
+		path: '/deleted',
+		name: 'deleted',
+		component: Deleted
 	},
 	{
 		path: '/cart',

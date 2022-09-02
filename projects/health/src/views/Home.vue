@@ -14,6 +14,11 @@
 			@loggedIn="loggedIn"
 		/>
 	</div>
+	<i
+		class="material-icons settingsss"
+		@click="this.$router.push('/admin/dashboard')"
+		>settings
+	</i>
 </template>
 
 <script>
@@ -75,5 +80,14 @@ export default {
 	.article-content{
 		flex-direction: column;
 		margin: 0 3rem;
+	}
+
+	.settingsss{
+		color: var(--red);
+		cursor: pointer;
+		position: fixed;
+		left: 1rem;
+		bottom: 1rem;
+		font-size: 5rem;
 	}
 </style>

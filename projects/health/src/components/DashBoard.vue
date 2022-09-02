@@ -2,9 +2,9 @@
 	<div class="dashboard">
 		<div class="c1-dash">
 			<div class="r1-dash">
-				<img src="https://firebasestorage.googleapis.com/v0/b/health-4d90f.appspot.com/o/profiles%2Fadmin.png82159c80-f49d-474b-9b23-aea81e1ef1ea?alt=media&token=52836ca1-b282-449b-a4ce-ead71fdb4c58" class="profile">
-				<h2 class="lastName">Kabore</h2>
-				<p>Admin</p>
+				<img :src="admin.avatar" class="profile">
+				<h2 class="lastName">{{admin.lastName}}</h2>
+				<p> {{admin.role}} </p>
 			</div>
 			<div class="r2-dash">
 				<div class="r2-dash-row">
@@ -25,61 +25,57 @@
 			<h1 class="currentTitle">DASHBOARD</h1>
 			<div class="statistique">
 				<div class="normal">
-					<span>users : </span>
-					<span>{{ users.length }}</span>
-				</div>
-				<div class="doctors">
-
-				</div>
-				<div class="vendors">
-
-				</div>
-				<div class="total">
-
+					<p>users : <span>{{ users.filter(u => u.role === "user").length}}</span> </p>
+					<p>doctors: <span>{{ users.filter(u => u.role === "doctor").length}}</span></p>
+					<p>vendor: <span>{{ users.filter(u => u.role === "vendor").length}}</span></p>
 				</div>
 			</div>
 			<div class="c2-users">
-				<User v-for="user in users" :user="user" :key="user.id"/>
+				<User
+					v-for="user in users"
+					:user="user"
+					:key="user.id"
+				/>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import { getAll} from '@/lib/firestoreLib';
 import User from './partials/User.vue';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from '@/lib/firebaseConfig';
+import { auth} from '@/lib/firestoreLib';
 
 export default {
 	name: 'AdminPanel',
 	data(){
 		return {
 			users: [
-				{
-					names: "Tapsoba Parfait",
-					role: "User",
-					avatar: "https://firebasestorage.googleapis.com/v0/b/health-4d90f.appspot.com/o/profiles%2Fadmin.png82159c80-f49d-474b-9b23-aea81e1ef1ea?alt=media&token=52836ca1-b282-449b-a4ce-ead71fdb4c58",
-				},
-				{
-					names: "Affou Ouattara",
-					role: "Doctor",
-					avatar: "https://firebasestorage.googleapis.com/v0/b/health-4d90f.appspot.com/o/profiles%2Fadmin.png82159c80-f49d-474b-9b23-aea81e1ef1ea?alt=media&token=52836ca1-b282-449b-a4ce-ead71fdb4c58",
-				},
-				{
-					names: "Kionou Mohamed",
-					role: "Doctor",
-					avatar: "https://firebasestorage.googleapis.com/v0/b/health-4d90f.appspot.com/o/profiles%2Fadmin.png82159c80-f49d-474b-9b23-aea81e1ef1ea?alt=media&token=52836ca1-b282-449b-a4ce-ead71fdb4c58",
-				},
-				{
-					names: "Beugre Desnos Jeremie",
-					role: "Vendor",
-					avatar: "https://firebasestorage.googleapis.com/v0/b/health-4d90f.appspot.com/o/profiles%2Fadmin.png82159c80-f49d-474b-9b23-aea81e1ef1ea?alt=media&token=52836ca1-b282-449b-a4ce-ead71fdb4c58",
-				}
-			]
+			],
+			admin: {}
 		}
 	},
 	components: {
 		User
-	}
+	},
+	mounted(){
+		const user = JSON.parse(localStorage.getItem("user"))
+		if (user && user.role !== "admin" || !user){
+			this.$router.push("/404")
+			return
+		}
+		onSnapshot(collection(db, "users"), (snap)=>{
+			let inter = []
+			snap.docs.map(d => inter.push(d.data()))
+			this.users = inter.filter(u => u.role !== "admin")
+			this.admin = inter.filter(u => u.role === "admin")[0]
+		})
+		// getAll("users", (data)=>{
+		// 	this.users = data.filter(u => u.role !== "admin")
+		// 	this.admin = data.filter(u => u.role === "admin")[0]
+		// })
+	},
 }
 </script>
 
@@ -134,23 +130,39 @@ export default {
 		overflow: scroll;
 	}
 
+	.normal{
+		display: flex;
+		flex-direction: row;
+	}
+
+	.normal p{
+		padding: 1rem;
+		font-size: 2.2rem;
+	}
+
+	.normal p span{
+		color: var(--green);
+	}
+
+
 	::-webkit-scrollbar {
-  width: .5rem;
-}
+  		width: .5rem;
+	}
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
+	/* Track */
+	::-webkit-scrollbar-track {
+	background: var(--white);
+	}
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		border-radius: .5rem;
+		background: var(--black);
+	}
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: red;
-}
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--green);
+	}
 
 </style>

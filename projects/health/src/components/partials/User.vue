@@ -1,20 +1,45 @@
 <template>
 	<div class="user">
-		<img class="user-image" src="https://firebasestorage.googleapis.com/v0/b/health-4d90f.appspot.com/o/profiles%2Fadmin.png82159c80-f49d-474b-9b23-aea81e1ef1ea?alt=media&token=52836ca1-b282-449b-a4ce-ead71fdb4c58">
-		<span class="names">{{user.names}}</span>
+		<img class="user-image" :src="user.avatar">
+		<span class="names">{{user.firstName}} {{user.lastName}}</span>
 		<select class="roles" v-model="user.role">
-			<option value="User">user</option>
-			<option value="Doctor">doctor</option>
-			<option value="Vendor">vendor</option>
+			<option value="user">user</option>
+			<option value="doctor">doctor</option>
+			<option value="vendor">vendor</option>
 		</select>
-		<i class="material-icons xray">delete</i>
-		<button class="update">Update</button>
+		<i
+			class="material-icons xray"
+			@click="deleteUser"
+		>
+			delete
+		</i>
+		<button
+			class="update"
+			@click="update"
+		>
+			Update
+		</button>
 	</div>
 </template>
 
 <script>
+import { updateUserInfo, unSaveDoc,} from '@/lib/firestoreLib';
+
 export default {
-	props: ["user"]
+	props: ["user"],
+	methods:{
+		async update(){
+			updateUserInfo(this.user.id, this.user)
+			.then(alert("user updated with success"))
+			.catch(e=>console?.log(e))
+		},
+		async deleteUser(){
+			if (window.confirm("really delete this user ?")){
+				console.log(this.user)
+				unSaveDoc("users", this.user.id)
+			}
+		}
+	}
 }
 </script>
 
@@ -22,7 +47,7 @@ export default {
 	.user{
 		margin: 1rem;
 		align-self: center;
-		max-width: max-content;
+		width: 50rem;
 		border-radius: 1rem;
 		background: var(--white);
 		padding: 1rem;
@@ -36,7 +61,7 @@ export default {
 	}
 
 	.names{
-		width: 10rem;
+		width: 15rem;
 	}
 	.user-image{
 		width: 2rem;
@@ -61,6 +86,7 @@ export default {
 
 	.update{
 		cursor: pointer;
+		width: 20rem;
 		padding: .5rem;
 		border-radius: 1rem;
 		background: var(--green);
