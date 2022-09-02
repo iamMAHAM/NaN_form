@@ -47,6 +47,7 @@
             <span class="rt-price" ref="price">{{ data.price }} FCFA</span>
 			<img src="../assets/loading.gif" class="wait" v-if="wait">
             <button
+				class="add-cart"
 				v-if="!wait"
 				:onclick="addToCart"
 			>
@@ -115,7 +116,7 @@ export default {
 		width: 2.5rem;
 	}
 </style>
-<style scoped>
+<style>
     .detail{
         position: absolute;
         top: 50%;
@@ -180,7 +181,7 @@ export default {
         color: var(--green);
     }
 
-    button{
+    .add-cart{
         padding: .5rem;
         border-radius: .8rem;
         color: var(--black);
@@ -219,9 +220,10 @@ export default {
 
 	@media all and (min-width: 1px) and (max-width: 768px){
 		.detail{
-			height: 40rem;
+			height: 30rem;
 		}
 		.left {
+			width: max-content;
 			display: flex;
 			align-items: center;
 			height: 100%;
@@ -232,19 +234,50 @@ export default {
 		}
 
 		.right{
+			height: 100%;
 			padding: .5rem !important;
 		}
 
 		.row{
 			min-height: 1.5rem;
 		}
-		button{
+		.add-cart{
 			font-size: 1.2rem;
-			width: 10rem;
+			width: 8rem;
 		}
 
 		.bottom-d{
+			padding: .2rem;
 			align-items: center;
 		}
+		.center p{
+			font-size: 1.3rem;
+			padding: .8rem;
+		}
+
+		.rt-price{
+			font-size: 1.5rem;
+		}
 	}
+
+	@media all and (max-width: 681px){
+		.detail{
+			transform: translate(-30%, -50%);
+			flex-direction: column;
+			min-height: max-content;
+		}
+
+		.img{
+			margin: unset;
+			width: max-content;
+		}
+
+		.right{
+			width: 30rem;
+			height: auto;
+		}
+
+
+	}
+
 </style>
