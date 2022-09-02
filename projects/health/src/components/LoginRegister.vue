@@ -14,6 +14,7 @@
                 placeholder="First Name"
                 required
 				v-model="fields.firstName"
+				@change="handleChange"
             />
             <input
                 class="fields"
@@ -21,6 +22,7 @@
                 placeholder="Last Name"
                 required
 				v-model="fields.lastName"
+				@change="handleChange"
             />
             <input
                 class="fields"
@@ -41,7 +43,7 @@
                 type="date"
                 name="birth"
                 required
-				v-model="fields.birth" 
+				v-model="fields.birth"
             />
             <div class="bottom">
 				<p
@@ -67,7 +69,7 @@
                     register
                 </button>
             </div>
-            <div class="error" v-if="error"> {{ errorMessage}}</div>
+            <div class="error" v-if="error"> {{ errorMessage }}</div>
         </div>
         <div class="validated" v-if="registrated">
             <span
@@ -213,21 +215,38 @@ export default {
 			})
 		},
 		registerCheck(){
-			this.request = true
-			signUp(this.fields, (res)=>{
-				if (res.status){ // register success
-					this.register = false,
-					this.login = false,
-					this.registrated = true
+			if (this.checkIfString(this.fields.firstName) && this.checkIfString(this.fields.lastName)){
+				this.error = false
+				this.request = true
+				signUp(this.fields, (res)=>{
+					if (res.status){ // register success
+						this.register = false,
+						this.login = false,
+						this.registrated = true
+						this.request = false
+						return
+					}
+					// case of failure
+					this.errorMessage = res.message.replace("auth/", '').replace("-", ' ')
+					this.error = true
 					this.request = false
-					return
-				}
-				// case of failure
-				this.errorMessage = res.message.replace("auth/", '').replace("-", ' ')
+					setTimeout(()=>this.error = false, 5000)
+				})
+			} else{
+				this.errorMessage = "names => (letters only)"
 				this.error = true
-				this.request = false
-				setTimeout(()=>this.error = false, 5000)
-			})
+			}
+		},
+		handleChange(e){
+			if (!this.checkIfString(e.target.value)){
+				this.errorMessage = "names => (letters only)"
+				this.error = true
+			} else{
+				this.error = false
+			}
+		},
+		checkIfString(string){
+			return /^[a-zA-Z]+$/.test(string)
 		}
 	}
 }
