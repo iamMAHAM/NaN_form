@@ -4,7 +4,6 @@ import Detail from '@/views/Detail.vue'
 import Cart from "@/views/Cart.vue"
 import NotFound from "@/views/404.vue"
 import Profile from "@/views/Profile.vue"
-import PresentationVideo from "@/components/PresentationVideo"
 import DashBoard from "@/components/DashBoard"
 
 
@@ -18,10 +17,6 @@ const routes = [
 		path: '/cart',
 		name: 'cart',
 		component: Cart
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		// component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
 	},
 	{
 		path: '/detail/:doc/:id',
@@ -48,11 +43,6 @@ const routes = [
 		path: '/admin/dashboard',
 		name: 'Dashboard',
 		component: DashBoard
-	},
-	{
-		path: '/pres/video',
-		name: 'presentation',
-		component: PresentationVideo
 	},
 	{
 		path: '/:pathMatch(.*)*',
