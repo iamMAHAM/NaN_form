@@ -146,6 +146,7 @@ export default {
 
 
 	::-webkit-scrollbar {
+		display: none;
   		width: .5rem;
 	}
 

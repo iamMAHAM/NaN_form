@@ -45,7 +45,11 @@ export default {
 			}
 	},
 	updated(){
+		const user = JSON.parse(localStorage.getItem("user"))
 		this.search = this.isSearch
+		if (user){
+				this.isAdmin = user.role === "admin"
+		}
 	},
 	methods: {
 		checkLog(){

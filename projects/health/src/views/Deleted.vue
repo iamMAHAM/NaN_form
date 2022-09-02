@@ -23,7 +23,6 @@ export default {
 	mounted(){
 		document.querySelector("nav.navbar").style.display = "none"
 		isLoggedUser((d, user)=>{
-			console.log(d, user)
 			user ? this.$router.push("/404") : this.show = true
 		})
 	},
@@ -33,7 +32,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 	.deleted{
 		font-size: 2.2rem;

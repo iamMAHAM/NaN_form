@@ -202,10 +202,13 @@ export default {
 					this.request = false
 					setTimeout(()=>this.error = false, 5000)
 				}else{
-					this.request = false
 					this.$emit("close")
 					deleteUser(auth.currentUser)
-					this.$router.push("/deleted")
+					setTimeout(()=>{
+						this.$router.push("/deleted")
+					}, 2000)
+					this.request = false
+					
 				}
 			})
 		},

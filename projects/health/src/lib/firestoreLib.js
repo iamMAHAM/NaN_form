@@ -47,8 +47,9 @@ export const matchFields = async (categories=[], value="", callback)=>{
     return callback(result)
 }
 
-export const saveDoc = async (collect="", doc)=>{
-    await addDoc(collection(db, collect), doc)
+export const saveDoc = async (collect="", doct)=>{
+    const q = await addDoc(collection(db, collect), doct)
+	await updateDoc(doc(db, "users", q.id), {id: q.id})
 }
 
 export const saveOrOverride = async(collect, id, doct, callback)=>{
@@ -99,7 +100,7 @@ export const signIn = async (data, callback)=>{
     .then(async (user)=>{
 		if (user.user.emailVerified){
 			const users = collection(db, "users")
-			const q = query(users, where("email", "==", data.email))
+			const q = query(users, where("email", "==", data.email), where("password", "==", data.password))
 			const querySnapshot = await getDocs(q)
 			querySnapshot.forEach(doc=>{
 				if (!doc.exists()){

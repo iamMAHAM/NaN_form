@@ -89,7 +89,7 @@ export default {
 			} else if (this.user.role === "doctor"){ // doctor to user
 				if (!this.target_id){
 					await sendMessage(this.user.id, message)
-					alert("warn : you sent a diffusion message")
+					alert("info : you sent a diffusion message")
 					return
 				}
 				await sendMessage(this.user.id, message)
@@ -111,11 +111,12 @@ export default {
 	async mounted(){
 		const user = JSON.parse(localStorage.getItem("user"))
 		this.user = user
+		let q = null
 		if (this.user.role ==="doctor" || this.user.role === "admin"){
-			const q = query(collection(db, `chat/8F1bKGaOUOAZGV0blD74/messages`), orderBy('timestamp'))
+			q = query(collection(db, `chat/8F1bKGaOUOAZGV0blD74/messages`), orderBy('timestamp'))
 			return
 		}else{
-			const q = query(collection(db, `chat/${user.id}/messages`), orderBy('timestamp'))
+			q = query(collection(db, `chat/${user.id}/messages`), orderBy('timestamp'))
 		}
 		onSnapshot(q, (snap)=>{
 			this.messages = []
