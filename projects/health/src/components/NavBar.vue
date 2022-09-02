@@ -46,25 +46,25 @@
 				<span >Déconnexion</span>
 				</a>
 			</li>
-			<router-link to="/profile" tag="li" class="nav-item" v-if="isLogged">
-				<a href="#" class="item">
-				<i class="material-icons item">account_circle</i>
-				<span >Profile</span>
-				</a>
-			</router-link>
-			<router-link to="/favorites" tag="li" class="nav-item" v-if="isLogged">
-				<a href="#" class="item">
+			<li class="nav-item" v-if="isLogged">
+				<router-link class="item" to="/profile">
+					<i class="material-icons item">account_circle</i>
+					<span >Profile</span>
+				</router-link>
+			</li>
+			<li class="nav-item" v-if="isLogged">
+				<router-link to="/favorites" class="item">
 				<i class="material-icons item">favorite</i>
 				<span >Favoris</span>
-				</a>
-			</router-link>
-			<router-link to="/cart" class="nav-item">
-				<a href="#" class="item" style="position: relative;">
+				</router-link>
+			</li>
+			<li class="nav-item">
+				<router-link to="/cart" class="item" style="position: relative;">
 				<i class="material-icons item">shopping_cart</i>
 				<span>Panier</span>
 				<span class="cart-article"> {{ cart }}</span>
-				</a>
-			</router-link>
+				</router-link>
+			</li>
 		</div>
 		<i
 			class="material-icons element"
@@ -246,5 +246,9 @@ export default {
 
 	.element{
 		display: none;
+	}
+
+	.router-link-active{
+		color: var(--green);
 	}
 </style>

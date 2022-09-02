@@ -1,5 +1,5 @@
 <template>
-	<img src="../assets/loading.gif" v-if="isLoading" class="loading" />
+	<img src="../assets/loading.gif" v-if="isLoading" class="loadings" />
     <div class="detail" v-if="!isLoading" :id="data.id" ref="product">
         <div class="left">
           <img :src="data.image" class="img">
@@ -111,6 +111,11 @@ export default {
 
 </script>
 
+<style scoped>
+	p{
+        padding: 1rem;
+    }
+</style>
 <style>
 	.wait{
 		width: 2.5rem;
@@ -173,10 +178,6 @@ export default {
         font-weight: bold;
     }
 
-    p{
-        padding: 1rem;
-    }
-
     .green{
         color: var(--green);
     }
@@ -211,7 +212,7 @@ export default {
         margin-top: .5rem;
     }
 
-	.loading{
+	.loadings{
 		position: absolute;
 		top: 20%;
 		left: 50%;

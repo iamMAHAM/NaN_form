@@ -56,6 +56,7 @@ export default {
 			await unSaveDoc(`users/${user.id}/favorites`, card.id)
 			this.cards[index].isFav = false
 			this.cards[index].isLoad = false
+			this.cards.filter(c=> c!== card.id)
 
 		}
 	},

@@ -50,7 +50,7 @@ export default {
 		border-radius: .5rem;
 		text-align: center;
 		position: relative;
-		min-height: max-content;
+		min-height: 30rem;
 		margin: 1rem auto;
 		width: 18%;
 		flex-direction: column;
