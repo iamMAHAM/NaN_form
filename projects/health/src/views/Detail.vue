@@ -216,4 +216,35 @@ export default {
 		left: 50%;
 		transform: translateX(-50%);
 	}
+
+	@media all and (min-width: 1px) and (max-width: 768px){
+		.detail{
+			height: 40rem;
+		}
+		.left {
+			display: flex;
+			align-items: center;
+			height: 100%;
+		}
+		.img{
+			margin: auto;
+			height: 30rem;
+		}
+
+		.right{
+			padding: .5rem !important;
+		}
+
+		.row{
+			min-height: 1.5rem;
+		}
+		button{
+			font-size: 1.2rem;
+			width: 10rem;
+		}
+
+		.bottom-d{
+			align-items: center;
+		}
+	}
 </style>
