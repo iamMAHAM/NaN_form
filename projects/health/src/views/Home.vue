@@ -15,6 +15,7 @@
 		/>
 	</div>
 	<i
+		v-if="isAdmin"
 		class="material-icons settingsss"
 		@click="this.$router.push('/admin/dashboard')"
 		>settings
@@ -34,13 +35,19 @@ export default {
 			modal: false,
 			isLogged: false,
 			search: false,
+			isAdmin: false
 		}
+	},
+	mounted(){
+		const user = JSON.parse(localStorage.getItem("user"))
+			if (user){
+				this.isAdmin = user.role === "admin"
+			}
 	},
 	updated(){
 		this.search = this.isSearch
 	},
 	methods: {
-
 		checkLog(){
 			const user = JSON.parse(localStorage.getItem("user"))
 			if (!user){
