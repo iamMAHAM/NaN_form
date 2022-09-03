@@ -75,32 +75,34 @@ export default {
 	},
 	methods:{
 		async sendMessage(){
-			const message = {
-				avatar: this.user.avatar,
-				id: this.user.id,
-				timestamp: serverTimestamp(),
-				content: this.message,
-				lastName: this.user.lastName,
-				role: this.user.role
-			}
-			if (this.user.role === "admin"){ // admin to user
-				console.log("admin detected")
-				await sendMessage(this.target_id, message)
-			} else if (this.user.role === "doctor"){ // doctor to user
-				if (!this.target_id){
-					await sendMessage(this.user.id, message)
-					alert("info : you sent a diffusion message")
-					return
+			if (this.message){
+				const message = {
+					avatar: this.user.avatar,
+					id: this.user.id,
+					timestamp: serverTimestamp(),
+					content: this.message,
+					lastName: this.user.lastName,
+					role: this.user.role
 				}
-				await sendMessage(this.user.id, message)
-				await sendMessage(this.target_id, message)
-
+				if (this.user.role === "admin"){ // admin to user
+					console.log("admin detected")
+					this.target.id = "bDxNmdt8C3qNhsPhpU4t" // trash route
+					await sendMessage(this.target_id, message)
+				} else if (this.user.role === "doctor"){ // doctor to user
+					if (!this.target_id){
+						await sendMessage(this.user.id, message)
+						alert("info : you sent a diffusion message")
+						return
+					}
+					await sendMessage(this.user.id, message)
+					await sendMessage(this.target_id, message)
+	
+				}
+				else{
+					await sendMessage(this.user.id, message) // user to admin and doctors
+				}
+				this.message = ''
 			}
-			else{
-				console.log("message from", this.user)
-				await sendMessage(this.user.id, message) // user to admin and doctors
-			}
-			this.message = ''
 		},
 		handleClick(e){
 			let  target = e.target
@@ -110,7 +112,6 @@ export default {
 		}
 	},
 	async mounted(){
-		console.log("mounted")
 		const user = JSON.parse(localStorage.getItem("user"))
 		this.user = user
 		let q = null
@@ -119,11 +120,12 @@ export default {
 		}else{
 			q = query(collection(db, `chat/${user.id}/messages`), orderBy('timestamp'))
 		}
-		console.log("q", q)
 		onSnapshot(q, (snap)=>{
 			this.messages = []
-			console.log(snap.docs)
 			snap.docs.map(m => this.messages.push({...m.data()}))
+		})
+		window.addEventListener("keydown", e=>{
+			e.key === "Enter" ? this.sendMessage() : ""
 		})
 	}
 }
