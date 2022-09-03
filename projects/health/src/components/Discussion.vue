@@ -97,6 +97,7 @@ export default {
 
 			}
 			else{
+				console.log("message from", this.user)
 				await sendMessage(this.user.id, message) // user to admin and doctors
 			}
 			this.message = ''
@@ -109,17 +110,19 @@ export default {
 		}
 	},
 	async mounted(){
+		console.log("mounted")
 		const user = JSON.parse(localStorage.getItem("user"))
 		this.user = user
 		let q = null
 		if (this.user.role ==="doctor" || this.user.role === "admin"){
 			q = query(collection(db, `chat/8F1bKGaOUOAZGV0blD74/messages`), orderBy('timestamp'))
-			return
 		}else{
 			q = query(collection(db, `chat/${user.id}/messages`), orderBy('timestamp'))
 		}
+		console.log("q", q)
 		onSnapshot(q, (snap)=>{
 			this.messages = []
+			console.log(snap.docs)
 			snap.docs.map(m => this.messages.push({...m.data()}))
 		})
 	}

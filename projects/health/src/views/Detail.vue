@@ -113,6 +113,11 @@ export default {
 </script>
 
 <style scoped>
+	.price,
+    .row{
+        display: flex;
+        flex-direction: row;
+    }
 	p{
         padding: 1rem;
     }
@@ -190,12 +195,6 @@ export default {
         font-size: 2rem;
         background-color: var(--white);
         cursor: pointer;
-    }
-
-    .price,
-    .row{
-        display: flex;
-        flex-direction: row;
     }
 
     .price{
