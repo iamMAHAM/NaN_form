@@ -42,10 +42,9 @@
 </template>
 
 <script>
-import User from './partials/User.vue';
+import User from '../partials/User.vue';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
-import { auth} from '@/lib/firestoreLib';
 
 export default {
 	name: 'AdminPanel',
