@@ -154,6 +154,6 @@ export const allCategories = [
 	'slimmingSport',
 	'veterinary',
 	'beautyHygiene',
-	'babyPregnacy',
+	'babyPregnancy',
 	'drugs'
 ]
