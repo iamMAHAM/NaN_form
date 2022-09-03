@@ -81,6 +81,7 @@ export default {
 			collect = `users/${user.id}/favorites`
 		}else{
 			this.$router.push("/404")
+			return
 		}
 		getAll(collect, async (result)=>{
 			if (user){
