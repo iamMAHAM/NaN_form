@@ -49,7 +49,9 @@ export const matchFields = async (categories=[], value="", callback)=>{
 
 export const saveDoc = async (collect="", doct)=>{
     const q = await addDoc(collection(db, collect), doct)
-	await updateDoc(doc(db, "users", q.id), {id: q.id})
+	if (!doct.hasOwnProperty("id")){
+		await updateDoc(doc(db, "users", q.id), {id: q.id})
+	}
 }
 
 export const saveOrOverride = async(collect, id, doct, callback)=>{

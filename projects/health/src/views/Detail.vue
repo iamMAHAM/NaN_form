@@ -88,6 +88,7 @@ export default {
 			}
 			this.$root.$forceUpdate()
 			this.wait = false
+			console.log(this.wait)
 		}
 	},
 	updated(){
