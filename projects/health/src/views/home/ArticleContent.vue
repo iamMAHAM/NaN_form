@@ -20,6 +20,12 @@
 	>
 		Oups ! Il n y'a aucun resultat
 	</div>
+	<div
+		class="nosearch"
+		v-if="favor && !isLoading && !cards.length"
+	>
+		Oups! aucun favoris
+	</div>
   </div>
 </template>
 
@@ -65,7 +71,8 @@ export default {
 			cards: [],
 			isLoading: true,
 			isLogged: false,
-			flag: 0
+			flag: 0,
+			favor: false
 		}
 	},
 	async mounted(){
@@ -78,6 +85,7 @@ export default {
 		if (allCategories.includes(route)){
 			collect = `data/Ho21xA8W3774097vSXhU/${route}`
 		}else if(route === "favorites"){
+			this.favor = true
 			collect = `users/${user.id}/favorites`
 		}else{
 			this.$router.push("/404")
