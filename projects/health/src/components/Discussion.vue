@@ -86,7 +86,7 @@ export default {
 				}
 				if (this.user.role === "admin"){ // admin to user
 					console.log("admin detected")
-					this.target.id = "bDxNmdt8C3qNhsPhpU4t" // trash route
+					this.target_id = this.target_id ? this.target_id : "bDxNmdt8C3qNhsPhpU4t" // In case of global fdiffusion
 					await sendMessage(this.target_id, message)
 				} else if (this.user.role === "doctor"){ // doctor to user
 					if (!this.target_id){
