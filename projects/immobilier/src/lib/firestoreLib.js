@@ -1,12 +1,14 @@
 
-import { db, storage } from "./firebaseConfig";
+import { db, storage } from "./firebaseConfig"
 import { ref, uploadBytes,getDownloadURL } from "firebase/storage"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged,signOut } from "firebase/auth"
-import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, onSnapshot, updateDoc } from "firebase/firestore"; 
-import { reject, resolve } from "core-js/fn/promise";
+import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, onSnapshot, updateDoc } from "firebase/firestore"
 
 /**********CONST VARIABLES********************/
 export const auth = getAuth()
+const users = collection(db, "users")
+const datas = collection(db, "datas")
+const messages = collection(db, "messages")
 
 /*************FUNCTIONS*********************/
 export const findOne = (col="", id="")=>{
@@ -24,7 +26,7 @@ export const findOne = (col="", id="")=>{
 }
 
 export const find = (col, origin="")=>{
-    return new Promise(async (resolve, reject)=>{
+    return new Promise(async (resolve)=>{
         const result = []
         const qs = await getDocs(collection(db, col))
         qs.docs.map((doc) => {
@@ -85,7 +87,7 @@ export const updateUserInfo = async(id="", news={})=>{
 	await updateDoc(doc(db, "users", id), news)
 }
 
-export const signUp = (data, callback)=>{
+export const signUp = (data)=>{
     return new Promise((resolve, reject)=>{
         const result = {
             status: null,
@@ -115,7 +117,6 @@ export const signIn = async (form)=>{
         signInWithEmailAndPassword(auth, form.email, form.password)
         .then(async (user)=>{
             if (user.user.emailVerified){
-                const users = collection(db, "users")
                 const q = query(users, where("email", "==", form.email), where("password", "==", form.password))
                 const querySnapshot = await getDocs(q)
                 if (!querySnapshot.empty){
@@ -149,8 +150,8 @@ export const isLoggedUser = async (callback)=>{
 
 export const sendMessage = async (senderId, receiverID, message, callback=()=>{})=>{
     Promise.all([
-        saveOne(`chat/${senderId}/messages/${receiverID}`, message),
-        saveOne(`chat/${receiverID}/messages/${senderId}`, message)
+        saveOne(`messages/${senderId}/${receiverID}/`, message),
+        saveOne(`messages/${receiverID}/${senderId}`, message)
     ]).catch(e=>{return callback(e.code)})
 }
 
@@ -159,9 +160,38 @@ export const uploadImage = async (path, file, callback)=>{
 	await uploadBytes(Imagesref, file).then((snapshot) => {
 		getDownloadURL(snapshot.ref)
 		.then(url=>{return callback(url)})
-	  });
+	  })
 }
 
+export const postAd = (userId, adInfo={})=>{
+    return new Promise((resolve, reject)=>{
+        const res = {status: null, error: null}
+        saveOne(collection(db, `users/${userId}/ads`), adInfo)
+        .then(()=>{
+            res.status = true
+            resolve(res)
+        })
+        .catch(e=>{
+            res.error = e.code
+            reject(res)
+        })
+    })
+}
+
+export const deleteAd = (userId, adId="")=>{
+    const res = {status: null, error: null}
+    return new Promise((resolve, reject)=>{
+        deleteOne(collection(db, `users/${userId}/ads`), adId)
+        .then(()=>{
+            res.status = true
+            resolve(res)
+        })
+        .catch(e=>{
+            res.error = e.code
+            reject(res)
+        })
+    })
+}
 export const allCategories = [
 	'terrain',
 	'maison',
