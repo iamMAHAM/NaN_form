@@ -1,14 +1,17 @@
 <template>
   <NavBar />
   <router-view/>
+  <Support />
 </template>
 
 
 <script>
   import NavBar from './components/NavBar.vue';
+  import Support from './components/Support.vue';
   export default {
     components:{
-      NavBar
+      NavBar,
+      Support
     }
   }
 </script>

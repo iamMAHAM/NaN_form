@@ -1,4 +1,4 @@
-(function ($) {
+(async function ($) {
 	
 	"use strict";
 
@@ -81,7 +81,7 @@
 			$(".naccs ul").height(listItemHeight + "px");
 		}
 	});
-
+	await new Promise(r => setTimeout(r, 2000));
 	$('.owl-features').owlCarousel({
 		items:3,
 		loop:true,
@@ -104,7 +104,6 @@
 			}
 		}
 	})
-
 	$('.owl-collection').owlCarousel({
 		items:3,
 		loop:true,

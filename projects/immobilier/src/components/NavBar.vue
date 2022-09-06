@@ -37,12 +37,6 @@
                         Publier
                     </a>
                 </router-link>
-                <router-link to="/sup">
-                    <a href="">
-                        <i class="material-symbols-outlined">contact_support</i>
-                        Support
-                    </a>     
-                </router-link>
             </ul>
         </nav>
         <i class="material-symbols-outlined menu">menu</i>
@@ -55,7 +49,7 @@ export default {
     setup(){
         window.addEventListener("DOMContentLoaded", ()=>{
             const ul = document.querySelector(".ul")
-            const menu = document.querySelector(".menu")
+            const menu = document.querySelector(".material-symbols-outlined.menu")
             menu.addEventListener("click", ()=>{
                 ul.classList.toggle("active")
                 menu.textContent = menu.textContent === "close" ? "menu" : "close"
@@ -122,7 +116,7 @@ a{
     display:block;
     padding:0 0 0  2rem
 }
-.menu{
+.material-symbols-outlined.menu{
     display: none;
     cursor: pointer;
     font-size: 3.5rem;
@@ -174,17 +168,17 @@ nav a:hover{
         flex-direction: column;
     }
 
-    .menu{
+    .material-symbols-outlined.menu{
         display: block;
     }
 
-    ul a {
+    .ul a {
         display: flex;
         align-items: center;
         flex-direction: row;
     }
 
-    ul a i{
+    .ul a i{
         margin: 0 .8rem;
     }
     
