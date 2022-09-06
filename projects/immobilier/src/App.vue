@@ -36,7 +36,7 @@ body{
 :root{
     --white: #fff;
     --gray: #bdc3c7;
-    --navcolor: #34495e;
-    --hovercolor: #2C3E50;
+    --navcolor: #1E262D;
+    --hovercolor: #34495e;
 }
 </style>
