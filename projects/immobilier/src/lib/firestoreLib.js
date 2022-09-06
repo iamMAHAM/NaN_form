@@ -21,7 +21,7 @@ export const findOne = (col="", id="")=>{
             resolve(found)
             return
         }
-        reject(false)
+        reject(new Error("user not found"))
     })
 }
 
@@ -29,6 +29,7 @@ export const find = (col, origin="")=>{
     return new Promise(async (resolve)=>{
         const result = []
         const qs = await getDocs(collection(db, col))
+        qs.empty ? reject(new Error("empty collection")) : ''
         qs.docs.map((doc) => {
             let toPush = doc.data()
             toPush.id = doc.id
@@ -40,7 +41,7 @@ export const find = (col, origin="")=>{
 }
 
 export const search = (categories=[], value="")=>{
-    return new Promise((resolve)=>{
+    return new Promise((resolve, reject)=>{
         const result = []
         categories.map(async cat=>{
             const q = query(collection(db, `data/Ho21xA8W3774097vSXhU/${cat}`),
@@ -48,6 +49,7 @@ export const search = (categories=[], value="")=>{
             where("title", "<=", value + "\uf8ff")
             )
             const querySnapshot = await getDocs(q)
+            querySnapshot.empty ? reject(new Error("aucun resultat trouvé")) : ''
             querySnapshot.docs.map((doc) => {
                 let toPush = doc.data()
                 toPush.id = doc.id
@@ -89,51 +91,30 @@ export const updateUserInfo = async(id="", news={})=>{
 
 export const signUp = (data)=>{
     return new Promise((resolve, reject)=>{
-        const result = {
-            status: null,
-            message: null
-        }
         createUserWithEmailAndPassword(auth, data.email, data.password)
         .then(async (u)=>{
             await sendEmailVerification(u.user)
             await saveOne("users", data)
-            result.status = true
-            result.message = "register success"
-            resolve(result)
-        }).catch(e=> {
-            result.status = false,
-            result.message = e.code
-            reject(result)
-        })
+            resolve(true)
+        }).catch(e => reject(e.code))
     })
 }
 
 export const signIn = async (form)=>{
     return new Promise((resolve, reject)=>{
-        const result = {
-            user: null,
-            error: null
-        }
         signInWithEmailAndPassword(auth, form.email, form.password)
         .then(async (user)=>{
             if (user.user.emailVerified){
                 const q = query(users, where("email", "==", form.email), where("password", "==", form.password))
-                const querySnapshot = await getDocs(q)
-                if (!querySnapshot.empty){
-                    result.error = "user data not found"
-                }
-                const user = querySnapshot.docs[0].data()
-                user.id = querySnapshot.docs[0].id
-                result.user = user
+                const qs = await getDocs(q)
+                const user = qs.docs[0].data()
+                user.id = qs.docs[0].id
+                resolve(user)
             }else{//not confirm mail
-                result.error = "confirm email first"
+               reject(new Error("confirm your email first"))
             }
-            resolve(result)
         })
-        .catch(err=>{
-            result.error = err.code
-            reject(result)
-        })
+        .catch(e=>reject(e.code))
     })
 }
 
@@ -152,7 +133,7 @@ export const sendMessage = async (senderId, receiverID, message, callback=()=>{}
     Promise.all([
         saveOne(`messages/${senderId}/${receiverID}/`, message),
         saveOne(`messages/${receiverID}/${senderId}`, message)
-    ]).catch(e=>{return callback(e.code)})
+    ]).catch(e=>{return callback(e.message)})
 }
 
 export const uploadImage = async (path, file, callback)=>{
@@ -165,33 +146,29 @@ export const uploadImage = async (path, file, callback)=>{
 
 export const postAd = (userId, adInfo={})=>{
     return new Promise((resolve, reject)=>{
-        const res = {status: null, error: null}
         saveOne(collection(db, `users/${userId}/ads`), adInfo)
-        .then(()=>{
-            res.status = true
-            resolve(res)
-        })
-        .catch(e=>{
-            res.error = e.code
-            reject(res)
-        })
+        .then(()=>resolve("success"))
+        .catch(e=>reject(new Error("failed to post ad : ", e.message)))
     })
 }
 
 export const deleteAd = (userId, adId="")=>{
-    const res = {status: null, error: null}
     return new Promise((resolve, reject)=>{
         deleteOne(collection(db, `users/${userId}/ads`), adId)
-        .then(()=>{
-            res.status = true
-            resolve(res)
-        })
-        .catch(e=>{
-            res.error = e.code
-            reject(res)
-        })
+        .then(()=>resolve("success"))
+        .catch(e=>reject("failed to delete ad : ", e.message))
     })
 }
+
+export const commentPost = (postId, message)=>{
+    saveOne(collection(db, `comments/${postId}`), message)
+}
+
+export const deleteComment = (postId, messageId)=>{
+    deleteOne(collection(db, `comments/${postId}`), messageId)
+}
+
+
 export const allCategories = [
 	'terrain',
 	'maison',
