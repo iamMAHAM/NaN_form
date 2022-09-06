@@ -20,11 +20,11 @@
                         <!-- ***** Search End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li to="/index" ><router-link to="/index" class="active">Home</router-link></li>
-                            <li to="/browse"><router-link to="/browse">Browse</router-link></li>
-                            <li to="details/"><router-link to="/detail">Details</router-link></li>
-                            <li to="/streams"><router-link to="/stream">Streams</router-link></li>
-                            <li to="/profile"><router-link to="/profil">Profile <img src="../../public/assets/images/profile-header.jpg" alt=""></router-link></li>
+                            <li><router-link to="/" class="active">Home</router-link></li>
+                            <li><router-link to="/browse">Browse</router-link></li>
+                            <li><router-link to="/details">Details</router-link></li>
+                            <li><router-link to="/streams">Streams</router-link></li>
+                            <li><router-link to="/profile">Profile <img src="../../public/assets/images/profile-header.jpg" alt=""></router-link></li>
                         </ul>   
                         <a class='menu-trigger'>
                             <span>Menu</span>
