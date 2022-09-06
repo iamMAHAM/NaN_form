@@ -171,7 +171,7 @@ nav a:hover{
     }
 
     ul.active{
-        display: block !important;
+        flex-direction: column;
     }
 
     .menu{

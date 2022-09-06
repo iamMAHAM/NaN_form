@@ -20,7 +20,7 @@
                         <!-- ***** Search End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><router-link to="/" class="active">Home</router-link></li>
+                            <li><router-link to="/">Home</router-link></li>
                             <li><router-link to="/browse">Browse</router-link></li>
                             <li><router-link to="/details">Details</router-link></li>
                             <li><router-link to="/streams">Streams</router-link></li>
