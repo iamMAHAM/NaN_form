@@ -10,10 +10,11 @@ export default {
 
 <style>
 .material-symbols-outlined.support{
-    cursor: pointer;
-    font-size: 5rem;
-    position: fixed;
-    right: 5%;
-    bottom: 5%;
+  color: var(--white);
+  cursor: pointer;
+  font-size: 8rem;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
 }
 </style>

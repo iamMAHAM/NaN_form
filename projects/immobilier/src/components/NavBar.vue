@@ -1,11 +1,7 @@
 <template>
     <div id="header">
         <div class="logo">
-            <img id="logo" src="../assets/logo.png" alt="">
-            <!-- <a href="#">
-                <i class="material-symbols-outlined">home</i>
-                Immo Soluce
-            </a> -->
+            <router-link to="/"><img id="logo" src="../assets/logo.png" alt=""/></router-link>
         </div>
         <div class="search"> 
                 <input name="q" placeholder="recherche..." type="search" class="search-i">
@@ -13,7 +9,7 @@
         </div>
         <nav>
             <ul class="ul">
-                <router-link to="/">
+                <router-link to="/auth">
                     <a href="">
                         <i class="material-symbols-outlined">person</i>
                         Connexion
@@ -62,8 +58,10 @@ export default {
 <style>
 
 #logo{
+    border: 1px solid white;
     width: 10rem;
-    height: 10rem;
+    height: 9rem;
+    border-radius: 50%;
 }
 
 a{
@@ -111,11 +109,6 @@ a{
     cursor: pointer;
 }
 
-.logo a{
-    font-size: 2.5rem;
-    display:block;
-    padding:0 0 0  2rem
-}
 .material-symbols-outlined.menu{
     display: none;
     cursor: pointer;

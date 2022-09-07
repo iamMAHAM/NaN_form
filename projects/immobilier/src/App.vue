@@ -31,6 +31,7 @@ html{
 }
 
 body{
+  background: var(--hovercolor);
     line-height:1.5;
     font-size: 1.6rem;
     font-family: 'Poppins', sans-serif;
@@ -38,7 +39,7 @@ body{
 
 :root{
     --white: #fff;
-    --gray: #bdc3c7;
+    --gray: #f5f5f5;
     --navcolor: #1E262D;
     --hovercolor: #34495e;
 }
