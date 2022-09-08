@@ -1,13 +1,13 @@
 <template>
-  <div class="card-container">
-    <Loader v-if="loaded"/>
+  <Loader v-if="loaded"/>
+  <div class="card-container" v-if="!loaded">
     <Card v-for="card in cards" :key="card.id" :card="card"/>
   </div>
 </template>
 
 <script>
-import Card from './Card.vue';
-import Loader from './Loader.vue';
+import Card from './partials/Card.vue';
+import Loader from './partials/Loader.vue';
 
 export default {
   name: 'CardContainer',
@@ -84,8 +84,11 @@ export default {
         },
 
       ],
-      loaded: false
+      loaded: true
     }
+  },
+  mounted(){
+    setTimeout(()=>this.loaded = false, 2000)
   }
 }
 </script>
@@ -97,6 +100,10 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+.wrapper{
+  margin: 20rem auto;
 }
 
 @media only screen and (max-width: 1550px){

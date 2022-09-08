@@ -30,7 +30,11 @@
               </i>
             </div>
             <div class="error" v-if="errors.reqError">{{ errors.message }}</div>
-            <input type="submit" name="" value="Sign Up" />
+            <input
+              type="submit"
+              value="Se Connecter"
+              @click="login"
+            />
             <p class="signup">
               Pas encore inscrit ?
               <a href="#" @click="toggleForm();">S'inscrire</a>
@@ -115,10 +119,15 @@
             >
               date invalide
             </div>
-            <input type="submit" name="" value="Sign Up" />
+            <input
+              type="submit"
+              value="S'inscrire"
+              :disabled="state"
+              @click="register"
+            />
             <p class="signup">
               déjà inscrit ?
-              <a href="#" @click="toggleForm();">Se connecter.</a>
+              <a href="#" @click="toggleForm()">Se connecter.</a>
             </p>
           </form>
         </div>
@@ -128,13 +137,19 @@
 </template>
 
 <script>
-import { tSMethodSignature } from '@babel/types';
 import validator from 'validator';
 
 export default {
   name: 'Auth',
   data(){
     return{
+      get state(){
+        return (
+          (this.form.birth && this.form.password && this.form.fullName && this.form.email && this.form.passwordConfirm)
+          &&
+          (this.errors.email || this.errors.password || this.errors.fullName || this.errors.passwordConfirm || this.errors.birth || this.errors.start)
+        )
+      },
       form: {
         email: '',
         password: '',
@@ -143,41 +158,53 @@ export default {
         birth: ''
       },
       errors:{
+        start: true,
         email: false,
         password: false,
         fullName: false,
         passwordConfirm: false,
         birth: false,
         reqError: false,
-        message: ''
+        message: '',
       }
     }
   },
   methods: {
     nameChange(){
-      this.errors.fullName = !(/^(?!(?:.*\s$)|(?:^\s.*)).*$/).test(this.form.fullName)
-      || !validator.isAlpha(this.form.fullName)
+      this.errors.start = false
+      let tri = this.form.fullName.trim()
+      this.errors.fullName = !(tri === this.form.fullName)
+      || !validator.isAlpha(this.form.fullName, 'fr-FR', {ignore: ' '})
       || this.form.fullName.length < 5
       ? true : false
     },
     emailChange(){
+      this.errors.start = false
       this.errors.email = !validator.isEmail(this.form.email)
       ? true : false
     },
     passwordChange(){
+      this.errors.start = false
       this.errors.password = !validator.isStrongPassword(this.form.password)
       ? true : false
       this.form.passwordConfirm ? this.passConfirmChange() : ''
     },
     passConfirmChange(){
+      this.errors.start = false
       this.errors.passwordConfirm = this.form.passwordConfirm !== this.form.password
       ? true: false
     },
     birthChange(){
+      this.errors.start = false
       const birthYear = new Date(Date.parse(this.form.birth)).getFullYear()
       this.errors.birth = (new Date().getFullYear() - birthYear) < 18
       ? true : false
-      console.log("birth", this.form.birth)
+    },
+    login(e){
+      console.log(e.target)
+    },
+    register(e){
+      console.log(e.target)
     }
   },
   setup(){
@@ -282,7 +309,7 @@ section .container .user .formBx form input {
 
 section .container .user .formBx form input[type='submit'] {
   border-radius: 1rem;
-  max-width: 10rem;
+  max-width: max-content;
   background: var(--navcolor);
   color: #fff;
   cursor: pointer;
@@ -290,6 +317,10 @@ section .container .user .formBx form input[type='submit'] {
   font-weight: 500;
   letter-spacing: .1rem;
   transition: 0.5s;
+}
+
+section .container .user .formBx form input[type='submit']:disabled{
+  background: var(--hovercolor);
 }
 
 section .container .user .formBx form input[type='submit']:hover{

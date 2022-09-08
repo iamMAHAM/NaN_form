@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from "../views/Home.vue"
 import Auth from "../views/Auth.vue"
-import Card from "../components/CardContainer.vue"
+import Details from "../views/Details.vue"
 
 const routes = [
   {
@@ -15,9 +15,9 @@ const routes = [
     component: Auth
   },
   {
-    path: '/card',
-    name: 'Card',
-    component: Card
+    path: '/detail/:categorie/:id',
+    name: 'Details',
+    component: Details
   },
 ]
 

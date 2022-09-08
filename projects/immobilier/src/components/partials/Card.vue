@@ -1,6 +1,6 @@
 <template>
-    <div class="box">
-      <div class="top">
+    <div class="box" :id="card.id">
+      <div class="top" @click="handleClick">
         <img src="https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271__340.jpg" alt="" />
         <i class="material-symbols-outlined favs">favorite</i>
       </div>
@@ -36,7 +36,14 @@
 <script>
 export default {
   name: 'Card',
-  props: ['card']
+  props: ['card'],
+  methods:{
+    handleClick(e){
+      e.target.className === "top" ? console.log("bingo") : ''
+      e.stopPropagation()
+      console.log(this.card)
+    },
+  }
 }
 </script>
 
