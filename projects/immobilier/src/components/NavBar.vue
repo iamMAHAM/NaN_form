@@ -9,10 +9,17 @@
         </div>
         <nav>
             <ul class="ul">
+
                 <router-link to="/auth">
                     <a href="">
                         <i class="material-symbols-outlined">person</i>
                         Connexion
+                    </a>
+                </router-link>
+                <router-link to="/publish">
+                    <a href="" class="item">
+                        <i class="material-symbols-outlined">publish</i>
+                        Publier
                     </a>
                 </router-link>
                 <router-link to="/favorites">
@@ -26,12 +33,6 @@
                         <i class="material-symbols-outlined">mail</i>
                         Messages
                     </a>  
-                </router-link>
-                <router-link to="/publish">
-                    <a href="" class="item">
-                        <i class="material-symbols-outlined">publish</i>
-                        Publier
-                    </a>
                 </router-link>
             </ul>
         </nav>

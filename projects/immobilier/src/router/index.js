@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from "../views/Home.vue"
 import Auth from "../views/Auth.vue"
-import Card from "../components/Card.vue"
+import Card from "../components/CardContainer.vue"
 
 const routes = [
   {
@@ -19,7 +19,6 @@ const routes = [
     name: 'Card',
     component: Card
   },
-
 ]
 
 const router = createRouter({

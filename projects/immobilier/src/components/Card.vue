@@ -1,16 +1,11 @@
 <template>
-  <div class="card-container">
-      <span style="color: red" class="loader" v-if="loaded">
-        ...
-      </span>
     <div class="box">
-      <i class="material-symbols-outlined favs">favorite</i>
       <div class="top">
         <img src="https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271__340.jpg" alt="" />
-        <span><i class="fas fa-heart"></i><i class="fas fa-exchange-alt"></i></span>
+        <i class="material-symbols-outlined favs">favorite</i>
       </div>
       <div class="bottom">
-        <h3>{{ card.type }} A {{ card.location.toLocaleUpperCase() }}</h3>
+        <h3>{{ card.type }} à {{ card.location.toLocaleUpperCase() }}</h3>
         <p>
          {{ card.description}}
         </p>
@@ -36,84 +31,20 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
 export default {
   name: 'Card',
-  data(){
-    return {
-      card: {
-        type: 'magasin',
-        proposition: 'vente',
-        location: 'Abidjan',
-        description: 'lorem 20 je xjnj ckn c ezv zivz vrzvnz v ezvnzvzvezvez veznvebzve',
-        superficie: 500,
-        price: 2000000
-      },
-      loaded: true
-    }
-  },
-  // async mounted(){
-  //   await new Promise(r=>setTimeout(r, 3000))
-  //   this.loaded = false
-  // },
-  // setup(){
-  //     let n = 0
-  //     const move = ()=>{
-  //       n++
-  //       const loader = document.querySelector(".loader")
-  //       loader.style.transform = `rotate(${150 * n}deg )`
-  //       setTimeout(move, 1000)
-  //     }
-  //     setTimeout(move, 1000)
-  // }
+  props: ['card']
 }
 </script>
 
 <style>
-.card-container {
-  width: 1100px;
-  margin: 100px auto;
-  display: flex;
-  justify-content: space-between;
-}
-
-.card-container .box {
-  width: calc((100% / 3) - 20px);
-  background-color: white;
-  position: relative;
-}
-/* .card-container .box:first-of-type:before {
-  content: "Featured";
-  background-color: #ea723d;
-  color: white;
-  font-size: 13px;
-  padding: 4px 10px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateY(-50%);
-  z-index: 1;
-} */
-
-/* .card-container .box:first-of-type:after {
-  content: "";
-  border-width: 12px;
-  border-style: solid;
-  border-color: transparent transparent transparent #ea723d;
-  position: absolute;
-  left: 72px;
-  top: 0;
-  transform: translateY(-50%);
-} */
-
 
 .favs{
-  cursor: pointer;
-  z-index: 2;
   position: absolute;
+  cursor: pointer;
   top: 1rem;
   right: 1rem;
   color: red;
@@ -124,28 +55,23 @@ export default {
   color: #3eaba1;
 }
 
+.favs:hover{
+  color: #3eaba1;
+}
+
 .card-container{
   position: relative;
 }
 
+.card-container .box {
+  width: 23%;
+  background-color: white;
+  position: relative;
+  margin: 1rem 0;
+}
 .card-container .box .top {
   position: relative;
   background-color: var(--hovercolor);
-}
-
-.card-container .box .top:before {
-  content: "";
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  transition: 0.3s;
-  opacity: 0;
-}
-
-.card-container .box .top:hover:before {
-  opacity: 1;
 }
 
 .card-container .box .top:after {
@@ -189,18 +115,6 @@ export default {
   padding: 20px 15px;
   position: relative;
 }
-
-/* .card-container .box:not(:last-of-type) .bottom:before {
-  content: "Hot";
-  background-color: #ea723d;
-  color: white;
-  font-size: 11px;
-  padding: 4px 7px;
-  position: absolute;
-  left: 20px;
-  top: -40px;
-  z-index: 1;
-} */
 
 .card-container .box .bottom h3 {
   font-size: 15px;
