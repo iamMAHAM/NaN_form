@@ -43,6 +43,8 @@
 
 <script>
 import postForm from './partials/postForm.vue'
+import validator  from 'validator'
+
 export default {
   name: 'NavBar',
   data(){
