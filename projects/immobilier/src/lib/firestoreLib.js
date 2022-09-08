@@ -172,7 +172,5 @@ export const deleteComment = (postId, messageId)=>{
 export const allCategories = [
 	'terrain',
 	'maison',
-	'location',
-	'colocation',
 	'magasin'
 ]
