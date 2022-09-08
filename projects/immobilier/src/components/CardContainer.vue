@@ -99,4 +99,42 @@ export default {
   flex-wrap: wrap;
 }
 
+@media only screen and (max-width: 1550px){
+  .card-container .box{
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width: 1174px){
+  .card-container .box{
+    width: 32%;
+  }
+}
+
+@media only screen and (max-width: 1098px){
+  .card-container .box{
+    width: 32.5%;
+  }
+}
+@media only screen and (max-width: 956px){
+  .card-container .box{
+    width: 48%;
+  }
+}
+@media only screen and (max-width: 739px){
+  .card-container .box{
+    width: 48.5%;
+  }
+}
+@media only screen and (max-width: 608px){
+  .card-container {
+    width: 95%;
+    justify-content: center;
+  }
+  .card-container .box{
+    width: 80%;
+  }
+}
+
+
 </style>

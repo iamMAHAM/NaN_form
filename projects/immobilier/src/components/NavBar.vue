@@ -71,6 +71,7 @@ a{
 }
 
 .ul{
+    z-index: 10;
     display: flex;
 }
 #header{
