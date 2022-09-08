@@ -21,7 +21,7 @@
           <div>
             <span>Superficie</span>
             <div>
-              <i class="fas fa-vector-square"></i><span>500<span>m²</span></span>
+              <i class="fas fa-vector-square"></i><span>{{ card.area}}<span>m²</span></span>
             </div>
           </div>
         </div>

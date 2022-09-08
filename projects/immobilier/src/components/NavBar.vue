@@ -16,12 +16,12 @@
                         Connexion
                     </a>
                 </router-link>
-                <router-link to="/publish">
-                    <a href="" class="item">
+                <a @click="publish">
+                    <a href="#" class="item">
                         <i class="material-symbols-outlined">publish</i>
                         Publier
                     </a>
-                </router-link>
+                </a>
                 <router-link to="/favorites">
                     <a href="" class="item">
                         <i class="material-symbols-outlined">favorite</i>
@@ -37,22 +37,37 @@
             </ul>
         </nav>
         <i class="material-symbols-outlined menu">menu</i>
+        <postForm :show="show"/>
     </div>
 </template>
 
 <script>
+import postForm from './partials/postForm.vue'
 export default {
-    name: 'NavBar',
-    setup(){
-        window.addEventListener("DOMContentLoaded", ()=>{
-            const ul = document.querySelector(".ul")
-            const menu = document.querySelector(".material-symbols-outlined.menu")
-            menu.addEventListener("click", ()=>{
-                ul.classList.toggle("active")
-                menu.textContent = menu.textContent === "close" ? "menu" : "close"
-           })
-        })
+  name: 'NavBar',
+  data(){
+    return {
+      show: true
     }
+  },
+  components: {
+    postForm
+  },
+  setup(){
+    window.addEventListener("DOMContentLoaded", ()=>{
+        const ul = document.querySelector(".ul")
+        const menu = document.querySelector(".material-symbols-outlined.menu")
+        menu.addEventListener("click", ()=>{
+            ul.classList.toggle("active")
+            menu.textContent = menu.textContent === "close" ? "menu" : "close"
+        })
+    })
+  },
+  methods:{
+    publish(e){
+      console.log(e.target)
+    }
+  }
 }
 </script>
 

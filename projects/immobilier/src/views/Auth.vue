@@ -327,6 +327,7 @@ section .container .user .formBx form input[type='submit']:hover{
   background: var(--hovercolor);
 }
 
+.button-style,
 section .container .user .formBx form .signup {
   position: relative;
   margin-top: 2rem;
