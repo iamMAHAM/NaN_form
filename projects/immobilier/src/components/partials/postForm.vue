@@ -9,7 +9,6 @@
             <div class="input">
               <i class="material-symbols-outlined">title</i>
               <input
-                required
                 type="text"
                 placeholder="Titre"
                 v-model="form.title"
@@ -23,9 +22,10 @@
                 <option value="maison">Maison</option>
                 <option value="terrain">Terrain</option>
                 <option value="magasin">Magasin</option>
+                <option value="hotel">Hotel</option>
               </select>
             </div>
-            <div class="error" v-if="errors.type">categorie inconnue</div>
+            <div class="error" v-if="errors.type">valeur de categorie inconnue</div>
             <div class="input">
               <i class="material-symbols-outlined">pentagon</i>
               <select v-model="form.proposition" required>
@@ -49,7 +49,6 @@
             <div class="input">
               <i class="material-symbols-outlined">payments</i>
               <input
-                required
                 min="0"
                 type="number"
                 placeholder="Prix"
@@ -61,7 +60,6 @@
             <div class="input">
               <i class="material-symbols-outlined">draft</i>
               <input
-                required
                 min="0"
                 type="file"
                 accept=".jpeg,.png"
@@ -75,15 +73,16 @@
             </div>
           </div>
           <div class="extra">
-            <textarea class="pa" v-model="form.description">
-            </textarea>
+            <textarea class="pa" v-model="form.description"></textarea>
+            <div class="error" v-if="errors.description">minimum 300 caractères</div>
             <input
-              @click="postAd"
+              @click.prevent="postAd"
               class="button-style"
               type="submit"
               value="Poster"
             >
           </div>
+
       </div>
     </form>
   </div>
@@ -108,7 +107,7 @@ export default {
         form: {
           title: '',
           type: '',
-          description: 'description',
+          description: 'description ...',
           location: '',
           proposition: '',
           area: 0,
@@ -148,13 +147,13 @@ export default {
         this.files = inter
       },
       handleErrors(){
-        console.log("price", validator.isNumeric(`${this.form.price}`) && parseFloat(this.form.price) <= 1000)
-        console.log("area", validator.isNumeric(`${this.form.area}`) && parseFloat(this.form.area) <= 0)
-        this.errors.type = !validator.isAlpha(this.form.type) ? true : false  
+        const type = ['maison', 'terrain', 'magasin', 'hotel'].includes(this.form.type)
+        const prop = ['vente', 'location'].includes(this.form.proposition)
+        this.errors.type = !validator.isAlpha(this.form.type) || !type ? true : false  
         this.errors.title = !validator.isAlpha(this.form.title) ? true : false  
-        this.errors.description = !validator.isAlphanumeric(this.form.description) ? true : false
+        this.errors.description = this.form.description.length < 300 ? true : false
         this.errors.location = !validator.isAlpha(this.form.location) ? true : false
-        this.errors.proposition = !validator.isAlpha(this.form.proposition) ? true : false
+        this.errors.proposition = !validator.isAlpha(this.form.proposition) || !prop ? true : false
         this.errors.area = validator.isNumeric(`${this.form.area}`) && parseFloat(this.form.area) <= 0
         ?
           true : false
@@ -202,12 +201,10 @@ form.post-modal-form{
   height: 60%;
 }
 
-h1{
-  display: block;
-}
 h1.title{
-    font-weight: 450;
-    text-align: center;
+  padding: .5rem;
+  font-weight: 450;
+  text-align: center;
 }
 
 .title i{
@@ -314,9 +311,6 @@ select,
   }
 }
 @media only screen and (max-width: 1098px){
-  h1.title{
-    height: 5rem;
-  }
   .ads-content{
     justify-content: center;
     align-items: center;
@@ -336,11 +330,21 @@ select,
   }
 
   .pa{
+    min-height: 10vh;
     min-width: 35vw;
   }
 
   .preview img{
     height: 5rem;
+  }
+}
+
+@media only screen and (max-width: 777px){
+  form.post-modal-form{
+    width: 80%;
+  }
+  .pa{
+    min-width: 70vw;
   }
 }
 </style>
