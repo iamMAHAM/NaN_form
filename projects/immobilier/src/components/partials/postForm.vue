@@ -8,37 +8,48 @@
           <div class="ads-rows">
             <div class="input">
               <i class="material-symbols-outlined">title</i>
-              <input type="text" placeholder="Titre" v-model="form.title">
+              <input
+                required
+                type="text"
+                placeholder="Titre"
+                v-model="form.title"
+                >
             </div>
+            <div class="error" v-if="errors.title">minimum 5 caractères</div>
             <div class="input">
               <i class="material-symbols-outlined">waving_hand</i>
-              <select v-model="form.type">
+              <select v-model="form.type" required>
                 <option disabled value="">Choisir un bien</option>
                 <option value="maison">Maison</option>
                 <option value="terrain">Terrain</option>
                 <option value="magasin">Magasin</option>
               </select>
             </div>
+            <div class="error" v-if="errors.type">categorie inconnue</div>
             <div class="input">
               <i class="material-symbols-outlined">pentagon</i>
-              <select v-model="form.proposition">
+              <select v-model="form.proposition" required>
                 <option disabled value="">Chosir une proposition</option>
                 <option value="location">Location</option>
                 <option value="vente">Vente</option>
               </select>
             </div>
+            <div class="error" v-if="errors.proposition">valeur inconnue</div>
             <div class="input">
               <i class="material-symbols-outlined">location_on</i>
-              <input type="text" placeholder="Lieux" v-model="form.location">
+              <input type="text" placeholder="Lieu" v-model="form.location" required>
             </div>
+            <div class="error" v-if="errors.location">emplacement invalide</div>
             <div class="input">
               <i class="material-symbols-outlined">functions</i>
-              <input type="text" placeholder="Superficie" v-model="form.area">
+              <input type="number" placeholder="Superficie" v-model="form.area">
               <span>m²</span>
             </div>
+            <div class="error" v-if="errors.area">superficie invalide</div>
             <div class="input">
               <i class="material-symbols-outlined">payments</i>
               <input
+                required
                 min="0"
                 type="number"
                 placeholder="Prix"
@@ -46,15 +57,19 @@
               >
               <span>FCFA</span>
             </div>
+            <div class="error" v-if="errors.price">montant invalide</div>
             <div class="input">
               <i class="material-symbols-outlined">draft</i>
               <input
+                required
+                min="0"
                 type="file"
                 accept=".jpeg,.png"
                 multiple="multiple"
                 @change="createImages"
                 >
             </div>
+            <div class="error" v-if="errors.files">minimium 1 et maximum 3</div>
             <div class="preview">
               <img v-for="file in files" :src="file.src" :key="file.id">
             </div>
@@ -63,6 +78,7 @@
             <textarea class="pa" v-model="form.description">
             </textarea>
             <input
+              @click="postAd"
               class="button-style"
               type="submit"
               value="Poster"
@@ -74,20 +90,40 @@
 </template>
 
 <script>
+import validator from 'validator'
 export default {
     props: ['show'],
     data(){
       return {
+        get state(){
+          const errors = Object.values(this.errors)
+          let flag = false
+          errors.map(e =>{
+            e ? flag = true : ''
+          })
+          return flag
+        },
         files: [],
         fileList: [],
         form: {
           title: '',
           type: '',
-          description: 'description...',
+          description: 'description',
           location: '',
           proposition: '',
-          area: '',
+          area: 0,
           price: 0
+        },
+        errors:{
+          type: false,
+          title: false,
+          description: false,
+          location: false,
+          proposition: false,
+          area: false,
+          price: false,
+          files: false,
+          start: true
         }
       }
     },
@@ -96,11 +132,12 @@ export default {
         const inter = []
         const target = e.target
         if (target.files.length > 3){
-          alert("3 images au maximum autorisées")
           target.value = ''
+          this.errors.files = true
           this.files = []
           return
         }
+        this.errors.files = false
         this.fileList = target.files
         console.log(this.fileList)
         Array.from(target.files).map(file=>{
@@ -109,11 +146,35 @@ export default {
           inter.push(file)
         })
         this.files = inter
-        console.log(typeof this.fileList)
+      },
+      handleErrors(){
+        console.log("price", validator.isNumeric(`${this.form.price}`) && parseFloat(this.form.price) <= 1000)
+        console.log("area", validator.isNumeric(`${this.form.area}`) && parseFloat(this.form.area) <= 0)
+        this.errors.type = !validator.isAlpha(this.form.type) ? true : false  
+        this.errors.title = !validator.isAlpha(this.form.title) ? true : false  
+        this.errors.description = !validator.isAlphanumeric(this.form.description) ? true : false
+        this.errors.location = !validator.isAlpha(this.form.location) ? true : false
+        this.errors.proposition = !validator.isAlpha(this.form.proposition) ? true : false
+        this.errors.area = validator.isNumeric(`${this.form.area}`) && parseFloat(this.form.area) <= 0
+        ?
+          true : false
+        this.errors.price = validator.isNumeric(`${this.form.price}`) && parseFloat(this.form.price) <= 1000
+        ?
+          true : false
+        this.errors.files = !this.files.length || this.files.length > 3 ? true: false
+      },
+      postAd(){
+        this.handleErrors()
+        if (!this.state){
+          console.log("all valide post now ...")
+        }
       }
     },
     mounted(){
 
+    },
+    updated(){
+      console.log("update now ...")
     }
 }
 </script>
@@ -129,6 +190,7 @@ export default {
 }
 
 form.post-modal-form{
+  overflow: scroll;
   border-radius: 1rem;
   margin: auto;
   width: 50%;
@@ -140,6 +202,9 @@ form.post-modal-form{
   height: 60%;
 }
 
+h1{
+  display: block;
+}
 h1.title{
     font-weight: 450;
     text-align: center;
@@ -161,16 +226,19 @@ h1.title{
 .ads-content{
   width: 100%;
   display: flex;
-  height: calc(100% - 7rem);
 }
 .pa{
+  text-align: center;
   outline-color: var(--navcolor);
-  width: 85%;
-  height: 60%;
-  max-width: 100%;
-  max-height: 60%;
+  min-width: 20vw;
+  max-width: 20vw;
+  min-height: 30vh;
+  max-height: 45vh;
 }
 .ads-content >div{
+  /* display: block; */
+  position: relative;
+  height: max-content;
   padding: 1rem;
   text-align: center;
   width: 50%;
@@ -190,11 +258,16 @@ h1.title{
   background: var(--navcolor);
   cursor: pointer;
   border-radius: .5rem;
-  width: 20%;
+  width: 30%;
 }
 
+.extra input[type="submit"]:disabled,
 .extra input[type="submit"]:hover{
   background: var(--hovercolor);
+}
+
+.extra input[type="submit"]:disabled{
+  pointer-events: none;
 }
 
 .ads-rows div.input{
@@ -225,6 +298,49 @@ select,
 .preview img{
   margin: .3rem;
   width: 30%;
-  height: 100%;
+  height: 65%;
+}
+
+.ads-content >span{
+  color: red;
+}
+
+@media only screen and (max-width: 1186px){
+  .title span{
+    font-size: 2.2rem;
+  }
+  .extra input[type="submit"]{
+    width: 35%;
+  }
+}
+@media only screen and (max-width: 1098px){
+  h1.title{
+    height: 5rem;
+  }
+  .ads-content{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .ads-content >div{
+    width: 70%;
+  }
+
+  .extra{
+    height: calc(15rem);
+  }
+
+  .ads-rows{
+    height: calc(100% - 20rem);
+  }
+
+  .pa{
+    min-width: 35vw;
+  }
+
+  .preview img{
+    height: 5rem;
+  }
 }
 </style>
