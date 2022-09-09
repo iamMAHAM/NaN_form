@@ -101,7 +101,6 @@
 </template>
 
 <script>
-import e from 'express'
 
 export default {
   name: 'Messages',
@@ -118,8 +117,8 @@ export default {
       this.show = this.message.trim().length > 0 ? true : false 
       textarea.style.height = this.message.trim().length > 100 ? scrollHeight +'px' : '16px'
     },
-    sendSMS(){
-      if (this.message.trim().length > 0){
+    sendSMS(e){
+      if (e.key==='Enter' && this.message.trim().length > 0){
         // do some task here like send message hahahha ... (iamMAHAM)
       }
     }
