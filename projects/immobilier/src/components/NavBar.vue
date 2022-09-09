@@ -37,19 +37,18 @@
             </ul>
         </nav>
         <i class="material-symbols-outlined menu">menu</i>
-        <postForm :show="show"/>
+        <postForm :show="show" @close="show=false"/>
     </div>
 </template>
 
 <script>
 import postForm from './partials/postForm.vue'
-import validator  from 'validator'
 
 export default {
   name: 'NavBar',
   data(){
     return {
-      show: true
+      show: false
     }
   },
   components: {
@@ -66,8 +65,8 @@ export default {
     })
   },
   methods:{
-    publish(e){
-      console.log(e.target)
+    publish(){
+        this.show = true
     }
   }
 }

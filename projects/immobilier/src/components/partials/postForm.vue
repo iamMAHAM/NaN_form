@@ -1,6 +1,12 @@
 <template>
   <div class="post-modal" v-if="show">
     <form class="post-modal-form" @submit.prevent="">
+      <span
+        class="close"
+        @click="$emit('close')"
+      >
+        x
+      </span>
       <h1 class="title">
           <span>Publier une Annonce</span>
       </h1>
@@ -309,6 +315,14 @@ select,
   .extra input[type="submit"]{
     width: 35%;
   }
+}
+
+.close{
+  cursor: pointer;
+  font-size: 2rem;
+  position: absolute;
+  right: 1rem;
+  color: red;
 }
 @media only screen and (max-width: 1098px){
   .ads-content{
