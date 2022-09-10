@@ -1,8 +1,9 @@
 
-import { db, storage } from "./firebaseConfig"
+import { db, storage, rtdb } from "./firebaseConfig"
 import { ref, uploadBytes,getDownloadURL } from "firebase/storage"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged,signOut } from "firebase/auth"
-import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, onSnapshot, updateDoc } from "firebase/firestore"
+import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, onSnapshot, updateDoc, orderBy } from "firebase/firestore"
+import { set } from "firebase/database"
 
 /**********CONST VARIABLES********************/
 export const auth = getAuth()
@@ -25,10 +26,16 @@ export const findOne = (col="", id="")=>{
     })
 }
 
-export const find = (col, origin="")=>{
+export const find = (col, origin="", order=false)=>{
     return new Promise(async (resolve)=>{
         const result = []
-        const qs = await getDocs(collection(db, col))
+        let qs = null
+        if (!order){
+            qs = await getDocs(collection(db, col))
+        } else{
+            qs = await getDocs(query(collection(db, col), orderBy(order)))
+        }
+        console.log(qs)
         qs.empty ? reject(new Error("empty collection")) : ''
         qs.docs.map((doc) => {
             let toPush = doc.data()
@@ -129,11 +136,15 @@ export const isLoggedUser = async (callback)=>{
     })
 }
 
-export const sendMessage = async (senderId, receiverID, message, callback=()=>{})=>{
-    Promise.all([
-        saveOne(`messages/${senderId}/${receiverID}/`, message),
-        saveOne(`messages/${receiverID}/${senderId}`, message)
-    ]).catch(e=>{return callback(e.message)})
+// export const sendMessage = async (senderId, receiverID, message, callback=()=>{})=>{
+//     Promise.all([
+//         saveOne(`messages/${senderId}/${receiverID}/`, message),
+//         saveOne(`messages/${receiverID}/${senderId}`, message)
+//     ]).catch(e=>{return callback(e.message)})
+// }
+
+export const sendMessage =async (senderId, receiverID, message)=>{
+
 }
 
 export const uploadImage = async (path, file, callback)=>{
