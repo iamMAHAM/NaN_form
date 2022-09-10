@@ -105,9 +105,8 @@
 
 <script>
 import Person from '@/components/partials/Person.vue'
-import { find } from '@/lib/firestoreLib'
-import { onSnapshot, collection, query, orderBy, addDoc } from '@firebase/firestore'
-import { db } from '@/lib/firebaseConfig'
+import { getConversations, sendMessage } from '@/lib/firestoreLib'
+import { findOne } from '@/lib/firestoreLib'
 export default {
   name: 'Messages',
   components: {
@@ -119,7 +118,7 @@ export default {
       ],
       conversations:[
         {
-          id: 'knfienfiezf',
+          info: {},
           messages: [
             {
             id: 1,
@@ -230,16 +229,33 @@ export default {
     this.messages = cMessages
   }
   },
-  mounted(){
-    console.log("mounted")
-    const q = query(collection(db, 'messages'))
-    onSnapshot(q, snap=>{
-      console.log(snap.docs.map(doc=>console.log(doc)))
+  async mounted(){
+    Object.filter = (obj, predicate) => 
+    Object.keys(obj)
+          .filter( key => predicate(obj[key]) )
+          .reduce( (res, key) => (res[key] = obj[key], res), {}
+    );
+    const inter = []
+    getConversations("W9StKsYWYG8J8ElNY4Gr")
+    .then(c=>{
+      for (const [k, v] of Object.entries(c)){
+        console.log("v", v)
+        inter.push({
+          info: v.info,
+          messages: Object.filter(v, v=> !v.hasOwnProperty("fullName"))
+        })
+      }
+      console.log(inter)
     })
-    // find("/messages/XAzeR0W8rrLMHKmGr4EE/W9StKsYWYG8J8ElNY4Gr", '', 'timestamp')
-    // .then(messages=>{
-    //   this.messages = messages
+    
+    // sendMessage("W9StKsYWYG8J8ElNY4Gr", "XAzeR0W8rrLMHKmGr4EE", {
+    //   message: {
+    //     type: 'text',
+    //     content: 'bvbvbcvbcxbvcbnvcxbbcnx'
+    //   },
+    //   who: 'me'
     // })
+    // .then(console.log("success"))
   },
 }
 </script>

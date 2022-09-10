@@ -2,14 +2,14 @@
 import { db, storage, rtdb } from "./firebaseConfig"
 import { ref, uploadBytes,getDownloadURL } from "firebase/storage"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged,signOut } from "firebase/auth"
-import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, onSnapshot, updateDoc, orderBy } from "firebase/firestore"
-import { set } from "firebase/database"
+import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, updateDoc, orderBy, se } from "firebase/firestore"
+import { set, ref as dbref, serverTimestamp, onValue, query as dbquery } from "firebase/database"
+import { uuidv4 } from "@firebase/util"
 
 /**********CONST VARIABLES********************/
 export const auth = getAuth()
 const users = collection(db, "users")
 const datas = collection(db, "datas")
-const messages = collection(db, "messages")
 
 /*************FUNCTIONS*********************/
 export const findOne = (col="", id="")=>{
@@ -143,9 +143,44 @@ export const isLoggedUser = async (callback)=>{
 //     ]).catch(e=>{return callback(e.message)})
 // }
 
-export const sendMessage =async (senderId, receiverID, message)=>{
+export const sendMessage = async (senderId, receiverID, message)=>{
+    const id = uuidv4()
+    const messagesRef = dbref(rtdb, `messages/${senderId}/${receiverID}/${id}`)
+    const receiverInfo = dbref(rtdb, `messages/${senderId}/${receiverID}/info`)
+    message.id = id
+    message.timestamp = serverTimestamp()
+    set(messagesRef, message)
+    findOne("users", receiverID)
+    .then(info=> {
+        console.log(info)
+        const banned = ['email', 'password', 'birth']
+        const inter = {} 
+        for (const [k, v] of Object.entries(info)){
+            banned.includes(k) ? '' : inter[k] = v
+        }
+        set(receiverInfo, inter)
+    })
+}
+// 
+export const getConversations = async (userId)=>{
+    return new Promise((resolve)=>{
+        const conversations = dbref(rtdb, `messages/${userId}/`);
+        const q = dbquery(conversations)
+        onValue(conversations, (snapshot) => {
+        const data = snapshot.val();
+        resolve(data)
+    })
+    // updateStarCount(postElement, data);
+});
 
 }
+// export const writeUserData = async (userId, name, email, imageUrl)=>{
+//     set(dbref(rtdb, 'users/' + userId), {
+//       username: name,
+//       email: email,
+//       profile_picture : imageUrl
+// });
+// }
 
 export const uploadImage = async (path, file, callback)=>{
 	const Imagesref = ref(storage, path)
