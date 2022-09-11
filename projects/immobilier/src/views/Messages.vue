@@ -5,7 +5,9 @@
       <div class="top">
         <div class="tub">
           <div class="username">
-
+            <img src="../assets/test.jpg" width="30px" height="30px"/>
+            iamMAHAM
+            <i class="material-symbols-outlined">edit_square</i>
           </div>
         </div>
       </div>

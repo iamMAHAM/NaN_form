@@ -21,7 +21,7 @@ const routes = [
     component: Messages
   },
   {
-    path: '/detail/:categorie/:id',
+    path: '/details/:categorie/:id',
     name: 'Details',
     component: Details
   },
