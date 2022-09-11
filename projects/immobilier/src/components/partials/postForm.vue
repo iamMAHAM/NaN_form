@@ -10,7 +10,7 @@
       <h1 class="title">
           <span>Publier une Annonce</span>
       </h1>
-      <div class="ads-content">
+      <div class="main-content">
           <div class="ads-rows">
             <div class="input">
               <i class="material-symbols-outlined">title</i>
@@ -184,6 +184,19 @@ export default {
 }
 </script>
 
+<style scoped>
+/* width */
+::-webkit-scrollbar {
+  border-radius: 1rem;
+  width: .1rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background: var(--navcolor);
+}
+</style>
 <style>
 .post-modal{
     z-index: 5;
@@ -195,7 +208,7 @@ export default {
 }
 
 form.post-modal-form{
-  overflow: scroll;
+  overflow-y: scroll;
   border-radius: 1rem;
   margin: auto;
   width: 50%;
@@ -226,7 +239,7 @@ h1.title{
     border: .1px solid var(--hovercolor);
 }
 
-.ads-content{
+.main-content{
   width: 100%;
   display: flex;
 }
@@ -238,7 +251,7 @@ h1.title{
   min-height: 30vh;
   max-height: 45vh;
 }
-.ads-content >div{
+.main-content >div{
   /* display: block; */
   position: relative;
   height: max-content;
@@ -278,7 +291,7 @@ h1.title{
 }
 
 select,
-.ads-content input{
+.main-content input{
   position: relative;
   width: 100%;
   padding: 1rem;
@@ -304,7 +317,7 @@ select,
   height: 65%;
 }
 
-.ads-content >span{
+.main-content >span{
   color: red;
 }
 
@@ -325,13 +338,13 @@ select,
   color: red;
 }
 @media only screen and (max-width: 1098px){
-  .ads-content{
+  .main-content{
     justify-content: center;
     align-items: center;
     flex-direction: column;
   }
 
-  .ads-content >div{
+  .main-content >div{
     width: 70%;
   }
 

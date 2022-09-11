@@ -76,8 +76,8 @@ export default {
 
 #logo{
     border: 1px solid white;
-    width: 10rem;
-    height: 9rem;
+    width: 80%;
+    max-height: 8rem;
     border-radius: 50%;
 }
 
@@ -138,8 +138,7 @@ nav .dropdown{
     position:relative
 }
 nav a{
-    float:left;
-    padding: 2rem
+    padding: 1rem
 }
 nav a:hover{
     background:#2C3E50
@@ -147,13 +146,21 @@ nav a:hover{
 
 @media only screen and (max-width: 1346px){
 
+    #logo{
+        height: 6rem;
+    }
+
     .logo a{
         width: max-content;
         padding: 0 1rem;
     }
 
+    nav a{
+        padding: .5rem;
+    }
+
     .search{
-        width: 50%;
+        width: 35%;
     }
 
     .search-i{
