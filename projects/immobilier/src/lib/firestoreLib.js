@@ -148,32 +148,35 @@ export const sendMessage = async (senderId, receiverID, message)=>{
     const messagesRef = dbref(rtdb, `messages/${senderId}/${receiverID}/${id}`)
     const receiverInfo = dbref(rtdb, `messages/${senderId}/${receiverID}/info`)
     message.id = id
-    message.timestamp = serverTimestamp()
+    message.timestamp = Date.now()
     set(messagesRef, message)
     findOne("users", receiverID)
     .then(info=> {
-        console.log(info)
         const banned = ['email', 'password', 'birth']
-        const inter = {} 
+        const inter = {}
+        inter.lastMessage = {
+            date: new Date(message.timestamp).toLocaleString().split(" ")[1].slice(1, 5),
+            message: message.message
+        }
         for (const [k, v] of Object.entries(info)){
             banned.includes(k) ? '' : inter[k] = v
         }
         set(receiverInfo, inter)
     })
 }
-// 
-export const getConversations = async (userId)=>{
-    return new Promise((resolve)=>{
-        const conversations = dbref(rtdb, `messages/${userId}/`);
-        const q = dbquery(conversations)
-        onValue(conversations, (snapshot) => {
-        const data = snapshot.val();
-        resolve(data)
-    })
-    // updateStarCount(postElement, data);
-});
+// // 
+// export const getConversations = async (userId)=>{
+//     return new Promise((resolve)=>{
+//         const conversations = dbref(rtdb, `messages/${userId}/`);
+//         const q = dbquery(conversations)
+//         onValue(conversations, (snapshot) => {
+//         const data = snapshot.val();
+//         resolve(data)
+//     })
+//     // updateStarCount(postElement, data);
+// });
+// }
 
-}
 // export const writeUserData = async (userId, name, email, imageUrl)=>{
 //     set(dbref(rtdb, 'users/' + userId), {
 //       username: name,

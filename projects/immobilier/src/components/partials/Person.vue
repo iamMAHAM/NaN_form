@@ -1,6 +1,7 @@
 <template>
   <div
     @click="showConversation"
+    :id="person?.id"
     class="person"
   >
     <div class="box">
@@ -14,17 +15,29 @@
     </div>
     <div class="information">
       <div class="username">
-        {{ person.fullName }}
+        {{ person?.fullName }}
         <i
-          v-if="person.isverified"
+          v-if="person?.isverified"
           class="material-symbols-outlined"
         >
           verified_user
         </i>
       </div>
       <div class="content">
-        <div class="message"><b>You :</b>{{ person.lastMessage.message }}</div>
-        <div class="time">&bull; {{ person.lastMessage.date }}</div>
+        <div class="message">
+          <b>You :</b>
+          <span
+            v-if="person?.lastMessage.message.type === 'text'"
+          >
+            {{ person?.lastMessage.message.content }}
+          </span>
+          <i
+            v-else
+            class="material-symbols-outlined pi"
+          >
+            imagesmode</i>
+        </div>
+        <div class="time">&bull; {{ person?.lastMessage?.date }}</div>
       </div>
     </div>
   </div>
@@ -33,15 +46,19 @@
 <script>
 export default {
   name: 'Person',
-  props: ['infos', 'styles'],
+  props: ['infos'],
   data(){
     return {
       person: {
+        id: '123',
         fullName: 'Abdul Mahamoudou Kabore',
         isverified: true,
         lastMessage: {
           date: '12:30',
-          message: 'hello'
+          message: {
+            type: 'img',
+            content: 'hello'
+          }
         }
       }
     }
@@ -50,6 +67,13 @@ export default {
     showConversation(){
       this.$emit("switch", this.person.lastMessage)
     }
+  },
+  update(){
+    console.log("paul")
+  },
+  mounted(){
+    console.log("infos", this.infos)
+    this.person = this.infos
   }
 }
 </script>
@@ -58,5 +82,10 @@ export default {
 .imgLog{
   height: 5rem;
   width: 5rem;
+}
+
+.pi{
+  margin: auto 0;
+  font-size: 2rem !important;
 }
 </style>

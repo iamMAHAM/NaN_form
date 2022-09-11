@@ -10,13 +10,22 @@
         </div>
       </div>
       <div class="conversations">
+        <div
+            v-if="!load && !conversations.length"
+            class="notFound"
+        >
+          <i class="material-symbols-outlined">filter_none</i>
+          Aucune Conversation
+        </div>
         <Person
+          v-else
           v-for="conversation in conversations" :key="conversation.id"
+          :infos="conversation.info"
           @switch="switchMessages"
           />
       </div>
     </div>
-    <div class="right">
+    <div class="right" v-if="!load && conversations.length">
       <div class="top">
         <div class="box">
           <div class="image">
@@ -105,8 +114,11 @@
 
 <script>
 import Person from '@/components/partials/Person.vue'
-import { getConversations, sendMessage } from '@/lib/firestoreLib'
+import { rtdb } from "@/lib/firebaseConfig"
+import {  sendMessage } from '@/lib/firestoreLib'
 import { findOne } from '@/lib/firestoreLib'
+import { onValue, ref as dbref, query as dbquery } from "firebase/database"
+
 export default {
   name: 'Messages',
   components: {
@@ -114,71 +126,11 @@ export default {
   },
   data(){
     return {
-      messages:[        
-      ],
-      conversations:[
-        {
-          info: {},
-          messages: [
-            {
-            id: 1,
-            who: 'me',
-            message: {
-              type: 'text',
-              content: 'salut comment tu vas ?'
-            },
-            timestamp: 1111111111,
-            },
-            {
-              id: 2,
-              who: 'me',
-              message: {
-                type: 'image',
-                content: 'https://images.unsplash.com/photo-1657664049378-c8aadfe323f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
-              },
-              timestamp: 1111111211,
-            },
-            {
-              id: 3,
-              who: 'me',
-              message: {
-                type: 'text',
-                content: 'on devait se voir odhui non ? je ne suis pas fan de ça hein donc dis mo ce qui ne vas pa en même temps'
-              },
-              timestamp: 11113431111,
-            },
-            {
-              id: 1,
-              who: 'you',
-              message: {
-                type: 'text',
-                content: 'salut comment tu vas ?'
-              },
-              timestamp: 1111111111,
-            },
-            {
-              id: 2,
-              who: 'you',
-              message: {
-                type: 'image',
-                content: 'https://images.unsplash.com/photo-1657664049378-c8aadfe323f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
-              },
-              timestamp: 1111111211,
-            },
-            {
-              id: 3,
-              who: 'you',
-              message: {
-                type: 'text',
-                content: 'on devait se voir odhui non ? je ne suis pas fan de ça hein donc dis mo ce qui ne vas pa en même temps'
-              },
-              timestamp: 11113431111,
-            },
-          ]
-        }
-      ],
+      messages:[],
+      conversations:[],
       message: '',
-      show: false
+      show: false,
+      load: true
     }
   },
   methods:{
@@ -204,7 +156,7 @@ export default {
       }
     },
     sendPhoto(e){
-      const d = new Date().toLocaleString();
+      const d = new Date().toLocaleString().split(" ")[1];
       this.messages.push({
         id: 'msms',
         who: 'me',
@@ -236,19 +188,30 @@ export default {
           .reduce( (res, key) => (res[key] = obj[key], res), {}
     );
     const inter = []
-    getConversations("W9StKsYWYG8J8ElNY4Gr")
-    .then(c=>{
-      for (const [k, v] of Object.entries(c)){
-        console.log("v", v)
-        inter.push({
-          info: v.info,
-          messages: Object.filter(v, v=> !v.hasOwnProperty("fullName"))
-        })
+    const conversations = dbref(rtdb, `messages/W9StKsYWYG8J8ElNY4Gr`);
+    const q = dbquery(conversations)
+    onValue(q, (snapshot) => {
+      const data = snapshot.val();
+      if (data){
+        for (const [k, v] of Object.entries(data)){
+          const filtered = Object.filter(v, v=> !v.hasOwnProperty("fullName"))
+          const messages = []
+          for (const [kc, vc] of Object.entries(filtered)){
+            messages.push(vc)
+          }
+          inter.push({
+            info: v.info,
+            messages: messages
+          })
+        }
+        this.conversations = inter
       }
-      console.log(inter)
+      this.load = false
     })
     
-    // sendMessage("W9StKsYWYG8J8ElNY4Gr", "XAzeR0W8rrLMHKmGr4EE", {
+
+    
+    // sendMessage("W9StKsYWYG8J8ElNY4Gr", "XAzeR0W8rrLMHKmGr4EESS", {
     //   message: {
     //     type: 'text',
     //     content: 'bvbvbcvbcxbvcbnvcxbbcnx'
@@ -407,6 +370,8 @@ img {
 }
 
 .conversations > .person > .information > .content > .message {
+  display: flex;
+  align-items: center;
   max-width: 70%;
   white-space: nowrap;
   overflow: hidden;
@@ -728,4 +693,11 @@ img {
   }
 }
 
+.notFound{
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .5rem;
+}
 </style>
