@@ -1,10 +1,10 @@
 <template>
   <section>
-    <div class="container active">
+    <div class="container active" ref="container">
       <div class="user signinBx">
         <div class="imgBx"><img src="../assets/reg.jpg" alt="" /></div>
         <div class="formBx">
-          <form action="" onsubmit="return false;">
+          <form>
             <h2>Connexion</h2>
             <div class="input">
               <i class="material-symbols-outlined">alternate_email</i>
@@ -33,7 +33,7 @@
             <input
               type="submit"
               value="Se Connecter"
-              @click="login"
+              @click.prevent="login"
             />
             <p class="signup">
               Pas encore inscrit ?
@@ -46,6 +46,7 @@
         <div class="formBx">
           <form action="" onsubmit="return false;">
             <h2>Inscription</h2>
+            <div class="error" v-if="errors.reqError">{{ errors.message }}</div>
             <div class="input">
               <i class="material-symbols-outlined">badge</i>
               <input
@@ -80,10 +81,17 @@
               <i class="material-symbols-outlined">lock</i>
               <input
                 v-model="form.password"
-                @change="passwordChange"
-                type="text"
+                type="password"
+                class="ps"
                 placeholder="Mot de passe"
+                @change="passwordChange"
               >
+              <i
+                class="material-symbols-outlined vs"
+                @click="toggleVisibility"
+              >
+                visibility_off
+              </i>
             </div>
             <div
               v-if="errors.password"
@@ -93,18 +101,18 @@
              (symbole, majuscule, chiffre, lettre)
             </div>
             <div class="input">
-              <i class="material-symbols-outlined">lock</i>
+              <i class="material-symbols-outlined">location_city</i>
               <input
-                v-model="form.passwordConfirm"
-                @change="passConfirmChange"
+                v-model="form.address"
+                @change="addressChange"
                 type="text"
-                placeholder="Confirmer le Mot de passe">
+                placeholder="Address ou Lieu d'Habitation">
             </div>
             <div
-              v-if="errors.passwordConfirm"
+              v-if="errors.address"
               class="error"
             >
-              mot de passe différent
+              address invalide
             </div>
             <div class="input">
               <i class="material-symbols-outlined">calendar_month</i>
@@ -119,11 +127,17 @@
             >
               date invalide
             </div>
+            <div class="input">
+              <i class="material-symbols-outlined">imagesmode</i>
+              <input
+                type="file"
+              >
+            </div>
             <input
               type="submit"
               value="S'inscrire"
               :disabled="state"
-              @click="register"
+              @click.prevent="register"
             />
             <p class="signup">
               déjà inscrit ?
@@ -138,6 +152,7 @@
 
 <script>
 import validator from 'validator';
+import { signUp, signIn } from '@/lib/firestoreLib';
 
 export default {
   name: 'Auth',
@@ -145,24 +160,26 @@ export default {
     return{
       get state(){
         return (
-          (this.form.birth && this.form.password && this.form.fullName && this.form.email && this.form.passwordConfirm)
+          (this.form.birth && this.form.password && this.form.fullName && this.form.email && this.form.address)
           &&
-          (this.errors.email || this.errors.password || this.errors.fullName || this.errors.passwordConfirm || this.errors.birth || this.errors.start)
+          (this.errors.email || this.errors.password || this.errors.fullName || this.errors.address || this.errors.birth || this.errors.start)
         )
       },
       form: {
         email: '',
         password: '',
         fullName: '',
-        passwordConfirm: '',
-        birth: ''
+        birth: '',
+        isVerified: false,
+        address: '',
+        avatar: "shorturl.at/elqr5"
       },
       errors:{
         start: true,
         email: false,
         password: false,
         fullName: false,
-        passwordConfirm: false,
+        address: false,
         birth: false,
         reqError: false,
         message: '',
@@ -170,41 +187,54 @@ export default {
     }
   },
   methods: {
+    showError(message, time=0){
+      console.log("original", message)
+      this.errors.message = message.replace("auth/", '').replace("-", ' ')
+      this.errors.reqError = true
+      setTimeout(()=>this.errors.reqError = false, time)
+    },
     nameChange(){
       this.errors.start = false
-      let tri = this.form.fullName.trim()
-      this.errors.fullName = !(tri === this.form.fullName)
-      || !validator.isAlpha(this.form.fullName, 'fr-FR', {ignore: ' '})
-      || this.form.fullName.length < 5
-      ? true : false
+      const tri = this.form.fullName.trim()
+      const isAlpha = !validator.isAlpha(this.form.fullName, 'fr-FR', {ignore: ' '})
+      const sup = this.form.fullName.length < 5
+      this.errors.fullName = (!(tri === this.form.fullName) || isAlpha || sup )
     },
     emailChange(){
       this.errors.start = false
       this.errors.email = !validator.isEmail(this.form.email)
-      ? true : false
     },
     passwordChange(){
       this.errors.start = false
       this.errors.password = !validator.isStrongPassword(this.form.password)
-      ? true : false
-      this.form.passwordConfirm ? this.passConfirmChange() : ''
-    },
-    passConfirmChange(){
-      this.errors.start = false
-      this.errors.passwordConfirm = this.form.passwordConfirm !== this.form.password
-      ? true: false
     },
     birthChange(){
       this.errors.start = false
       const birthYear = new Date(Date.parse(this.form.birth)).getFullYear()
       this.errors.birth = (new Date().getFullYear() - birthYear) < 18
-      ? true : false
     },
-    login(e){
-      console.log(e.target)
+    addressChange(){
+      this.errors.start = false
+      this.errors.address = !validator.isAlpha(this.form.address) && this.form.address.length >= 3
     },
-    register(e){
-      console.log(e.target)
+    login(){
+      signIn(this.form)
+      .then(user=>{
+        console.log(user)
+      })
+      .catch(e=>{
+        this.showError(e, 3500)
+      })
+    },
+    register(){
+      signUp(this.form)
+      .then(([authUser, fData])=>{
+        console.log("auth", authUser)
+        console.log("data", fData)
+      })
+      .catch(e=>{
+        this.showError(e, 3500)
+      })
     }
   },
   setup(){
@@ -212,9 +242,9 @@ export default {
       const container = document.querySelector('.container');
       container.classList.toggle('active');
     };
-    const toggleVisibility = ()=>{
-      const vs = document.querySelector('.vs')
-      const ps = document.querySelector('.ps')
+    const toggleVisibility = (e)=>{
+      const vs = e.target
+      const ps = e.target.previousElementSibling
       ps.type = ps.type === 'password' ? 'text' : 'password'
       vs.textContent = ps.type ==='password' ? 'visibility_off' : 'visibility'
     }
@@ -238,7 +268,8 @@ section {
 section .container {
   position: relative;
   width: 80rem;
-  height: 50rem;
+  min-height: 50rem;
+  height: auto;
   background: #fff;
   box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -277,7 +308,7 @@ section .container .user .formBx {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4rem;
+  padding: 2rem;
   transition: 0.5s;
 }
 
@@ -330,7 +361,7 @@ section .container .user .formBx form input[type='submit']:hover{
 .button-style,
 section .container .user .formBx form .signup {
   position: relative;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   font-size: 1.2rem;
   letter-spacing: .1rem;
   color: #555;
@@ -389,7 +420,7 @@ section .container.active .signinBx .imgBx {
 }
 
 div.input{
-  margin: .8rem 0;
+  margin: .5rem 0;
   border-radius: 1rem;
   padding: 0 1rem;
   align-items: center;
@@ -410,7 +441,8 @@ div.input i{
 }
 
 div.error{
-  font-size: 1.3rem;
+  line-height: 1rem;
+  font-size: 1rem;
   text-align: center;
   color: red;
   font-weight: 300;

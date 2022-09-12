@@ -2,7 +2,7 @@
 import { db, storage, rtdb } from "./firebaseConfig"
 import { ref, uploadBytes,getDownloadURL } from "firebase/storage"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged,signOut } from "firebase/auth"
-import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, updateDoc, orderBy, se } from "firebase/firestore"
+import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, updateDoc, orderBy, serverTimestamp as sT } from "firebase/firestore"
 import { set, ref as dbref, serverTimestamp, onValue, query as dbquery } from "firebase/database"
 import { uuidv4 } from "@firebase/util"
 
@@ -10,6 +10,12 @@ import { uuidv4 } from "@firebase/util"
 export const auth = getAuth()
 const users = collection(db, "users")
 const datas = collection(db, "datas")
+
+Object.filter = (obj, predicate) => 
+Object.keys(obj)
+      .filter( key => predicate(obj[key]) )
+      .reduce( (res, key) => (res[key] = obj[key], res), {}
+);
 
 /*************FUNCTIONS*********************/
 export const findOne = (col="", id="")=>{
@@ -22,7 +28,7 @@ export const findOne = (col="", id="")=>{
             resolve(found)
             return
         }
-        reject(new Error("user not found"))
+        reject("user not found")
     })
 }
 
@@ -36,7 +42,7 @@ export const find = (col, origin="", order=false)=>{
             qs = await getDocs(query(collection(db, col), orderBy(order)))
         }
         console.log(qs)
-        qs.empty ? reject(new Error("empty collection")) : ''
+        qs.empty ? reject("empty collection") : ''
         qs.docs.map((doc) => {
             let toPush = doc.data()
             toPush.id = doc.id
@@ -68,13 +74,16 @@ export const search = (categories=[], value="")=>{
     })
 }
 
-export const saveOne = (col="", d)=>{
-    return new Promise(async (resolve)=>{
-        const q = await addDoc(collection(db, col), d)
-        if (!d.hasOwnProperty("id")){
-            await updateDoc(doc(db, "users", q.id), {id: q.id})
-        }
-    })
+export const saveOne = async (col="", d)=>{
+    const q = await addDoc(collection(db, col), d)
+    d.timestamp = Date.now()
+    if (!d.hasOwnProperty("id")){
+        await updateDoc(doc(db, col, q.id), {id: q.id})
+    }
+}
+export const setOne = async (col="", data={}, id='')=>{
+    data.id = id
+    await setDoc(doc(db, col, id), data)
 }
 
 export const save = (col="", docs=[])=>{
@@ -96,32 +105,34 @@ export const updateUserInfo = async(id="", news={})=>{
 	await updateDoc(doc(db, "users", id), news)
 }
 
-export const signUp = (data)=>{
+export const signUp = async (data)=>{
     return new Promise((resolve, reject)=>{
         createUserWithEmailAndPassword(auth, data.email, data.password)
         .then(async (u)=>{
+            console.log(u.user.currentUser)
             await sendEmailVerification(u.user)
-            await saveOne("users", data)
-            resolve(true)
-        }).catch(e => reject(e.code))
+            data.password = u.user.reloadUserInfo.passwordHash
+            await setOne("users", data, u.user.uid)
+            resolve([data, u.user])
+        }).catch(e => reject(e.code ? e.code : e.message))
     })
 }
 
 export const signIn = async (form)=>{
     return new Promise((resolve, reject)=>{
         signInWithEmailAndPassword(auth, form.email, form.password)
-        .then(async (user)=>{
-            if (user.user.emailVerified){
-                const q = query(users, where("email", "==", form.email), where("password", "==", form.password))
+        .then(async (userCredential)=>{
+            if (userCredential.user.emailVerified){
+                const q = query(users, where("id", "==", userCredential.user.uid))
                 const qs = await getDocs(q)
-                const user = qs.docs[0].data()
-                user.id = qs.docs[0].id
+                const user = qs.docs[0].exists() ? qs.docs[0].data() : null
+                delete user.password
                 resolve(user)
             }else{//not confirm mail
-               reject(new Error("confirm your email first"))
+               reject("confirm your email first")
             }
         })
-        .catch(e=>reject(e.code))
+        .catch(e=>reject(e.code ? e.code : e.message))
     })
 }
 
@@ -129,10 +140,9 @@ export const signOutUser = async ()=>{
     await signOut(auth)
 }
 
-export const isLoggedUser = async (callback)=>{
+export const monitorState = async (callback)=>{
     onAuthStateChanged(auth, (user) => {
-        const status = user ? true : false
-        return callback(status, user)
+        callback(user)
     })
 }
 
@@ -197,7 +207,7 @@ export const postAd = (userId, adInfo={})=>{
     return new Promise((resolve, reject)=>{
         saveOne(collection(db, `users/${userId}/ads`), adInfo)
         .then(()=>resolve("success"))
-        .catch(e=>reject(new Error("failed to post ad : ", e.message)))
+        .catch(e=>reject("failed to post ad : ", e.message))
     })
 }
 

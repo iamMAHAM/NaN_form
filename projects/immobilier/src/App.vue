@@ -1,6 +1,6 @@
 <template>
-  <NavBar />
-  <router-view/>
+  <NavBar :isLogged="isLogged"/>
+  <router-view :isLogged="isLogged"/>
   <Support />
 </template>
 
@@ -8,10 +8,25 @@
 <script>
   import NavBar from './components/NavBar.vue';
   import Support from './components/Support.vue';
+import { monitorState } from './lib/firestoreLib';
   export default {
+    data(){
+      return {
+        isLogged: false,
+      }
+    },
     components:{
       NavBar,
       Support
+    },
+    mounted(){
+      monitorState(user=>{
+        if (user){
+          this.isLogged = true
+          this.$router.push("/")
+        }
+        else this.isLogged = false
+      })
     }
   }
 </script>

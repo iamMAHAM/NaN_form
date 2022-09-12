@@ -10,12 +10,18 @@
         <nav>
             <ul class="ul">
 
-                <router-link to="/auth">
+                <router-link to="/auth"  v-if="!isLogged">
                     <a href="">
                         <i class="material-symbols-outlined">person</i>
                         Connexion
                     </a>
                 </router-link>
+                <a @click="signOut" v-if="isLogged">
+                    <a href="#" class="item">
+                        <i class="material-symbols-outlined">logout</i>
+                        Déconnexion
+                    </a>
+                </a>
                 <a @click="publish">
                     <a href="#" class="item">
                         <i class="material-symbols-outlined">publish</i>
@@ -28,7 +34,7 @@
                         Favoris
                     </a>
                 </router-link>
-                <router-link to="/messages">
+                <router-link to="/messages" v-if="isLogged">
                     <a href="" class="item">
                         <i class="material-symbols-outlined">mail</i>
                         Messages
@@ -42,13 +48,14 @@
 </template>
 
 <script>
+import { signOutUser } from '@/lib/firestoreLib'
 import postForm from './partials/postForm.vue'
-
 export default {
   name: 'NavBar',
+  props: ['isLogged'],
   data(){
     return {
-      show: false
+      show: false,
     }
   },
   components: {
@@ -67,6 +74,9 @@ export default {
   methods:{
     publish(){
         this.show = true
+    },
+    signOut(){
+        signOutUser()
     }
   }
 }
