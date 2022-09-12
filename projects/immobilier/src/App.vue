@@ -8,7 +8,7 @@
 <script>
   import NavBar from './components/NavBar.vue';
   import Support from './components/Support.vue';
-import { monitorState } from './lib/firestoreLib';
+  import { monitorState } from './lib/firestoreLib';
   export default {
     data(){
       return {
@@ -21,7 +21,7 @@ import { monitorState } from './lib/firestoreLib';
     },
     mounted(){
       monitorState(user=>{
-        if (user){
+        if (user?.emailVerified){
           this.isLogged = true
           this.$router.push("/")
         }

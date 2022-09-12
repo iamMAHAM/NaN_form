@@ -109,11 +109,10 @@ export const signUp = async (data)=>{
     return new Promise((resolve, reject)=>{
         createUserWithEmailAndPassword(auth, data.email, data.password)
         .then(async (u)=>{
-            console.log(u.user.currentUser)
             await sendEmailVerification(u.user)
-            data.password = u.user.reloadUserInfo.passwordHash
+            delete data.password
             await setOne("users", data, u.user.uid)
-            resolve([data, u.user])
+            resolve(data)
         }).catch(e => reject(e.code ? e.code : e.message))
     })
 }

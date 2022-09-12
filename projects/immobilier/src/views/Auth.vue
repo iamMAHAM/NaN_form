@@ -172,7 +172,7 @@ export default {
         birth: '',
         isVerified: false,
         address: '',
-        avatar: "shorturl.at/elqr5"
+        avatar: "https://firebasestorage.googleapis.com/v0/b/immobilier-0.appspot.com/o/profiles%2Favatar-icon.svg?alt=media&token=516f42ab-4ec8-45a0-b66c-1e4058455e4c"
       },
       errors:{
         start: true,
@@ -228,9 +228,9 @@ export default {
     },
     register(){
       signUp(this.form)
-      .then(([authUser, fData])=>{
-        console.log("auth", authUser)
-        console.log("data", fData)
+      .then((userInfo)=>{
+        console.log(userInfo)
+        this.$refs.container.classList.toggle("active")
       })
       .catch(e=>{
         this.showError(e, 3500)
