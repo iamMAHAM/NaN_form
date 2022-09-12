@@ -173,7 +173,7 @@ export default {
             .then(userInfo=>{
               if (userInfo.isVerified){
                 console.log(userInfo)
-                uploadImage("images")
+                uploadImage("images") /// not finished yet
                 this.form.publisherId = auth.currentUser.uid
                 postAd(auth.currentUser.uid, this.form)
                 .then(adInfo=>{

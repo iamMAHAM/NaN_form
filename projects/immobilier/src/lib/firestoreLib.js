@@ -62,7 +62,7 @@ export const search = (categories=[], value="")=>{
             where("title", "<=", value + "\uf8ff")
             )
             const querySnapshot = await getDocs(q)
-            querySnapshot.empty ? reject(new Error("aucun resultat trouvé")) : ''
+            querySnapshot.empty ? reject("aucun resultat trouvé") : ''
             querySnapshot.docs.map((doc) => {
                 let toPush = doc.data()
                 toPush.id = doc.id
@@ -74,12 +74,15 @@ export const search = (categories=[], value="")=>{
     })
 }
 
-export const saveOne = async (col="", d)=>{
-    const q = await addDoc(collection(db, col), d)
-    d.timestamp = Date.now()
-    if (!d.hasOwnProperty("id")){
-        await updateDoc(doc(db, col, q.id), {id: q.id})
-    }
+export const saveOne = (col="", d)=>{
+    return new Promise(async (resolve, reject)=>{
+        d.publishedAt = Date.now()
+        const q = await addDoc(collection(db, col), d)
+        if (!d.hasOwnProperty("id")){
+            await updateDoc(doc(db, col, q.id), {id: q.id})
+        }
+        resolve(d)
+    })
 }
 export const setOne = async (col="", data={}, id='')=>{
     data.id = id
@@ -173,39 +176,26 @@ export const sendMessage = async (senderId, receiverID, message)=>{
         set(receiverInfo, inter)
     })
 }
-// // 
-// export const getConversations = async (userId)=>{
-//     return new Promise((resolve)=>{
-//         const conversations = dbref(rtdb, `messages/${userId}/`);
-//         const q = dbquery(conversations)
-//         onValue(conversations, (snapshot) => {
-//         const data = snapshot.val();
-//         resolve(data)
-//     })
-//     // updateStarCount(postElement, data);
-// });
-// }
 
-// export const writeUserData = async (userId, name, email, imageUrl)=>{
-//     set(dbref(rtdb, 'users/' + userId), {
-//       username: name,
-//       email: email,
-//       profile_picture : imageUrl
-// });
-// }
-
-export const uploadImage = async (path, file, callback)=>{
-	const Imagesref = ref(storage, path)
-	await uploadBytes(Imagesref, file).then((snapshot) => {
-		getDownloadURL(snapshot.ref)
-		.then(url=>{return callback(url)})
-	  })
+export const uploadImage = (path, file,)=>{
+    return new Promise(async (resolve, reject)=>{
+        const Imagesref = ref(storage, path)
+        await uploadBytes(Imagesref, file).then((snapshot) => {
+            getDownloadURL(snapshot.ref)
+            .then(url=>resolve(url))
+          }).catch(e=>reject(e.message))
+    }).catch(e=>reject(e.message))
 }
 
 export const postAd = (userId, adInfo={})=>{
     return new Promise((resolve, reject)=>{
-        saveOne(collection(db, `users/${userId}/ads`), adInfo)
-        .then(()=>resolve("success"))
+        saveOne(`users/${userId}/ads`, adInfo)
+        .then((ad)=>{
+            const id = uuidv4()
+            const waitRef = dbref(rtdb, `waitingAds/${userId}/${id}`)
+            set(waitRef, ad)
+            resolve(ad)
+        })
         .catch(e=>reject("failed to post ad : ", e.message))
     })
 }
@@ -213,7 +203,7 @@ export const postAd = (userId, adInfo={})=>{
 export const deleteAd = (userId, adId="")=>{
     return new Promise((resolve, reject)=>{
         deleteOne(collection(db, `users/${userId}/ads`), adId)
-        .then(()=>resolve("success"))
+        .then(resolve())
         .catch(e=>reject("failed to delete ad : ", e.message))
     })
 }
