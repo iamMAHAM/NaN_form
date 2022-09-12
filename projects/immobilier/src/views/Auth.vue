@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="container active" ref="container">
+    <div class="container" ref="container">
       <div class="user signinBx">
         <div class="imgBx"><img src="../assets/reg.jpg" alt="" /></div>
         <div class="formBx">

@@ -1,5 +1,5 @@
 <template>
-  <div class="post-modal" v-if="show">
+  <div class="post-modal" v-if="true">
     <form class="post-modal-form" @submit.prevent="">
       <span
         class="close"
@@ -10,7 +10,7 @@
       <h1 class="title">
           <span>Publier une Annonce</span>
       </h1>
-      <div class="main-content">
+      <div class="main-content" ref="content">
           <div class="ads-rows">
             <div class="input">
               <i class="material-symbols-outlined">title</i>
@@ -48,14 +48,14 @@
             <div class="error" v-if="errors.location">emplacement invalide</div>
             <div class="input">
               <i class="material-symbols-outlined">functions</i>
-              <input type="number" placeholder="Superficie" v-model="form.area">
+              <input min="1" type="number" placeholder="Superficie" v-model="form.area">
               <span>m²</span>
             </div>
             <div class="error" v-if="errors.area">superficie invalide</div>
             <div class="input">
               <i class="material-symbols-outlined">payments</i>
               <input
-                min="0"
+                min="2000"
                 type="number"
                 placeholder="Prix"
                 v-model="form.price"
@@ -82,13 +82,12 @@
             <textarea class="pa" v-model="form.description"></textarea>
             <div class="error" v-if="errors.description">minimum 300 caractères</div>
             <input
-              @click.prevent="postAd"
+              @click.prevent="postAds"
               class="button-style"
               type="submit"
               value="Poster"
             >
           </div>
-
       </div>
     </form>
   </div>
@@ -96,6 +95,8 @@
 
 <script>
 import validator from 'validator'
+import { auth, findOne,postAd, uploadImage } from '@/lib/firestoreLib'
+
 export default {
     props: ['show'],
     data(){
@@ -128,7 +129,6 @@ export default {
           area: false,
           price: false,
           files: false,
-          start: true
         }
       }
     },
@@ -144,7 +144,6 @@ export default {
         }
         this.errors.files = false
         this.fileList = target.files
-        console.log(this.fileList)
         Array.from(target.files).map(file=>{
           const src = window.URL.createObjectURL(file)
           file.src = src
@@ -155,31 +154,46 @@ export default {
       handleErrors(){
         const type = ['maison', 'terrain', 'magasin', 'hotel'].includes(this.form.type)
         const prop = ['vente', 'location'].includes(this.form.proposition)
-        this.errors.type = !validator.isAlpha(this.form.type) || !type ? true : false  
-        this.errors.title = !validator.isAlpha(this.form.title) ? true : false  
-        this.errors.description = this.form.description.length < 300 ? true : false
-        this.errors.location = !validator.isAlpha(this.form.location) ? true : false
-        this.errors.proposition = !validator.isAlpha(this.form.proposition) || !prop ? true : false
+        this.errors.type = !validator.isAlpha(this.form.type) || !type
+        this.errors.title = !validator.isAlpha(this.form.title)
+        this.errors.description = this.form.description.length < 300 
+        this.errors.location = !validator.isAlpha(this.form.location)
+        this.errors.proposition = !validator.isAlpha(this.form.proposition) || !prop 
         this.errors.area = validator.isNumeric(`${this.form.area}`) && parseFloat(this.form.area) <= 0
-        ?
-          true : false
         this.errors.price = validator.isNumeric(`${this.form.price}`) && parseFloat(this.form.price) <= 1000
-        ?
-          true : false
-        this.errors.files = !this.files.length || this.files.length > 3 ? true: false
+        this.errors.files = !this.files.length || this.files.length > 3
       },
-      postAd(){
+      postAds(){
         this.handleErrors()
+        console.log(this.state)
         if (!this.state){
-          console.log("all valide post now ...")
+          console.log("here")
+          if (auth?.currentUser){
+            findOne("users", auth.currentUser.uid)
+            .then(userInfo=>{
+              if (userInfo.isVerified){
+                console.log(userInfo)
+                uploadImage("images")
+                this.form.publisherId = auth.currentUser.uid
+                postAd(auth.currentUser.uid, this.form)
+                .then(adInfo=>{
+                  console.log("info", adInfo)
+                  this.$refs.content.classList.remove("failed")
+                  this.$refs.content.classList.add("success")
+                })
+                .catch(e=>alert(e))
+              }else{
+                this.$refs.content.classList.remove("success")
+                this.$refs.content.classList.add("failed")
+              }
+            })
+          }
+          else {
+            this.$emit("close")
+            this.$router.push("/auth")
+          }
         }
       }
-    },
-    mounted(){
-
-    },
-    updated(){
-      console.log("update now ...")
     }
 }
 </script>
@@ -240,6 +254,7 @@ h1.title{
 }
 
 .main-content{
+  position: relative;
   width: 100%;
   display: flex;
 }
@@ -320,6 +335,26 @@ select,
 .main-content >span{
   color: red;
 }
+
+.main-content.success::after,
+.main-content.failed::after{
+  text-align: center;
+  content: "Impossible de publier l'annonce : vous devez vérifier votre identité avant de poster";
+  color: red;
+  font-size: 1.5rem;
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: -2rem;
+}
+
+.main-content.success::after{
+  color: green;
+  content: "Annonce publiée avec succès : En attente de validation ...";
+}
+
+
 
 @media only screen and (max-width: 1186px){
   .title span{
