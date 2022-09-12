@@ -114,7 +114,7 @@ a{
 }
 .search-i{
     outline: none;
-    padding: 1.5rem;
+    padding: 1rem;
     width: calc(100% - 2.5rem);
     border: none;
     border-radius: 2rem
