@@ -1,5 +1,5 @@
 <template>
-  <div class="post-modal" v-if="true">
+  <div class="post-modal" v-if="show">
     <form class="post-modal-form" @submit.prevent="">
       <span
         class="close"
@@ -143,7 +143,7 @@ export default {
           return
         }
         this.errors.files = false
-        this.fileList = target.files
+        this.fileList = [...target.files]
         Array.from(target.files).map(file=>{
           const src = window.URL.createObjectURL(file)
           file.src = src
@@ -164,6 +164,7 @@ export default {
         this.errors.files = !this.files.length || this.files.length > 3
       },
       postAds(){
+        console.log(this.fileList)
         this.handleErrors()
         console.log(this.state)
         if (!this.state){
@@ -172,9 +173,8 @@ export default {
             findOne("users", auth.currentUser.uid)
             .then(userInfo=>{
               if (userInfo.isVerified){
-                console.log(userInfo)
-                uploadImage("images") /// not finished yet
                 this.form.publisherId = auth.currentUser.uid
+                this.form.images = this.fileList
                 postAd(auth.currentUser.uid, this.form)
                 .then(adInfo=>{
                   console.log("info", adInfo)
@@ -192,6 +192,11 @@ export default {
             this.$emit("close")
             this.$router.push("/auth")
           }
+          setTimeout(()=>{
+            this.$refs.content.classList.remove("success")
+            this.$refs.content.classList.remove("failed")
+            this.$emit('close')
+          }, 5000)
         }
       }
     }

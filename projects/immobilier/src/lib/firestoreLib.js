@@ -177,7 +177,7 @@ export const sendMessage = async (senderId, receiverID, message)=>{
     })
 }
 
-export const uploadImage = (path, file,)=>{
+export const uploadImage = (path, file)=>{
     return new Promise(async (resolve, reject)=>{
         const Imagesref = ref(storage, path)
         await uploadBytes(Imagesref, file).then((snapshot) => {
@@ -189,9 +189,16 @@ export const uploadImage = (path, file,)=>{
 
 export const postAd = (userId, adInfo={})=>{
     return new Promise((resolve, reject)=>{
+        const images = []
+        const id = uuidv4()
+        adInfo.images.map(img=>{
+            uploadImage(`images/${id + img.name}`, img).then(url=>{
+                images.push(url)
+            })
+        })
+        adInfo.images = images
         saveOne(`users/${userId}/ads`, adInfo)
         .then((ad)=>{
-            const id = uuidv4()
             const waitRef = dbref(rtdb, `waitingAds/${userId}/${id}`)
             set(waitRef, ad)
             resolve(ad)
@@ -202,18 +209,18 @@ export const postAd = (userId, adInfo={})=>{
 
 export const deleteAd = (userId, adId="")=>{
     return new Promise((resolve, reject)=>{
-        deleteOne(collection(db, `users/${userId}/ads`), adId)
+        deleteOne(`users/${userId}/ads`, adId)
         .then(resolve())
         .catch(e=>reject("failed to delete ad : ", e.message))
     })
 }
 
 export const commentPost = (postId, message)=>{
-    saveOne(collection(db, `comments/${postId}`), message)
+    saveOne(`comments/${postId}`, message)
 }
 
 export const deleteComment = (postId, messageId)=>{
-    deleteOne(collection(db, `comments/${postId}`), messageId)
+    deleteOne(`comments/${postId}`, messageId)
 }
 
 
