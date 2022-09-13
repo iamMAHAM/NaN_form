@@ -5,8 +5,8 @@
       <div class="top">
         <div class="tub">
           <div class="username">
-            <img src="../assets/test.jpg" width="30px" height="30px"/>
-            iamMAHAM
+            <img src="../assets/test.jpg" width="30px" height="30px" ref="img"/>
+            <span ref="u">iamMAHAM</span>
             <i class="material-symbols-outlined">edit_square</i>
           </div>
         </div>
@@ -22,24 +22,25 @@
         <Person
           v-else
           v-for="conversation in conversations" :key="conversation.id"
-          :infos="conversation.info"
+          :person="conversation.info"
+          :messages="conversation.messages.sort(compare)"
           @switch="switchMessages"
           />
       </div>
     </div>
     <div class="right" v-if="!load && conversations.length">
-      <div class="top">
+      <div class="top" v-if="pers">
         <div class="box">
           <div class="image">
-            <img src="../assets/test.jpg" width="30px" height="30px"/>
+            <img :src="pers?.avatar" class="imgLog e"/>
           </div>
           <div class="online"></div>
         </div>
         <div class="information">
           <div class="username">
             <a href="#">
-              iamMAHAM
-              <i class="material-symbols-outlined">verified_user</i>
+              {{ pers?.fullName}}
+              <i class="material-symbols-outlined" v-if="pers.isVerified">verified_user</i>
             </a>
           </div>
           <div class="name">Active now</div>
@@ -47,12 +48,13 @@
         <div class="options">
         </div>
       </div>
+      <div v-else class="top">selectionnez une conversation</div>
       <div class="middle">
         <div class="tumbler">
           <div class="messages" ref="messages">
             <div
               v-for="message in messages" :key="message.id"
-              :class="message.who === 'me' ? ' clip sent' : 'clip received'"
+              :class="message.senderId === uid ? ' clip sent' : 'clip received'"
             >
               <i class="material-symbols-outlined delete" v-if="message.who === 'me'">delete</i>
               <div
@@ -60,7 +62,7 @@
                 class="text"
               >
                 {{ message.message.content }}
-                <span class="date">{{message.timestamp}}</span>
+                <span class="date">{{ readableDate(message.timestamp) }}</span>
               </div>
               <img v-else
                 class="text"
@@ -70,7 +72,7 @@
           </div>
         </div>
       </div>
-      <div class="bottom">
+      <div class="bottom" v-if="pers">
         <div class="cup">
           <div class="picker">
             <i class="material-symbols-outlined">mood</i>
@@ -119,8 +121,18 @@ import Person from '@/components/partials/Person.vue'
 import { rtdb } from "@/lib/firebaseConfig"
 import {  auth, sendMessage } from '@/lib/firestoreLib'
 import { findOne } from '@/lib/firestoreLib'
-import { onValue, ref as dbref, query as dbquery } from "firebase/database"
+import { onValue, ref as dbref, query as dbquery, orderByChild } from "firebase/database"
+import { orderBy } from '@firebase/firestore'
 
+const compare = ( a, b )=>{
+  if ( a.timestamp < b.timestamp ){
+    return -1;
+  }
+  if ( a.timestamp > b.timestamp ){
+    return 1;
+  }
+  return 0;
+}
 export default {
   name: 'Messages',
   components: {
@@ -132,10 +144,18 @@ export default {
       conversations:[],
       message: '',
       show: false,
-      load: true
+      load: true,
+      uid: '',
+      pers: null,
+      compare: compare
     }
   },
   methods:{
+    readableDate(timestamp){
+      const hours = new Date(timestamp).toLocaleString().replace("à", '').trim().split(" ")
+      var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+      return isSafari ? hours[2] : hours[1]
+    },
     dropMessage(){
       const textarea = this.$refs.textarea
       const scrollHeight = textarea.scrollHeight
@@ -145,16 +165,15 @@ export default {
     sendSMS(e){
       if (e.key==='Enter' && this.message.trim().length > 0 || e.target.textContent === 'send'){
         const d = new Date().toLocaleString().split(" ")[1];
-        this.messages.push({
-          id: '0',
-          who: 'me',
-          message: {
-            type: 'text',
+        sendMessage(this.uid, this.pers.id,{
+          message:{
+            type: "text",
             content: this.message
-          },
-          timestamp: d
-        })
-        this.message = ''
+          }
+        }).then((message)=>{
+          this.message = ''
+        }
+        ).catch(e=>alert(e))
       }
     },
     sendPhoto(e){
@@ -167,8 +186,6 @@ export default {
         },
         timestamp: d
       }
-      
-      this.messages.push()
   },
   deleteMessage(e){
     console.log("clicked for handle delete error")
@@ -179,10 +196,13 @@ export default {
       console.log("bingo")
     }
   },
-  switchMessages(cMessages){
-    console.log("haha", cMessages)
+  switchMessages([cMessages, person]){
     this.messages = cMessages
+    this.pers = person
   }
+  },
+  beforeMount(){
+    if (!auth?.currentUser) this.$router.push("/auth")
   },
   async mounted(){
     if (!auth?.currentUser) this.$router.push("/auth")
@@ -191,38 +211,45 @@ export default {
           .filter( key => predicate(obj[key]) )
           .reduce( (res, key) => (res[key] = obj[key], res), {}
     );
-    const inter = []
+    this.uid = auth?.currentUser.uid
     const conversations = dbref(rtdb, `messages/${auth?.currentUser.uid}`);
     const q = dbquery(conversations)
-    onValue(q, (snapshot) => {
+    onValue(q, async (snapshot) => {
+      const inter = []
       const data = snapshot.val();
-      console.log(auth?.currentUser.uid)
-      if (data){
-        for (const [k, v] of Object.entries(data)){
-          const filtered = Object.filter(v, v=> !v.hasOwnProperty("fullName"))
-          const messages = []
-          for (const [kc, vc] of Object.entries(filtered)){
-            messages.push(vc)
+      console.log(data)
+      await new Promise((r=>{
+        if (data){
+          for (const [k, v] of Object.entries(data)){
+            const filtered = Object.filter(v, v=> !v.hasOwnProperty("fullName"))
+            const messages = []
+            for (const [kc, vc] of Object.entries(filtered)){
+              messages.push(vc)
+            }
+            inter.push({
+              info: v.info,
+              messages: messages
+            })
           }
-          inter.push({
-            info: v.info,
-            messages: messages
-          })
+          r(inter)
         }
+      })).then(inter=>{
         this.conversations = inter
-      }
-      this.load = false
-    })
-    if (auth?.currentUser.uid === "89tUBz2CfUY6aylA3fhYvmj4EPD2"){
-      console.log("binfoierjifjer")
-      sendMessage("89tUBz2CfUY6aylA3fhYvmj4EPD2", "zsHm67Xam6bfrPNUbPCRkHGJZz33", {
-        message: {
-          type: 'text',
-          content: 'Bonjour user comment allez vous ? bienvenue sur le site pour la première fois\prenez place'
-        },
+        this.load = false
+        const ab = Object.filter(inter, v=> v?.info?.id === this.pers?.id)
+        // this.messages = ab[0]?.messages.filter()
+        this.messages = ab[0]?.messages.sort(compare)
       })
-      .then(console.log("success"))
-    }  
+    })
+    // if (auth?.currentUser.uid === "89tUBz2CfUY6aylA3fhYvmj4EPD2"){
+    //   sendMessage("89tUBz2CfUY6aylA3fhYvmj4EPD2", "zsHm67Xam6bfrPNUbPCRkHGJZz33", {
+    //     message: {
+    //       type: 'text',
+    //       content: 'Bonjour? bienvenue sur le site pour la première fois'
+    //     },
+    //   })
+    //   .then(console.log("success"))
+    // }
   },
 }
 </script>

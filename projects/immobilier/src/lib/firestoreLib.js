@@ -155,25 +155,44 @@ export const monitorState = async (callback)=>{
 //     ]).catch(e=>{return callback(e.message)})
 // }
 
+
+const setData = (info, receiver, message)=>{
+    const banned = ['email', 'password', 'birth']
+    const inter = {}
+    inter.lastMessage = {
+        date: new Date(message.timestamp).toLocaleString().split(" ")[1].slice(0, 5),
+        message: message.message
+    }
+    for (const [k, v] of Object.entries(info)){
+        banned.includes(k) ? '' : inter[k] = v
+    }
+    set(receiver, inter)
+}
+
 export const sendMessage = async (senderId, receiverID, message)=>{
-    const id = uuidv4()
-    const messagesRef = dbref(rtdb, `messages/${senderId}/${receiverID}/${id}`)
-    const receiverInfo = dbref(rtdb, `messages/${senderId}/${receiverID}/info`)
-    message.id = id
-    message.timestamp = Date.now()
-    set(messagesRef, message)
-    findOne("users", receiverID)
-    .then(info=> {
-        const banned = ['email', 'password', 'birth']
-        const inter = {}
-        inter.lastMessage = {
-            date: new Date(message.timestamp).toLocaleString().split(" ")[1].slice(1, 5),
-            message: message.message
-        }
-        for (const [k, v] of Object.entries(info)){
-            banned.includes(k) ? '' : inter[k] = v
-        }
-        set(receiverInfo, inter)
+    return new Promise((resolve, reject)=>{
+        const id = uuidv4()
+        const senderRef = dbref(rtdb, `messages/${senderId}/${receiverID}/${id}`)
+        const receiverRef = dbref(rtdb, `messages/${receiverID}/${senderId}/${id}`)
+    
+        const senderInfoRef = dbref(rtdb, `messages/${receiverID}/${senderId}/info`)
+        const receiverInfoRef = dbref(rtdb, `messages/${senderId}/${receiverID}/info`)
+        message.id = id
+        message.senderId = senderId
+        message.timestamp = Date.now()
+        set(senderRef, message) // save message to sender collection
+        set(receiverRef, message) // save message to receiver collection
+        findOne("users", receiverID) // find receiver user info
+        .then(receiverInfo=> {
+            setData(receiverInfo, receiverInfoRef, message) // save receiver information to sender
+        })
+        .catch(e=>reject(e.message))
+        findOne("users", senderId) // find sender user info
+        .then(senderInfo=>{
+            setData(senderInfo, senderInfoRef, message) // save sender information to reciver
+            resolve(message)
+        })
+        .catch(e=>reject(e.message))
     })
 }
 

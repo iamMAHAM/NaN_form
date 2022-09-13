@@ -17,7 +17,7 @@
       <div class="username">
         {{ person?.fullName }}
         <i
-          v-if="person?.isverified"
+          v-if="person?.isVerified"
           class="material-symbols-outlined"
         >
           verified_user
@@ -46,34 +46,12 @@
 <script>
 export default {
   name: 'Person',
-  props: ['infos'],
-  data(){
-    return {
-      person: {
-        id: '123',
-        fullName: 'Abdul Mahamoudou Kabore',
-        isverified: true,
-        lastMessage: {
-          date: '12:30',
-          message: {
-            type: 'img',
-            content: 'hello'
-          }
-        }
-      }
-    }
-  },
+  props: ['person', 'messages'],
   methods: {
     showConversation(){
-      this.$emit("switch", this.person.lastMessage)
+      console.log(this.person)
+      this.$emit("switch", [this.messages, this.person])
     }
-  },
-  update(){
-    console.log("paul")
-  },
-  mounted(){
-    console.log("infos", this.infos)
-    this.person = this.infos
   }
 }
 </script>
@@ -82,6 +60,11 @@ export default {
 .imgLog{
   height: 5rem;
   width: 5rem;
+}
+
+.imgLog.e{
+  height: 3rem;
+  width: 3rem;
 }
 
 .pi{
