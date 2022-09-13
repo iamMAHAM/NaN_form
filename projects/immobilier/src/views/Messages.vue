@@ -117,7 +117,7 @@
 <script>
 import Person from '@/components/partials/Person.vue'
 import { rtdb } from "@/lib/firebaseConfig"
-import {  sendMessage } from '@/lib/firestoreLib'
+import {  auth, sendMessage } from '@/lib/firestoreLib'
 import { findOne } from '@/lib/firestoreLib'
 import { onValue, ref as dbref, query as dbquery } from "firebase/database"
 
@@ -159,15 +159,16 @@ export default {
     },
     sendPhoto(e){
       const d = new Date().toLocaleString().split(" ")[1];
-      this.messages.push({
-        id: 'msms',
+      const toSend = {
         who: 'me',
         message: {
           type: 'image',
           content: 'https://images.unsplash.com/photo-1661956600654-edac218fea67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80',
         },
         timestamp: d
-    })
+      }
+      
+      this.messages.push()
   },
   deleteMessage(e){
     console.log("clicked for handle delete error")
@@ -184,16 +185,18 @@ export default {
   }
   },
   async mounted(){
+    if (!auth?.currentUser) this.$router.push("/auth")
     Object.filter = (obj, predicate) => 
     Object.keys(obj)
           .filter( key => predicate(obj[key]) )
           .reduce( (res, key) => (res[key] = obj[key], res), {}
     );
     const inter = []
-    const conversations = dbref(rtdb, `messages/W9StKsYWYG8J8ElNY4Gr`);
+    const conversations = dbref(rtdb, `messages/${auth?.currentUser.uid}`);
     const q = dbquery(conversations)
     onValue(q, (snapshot) => {
       const data = snapshot.val();
+      console.log(auth?.currentUser.uid)
       if (data){
         for (const [k, v] of Object.entries(data)){
           const filtered = Object.filter(v, v=> !v.hasOwnProperty("fullName"))
@@ -210,17 +213,16 @@ export default {
       }
       this.load = false
     })
-    
-
-    
-    // sendMessage("W9StKsYWYG8J8ElNY4Gr", "XAzeR0W8rrLMHKmGr4EESS", {
-    //   message: {
-    //     type: 'text',
-    //     content: 'bvbvbcvbcxbvcbnvcxbbcnx'
-    //   },
-    //   who: 'me'
-    // })
-    // .then(console.log("success"))
+    if (auth?.currentUser.uid === "89tUBz2CfUY6aylA3fhYvmj4EPD2"){
+      console.log("binfoierjifjer")
+      sendMessage("89tUBz2CfUY6aylA3fhYvmj4EPD2", "zsHm67Xam6bfrPNUbPCRkHGJZz33", {
+        message: {
+          type: 'text',
+          content: 'Bonjour user comment allez vous ? bienvenue sur le site pour la première fois\prenez place'
+        },
+      })
+      .then(console.log("success"))
+    }  
   },
 }
 </script>
