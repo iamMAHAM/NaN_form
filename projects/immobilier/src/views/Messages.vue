@@ -40,7 +40,13 @@
           <div class="username">
             <a href="#">
               {{ pers?.fullName}}
-              <i class="material-symbols-outlined" v-if="pers.isVerified">verified_user</i>
+              <i
+                class="material-symbols-outlined verified"
+                title="compte verifié"
+                  v-if="pers.isVerified"
+                >
+                  verified_user
+              </i>
             </a>
           </div>
           <div class="name">Active now</div>
@@ -84,7 +90,7 @@
             placeholder="Message..."
             ref="textarea"
             @input="dropMessage"
-            @keydown="sendSMS"
+            @keydown="sendMessages"
             v-model="message"
           >
           </textarea>
@@ -92,13 +98,13 @@
             class="send"
             v-show="show"
             ref="send"
-            @click="sendSMS"
+            @click="sendMessages"
           >
               <i class="material-symbols-outlined">send</i>
           </button>
           <div class="picker photo">
             <input
-              @change="sendPhoto"
+              @change="sendMessages"
               type="file"
               accept="*.png; *.jpeg; *.svg"
               id="photof"
@@ -119,7 +125,7 @@
 <script>
 import Person from '@/components/partials/Person.vue'
 import { rtdb } from "@/lib/firebaseConfig"
-import {  auth, sendMessage } from '@/lib/firestoreLib'
+import {  auth, commentPost, sendMessage, uploadImage } from '@/lib/firestoreLib'
 import { findOne } from '@/lib/firestoreLib'
 import { onValue, ref as dbref, query as dbquery, orderByChild } from "firebase/database"
 import { orderBy } from '@firebase/firestore'
@@ -159,34 +165,37 @@ export default {
     dropMessage(){
       const textarea = this.$refs.textarea
       const scrollHeight = textarea.scrollHeight
-      this.show = this.message.trim().length > 0 ? true : false
+      this.show = this.message.trim().length > 0 
       textarea.style.height = scrollHeight + 'px'
     },
-    sendSMS(e){
-      if (e.key==='Enter' && this.message.trim().length > 0 || e.target.textContent === 'send'){
-        const d = new Date().toLocaleString().split(" ")[1];
+    async sendMessages(e){
+      await new Promise(async r=>{
+        let type = null, content = null
+        if (e.target === this.$refs.tof){
+          const url = await uploadImage(`images/${e.target.files[0].name}`, e.target.files[0])
+          type = 'image'
+          content = url
+        }else{
+          type = 'text'
+          content = this.message.trim()
+        }
+        r([type, content])
+      }).then(([type, content])=>{
+        console.log(type, content)
+        if (!((e.key==='Enter' || e.target.textContent === 'send' || e.target === this.$refs.tof) 
+        && content.length > 0)) return
+        console.log("jkbjzbjezf")
         sendMessage(this.uid, this.pers.id,{
           message:{
-            type: "text",
-            content: this.message
+            type: type,
+            content: content
           }
         }).then((message)=>{
           this.message = ''
         }
         ).catch(e=>alert(e))
-      }
+      })
     },
-    sendPhoto(e){
-      const d = new Date().toLocaleString().split(" ")[1];
-      const toSend = {
-        who: 'me',
-        message: {
-          type: 'image',
-          content: 'https://images.unsplash.com/photo-1661956600654-edac218fea67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80',
-        },
-        timestamp: d
-      }
-  },
   deleteMessage(e){
     console.log("clicked for handle delete error")
   },
@@ -205,7 +214,6 @@ export default {
     if (!auth?.currentUser) this.$router.push("/auth")
   },
   async mounted(){
-    if (!auth?.currentUser) this.$router.push("/auth")
     Object.filter = (obj, predicate) => 
     Object.keys(obj)
           .filter( key => predicate(obj[key]) )
@@ -231,8 +239,8 @@ export default {
               messages: messages
             })
           }
-          r(inter)
         }
+        r(inter)
       })).then(inter=>{
         this.conversations = inter
         this.load = false
@@ -730,5 +738,10 @@ img {
   flex-direction: row;
   align-items: center;
   gap: .5rem;
+}
+
+.verified{
+  color: #0084ff;
+  font-size: 20px !important;
 }
 </style>

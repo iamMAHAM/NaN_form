@@ -7,7 +7,7 @@
     <div class="box">
       <div class="image">
           <img
-            src="../../assets/test.jpg"
+            :src="person?.avatar"
             class="imgLog"
           />
       </div>
@@ -18,7 +18,7 @@
         {{ person?.fullName }}
         <i
           v-if="person?.isVerified"
-          class="material-symbols-outlined"
+          class="material-symbols-outlined verified"
         >
           verified_user
         </i>
