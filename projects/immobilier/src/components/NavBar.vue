@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { signOutUser } from '@/lib/firestoreLib'
+import { auth, signOutUser } from '@/lib/firestoreLib'
 import postForm from './partials/postForm.vue'
 export default {
   name: 'NavBar',
@@ -73,7 +73,8 @@ export default {
   },
   methods:{
     publish(){
-        this.show = true
+        if (!auth?.currentUser) this.$router.push("/auth")
+        else this.show = true
     },
     signOut(){
         signOutUser()

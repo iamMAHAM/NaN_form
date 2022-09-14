@@ -1,9 +1,9 @@
 
 import { db, storage, rtdb } from "./firebaseConfig"
 import { ref, uploadBytes,getDownloadURL } from "firebase/storage"
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged,signOut } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged,signOut, updateProfile } from "firebase/auth"
 import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, updateDoc, orderBy, serverTimestamp as sT } from "firebase/firestore"
-import { set, ref as dbref, serverTimestamp, onValue, query as dbquery } from "firebase/database"
+import { set, ref as dbref, serverTimestamp, onValue, query as dbquery, remove } from "firebase/database"
 import { uuidv4 } from "@firebase/util"
 
 /**********CONST VARIABLES********************/
@@ -113,6 +113,10 @@ export const signUp = async (data)=>{
         createUserWithEmailAndPassword(auth, data.email, data.password)
         .then(async (u)=>{
             await sendEmailVerification(u.user)
+            await updateProfile(u.user,{
+                displayName: data.fullName,
+                photoURL: data.avatar,
+            })
             delete data.password
             await setOne("users", data, u.user.uid)
             resolve(data)
@@ -148,18 +152,21 @@ export const monitorState = async (callback)=>{
     })
 }
 
-// export const sendMessage = async (senderId, receiverID, message, callback=()=>{})=>{
+// export const sendMessage = async (senderId, receiverId, message, callback=()=>{})=>{
 //     Promise.all([
-//         saveOne(`messages/${senderId}/${receiverID}/`, message),
-//         saveOne(`messages/${receiverID}/${senderId}`, message)
+//         saveOne(`messages/${senderId}/${receiverId}/`, message),
+//         saveOne(`messages/${receiverId}/${senderId}`, message)
 //     ]).catch(e=>{return callback(e.message)})
 // }
 
 
 const setData = (info, receiver, message)=>{
+    console.log(message)
+    console.log(info)
     const banned = ['email', 'password', 'birth']
     const inter = {}
     inter.lastMessage = {
+        senderId: message.senderId,
         date: new Date(message.timestamp).toLocaleString().split(" ")[1].slice(0, 5),
         message: message.message
     }
@@ -169,20 +176,23 @@ const setData = (info, receiver, message)=>{
     set(receiver, inter)
 }
 
-export const sendMessage = async (senderId, receiverID, message)=>{
+export const useRightRef = (path, from, to, id)=>{
+    return [dbref(rtdb, `${path}/${from}/${to}/${id}`), dbref(rtdb, `${path}/${to}/${from}/${id}`)]
+}
+
+export const sendMessage = async (senderId, receiverId, message)=>{
     return new Promise((resolve, reject)=>{
         const id = uuidv4()
-        const senderRef = dbref(rtdb, `messages/${senderId}/${receiverID}/${id}`)
-        const receiverRef = dbref(rtdb, `messages/${receiverID}/${senderId}/${id}`)
-    
-        const senderInfoRef = dbref(rtdb, `messages/${receiverID}/${senderId}/info`)
-        const receiverInfoRef = dbref(rtdb, `messages/${senderId}/${receiverID}/info`)
+        const [senderRef, receiverRef] = useRightRef("messages", senderId, receiverId, id)
+        const [senderInfoRef, receiverInfoRef] = useRightRef("messages", receiverId, senderId, "info")
+        // const senderInfoRef = rightRef(receiverId, senderId, "info")
+        // const receiverInfoRef = rightRef(senderId, receiverId, "info")
         message.id = id
         message.senderId = senderId
         message.timestamp = Date.now()
         set(senderRef, message) // save message to sender collection
         set(receiverRef, message) // save message to receiver collection
-        findOne("users", receiverID) // find receiver user info
+        findOne("users", receiverId) // find receiver user info
         .then(receiverInfo=> {
             setData(receiverInfo, receiverInfoRef, message) // save receiver information to sender
         })
@@ -193,6 +203,18 @@ export const sendMessage = async (senderId, receiverID, message)=>{
             resolve(message)
         })
         .catch(e=>reject(e.message))
+    })
+}
+
+export const deleteMessage = (senderId, receiverId, id)=>{
+    return new Promise((resolve, reject)=>{
+        const [senderRef, receiverRef] = useRightRef("messages", senderId, receiverId, id)
+        remove(senderRef)
+        .then(()=>{
+            remove(receiverRef)
+            resolve()
+        })
+        .catch(e=>reject(e?.message))
     })
 }
 

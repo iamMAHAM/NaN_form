@@ -25,7 +25,7 @@
       </div>
       <div class="content">
         <div class="message">
-          <b>You :</b>
+          <b>{{person?.lastMessage.senderId === auth?.currentUser?.uid  ? 'you' : 'him'}} : </b>
           <span
             v-if="person?.lastMessage.message.type === 'text'"
           >
@@ -44,12 +44,16 @@
 </template>
 
 <script>
+import { auth } from '@/lib/firestoreLib';
+
 export default {
   name: 'Person',
   props: ['person', 'messages'],
+  data(){
+    return {auth: auth}
+  },
   methods: {
     showConversation(){
-      console.log(this.person)
       this.$emit("switch", [this.messages, this.person])
     }
   }

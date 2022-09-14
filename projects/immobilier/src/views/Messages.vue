@@ -6,7 +6,7 @@
         <div class="tub">
           <div class="username">
             <img src="../assets/test.jpg" width="30px" height="30px" ref="img"/>
-            <span ref="u">iamMAHAM</span>
+            <span ref="u">{{ auth?.currentUser?.displayName }}</span>
             <i class="material-symbols-outlined">edit_square</i>
           </div>
         </div>
@@ -25,7 +25,7 @@
           :person="conversation.info"
           :messages="conversation.messages.sort(compare)"
           @switch="switchMessages"
-          />
+        />
       </div>
     </div>
     <div class="right" v-if="!load && conversations.length">
@@ -43,7 +43,7 @@
               <i
                 class="material-symbols-outlined verified"
                 title="compte verifié"
-                  v-if="pers.isVerified"
+                  v-if="pers?.isVerified"
                 >
                   verified_user
               </i>
@@ -60,9 +60,16 @@
           <div class="messages" ref="messages">
             <div
               v-for="message in messages" :key="message.id"
+              :id="message.id"
               :class="message.senderId === uid ? ' clip sent' : 'clip received'"
             >
-              <i class="material-symbols-outlined delete" v-if="message.who === 'me'">delete</i>
+              <i
+                class="material-symbols-outlined delete"
+                v-if="message.senderId === auth?.currentUser.uid"
+                @click="deleteMessages"
+              >
+                delete
+              </i>
               <div
                 v-if="message.message.type === 'text'"
                 class="text"
@@ -81,8 +88,18 @@
       <div class="bottom" v-if="pers">
         <div class="cup">
           <div class="picker">
-            <i class="material-symbols-outlined">mood</i>
+            <i
+              class="material-symbols-outlined"
+              @click="toggle"
+            >
+              mood
+            </i>
           </div>
+          <Emojis
+            ref="emoji"
+            class="show-emoji"
+            @emoji_click="addEmoji"
+          />
           <textarea
             id="message"
             cols="30"
@@ -124,11 +141,10 @@
 
 <script>
 import Person from '@/components/partials/Person.vue'
+import Emojis from "@/components/partials/Emojis.vue"
 import { rtdb } from "@/lib/firebaseConfig"
-import {  auth, commentPost, sendMessage, uploadImage } from '@/lib/firestoreLib'
-import { findOne } from '@/lib/firestoreLib'
+import {  auth, commentPost, deleteMessage, sendMessage, uploadImage } from '@/lib/firestoreLib'
 import { onValue, ref as dbref, query as dbquery, orderByChild } from "firebase/database"
-import { orderBy } from '@firebase/firestore'
 
 const compare = ( a, b )=>{
   if ( a.timestamp < b.timestamp ){
@@ -142,7 +158,8 @@ const compare = ( a, b )=>{
 export default {
   name: 'Messages',
   components: {
-    Person
+    Person,
+    Emojis
   },
   data(){
     return {
@@ -153,16 +170,26 @@ export default {
       load: true,
       uid: '',
       pers: null,
-      compare: compare
+      compare: compare,
+      auth: auth
     }
   },
   methods:{
+    toggle(){
+      document.querySelector(".emoji_picker").classList.toggle("active")
+    },
+    addEmoji(emoji){
+      console.log(emoji)
+      this.message+= emoji
+      console.log(this.message.length)
+    },
     readableDate(timestamp){
       const hours = new Date(timestamp).toLocaleString().replace("à", '').trim().split(" ")
       var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
       return isSafari ? hours[2] : hours[1]
     },
     dropMessage(){
+      console.log("input")
       const textarea = this.$refs.textarea
       const scrollHeight = textarea.scrollHeight
       this.show = this.message.trim().length > 0 
@@ -181,10 +208,8 @@ export default {
         }
         r([type, content])
       }).then(([type, content])=>{
-        console.log(type, content)
         if (!((e.key==='Enter' || e.target.textContent === 'send' || e.target === this.$refs.tof) 
         && content.length > 0)) return
-        console.log("jkbjzbjezf")
         sendMessage(this.uid, this.pers.id,{
           message:{
             type: type,
@@ -192,18 +217,16 @@ export default {
           }
         }).then((message)=>{
           this.message = ''
+          this.$refs.textarea.style.height = '16px'
         }
         ).catch(e=>alert(e))
       })
     },
-  deleteMessage(e){
+  deleteMessages(e){
+    const message = e.target.parentElement
     console.log("clicked for handle delete error")
-  },
-  showConversation(e){
-    console.log(e.target.parentElement)
-    if (e.target.className === 'person'){
-      console.log("bingo")
-    }
+    deleteMessage(this.uid, this.pers.id, message.id)
+    .then(console.log("success"))
   },
   switchMessages([cMessages, person]){
     this.messages = cMessages
@@ -219,13 +242,12 @@ export default {
           .filter( key => predicate(obj[key]) )
           .reduce( (res, key) => (res[key] = obj[key], res), {}
     );
-    this.uid = auth?.currentUser.uid
-    const conversations = dbref(rtdb, `messages/${auth?.currentUser.uid}`);
+    this.uid = auth?.currentUser?.uid
+    const conversations = dbref(rtdb, `messages/${auth?.currentUser?.uid}`);
     const q = dbquery(conversations)
     onValue(q, async (snapshot) => {
       const inter = []
       const data = snapshot.val();
-      console.log(data)
       await new Promise((r=>{
         if (data){
           for (const [k, v] of Object.entries(data)){
@@ -639,6 +661,7 @@ img {
 }
 
 .right > .bottom {
+  position: relative;
   height: auto;
   width: 100%;
   display: flex;
@@ -661,6 +684,7 @@ img {
 }
 
 .cup > .picker {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -700,7 +724,7 @@ img {
 }
 
 .delete{
-  font-size: unset !important;
+  font-size: 1rem !important;
   cursor: pointer;
   color: red;
   font-weight: 200;
@@ -744,4 +768,13 @@ img {
   color: #0084ff;
   font-size: 20px !important;
 }
+
+.show-emoji{
+  display: none !important;
+}
+
+.show-emoji.active{
+  display: block !important;
+}
+
 </style>
