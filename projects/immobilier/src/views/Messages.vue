@@ -5,7 +5,7 @@
       <div class="top">
         <div class="tub">
           <div class="username">
-            <img src="../assets/test.jpg" width="30px" height="30px" ref="img"/>
+            <img src="../assets/test.jpg" width="3rem" height="3rem" ref="img"/>
             <span ref="u">{{ auth?.currentUser?.displayName }}</span>
             <i class="material-symbols-outlined">edit_square</i>
           </div>
@@ -138,7 +138,6 @@
   </div>
 </div>
 </template>
-
 <script>
 import Person from '@/components/partials/Person.vue'
 import Emojis from "@/components/partials/Emojis.vue"
@@ -288,12 +287,12 @@ export default {
 
 .navigation {
   width: 100%;
-  min-height: 60px;
+  min-height: 6rem;
   background-color: white;
   position: sticky;
   top: 0;
   z-index: 1;
-  border: 0.5px solid #76767637;
+  border: 0..5rem solid #76767637;
 }
 
 .case {
@@ -309,7 +308,7 @@ export default {
   display: flex;
   justify-content: center;
   background-color: #ffffff;
-  border: 0.5px solid #76767637;
+  border: 0..5rem solid #76767637;
 }
 
 img {
@@ -319,8 +318,8 @@ img {
 }
 
 .left {
-  min-width: 350px;
-  max-width: 350px;
+  min-width: 35rem;
+  max-width: 35rem;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -329,10 +328,10 @@ img {
 
 .left > .top {
   position: relative;
-  min-height: 60px;
+  min-height: 6rem;
   width: 100%;
   background-color: #ffffff;
-  border-bottom: 0.5px solid #76767637;
+  border-bottom: 0..5rem solid #76767637;
   display: flex;
   align-items: center;
 }
@@ -341,7 +340,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
+  font-size: 1.5rem;
   width: 100%;
 }
 .left > .top > .tub > .username {
@@ -351,7 +350,7 @@ img {
   text-overflow: ellipsis;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: .5rem;
 }
 
 .left > .top > .tub > .username > .down-arrow {
@@ -360,17 +359,17 @@ img {
 
 .left > .top > .card {
   position: absolute;
-  padding: 0 10px;
-  right: 10px;
+  padding: 0 1rem;
+  right: 1rem;
 }
 .left > .top > .card > button {
   background-color: #ffffff;
-  border: 0.5px solid #76767637;
-  padding: 4px 8px;
+  border: 0.5rem solid #76767637;
+  padding: .4rem .8rem;
   color: #323232;
   font-weight: 700;
-  font-size: 12px;
-  border-radius: 12px;
+  font-size: 1.2rem;
+  border-radius: 1.2rem;
   cursor: pointer;
 }
 .left > .top > .card > button:hover {
@@ -380,16 +379,16 @@ img {
 .left > .conversations {
   overflow-y: scroll;
   height: 100%;
-  padding: 10px 0 0 0;
+  padding: 1rem 0 0 0;
   overflow-x: hidden;
 }
 
 .conversations > .person {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 1rem;
   background-color: #ffffff;
-  gap: 10px;
+  gap: 1rem;
 }
 
 .conversations > .person:hover {
@@ -399,10 +398,10 @@ img {
 
 .conversations > .person > .information {
   
-  font-size: 14px;
+  font-size: 1.4rem;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: .4rem;
   width: 100%;
   overflow: hidden;
   user-select: none;
@@ -412,12 +411,12 @@ img {
 
 .conversations > .person > .information > .username {
   
-  font-size: 14px;
+  font-size: 1.4rem;
   display: flex;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  gap: 4px;
+  gap: .4rem;
   width: 100%;
   align-items: center;
 }
@@ -425,7 +424,7 @@ img {
 .conversations > .person > .information > .content {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: .5rem;
   width: 100%;
   color: black;
 }
@@ -459,8 +458,8 @@ img {
 }
 
 .conversations > .person > .box > .image {
-  width: clamp(50px, 50px, 50px);
-  height: clamp(50px, 50px, 50px);
+  width: clamp(5rem, 5rem, 5rem);
+  height: clamp(5rem, 5rem, 5rem);
   border-radius: 100%;
   overflow: hidden;
   display: flex;
@@ -474,7 +473,7 @@ img {
   background-color: lawngreen;
   border-radius: 100%;
   position: absolute;
-  border: 3px solid white;
+  border: .3rem solid white;
   right: 0;
   bottom: 0;
 }
@@ -487,14 +486,14 @@ img {
 }
 
 .conversations > .person > .status > .point {
-  min-height: 8px;
-  min-width: 8px;
+  min-height: .8rem;
+  min-width: .8rem;
   background-color: #0084ff;
   border-radius: 100%;
 }
 
 .right {
-  border-left: 0.5px solid #76767637;
+  border-left: 0..5rem solid #76767637;
   width: inherit;
   height: 100%;
   display: flex;
@@ -505,17 +504,17 @@ img {
 .right > .top {
   width: 100%;
   display: flex;
-  min-height: 60px;
+  min-height: 6rem;
   align-items: center;
-  padding: 0 20px;
-  border-bottom: 0.5px solid #76767637;
+  padding: 0 2rem;
+  border-bottom: 0..5rem solid #76767637;
   gap: 1rem;
 }
 
 .right > .top > .box {
   position: relative;
-  min-width: 30px;
-  min-height: 30px;
+  min-width: 3rem;
+  min-height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -531,8 +530,8 @@ img {
 
 .right > .top > .box > .online {
   position: absolute;
-  min-width: 12px;
-  min-height: 12px;
+  min-width: 1.2rem;
+  min-height: 1.2rem;
   background-color: lawngreen;
   border-radius: 100%;
   border: 2px solid #ffffff;
@@ -557,12 +556,12 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 14px;
+  font-size: 1.4rem;
   
 }
 .right > .top .information > .username {
   font-weight: 400;
-  font-size: 15px;
+  font-size: 1.5rem;
   display: flex;
 }
 .blue-tick {
@@ -581,12 +580,12 @@ img {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 2.5px;
+  gap: 2..5rem;
 }
 
 .right > .top .information > .name {
   font-weight: 400;
-  font-size: 12px;
+  font-size: 1.2rem;
   color: #707070;
 }
 
@@ -616,8 +615,8 @@ img {
 .messages {
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  gap: 2.5px;
+  padding: 1rem;
+  gap: 2..5rem;
 }
 
 .clip {
@@ -627,11 +626,11 @@ img {
 
 .clip > .text {
   position: relative;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 400;
   max-width: 50%;
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: .8rem 16px;
+  border-radius: 2rem;
   word-break: keep-all;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -639,10 +638,11 @@ img {
 
 .received > .text {
   background-color: white;
-  border: 0.5px solid #80808080;
+  border: 0..5rem solid #80808080;
 }
 
 .sent > .text {
+  margin: .3rem;
   background-color: #0084ff;
   color: white;
 }
@@ -653,7 +653,7 @@ img {
 
 .seen {
   text-align: right;
-  padding: 0 10px;
+  padding: 0 1rem;
   
   font-size: 0.75rem;
   font-weight: 400;
@@ -667,7 +667,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 28px;
+  padding: 1.4rem 2.8rem;
 }
 
 .cup {
@@ -675,11 +675,11 @@ img {
   align-items: center;
   justify-content: center;
   background-color: #ffffff;
-  border: 0.5px solid #7676765c;
+  border: 0..5rem solid #7676765c;
   width: 100%;
-  gap: 10px;
-  padding: 2px 15px;
-  border-radius: 40px;
+  gap: 1rem;
+  padding: 2px 1.5rem;
+  border-radius: 4rem;
   overflow: hidden;
 }
 
@@ -689,8 +689,8 @@ img {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: clamp(35px, 35px, 35px);
-  height: clamp(35px, 35px, 35px);
+  width: clamp(3.5rem, 3.5rem, 3.5rem);
+  height: clamp(3.5rem, 3.5rem, 3.5rem);
   user-select: none;
 }
 
@@ -699,7 +699,7 @@ img {
   font-weight: 400;
   border: none;
   outline: none;
-  padding: 0 5px;
+  padding: 0 .5rem;
   width: 100%;
   resize: none;
   max-height: 100px;
@@ -708,9 +708,9 @@ img {
 .cup > .send {
   cursor: pointer;
   border: none;
-  padding: 5px 10px;
+  padding: .5rem 1rem;
   background-color: transparent;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #0084ff;
 }
@@ -748,11 +748,35 @@ img {
 .time{
   font-size: 1rem;
 }
-@media only screen and (max-width: 950px) {
-  .container {
+.left{
+  border-right: .1rem solid rgba(0, 0, 0, .2);
+}
+
+.top{
+  border-bottom: .1rem solid rgba(0, 0, 0, .2);
+}
+
+@media only screen and (max-width: 1100px) {
+  .case .container {
     border-top: none;
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 70vh;
+  }
+}
+
+@media only screen and (max-width: 770px){
+  .case .container {
+    width: 98%;
+  }
+  .left{
+    min-width: 20rem;
+  }
+}
+
+@media only screen and (max-width: 505px){
+  .left{
+    max-width: 8rem;
+    min-width: 5rem;
   }
 }
 
@@ -766,7 +790,7 @@ img {
 
 .verified{
   color: #0084ff;
-  font-size: 20px !important;
+  font-size: 2rem !important;
 }
 
 .show-emoji{
