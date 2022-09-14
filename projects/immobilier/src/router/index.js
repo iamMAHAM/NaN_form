@@ -3,6 +3,7 @@ import Home from "../views/Home.vue"
 import Auth from "../views/Auth.vue"
 import Details from "../views/Details.vue"
 import Messages from "../views/Messages.vue"
+import Favoris from "../views/Favoris.vue"
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     path: '/messages',
     name: 'Messages',
     component: Messages
+  },
+  {
+    path: '/favorites',
+    name: 'Favorites',
+    component: Favoris
   },
   {
     path: '/details/:categorie/:id',

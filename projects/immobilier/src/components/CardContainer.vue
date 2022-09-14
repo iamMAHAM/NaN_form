@@ -1,94 +1,101 @@
 <template>
-  <Loader v-if="loaded"/>
-  <div class="card-container" v-if="!loaded">
+  <Loader v-if="load"/>
+  <div class="card-container" v-if="!load">
     <Card v-for="card in cards" :key="card.id" :card="card"/>
   </div>
 </template>
 
 <script>
+import { save } from '@/lib/firestoreLib';
 import Card from './partials/Card.vue';
 import Loader from './partials/Loader.vue';
 
 export default {
   name: 'CardContainer',
+  props: ['cards', 'load'],
   components: {
     Card,
     Loader
   },
   data(){
     return {
-      cards : [
-        {
-          type: 'magasin',
-          proposition: 'vente',
-          location: 'Abidjan',
-          description: 'lorem 20 je xjnj ckn c ezv zivz vrzvnz v ezvnzvzvezvez veznvebzve',
-          superficie: 500,
-          price: 2000000
-        },
-        {
-          type: 'maison',
-          proposition: 'location',
-          location: 'Abidjan',
-          description: 'lorem',
-          superficie: 500,
-          price: 150000
-        },
-        {
-          type: 'magasin',
-          proposition: 'vente',
-          location: 'Bingerville',
-          description: 'zigribsiscbcbiuhez',
-          superficie: 500,
-          price: 4560000000
-        },
-        {
-          type: 'magasin',
-          proposition: 'vente',
-          location: 'Yamoussoukro',
-          description: 'const toggleForm = () => {',
-          superficie: 500,
-          price: 1890000
-        },
-        {
-          type: 'magasin',
-          proposition: 'vente',
-          location: 'Abidjan',
-          description: 'lorem 20 je xjnj ckn c ezv zivz vrzvnz v ezvnzvzvezvez veznvebzve',
-          superficie: 500,
-          price: 2000000
-        },
-        {
-          type: 'maison',
-          proposition: 'location',
-          location: 'Abidjan',
-          description: 'lorem',
-          superficie: 500,
-          price: 150000
-        },
-        {
-          type: 'magasin',
-          proposition: 'vente',
-          location: 'Bingerville',
-          description: 'zigribsiscbcbiuhez',
-          superficie: 500,
-          price: 4560000000
-        },
-        {
-          type: 'magasin',
-          proposition: 'vente',
-          location: 'Yamoussoukro',
-          description: 'const toggleForm = () => {',
-          superficie: 500,
-          price: 1890000
-        },
+      // cards : [
+      //   {
+      //     type: 'magasin',
+      //     proposition: 'vente',
+      //     location: 'Abidjan',
+      //     description: 'lorem 20 je xjnj ckn c ezv zivz vrzvnz v ezvnzvzvezvez veznvebzve',
+      //     superficie: 500,
+      //     price: 2000000
+      //   },
+      //   {
+      //     type: 'maison',
+      //     proposition: 'location',
+      //     location: 'Abidjan',
+      //     description: 'lorem',
+      //     superficie: 500,
+      //     price: 150000
+      //   },
+      //   {
+      //     type: 'magasin',
+      //     proposition: 'vente',
+      //     location: 'Bingerville',
+      //     description: 'zigribsiscbcbiuhez',
+      //     superficie: 500,
+      //     price: 4560000000
+      //   },
+      //   {
+      //     type: 'magasin',
+      //     proposition: 'vente',
+      //     location: 'Yamoussoukro',
+      //     description: 'const toggleForm = () => {',
+      //     superficie: 500,
+      //     price: 1890000
+      //   },
+      //   {
+      //     type: 'magasin',
+      //     proposition: 'vente',
+      //     location: 'Abidjan',
+      //     description: 'lorem 20 je xjnj ckn c ezv zivz vrzvnz v ezvnzvzvezvez veznvebzve',
+      //     superficie: 500,
+      //     price: 2000000
+      //   },
+      //   {
+      //     type: 'maison',
+      //     proposition: 'location',
+      //     location: 'Abidjan',
+      //     description: 'lorem',
+      //     superficie: 500,
+      //     price: 150000
+      //   },
+      //   {
+      //     type: 'magasin',
+      //     proposition: 'vente',
+      //     location: 'Bingerville',
+      //     description: 'zigribsiscbcbiuhez',
+      //     superficie: 500,
+      //     price: 4560000000
+      //   },
+      //   {
+      //     type: 'magasin',
+      //     proposition: 'vente',
+      //     location: 'Yamoussoukro',
+      //     description: 'const toggleForm = () => {',
+      //     superficie: 500,
+      //     price: 1890000
+      //   },
 
-      ],
-      loaded: true
+      // ],
+      // load: true
     }
   },
   mounted(){
-    setTimeout(()=>this.loaded = false, 2000)
+    console.log(this.load)
+    // save("ads/X1eA1Bk8tfnVXHqduiTg/test", this.cards)
+    // .then(console.log("save success"))
+  },
+  updated(){
+    console.log(this.load)
   }
 }
 </script>

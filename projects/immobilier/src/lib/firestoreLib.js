@@ -41,8 +41,6 @@ export const find = (col, origin="", order=false)=>{
         } else{
             qs = await getDocs(query(collection(db, col), orderBy(order)))
         }
-        console.log(qs)
-        qs.empty ? reject("empty collection") : ''
         qs.docs.map((doc) => {
             let toPush = doc.data()
             toPush.id = doc.id
@@ -89,7 +87,7 @@ export const setOne = async (col="", data={}, id='')=>{
     await setDoc(doc(db, col, id), data)
 }
 
-export const save = (col="", docs=[])=>{
+export const save = async (col="", docs=[])=>{
     docs.map(async (doc) =>{
         await addDoc(collection(db, col), doc)
     })

@@ -8,8 +8,11 @@
   },
   "dependencies": {
     "@types/validator": "^13.7.6",
+    "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "firebase": "^9.9.4",
+    "fs": "^0.0.1-security",
+    "jsdom": "^20.0.0",
     "material-symbols": "^0.2.10",
     "validator": "^13.7.0",
     "vue": "^3.2.13",
