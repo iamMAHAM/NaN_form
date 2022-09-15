@@ -121,7 +121,6 @@ export default {
 			deleteOne(`users/${this.uid}/favorites`, card.id)
       .then(()=>{
         this.$emit("filteringCard", card)
-        console.log("filter emmitted")
         this.cards[index].isFav = false
         this.cards[index].isLoad = false
       })
