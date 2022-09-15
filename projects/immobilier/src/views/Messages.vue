@@ -5,7 +5,7 @@
       <div class="top">
         <div class="tub">
           <div class="username">
-            <img src="../assets/test.jpg" width="3rem" height="3rem" ref="img"/>
+            <img :src="auth?.currentUser?.photoURL" width="3rem" height="3rem" ref="img"/>
             <span ref="u">{{ auth?.currentUser?.displayName }}</span>
             <i class="material-symbols-outlined">edit_square</i>
           </div>
@@ -60,26 +60,27 @@
           <div class="messages" ref="messages">
             <div
               v-for="message in messages" :key="message.id"
-              :id="message.id"
-              :class="message.senderId === uid ? ' clip sent' : 'clip received'"
+              :id="message?.id"
+              :class="message?.senderId === uid ? ' clip sent' : 'clip received'"
             >
               <i
                 class="material-symbols-outlined delete"
-                v-if="message.senderId === auth?.currentUser.uid"
+                v-if="message?.senderId === auth?.currentUser.uid"
                 @click="deleteMessages"
               >
                 delete
               </i>
               <div
-                v-if="message.message.type === 'text'"
+                v-if="message?.message?.type === 'text'"
                 class="text"
               >
-                {{ message.message.content }}
+                {{ message?.message.content }}
+                <router-link v-if="message?.message?.link" :to="message.message.link" class="link">voir l'annonce</router-link>
                 <span class="date">{{ readableDate(message.timestamp) }}</span>
               </div>
               <img v-else
                 class="text"
-                :src="message.message.content"
+                :src="message?.message?.content"
               >
             </div>
           </div>
@@ -188,7 +189,6 @@ export default {
       return isSafari ? hours[2] : hours[1]
     },
     dropMessage(){
-      console.log("input")
       const textarea = this.$refs.textarea
       const scrollHeight = textarea.scrollHeight
       this.show = this.message.trim().length > 0 
@@ -262,12 +262,17 @@ export default {
           }
         }
         r(inter)
-      })).then(inter=>{
+      })).then(async inter=>{
         this.conversations = inter
         this.load = false
         const ab = Object.filter(inter, v=> v?.info?.id === this.pers?.id)
         // this.messages = ab[0]?.messages.filter()
         this.messages = ab[0]?.messages.sort(compare)
+        if (this.$route.query.id){
+          const id = this.$route.query.id
+          await new Promise(r=>setTimeout(r, 2000))
+          document.getElementById(id).click()
+        }
       })
     })
     // if (auth?.currentUser.uid === "89tUBz2CfUY6aylA3fhYvmj4EPD2"){
@@ -292,7 +297,7 @@ export default {
   position: sticky;
   top: 0;
   z-index: 1;
-  border: 0..5rem solid #76767637;
+  border: 0.5rem solid #76767637;
 }
 
 .case {
@@ -303,12 +308,12 @@ export default {
 }
 
 .case .container {
-  height: 50vh;
-  width: 60%;
+  height: 70vh;
+  width: 70%;
   display: flex;
   justify-content: center;
   background-color: #ffffff;
-  border: 0..5rem solid #76767637;
+  border: 0.05rem solid #76767637;
 }
 
 img {
@@ -331,7 +336,7 @@ img {
   min-height: 6rem;
   width: 100%;
   background-color: #ffffff;
-  border-bottom: 0..5rem solid #76767637;
+  border-bottom: 0.05rem solid #76767637;
   display: flex;
   align-items: center;
 }
@@ -488,12 +493,12 @@ img {
 .conversations > .person > .status > .point {
   min-height: .8rem;
   min-width: .8rem;
-  background-color: #0084ff;
+  background-color: var(--green);
   border-radius: 100%;
 }
 
 .right {
-  border-left: 0..5rem solid #76767637;
+  border-left: 0.05rem solid #76767637;
   width: inherit;
   height: 100%;
   display: flex;
@@ -507,7 +512,7 @@ img {
   min-height: 6rem;
   align-items: center;
   padding: 0 2rem;
-  border-bottom: 0..5rem solid #76767637;
+  border-bottom: 0.05rem solid #76767637;
   gap: 1rem;
 }
 
@@ -580,7 +585,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 2..5rem;
+  gap: 2.05rem;
 }
 
 .right > .top .information > .name {
@@ -616,7 +621,7 @@ img {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  gap: 2..5rem;
+  gap: 2.05rem;
 }
 
 .clip {
@@ -628,7 +633,7 @@ img {
   position: relative;
   font-size: 1.4rem;
   font-weight: 400;
-  max-width: 50%;
+  max-width: 65%;
   padding: .8rem 16px;
   border-radius: 2rem;
   word-break: keep-all;
@@ -638,13 +643,13 @@ img {
 
 .received > .text {
   background-color: white;
-  border: 0..5rem solid #80808080;
+  border: 0.05rem solid #80808080;
 }
 
 .sent > .text {
   margin: .3rem;
-  background-color: #0084ff;
-  color: white;
+  background-color: var(--green);
+  color: var(--navcolor);
 }
 
 .sent {
@@ -675,7 +680,7 @@ img {
   align-items: center;
   justify-content: center;
   background-color: #ffffff;
-  border: 0..5rem solid #7676765c;
+  border: 0.05rem solid #7676765c;
   width: 100%;
   gap: 1rem;
   padding: 2px 1.5rem;
@@ -711,8 +716,8 @@ img {
   padding: .5rem 1rem;
   background-color: transparent;
   font-size: 1.4rem;
-  font-weight: 700;
-  color: #0084ff;
+  font-weight: 900;
+  color: var(--navcolor);
 }
 
 .send:disabled {
@@ -724,7 +729,7 @@ img {
 }
 
 .delete{
-  font-size: 1rem !important;
+  font-size: 1.3rem !important;
   cursor: pointer;
   color: red;
   font-weight: 200;
@@ -789,7 +794,7 @@ img {
 }
 
 .verified{
-  color: #0084ff;
+  color: var(--green);
   font-size: 2rem !important;
 }
 
@@ -801,4 +806,15 @@ img {
   display: block !important;
 }
 
+.link{
+  text-decoration: underline;
+  color: var(--hovercolor);
+  display: block;
+  text-align: center;
+  position: relative;
+}
+
+.link:hover{
+  color: var(--red);
+}
 </style>

@@ -159,8 +159,6 @@ export const monitorState = async (callback)=>{
 
 
 const setData = (info, receiver, message)=>{
-    console.log(message)
-    console.log(info)
     const banned = ['email', 'password', 'birth']
     const inter = {}
     inter.lastMessage = {
@@ -268,3 +266,16 @@ export const allCategories = [
 	'maison',
 	'magasin'
 ]
+
+export const messageTemplate = (type, proposition, price, link)=>{
+    return ({
+        message:{
+            type: 'text',
+            content:
+            `
+                Bonjour je suis intéressé(e) par la ${proposition} de votre ${type} au prix de ${price.toLocaleString("ci")} FCFA. J'aimerais avoir de plus amples informations. Merci d'avance.
+            `.trim(),
+            link: link
+        }
+    })
+}

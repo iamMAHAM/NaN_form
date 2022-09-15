@@ -1,11 +1,11 @@
 <template>
-  <div class = "card-wrapper">
+<div class = "card-wrapper">
   <div class = "card">
     <!-- card left -->
     <div class = "product-imgs">
       <div class = "img-display">
         <div class = "img-showcase">
-          <img src = "../assets/m1.jpg">
+          <img :src = "current">
           <img src = "../assets/m2.jpg">
           <img src = "../assets/m3.jpeg">
         </div>
@@ -13,52 +13,65 @@
       <div class = "img-select">
         <div class = "img-item">
           <a href = "#" data-id = "1">
-            <img src = "../assets/m1.jpg">
+          <img
+            src = "../assets/m1.jpg"
+            @click="toggleImages"
+          >
           </a>
         </div>
         <div class = "img-item">
           <a href = "#" data-id = "2">
-            <img src = "../assets/m2.jpg">
+          <img
+            src = "../assets/m2.jpg"
+            @click="toggleImages"
+          >
           </a>
         </div>
         <div class = "img-item">
           <a href = "#" data-id = "3">
-            <img src = "../assets/m3.jpeg">
+          <img
+            src = "../assets/m3.jpeg"
+            @click="toggleImages"
+          >
           </a>
         </div>
       </div>
     </div>
     <!-- card right -->
     <div class = "product-content">
-      <h2 class = "product-title">Maison moins chère</h2>
+      <h2 class = "product-title">{{ cardInfo?.title }}</h2>
       <div class = "product-price">
-        <p class = "price">Prix: <span>4000000 FCFA</span></p>
+        <p class = "price">Prix: <span>{{ cardInfo?.price?.toLocaleString('ci') }} FCFA</span></p>
       </div>
       <div class = "product-detail">
         <h2>Description</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
+        <p>{{ cardInfo?.description }}</p>
         <ul>
           <li>
             <i class="material-symbols-outlined">home_work</i>
-            <span>maison</span>
+            <span>{{ cardInfo?.type }}</span>
           </li>
           <li>
             <i class="material-symbols-outlined">sell</i>
-            <span>vente</span>
+            <span>{{ cardInfo?.proposition }}</span>
           </li>
           <li>
-            <i class="material-symbols-outlined">crop_square</i>
-            <span>450</span>m²
+            <i class="material-symbols-outlined">grass</i>
+            <span>{{ cardInfo?.area }}</span>m²
           </li>
           <li>
             <i class="material-symbols-outlined">location_on</i>
-            <span>Abidjan</span>
+            <span>{{ cardInfo?.location }}</span>
           </li>
         </ul>
       </div>
       <div class = "purchase-info">
-        <button type="button" class="btn button-style c">
+        <button
+          type="button"
+          class="btn button-style c"
+          :id="cardInfo?.ownerId"
+          @click="write"
+        >
           Ecrire au vendeur
           <i class="material-symbols-outlined">forward_to_inbox</i>
         </button>
@@ -66,13 +79,51 @@
     </div>
   </div>
 </div>
+<div class="location">
+  ADD LOCATION MAP here
+</div>
 </template>
 
 <script>
+import { auth, findOne, messageTemplate, sendMessage } from '@/lib/firestoreLib'
+
 export default {
   name: 'Details',
+  props: ['isLogged'],
+  data(){
+    return {
+      cardInfo: {},
+      load: false,
+      current: '',
+    }
+  },
+  methods:{
+    toggleImages(e){
+      this.current = e.target.src
+    },
+    write(e){
+      console.log("writed", e.target.id)
+      const receiverId = e.target.id
+      sendMessage(auth?.currentUser?.uid, receiverId,
+                  messageTemplate(
+                    this.cardInfo?.type,
+                    this.cardInfo?.proposition,
+                    this.cardInfo?.price,
+                    window.location.pathname
+                  )
+      ).then(message=>{
+        console.log("message", message)
+        this.$router.push({ path: '/messages', query: { id: this.cardInfo?.ownerId } })
+      })
+    }
+  },
   mounted(){
-
+    const params = this.$route.params
+    findOne(`ads/X1eA1Bk8tfnVXHqduiTg/${params.categorie}`, params.id)
+    .then(detailInfo=>{
+      this.current = detailInfo?.images?.slice(0, 1)
+      this.cardInfo = detailInfo
+    })
   }
 }
 </script>
@@ -224,7 +275,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: .7rem;
+    margin-top: 1rem;
   }
 
   .product-imgs {

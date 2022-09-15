@@ -25,11 +25,11 @@
       </div>
       <div class="content">
         <div class="message">
-          <b>{{person?.lastMessage.senderId === auth?.currentUser?.uid  ? 'you' : 'him'}} : </b>
+          <b>{{person?.lastMessage?.senderId === auth?.currentUser?.uid  ? 'you' : 'him'}} : </b>
           <span
-            v-if="person?.lastMessage.message.type === 'text'"
+            v-if="person?.lastMessage?.message?.type === 'text'"
           >
-            {{ person?.lastMessage.message.content }}
+            {{ person?.lastMessage?.message?.content?.slice(0, 25) }}...
           </span>
           <i
             v-else
