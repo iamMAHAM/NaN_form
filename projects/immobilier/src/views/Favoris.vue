@@ -29,9 +29,6 @@ export default {
   },
   methods:{
     filteringCard(card){
-      console.log(card.id)
-      console.log(this.cards.length)
-      // this.cards = [...this.cards.filter(c=> c!== card.id)]
       const inter = this.cards.filter(c=>c.id !== card.id)
       this.cards = [...inter]
     }
@@ -56,8 +53,13 @@ export default {
 <style>
   div.empty *, div.empty{
     color: var(--white);
-    margin-top: 1rem;
     text-align: center;
-    font-size: 8rem;
+    font-size: 6rem;
+  }
+  div.empty{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 </style>
