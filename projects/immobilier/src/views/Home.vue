@@ -1,18 +1,38 @@
 <template>
-  
+  <Banner />
+  <CardContainer
+    :cards="cards"
+    :load="load"/>
 </template>
 
 <script>
 import Banner from '@/components/partials/Banner.vue';
 import CardContainer from '@/components/CardContainer.vue';
-import { scraper } from "@/lib/scraper"
+import { auth, find } from '@/lib/firestoreLib';
 export default {
   name: 'Home',
+  props: ['isLogged'],
   components: {
       Banner,
       CardContainer
   },
+  data(){
+    return {
+      load: true,
+      cards: []
+    }
+  },
   mounted(){
+    console.log(auth?.currentUser?.uid)
+    console.log(this.isLogged)
+    // find(`users/${auth?.currentUser?.uid}/favorites`)
+    find(`ads/X1eA1Bk8tfnVXHqduiTg/maison`)
+    .then(maison=>{
+      console.log(maison)
+      this.cards = maison
+      console.log(this.cards)
+      this.load = false
+    })
   }
 
 }

@@ -1,33 +1,45 @@
 <template>
     <div class="box" :id="card.id">
       <div class="top" @click="handleClick">
-        <img src="https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271__340.jpg" alt="" />
-        <i class="material-symbols-outlined favs">favorite</i>
+        <img :src="card?.images.slice(0, 1)"/>
+        <i
+          :class="`material-symbols-outlined favs ${card?.isFav ? 'active' : ''}`"
+          @click="handleFav"
+        >
+          favorite
+        </i>
       </div>
       <div class="bottom">
-        <h3>{{ card.type }} à {{ card.location.toLocaleUpperCase() }}</h3>
+        <h3>{{ card?.type }} à {{ card?.location?.toLocaleUpperCase() }}</h3>
         <p>
-         {{ card.description}}
+         {{ card.description.slice(0, 80)}} ...
         </p>
         <div class="advants">
-          <div v-if="card.type === 'maison'">
+          <div v-if="card?.type === 'maison'">
             <span>Chambres</span>
-            <div><i class="fas fa-th-large"></i><span>3</span></div>
+            <div>
+              <i class="material-symbols-outlined">bed</i>
+              <span>3</span>
+            </div>
           </div>
-          <div v-if="card.type === 'maison'">
+          <div v-if="card?.type === 'maison'">
             <span>Salle de Bain</span>
-            <div><i class="fas fa-shower"></i><span>3</span></div>
+            <div>
+              <i class="material-symbols-outlined">bathroom</i>
+              <span>{{ card?.options?.salle }}</span>
+            </div>
           </div>
           <div>
             <span>Superficie</span>
             <div>
-              <i class="fas fa-vector-square"></i><span>{{ card.area}}<span>m²</span></span>
+              <i class="material-symbols-outlined">grass</i>
+              <span>{{ card?.area}}<span>m²</span></span>
             </div>
           </div>
         </div>
         <div class="price">
-          <span>En {{ card.proposition }}</span>
-          <span>{{ card.price.toLocaleString('ci') }}</span> FCFA
+          <span>En {{ card?.proposition }}</span>
+          <span>{{ card?.price?.toLocaleString('ci') }}</span> FCFA
         </div>
       </div>
     </div>
@@ -39,10 +51,17 @@ export default {
   props: ['card'],
   methods:{
     handleClick(e){
-      e.target.className === "top" ? console.log("bingo") : ''
-      e.stopPropagation()
+      if (e.target.className !== 'top') return
       console.log(this.card)
     },
+    handleFav(e){
+      console.log(e.target.classList)
+			if (e.target.classList.contains("active")){
+				this.$emit("removeFav", this.card)
+			}else{
+				this.$emit("addFav", this.card)
+			}
+		}
   }
 }
 </script>
@@ -51,6 +70,7 @@ export default {
 
 .favs{
   position: absolute;
+  pointer-events: visible;
   cursor: pointer;
   top: 1rem;
   right: 1rem;
@@ -71,17 +91,21 @@ export default {
 }
 
 .card-container .box {
+  pointer-events: none;
   width: 23%;
+  height: auto;
   background-color: white;
   position: relative;
   margin: 1rem 0;
 }
 .card-container .box .top {
+  height: calc(40%);
   position: relative;
   background-color: var(--hovercolor);
 }
 
 .card-container .box .top:after {
+  pointer-events: all;
   border-radius: .5rem;
   content: "Voir Details";
   background: var(--white);
@@ -103,6 +127,7 @@ export default {
 
 .card-container .box .top img {
   width: 100%;
+  height: 100%;
   margin-bottom: -.4rem;
 }
 

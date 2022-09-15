@@ -1,18 +1,25 @@
 <template>
   <Loader v-if="load"/>
   <div class="card-container" v-if="!load">
-    <Card v-for="card in cards" :key="card.id" :card="card"/>
+    <Card
+      v-for="card in cards"
+      :key="card.id"
+      :card="card"
+      @addFav="addFavs"
+      @removeFav="removeFavs"
+    />
   </div>
 </template>
 
 <script>
-import { save } from '@/lib/firestoreLib';
+import { auth, deleteOne, override } from '@/lib/firestoreLib';
 import Card from './partials/Card.vue';
 import Loader from './partials/Loader.vue';
 
 export default {
   name: 'CardContainer',
   props: ['cards', 'load'],
+  emits: ['filteringCard'],
   components: {
     Card,
     Loader
@@ -86,16 +93,45 @@ export default {
       //   },
 
       // ],
-      // load: true
+      // load: true,
+      uid: null
     }
+  },
+  methods: {
+    addFavs(card){ // add to favorite
+			const index = this.cards.indexOf(card)
+      const copy = {...card}
+      delete copy.isLoad
+      copy.isFav = true
+			this.cards[index].isLoad = true
+			if (!this.uid){
+        this.$router.push("/auth")
+				return
+			}
+			override(`users/${this.uid}/favorites`, copy.id, copy)
+      .then(()=>{
+        this.cards[index].isFav = true
+				this.cards[index].isLoad = false
+      })
+      .catch(e=>console.log("error", e))
+		},
+		removeFavs(card){ // remove to favorite
+			const index = this.cards.indexOf(card)
+			this.cards[index].isLoad = true
+			deleteOne(`users/${this.uid}/favorites`, card.id)
+      .then(()=>{
+        this.$emit("filteringCard", card)
+        console.log("filter emmitted")
+        this.cards[index].isFav = false
+        this.cards[index].isLoad = false
+      })
+		}
   },
   mounted(){
     console.log(this.load)
+    this.uid = auth.currentUser? auth.currentUser.uid : ''
     // save("ads/X1eA1Bk8tfnVXHqduiTg/test", this.cards)
     // .then(console.log("save success"))
-  },
-  updated(){
-    console.log(this.load)
   }
 }
 </script>
@@ -120,8 +156,13 @@ export default {
 }
 
 @media only screen and (max-width: 1174px){
+
+  .card-container{
+    width: 90%;
+  }
+
   .card-container .box{
-    width: 32%;
+    width: 32.9%;
   }
 }
 
@@ -136,8 +177,13 @@ export default {
   }
 }
 @media only screen and (max-width: 739px){
+
+  .card-container{
+    width: 95%;
+  }
+
   .card-container .box{
-    width: 48.5%;
+    width: 49%;
   }
 }
 @media only screen and (max-width: 608px){
@@ -146,7 +192,8 @@ export default {
     justify-content: center;
   }
   .card-container .box{
-    width: 80%;
+    height: max-content;
+    width: 90%;
   }
 }
 
