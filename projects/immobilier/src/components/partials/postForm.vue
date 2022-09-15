@@ -173,7 +173,7 @@ export default {
             findOne("users", auth.currentUser.uid)
             .then(userInfo=>{
               if (userInfo.isVerified){
-                this.form.publisherId = auth.currentUser.uid
+                this.form.ownerId = auth.currentUser.uid
                 this.form.images = this.fileList
                 postAd(auth.currentUser.uid, this.form)
                 .then(adInfo=>{
