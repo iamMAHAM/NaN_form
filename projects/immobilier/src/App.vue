@@ -21,12 +21,16 @@
     },
     mounted(){
       monitorState(user=>{
+        console.log(user)
         if (user?.emailVerified){
           this.isLogged = true
           this.$router.push("/")
         }
         else this.isLogged = false
       })
+    },
+    updated(){
+      console.log("root updated")
     }
   }
 </script>
@@ -57,5 +61,7 @@ body{
     --gray: #f5f5f5;
     --navcolor: #1E262D;
     --hovercolor: #34495e;
+    --green: #3eaba1;
+    --red: red;
 }
 </style>
