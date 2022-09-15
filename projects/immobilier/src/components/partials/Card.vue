@@ -6,7 +6,7 @@
           :class="`material-symbols-outlined favs ${card?.isFav ? 'active' : ''}`"
           @click="handleFav"
         >
-          favorite
+          {{ card?.isFav ? 'delete' : 'favorite'}}
         </i>
       </div>
       <div class="bottom">
@@ -52,10 +52,9 @@ export default {
   methods:{
     handleClick(e){
       if (e.target.className !== 'top') return
-      console.log(this.card)
+      this.$router.push(`/details/${this.card.type}/${this.card.id}`)
     },
     handleFav(e){
-      console.log(e.target.classList)
 			if (e.target.classList.contains("active")){
 				this.$emit("removeFav", this.card)
 			}else{
@@ -74,16 +73,20 @@ export default {
   cursor: pointer;
   top: 1rem;
   right: 1rem;
-  color: red;
+  color: var(--red);
   font-size: 3rem !important;
 }
 
 .favs.active{
-  color: #3eaba1;
+  color: var(--red);
 }
 
 .favs:hover{
-  color: #3eaba1;
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48;
 }
 
 .card-container{
