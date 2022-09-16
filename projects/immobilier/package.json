@@ -7,6 +7,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@tomtom-international/web-sdk-maps": "^6.20.0",
+    "@tomtom-international/web-sdk-services": "^6.20.0",
     "@types/validator": "^13.7.6",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",

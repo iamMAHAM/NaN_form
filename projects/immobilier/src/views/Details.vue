@@ -79,22 +79,28 @@
     </div>
   </div>
 </div>
-<div class="location">
-  ADD LOCATION MAP here
-</div>
+
+<Maps
+  :emp="emp"
+/>
+
 </template>
 
 <script>
 import { auth, findOne, messageTemplate, sendMessage } from '@/lib/firestoreLib'
-
+import Maps from "../components/Map.vue"
 export default {
   name: 'Details',
   props: ['isLogged'],
+  components: {
+    Maps
+  },
   data(){
     return {
       cardInfo: {},
       load: false,
       current: '',
+      emp: ''
     }
   },
   methods:{
@@ -123,6 +129,8 @@ export default {
     .then(detailInfo=>{
       this.current = detailInfo?.images?.slice(0, 1)
       this.cardInfo = detailInfo
+      this.emp = detailInfo?.location
+      console.log(this.emp)
     })
   }
 }
