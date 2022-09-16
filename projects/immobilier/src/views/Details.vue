@@ -81,6 +81,7 @@
 </div>
 
 <Maps
+  v-if="emp"
   :emp="emp"
 />
 
@@ -130,7 +131,6 @@ export default {
       this.current = detailInfo?.images?.slice(0, 1)
       this.cardInfo = detailInfo
       this.emp = detailInfo?.location
-      console.log(this.emp)
     })
   }
 }

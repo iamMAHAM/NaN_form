@@ -4,6 +4,7 @@ import Auth from "../views/Auth.vue"
 import Details from "../views/Details.vue"
 import Messages from "../views/Messages.vue"
 import Favoris from "../views/Favoris.vue"
+import DashBoard from "@/views/admin/DashBoard.vue"
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/details/:categorie/:id',
     name: 'Details',
     component: Details
+  },
+  {
+    path: '/admin/dashboard',
+    name: 'DashBoard',
+    component: DashBoard
   },
 ]
 
