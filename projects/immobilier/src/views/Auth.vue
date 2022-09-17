@@ -153,7 +153,6 @@
 <script>
 import validator from 'validator';
 import { signUp, signIn, auth } from '@/lib/firestoreLib';
-import { onMounted } from '@vue/runtime-core';
 
 export default {
   name: 'Auth',
@@ -173,7 +172,7 @@ export default {
         birth: '',
         isVerified: false,
         address: '',
-        avatar: "https://firebasestorage.googleapis.com/v0/b/immobilier-0.appspot.com/o/profiles%2Favatar-icon.svg?alt=media&token=516f42ab-4ec8-45a0-b66c-1e4058455e4c"
+        avatar: "https://firebasestorage.googleapis.com/v0/b/immobilier-0.appspot.com/o/profiles%2Favatar-icon.svg?alt=media&token=516f42ab-4ec8-45a0-b66c-1e4058455e4c",
       },
       errors:{
         start: true,

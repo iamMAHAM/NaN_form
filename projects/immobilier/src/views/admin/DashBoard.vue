@@ -14,10 +14,10 @@
 			</div>
 
 			<!-- tab-menu -->
-			<input type="radio" class="tab-1" name="tab" checked="checked">
+			<input type="radio" class="tab-1" name="tab">
 			<span>Home</span><i class="material-symbols-outlined">home</i>
 
-			<input type="radio" class="tab-2" name="tab">
+			<input type="radio" class="tab-2" name="tab" checked="checked">
 			<span>Users</span><i class="material-symbols-outlined">group</i>
 
 			<input type="radio" class="tab-3" name="tab">
@@ -83,7 +83,7 @@
 
 				</section>
 				<section class="users">
-				<!-- //all users here -->
+          <Users />
 				</section>
 				<section class="pending">
 				<!-- //all users here -->
@@ -101,11 +101,11 @@
 
 <script>
 import Stats from './Stats.vue';
-import User from './User.vue';
+import Users from '@/components/partials/user/Users.vue';
 export default {
   name: 'DashBoard',
   components:{
-    User,
+    Users,
     Stats
   }
 }
@@ -120,6 +120,7 @@ p{
   color: var(--hovercolor);
   text-align: center;
 }
+
 </style>
 
 <style>
@@ -153,7 +154,7 @@ li{
 /* Backend Panel Start */
 
 .clear-backend {
-	background: #fff;
+	background: var(--white);
 	width: 100%;
 	height: 800px;
 	position: relative;
@@ -196,7 +197,7 @@ li{
 
 .clear-backend > input:hover + span,
 .clear-backend > input:checked + span {
-	background: #fff;
+	background: var(--white);
 	color: #1ABC9C;
 }
 .clear-backend > input:checked + span + i {
@@ -256,11 +257,11 @@ li{
 }
 
 .top-bar a:hover {
-	color: #1ABC9C;
+	color: var(--greenfun);
 }
 
 .top-bar li:hover {
-	background: #fff;
+	background: var(--white);
 }
 
 .tab-content {
@@ -321,7 +322,6 @@ li{
 .tab-content .home .bottom > div{
   height: 50%;
 }
-
 
 /* Responsive */
 @media only screen and (max-width: 641px) {

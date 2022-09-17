@@ -59,10 +59,12 @@ body{
 
 :root{
     --white: #fff;
-    --gray: #f5f5f5;
+    --gray: #f0f0f0;
     --navcolor: #1E262D;
     --hovercolor: #34495e;
     --green: #d9fdd2;
-    --red: red;
+    --greenfun: #1ABC9C;
+    --red: #E91E63;
+    --blue: #03A9F4;
 }
 </style>

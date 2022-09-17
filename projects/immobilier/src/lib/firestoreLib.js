@@ -32,7 +32,7 @@ export const findOne = (col="", id="")=>{
     })
 }
 
-export const find = (col, origin="", order=false)=>{
+export const find = (col, order=false)=>{
     return new Promise(async (resolve)=>{
         const result = []
         let qs = null
@@ -44,7 +44,6 @@ export const find = (col, origin="", order=false)=>{
         qs.docs.map((doc) => {
             let toPush = doc.data()
             toPush.id = doc.id
-            origin ? toPush.origin = origin :  ''
             result.push(toPush)
         })
         resolve(result)

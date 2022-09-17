@@ -45,7 +45,7 @@
                 title="compte verifié"
                   v-if="pers?.isVerified"
                 >
-                  verified_user
+                  verified
               </i>
             </a>
           </div>
