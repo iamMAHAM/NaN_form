@@ -131,6 +131,8 @@
               <i class="material-symbols-outlined">imagesmode</i>
               <input
                 type="file"
+                ref="avatar"
+                @change="flag = true"
               >
             </div>
             <input
@@ -152,7 +154,7 @@
 
 <script>
 import validator from 'validator';
-import { signUp, signIn, auth } from '@/lib/firestoreLib';
+import { signUp, signIn, auth, uploadImage } from '@/lib/firestoreLib';
 
 export default {
   name: 'Auth',
@@ -183,7 +185,8 @@ export default {
         birth: false,
         reqError: false,
         message: '',
-      }
+      },
+      flag: false
     }
   },
   methods: {
@@ -221,13 +224,19 @@ export default {
       signIn(this.form)
       .then(user=>{
         console.log(user)
-        this.$router.go(-1)
+        this.$router.push("/")
       })
       .catch(e=>{
         this.showError(e, 3500)
       })
     },
-    register(){
+    async register(){
+      if (this.flag){
+        const target = this.$refs.avatar
+        console.log(target)
+        const avatar = await uploadImage(`images/${target?.files[0].name}`, target.files[0])
+        this.form.avatar = avatar
+      }
       signUp(this.form)
       .then((userInfo)=>{
         console.log(userInfo)

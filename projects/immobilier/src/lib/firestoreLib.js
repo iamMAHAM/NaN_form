@@ -1,7 +1,7 @@
 
 import { db, storage, rtdb } from "./firebaseConfig"
 import { ref, uploadBytes,getDownloadURL } from "firebase/storage"
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged,signOut, updateProfile } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged,signOut, updateProfile, deleteUser } from "firebase/auth"
 import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, updateDoc, orderBy, serverTimestamp as sT } from "firebase/firestore"
 import { set, ref as dbref, remove } from "firebase/database"
 import { uuidv4 } from "@firebase/util"
@@ -156,6 +156,11 @@ export const monitorState = async (callback)=>{
 //     ]).catch(e=>{return callback(e.message)})
 // }
 
+export const deleteUsers = ()=>{
+  return new Promise(async (resolve, rejecte)=>{
+    const deleted = await deleteUser()
+  })
+}
 
 const setData = (info, receiver, message)=>{
     const banned = ['email', 'password', 'birth']

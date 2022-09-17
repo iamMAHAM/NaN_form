@@ -19,9 +19,12 @@
     </button>
     <button
       class="block"
-      @click="updateUser"
+      @click="blockUser"
     >
-      <i class="material-symbols-outlined">block</i>
+      <i class="material-symbols-outlined"
+      >
+        block
+      </i>
     </button>
     <button
       class="deleteA"
@@ -101,6 +104,17 @@ export default {
       this.user.role = this.backup.role,
       this.user.isVerified = this.backup.isVerified
       this.show = false
+    },
+    async blockUser(e){
+      const userToken = await auth?.currentUser.getIdToken()
+      fetch("/disable/2", {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'authorization': 'Bearer' + userToken
+        }
+      }).then(res=> res.json())
+      .then(data=>console.log(data))
     }
 	},
   computed:{

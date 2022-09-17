@@ -1,6 +1,31 @@
 <template>
   <table>
-    <caption>Utilisateurs</caption>
+    <caption>
+      <input
+        type="search"
+        role="search"
+        placeholder="rechercher un utilisateur dans ..."
+        v-model="search"
+        @input="findUser"
+        style="min-width: 35rem; height: ; padding: .5rem; margin: .5rem;"
+      >
+      <select
+        @change="filterUsers"
+        style="cursor: pointer; text-align:center; width: max-content;"
+        v-model="filter">
+        <option value="">Tout Le Monde</option>
+        <option value="user">users</option>
+        <option value="admin">admin</option>
+        <option value="vendor">partnaires</option>
+      </select>
+      <i
+        class="material-symbols-outlined"
+        style="vertical-align: middle; cursor: pointer"
+      >
+        search
+      </i>
+
+    </caption>
     <thead>
       <tr>
         <th>Avatar</th>
@@ -33,17 +58,32 @@ import User from './User.vue';
 export default {
   name: 'Users',
   components: { User },
+  methods: {
+    filterUsers(){
+      if (!this.filter) this.users = this.allUsers
+      this.users = this.allUsers.filter(u=>u.role === this.filter)
+    },
+    findUser(){
+      this.users = this.search
+      ? this.users = this.users.filter(u => u.fullName.toLowerCase().includes(this.search.toLowerCase()))
+      : this.allUsers
+      
+    }
+  },
   data(){
     return {
       users:[
-      ]
+      ],
+      filter: '',
+      allUsers: [],
+      search: ''
     }
   },
   mounted(){
     find("users", false)
     .then(users=>{
-      console.log(users)
       this.users = users
+      this.allUsers = users
     })
   }
 }
