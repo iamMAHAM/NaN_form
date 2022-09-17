@@ -21,9 +21,11 @@
     },
     mounted(){
       monitorState(user=>{
+        const forbiden = ['/auth', '/messages']
         if (user?.emailVerified){
           this.isLogged = true
-          // this.$router.push("/")
+          console.log(this.$route.path)
+          forbiden.includes(this.$route.path) ? this.$router.go(-1) : ''
         }
         else this.isLogged = false
       })

@@ -17,16 +17,16 @@
 			<input type="radio" class="tab-1" name="tab" checked="checked">
 			<span>Home</span><i class="material-symbols-outlined">home</i>
 
-			<input type="radio" class="tab-3" name="tab">
+			<input type="radio" class="tab-2" name="tab">
 			<span>Users</span><i class="material-symbols-outlined">group</i>
 
-			<input type="radio" class="tab-4" name="tab">
+			<input type="radio" class="tab-3" name="tab">
 			<span>Pending</span><i class="material-symbols-outlined">pending</i>
 			
-      <input type="radio" class="tab-2" name="tab">
+      <input type="radio" class="tab-4" name="tab">
 			<span>Reports</span><i class="material-symbols-outlined">report</i>
 
-			<input type="radio" class="tab-10" name="tab">
+			<input type="radio" class="tab-5" name="tab">
 			<span>Settings</span><i class="material-symbols-outlined">settings</i>
 
 
@@ -53,20 +53,46 @@
 
 			<!-- tab-content -->
 			<div class="tab-content">
-        <section class="home">
-          <!-- //all users here -->
-        </section>
-        <section class="user">
-          <!-- //all users here -->
-        </section>
-        <section class="pending">
-          <!-- //all users here -->
-        </section>
+				<section class="home">
+					<div class="home-top">
+            <div class="item">
+              <div class="ileft">
+                Total Users
+              </div>
+              <div class="iright">30</div>
+            </div>
+            <div class="item">
+              <div class="ileft">
+                Partners
+              </div>
+              <div class="iright">30</div>
+            </div>
+            <div class="item">
+              <div class="ileft">
+                Total ads
+              </div>
+              <div class="iright">30</div>
+            </div>
+					</div>
+          <div class="bottom">
+            <Stats
+              :width="1000"
+              :height="600"
+            />
+          </div>
+
+				</section>
+				<section class="users">
+				<!-- //all users here -->
+				</section>
+				<section class="pending">
+				<!-- //all users here -->
+				</section>
 				<section class="report">
-          <!-- // report -->
+				<!-- // report -->
 				</section>
 				<section class="settings">
-          <!-- settings -->
+				<!-- settings -->
 				</section>
 			</div>
 		</div>
@@ -74,8 +100,14 @@
 </template>
 
 <script>
+import Stats from './Stats.vue';
+import User from './User.vue';
 export default {
-  name: 'DashBoard'
+  name: 'DashBoard',
+  components:{
+    User,
+    Stats
+  }
 }
 </script>
 
@@ -242,12 +274,54 @@ li{
 }
 
 .tab-content section {
-	position: absolute;
+	position: relative;
 	width: 100%;
 	height: 100%;
-	padding: 20px;
 	display: none;
 }
+
+.clear-backend > input.tab-1:checked ~ .tab-content .home {
+	display: block;
+}
+
+.clear-backend > input.tab-2:checked ~ .tab-content .users {
+	display: block;
+}
+
+.clear-backend > input.tab-3:checked ~ .tab-content .pending {
+	display: block;
+}
+
+.clear-backend > input.tab-4:checked ~ .tab-content .report {
+	display: block;
+}
+
+.clear-backend > input.tab-4:checked ~ .tab-content .settings {
+	display: block;
+}
+
+.tab-content .home{
+  align-items: center;
+}
+.tab-content .home-top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.tab-content .item{
+	padding: 2rem;
+	display: flex;
+	justify-content: space-between;
+	width: 28%;
+	background: var(--hovercolor);
+	color: var(--white);
+}
+
+.tab-content .home .bottom > div{
+  height: 50%;
+}
+
 
 /* Responsive */
 @media only screen and (max-width: 641px) {

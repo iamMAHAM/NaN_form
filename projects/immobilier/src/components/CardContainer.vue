@@ -127,8 +127,7 @@ export default {
 		}
   },
   mounted(){
-    console.log(this.load)
-    this.uid = auth.currentUser? auth.currentUser.uid : ''
+    this.uid = auth?.currentUser? auth.currentUser.uid : ''
     // save("ads/X1eA1Bk8tfnVXHqduiTg/test", this.cards)
     // .then(console.log("save success"))
   }

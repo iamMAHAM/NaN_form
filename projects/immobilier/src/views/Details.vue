@@ -110,6 +110,10 @@ export default {
     },
     write(e){
       console.log("writed", e.target.id)
+      if (!auth?.currentUser){
+        this.$router.push("/auth")
+        return
+      }
       const receiverId = e.target.id
       sendMessage(auth?.currentUser?.uid, receiverId,
                   messageTemplate(

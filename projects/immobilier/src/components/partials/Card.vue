@@ -6,7 +6,7 @@
           :class="`material-symbols-outlined favs ${card?.isFav ? 'active' : ''}`"
           @click="handleFav"
         >
-          {{ card?.isFav ? 'delete' : 'favorite'}}
+          {{ rightIcone }}
         </i>
       </div>
       <div class="bottom">
@@ -61,6 +61,11 @@ export default {
 				this.$emit("addFav", this.card)
 			}
 		}
+  },
+  computed: {
+    rightIcone(){
+      return this.$route.path.includes("favorites") ? 'delete' : 'favorite'
+    }
   }
 }
 </script>
@@ -81,6 +86,7 @@ export default {
   color: var(--red);
 }
 
+.favs.active,
 .favs:hover{
   font-variation-settings:
   'FILL' 1,
@@ -88,6 +94,7 @@ export default {
   'GRAD' 0,
   'opsz' 48;
 }
+
 
 .card-container{
   position: relative;

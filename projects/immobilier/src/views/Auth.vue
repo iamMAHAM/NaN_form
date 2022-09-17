@@ -152,7 +152,8 @@
 
 <script>
 import validator from 'validator';
-import { signUp, signIn } from '@/lib/firestoreLib';
+import { signUp, signIn, auth } from '@/lib/firestoreLib';
+import { onMounted } from '@vue/runtime-core';
 
 export default {
   name: 'Auth',
@@ -221,6 +222,7 @@ export default {
       signIn(this.form)
       .then(user=>{
         console.log(user)
+        this.$router.go(-1)
       })
       .catch(e=>{
         this.showError(e, 3500)
@@ -253,9 +255,7 @@ export default {
 }
 </script>
 
-<style>
-@import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap');
-
+<style scoped>
 section {
   position: relative;
   min-height: 100vh;
@@ -264,6 +264,9 @@ section {
   align-items: center;
   padding: 2rem;
 }
+</style>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap');
 
 section .container {
   position: relative;

@@ -23,14 +23,10 @@ export default {
     }
   },
   mounted(){
-    console.log(auth?.currentUser?.uid)
-    console.log(this.isLogged)
     // find(`users/${auth?.currentUser?.uid}/favorites`)
     find(`ads/X1eA1Bk8tfnVXHqduiTg/maison`)
     .then(maison=>{
-      console.log(maison)
       this.cards = maison
-      console.log(this.cards)
       this.load = false
     })
   }

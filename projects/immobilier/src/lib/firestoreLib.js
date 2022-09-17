@@ -3,7 +3,7 @@ import { db, storage, rtdb } from "./firebaseConfig"
 import { ref, uploadBytes,getDownloadURL } from "firebase/storage"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged,signOut, updateProfile } from "firebase/auth"
 import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, updateDoc, orderBy, serverTimestamp as sT } from "firebase/firestore"
-import { set, ref as dbref, serverTimestamp, onValue, query as dbquery, remove } from "firebase/database"
+import { set, ref as dbref, remove } from "firebase/database"
 import { uuidv4 } from "@firebase/util"
 
 /**********CONST VARIABLES********************/
@@ -260,7 +260,11 @@ export const deleteComment = (postId, messageId)=>{
     deleteOne(`comments/${postId}`, messageId)
 }
 
-
+export const forbiden = (thiss)=>{
+    if (!auth?.currentUser){
+        thiss.$router.push("/")
+    }
+}
 export const allCategories = [
 	'terrain',
 	'maison',
