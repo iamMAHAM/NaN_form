@@ -126,9 +126,15 @@ export default {
     const wads = dbref(rtdb, `waitingAds`);
     onValue(wads, (snapshot)=>{
       const all = snapshot.val()
-      console.log(all)
-      all ? this.cards = Object.values(all) : ''
-      this.load = false
+      const inter = []
+      if (all){
+        for (const [k, v] of Object.entries(all)){
+          v.tempId = k
+          inter.push(v)
+        }
+        this.cards = inter
+        this.load = false
+    }
     })
   }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="box" :id="card.id">
+    <div class="box" :id="card.id" :title="card?.tempId">
       <div class="top" @click="handleClick">
         <img :src="card?.images.slice(0, 1)"/>
         <i
@@ -23,7 +23,7 @@
             </div>
           </div>
           <div v-if="card?.type === 'maison'">
-            <span>Salle de Bain</span>
+            <span>Bain</span>
             <div>
               <i class="material-symbols-outlined">bathroom</i>
               <span>{{ card?.options?.salle }}</span>
@@ -40,27 +40,31 @@
         <div class="price">
           <span>En {{ card?.proposition }}</span>
           <span>{{ card?.price?.toLocaleString('ci') }}</span> FCFA
-          <span class="button" v-if="admin">
+          <div class="buttonss" v-if="admin">
             <i
               class="material-symbols-outlined"
+              @click="validate"
               title="valider"
+              style="color: var(--greenfun)"
             >
               check_circle
             </i>
             <i
               class="material-symbols-outlined"
-              title="supprimer"
+              @click="del"
+              title="refuser"
               style="color: var(--red)"
             >
               delete
             </i>
-          </span>
+          </div>
         </div>
       </div>
     </div>
 </template>
 
 <script>
+
 export default {
   name: 'Card',
   props: ['card'],
@@ -75,7 +79,14 @@ export default {
 			}else{
 				this.$emit("addFav", this.card)
 			}
-		}
+		},
+    del(e){
+      const parent = e.target.closest("div.box")
+    },
+    validate(e){
+      const parent = e.target.closest("div.box")
+      console.log(parent)
+    }
   },
   computed: {
     rightIcone(){
@@ -237,5 +248,17 @@ export default {
 .card-container .box .bottom .price span:last-of-type {
   color: #3eaba1;
   font-size: 2.2rem;
+}
+
+.buttonss i{
+  margin: .2rem;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.buttonss{
+  pointer-events: auto;
+  float: right;
+  z-index: 12;
 }
 </style>

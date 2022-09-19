@@ -1,7 +1,7 @@
 <template>
   <Loader v-if="load"/>
   <div class="card-container" v-if="!load">
-    <div v-if="!load && !cards.length">{{ message }}</div>
+    <div v-if="!load && !cards.length" class="em">{{ message }}</div>
     <Card
       v-for="card in cards"
       :key="card.id"
@@ -144,7 +144,7 @@ export default {
   flex-wrap: wrap;
 }
 
-.card-container :nth-child(1){
+.card-container .em{
   font-size: 2.5rem;
   text-align: center;
   color: var(--white);

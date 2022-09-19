@@ -168,7 +168,6 @@ export default {
         this.handleErrors()
         console.log(this.state)
         if (!this.state){
-          console.log("here")
           if (auth?.currentUser){
             findOne("users", auth.currentUser.uid)
             .then(userInfo=>{
@@ -218,12 +217,12 @@ export default {
 </style>
 <style>
 .post-modal{
-    z-index: 5;
+    z-index: 12;
     top: 0;
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, .3);
+    background: rgba(0, 0, 0, .6);
 }
 
 form.post-modal-form{

@@ -1,6 +1,5 @@
 <template>
   <Bar
-    ref="bar"
     :chart-options="chartOptions"
     :chart-data="chartData"
     :chart-id="chartId"
@@ -84,9 +83,6 @@ export default {
         responsive: true,
       }
     }
-  },
-  mounted(){
-    console.log(this.$refs.bar)
   }
 }
 </script>

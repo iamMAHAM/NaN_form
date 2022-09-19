@@ -72,10 +72,12 @@ export const search = (categories=[], value="")=>{
 }
 
 export const saveOne = (col="", d)=>{
-    return new Promise(async (resolve, reject)=>{
+    return new Promise(async (resolve)=>{
         d.publishedAt = Date.now()
-        await addDoc(collection(db, col), d)
-        resolve(d)
+       const q = await addDoc(collection(db, col), d)
+       d.id = q.id
+       console.log("new d", d)
+       resolve(d)
     })
 }
 export const setOne = async (col="", data={}, id='')=>{
@@ -229,12 +231,12 @@ export const postAd = (userId, adInfo={})=>{
     return new Promise((resolve, reject)=>{
         const images = []
         const id = uuidv4()
-        adInfo.id = id
         adInfo.images.map(async img=>{
             uploadImage(`images/${id + img.name}`, img).then(url=>{
                 images.push(url)
             }).then(()=>{
               adInfo.images = images
+              adInfo.status = "pending"
               saveOne(`users/${userId}/ads`, adInfo)
               .then((ad)=>{
                   const waitRef = dbref(rtdb, `waitingAds/${id}`)
@@ -250,12 +252,36 @@ export const postAd = (userId, adInfo={})=>{
 
 export const deleteAd = (userId, adId="")=>{
     return new Promise((resolve, reject)=>{
-        deleteOne(`users/${userId}/ads`, adId)
-        .then(resolve())
-        .catch(e=>reject("failed to delete ad : ", e.message))
+      deleteOne(`users/${userId}/ads`, adId)
+      .then(resolve())
+      .catch(e=>reject("failed to delete ad : ", e.message))
     })
 }
 
+export const validateAd = (userId, adInfo)=>{
+  return new Promise((resolve, reject)=>{
+    const ref = dbref(rtdb, `waitingAds/${ adInfo.tempId }`)
+    remove(ref)
+    .then(()=>{
+      adInfo.status = "online"
+      setOne(`users/${userId}/ads`, adInfo, adInfo.id)
+      .then(resolve()) // send mail to say ad is online
+    })
+    .catch(e=>reject(e.message))
+  })
+}
+
+export const unValidateAd = (userId, adInfo)=>{
+  return new Promise((resolve, reject)=>{
+    const ref = dbref(rtdb, `waitingAds/${ adInfo.tempId }`)
+    remove(ref)
+    .then(()=>{
+      adInfo.status = "refused",
+      setOne(`users/${userId}/ads`, adInfo, adInfo.id)
+      .then(resolve()) //send mail to tell user add is refused
+    }).catch(e=>reject(e.message))
+  })
+}
 export const commentPost = (postId, message)=>{
     saveOne(`comments/${postId}`, message)
 }
