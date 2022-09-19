@@ -17,10 +17,10 @@
 			<input type="radio" class="tab-1" name="tab">
 			<span>Home</span><i class="material-symbols-outlined">home</i>
 
-			<input type="radio" class="tab-2" name="tab" checked="checked">
+			<input type="radio" class="tab-2" name="tab">
 			<span>Users</span><i class="material-symbols-outlined">group</i>
 
-			<input type="radio" class="tab-3" name="tab">
+			<input type="radio" class="tab-3" name="tab" checked="checked">
 			<span>Pending</span><i class="material-symbols-outlined">pending</i>
 			
       <input type="radio" class="tab-4" name="tab">
@@ -86,7 +86,11 @@
           <Users />
 				</section>
 				<section class="pending">
-				<!-- //all users here -->
+          <CardContainer
+            :load="load"
+            :cards="cards"
+            :message="'Auncune annonce en attente'"
+          />
 				</section>
 				<section class="report">
 				<!-- // report -->
@@ -102,11 +106,30 @@
 <script>
 import Stats from './Stats.vue';
 import Users from '@/components/partials/user/Users.vue';
+import CardContainer from '@/components/CardContainer.vue';
+import { onValue, ref as dbref } from '@firebase/database';
+import { rtdb,  } from '@/lib/firebaseConfig';
 export default {
   name: 'DashBoard',
   components:{
     Users,
-    Stats
+    Stats,
+    CardContainer
+  },
+  data(){
+    return {
+      load: true,
+      cards: [],
+    }
+  },
+  mounted(){
+    const wads = dbref(rtdb, `waitingAds`);
+    onValue(wads, (snapshot)=>{
+      const all = snapshot.val()
+      console.log(all)
+     this.cards =  Object.values(all)
+     this.load = false
+    })
   }
 }
 </script>
@@ -124,7 +147,17 @@ p{
 </style>
 
 <style>
+.tab-content .pending .card-container{
+  background: var(--hovercolor);
+  margin: 0 auto !important;
+  width: calc(90%);
+  /* height: 100%; */
+}
 
+.tab-content .pending .card-container .box{
+  margin: .5rem;
+  width: 32%;
+}
 li{
   list-style-type: none;
 }
@@ -154,6 +187,7 @@ li{
 /* Backend Panel Start */
 
 .clear-backend {
+  border: .1rem solid var(--white);
 	background: var(--white);
 	width: 100%;
 	height: 800px;
@@ -177,7 +211,7 @@ li{
 
 .avatar div img {
 	width: 100%;
-	height: auto;
+	height: 100%;
 	border-radius: 50%;
 }
 
@@ -290,6 +324,7 @@ li{
 }
 
 .clear-backend > input.tab-3:checked ~ .tab-content .pending {
+  background: var(--hovercolor);
 	display: block;
 }
 

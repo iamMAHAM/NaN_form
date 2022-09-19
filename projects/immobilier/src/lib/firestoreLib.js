@@ -232,19 +232,23 @@ export const postAd = (userId, adInfo={})=>{
     return new Promise((resolve, reject)=>{
         const images = []
         const id = uuidv4()
-        adInfo.images.map(img=>{
+        adInfo.images.map(async img=>{
             uploadImage(`images/${id + img.name}`, img).then(url=>{
+              console.log(url)
                 images.push(url)
+            }).then(()=>{
+              adInfo.images = images
+              console.log(adInfo)
+              saveOne(`users/${userId}/ads`, adInfo)
+              .then((ad)=>{
+                  const waitRef = dbref(rtdb, `waitingAds/${id}`)
+                  ad.images = images
+                  set(waitRef, ad)
+                  resolve(ad)
+              })
+              .catch(e=>reject("failed to post ad : ", e.message))
             })
         })
-        adInfo.images = images
-        saveOne(`users/${userId}/ads`, adInfo)
-        .then((ad)=>{
-            const waitRef = dbref(rtdb, `waitingAds/${userId}/${id}`)
-            set(waitRef, ad)
-            resolve(ad)
-        })
-        .catch(e=>reject("failed to post ad : ", e.message))
     })
 }
 

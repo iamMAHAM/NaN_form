@@ -17,7 +17,7 @@
         edit
       </i>
     </button>
-    <button
+    <!-- <button
       class="block"
       @click="blockUser"
     >
@@ -25,7 +25,7 @@
       >
         block
       </i>
-    </button>
+    </button> -->
     <button
       class="deleteA"
       @click="deleteUser"
@@ -79,6 +79,8 @@
 
 <script>
 import { updateUserInfo, deleteOne, auth, findOne,} from '@/lib/firestoreLib';
+import axios from 'axios'
+// axios.defaults.baseURL = 'http://localhost:3000/'
 export default {
   name: 'User',
 	props: ["user"],
@@ -107,8 +109,8 @@ export default {
     },
     async blockUser(e){
       const userToken = await auth?.currentUser.getIdToken()
-      fetch("/disable/2", {
-        method: 'POST',
+      console.log(userToken)
+      axios.post("/api/disable/2", {
         headers: {
           'content-type': 'application/json',
           'authorization': 'Bearer' + userToken
@@ -119,7 +121,7 @@ export default {
 	},
   computed:{
     role(){
-      return this.user.role ? this.user.role : 'user'
+      return this.user.role = this.user.role ? this.user.role : 'user'
     },
     age(){
       return new Date().getFullYear() -  parseInt(this.user?.birth?.split("-")[0])

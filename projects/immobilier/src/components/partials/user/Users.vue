@@ -6,7 +6,7 @@
         role="search"
         placeholder="rechercher un utilisateur dans ..."
         v-model="search"
-        @input="findUser"
+        @input="filterUsers"
         style="min-width: 35rem; height: ; padding: .5rem; margin: .5rem;"
       >
       <select
@@ -61,13 +61,9 @@ export default {
   methods: {
     filterUsers(){
       if (!this.filter) this.users = this.allUsers
-      this.users = this.allUsers.filter(u=>u.role === this.filter)
-    },
-    findUser(){
-      this.users = this.search
-      ? this.users = this.users.filter(u => u.fullName.toLowerCase().includes(this.search.toLowerCase()))
-      : this.allUsers
-      
+      this.users = this.allUsers.filter(u=>
+      u.role.includes(this.filter)
+      && u.fullName.toLowerCase().includes(this.search.toLowerCase()))
     }
   },
   data(){

@@ -1,6 +1,7 @@
 <template>
   <Loader v-if="load"/>
   <div class="card-container" v-if="!load">
+    <div v-if="!load && !cards.length">{{ message }}</div>
     <Card
       v-for="card in cards"
       :key="card.id"
@@ -18,7 +19,7 @@ import Loader from './partials/Loader.vue';
 
 export default {
   name: 'CardContainer',
-  props: ['cards', 'load'],
+  props: ['cards', 'load', 'message'],
   emits: ['filteringCard'],
   components: {
     Card,
