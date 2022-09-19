@@ -794,7 +794,7 @@ img {
 }
 
 .verified{
-  color: var(--green);
+  color: var(--greenfun);
   font-size: 2rem !important;
 }
 

@@ -36,66 +36,6 @@ export default {
       //     superficie: 500,
       //     price: 2000000
       //   },
-      //   {
-      //     type: 'maison',
-      //     proposition: 'location',
-      //     location: 'Abidjan',
-      //     description: 'lorem',
-      //     superficie: 500,
-      //     price: 150000
-      //   },
-      //   {
-      //     type: 'magasin',
-      //     proposition: 'vente',
-      //     location: 'Bingerville',
-      //     description: 'zigribsiscbcbiuhez',
-      //     superficie: 500,
-      //     price: 4560000000
-      //   },
-      //   {
-      //     type: 'magasin',
-      //     proposition: 'vente',
-      //     location: 'Yamoussoukro',
-      //     description: 'const toggleForm = () => {',
-      //     superficie: 500,
-      //     price: 1890000
-      //   },
-      //   {
-      //     type: 'magasin',
-      //     proposition: 'vente',
-      //     location: 'Abidjan',
-      //     description: 'lorem 20 je xjnj ckn c ezv zivz vrzvnz v ezvnzvzvezvez veznvebzve',
-      //     superficie: 500,
-      //     price: 2000000
-      //   },
-      //   {
-      //     type: 'maison',
-      //     proposition: 'location',
-      //     location: 'Abidjan',
-      //     description: 'lorem',
-      //     superficie: 500,
-      //     price: 150000
-      //   },
-      //   {
-      //     type: 'magasin',
-      //     proposition: 'vente',
-      //     location: 'Bingerville',
-      //     description: 'zigribsiscbcbiuhez',
-      //     superficie: 500,
-      //     price: 4560000000
-      //   },
-      //   {
-      //     type: 'magasin',
-      //     proposition: 'vente',
-      //     location: 'Yamoussoukro',
-      //     description: 'const toggleForm = () => {',
-      //     superficie: 500,
-      //     price: 1890000
-      //   },
-
-      // ],
-      // load: true,
-      uid: null
     }
   },
   methods: {
@@ -109,7 +49,7 @@ export default {
         this.$router.push("/auth")
 				return
 			}
-			override(`users/${this.uid}/favorites`, copy.id, copy)
+			override(`users/${auth?.currentUser.uid}/favorites`, copy.id, copy)
       .then(()=>{
         this.cards[index].isFav = true
 				this.cards[index].isLoad = false
@@ -119,7 +59,7 @@ export default {
 		removeFavs(card){ // remove to favorite
 			const index = this.cards.indexOf(card)
 			this.cards[index].isLoad = true
-			deleteOne(`users/${this.uid}/favorites`, card.id)
+			deleteOne(`users/${auth?.currentUser.uid}/favorites`, card.id)
       .then(()=>{
         this.$emit("filteringCard", card)
         this.cards[index].isFav = false

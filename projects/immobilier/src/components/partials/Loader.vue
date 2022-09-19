@@ -31,8 +31,8 @@ export default {
 
 .dot {
     z-index: 5;
-    width: 1%;
-    height: 1%;
+    width: 1.2%;
+    height: 1.2%;
     top: 0;
     left: .5rem;
     background: var(--white);
@@ -63,13 +63,13 @@ export default {
 
 @keyframes dot {
     50% {
-        transform: translateX(4.5rem);
+        transform: translateX(9.1rem);
     }
 }
 
 @keyframes dots {
     50% {
-        transform: translateX(-2.5rem);
+        transform: translateX(-3.1rem);
     }
 }
 </style>

@@ -16,6 +16,12 @@
                         Connexion
                     </a>
                 </router-link>
+                <router-link to="/profile"  v-if="isLogged">
+                    <a href="">
+                        <i class="material-symbols-outlined">person</i>
+                        Profile
+                    </a>
+                </router-link>
                 <a @click="signOut" v-if="isLogged">
                     <a href="#" class="item">
                         <i class="material-symbols-outlined">logout</i>

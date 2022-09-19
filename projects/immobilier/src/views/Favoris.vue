@@ -36,9 +36,10 @@ export default {
   components:{
     CardContainer
   },
-  mounted(){
-    console.log(auth?.currentUser?.uid)
+  async mounted(){
     // find(`users/${auth?.currentUser?.uid}/favorites`)
+    await new Promise(r=>setTimeout(r, 200))
+    console.log(auth?.currentUser?.uid)
     find(`users/${auth?.currentUser?.uid}/favorites`)
     .then(favorites=>{
       console.log(favorites)
@@ -51,6 +52,11 @@ export default {
 </script>
 
 <style>
+  div.favorites{
+    display: inline-block;
+    height: 80vh;
+    width: 100%;
+  }
   div.empty *, div.empty{
     color: var(--white);
     text-align: center;
