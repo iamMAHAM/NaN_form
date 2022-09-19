@@ -132,9 +132,9 @@ export default {
           v.tempId = k
           inter.push(v)
         }
-        this.cards = inter
-        this.load = false
     }
+    this.cards = inter
+    this.load = false
     })
   }
 }

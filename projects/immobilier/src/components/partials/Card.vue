@@ -1,8 +1,9 @@
 <template>
-    <div class="box" :id="card.id" :title="card?.tempId">
+    <div class="box" :id="card.id">
       <div class="top" @click="handleClick">
         <img :src="card?.images.slice(0, 1)"/>
         <i
+          v-if="!admin"
           :class="`material-symbols-outlined favs ${card?.isFav ? 'active' : ''}`"
           @click="handleFav"
         >
@@ -64,6 +65,7 @@
 </template>
 
 <script>
+import { unValidateAd, validateAd } from '@/lib/firestoreLib'
 
 export default {
   name: 'Card',
@@ -80,12 +82,15 @@ export default {
 				this.$emit("addFav", this.card)
 			}
 		},
-    del(e){
-      const parent = e.target.closest("div.box")
+    del(){
+      unValidateAd(this.card.ownerId, this.card)
+      .then(console.log("refused ad with success"))
     },
-    validate(e){
-      const parent = e.target.closest("div.box")
-      console.log(parent)
+    validate(){
+      validateAd(this.card.ownerId, this.card)
+      .then(alert("validated ads with success"))
+      .catch(e=>alert(e))
+      console.log(this.card)
     }
   },
   computed: {

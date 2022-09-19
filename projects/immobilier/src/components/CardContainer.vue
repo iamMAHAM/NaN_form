@@ -105,7 +105,7 @@ export default {
       delete copy.isLoad
       copy.isFav = true
 			this.cards[index].isLoad = true
-			if (!this.uid){
+			if (!auth?.currentUser){
         this.$router.push("/auth")
 				return
 			}
@@ -126,11 +126,6 @@ export default {
         this.cards[index].isLoad = false
       })
 		}
-  },
-  mounted(){
-    this.uid = auth?.currentUser? auth.currentUser.uid : ''
-    // save("ads/X1eA1Bk8tfnVXHqduiTg/test", this.cards)
-    // .then(console.log("save success"))
   }
 }
 </script>

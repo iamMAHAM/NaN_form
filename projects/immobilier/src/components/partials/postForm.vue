@@ -180,7 +180,10 @@ export default {
                   this.$refs.content.classList.remove("failed")
                   this.$refs.content.classList.add("success")
                 })
-                .catch(e=>alert(e))
+                .catch(e=>{
+                  console.log(e)
+                  alert(e)
+                })
               }else{
                 this.$refs.content.classList.remove("success")
                 this.$refs.content.classList.add("failed")

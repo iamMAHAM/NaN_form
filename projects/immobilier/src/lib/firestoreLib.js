@@ -81,6 +81,7 @@ export const saveOne = (col="", d)=>{
     })
 }
 export const setOne = async (col="", data={}, id='')=>{
+    console.log("idddd", id)
     data.id = id
     await setDoc(doc(db, col, id), data)
 }
@@ -260,11 +261,15 @@ export const deleteAd = (userId, adId="")=>{
 
 export const validateAd = (userId, adInfo)=>{
   return new Promise((resolve, reject)=>{
-    const ref = dbref(rtdb, `waitingAds/${ adInfo.tempId }`)
+    const ref = dbref(rtdb, `waitingAds/${adInfo.tempId}`)
     remove(ref)
     .then(()=>{
       adInfo.status = "online"
-      setOne(`users/${userId}/ads`, adInfo, adInfo.id)
+      delete adInfo.tempId
+      Promise.all([
+        setOne(`users/${userId}/ads`, adInfo, adInfo.id),
+        setOne(`ads/X1eA1Bk8tfnVXHqduiTg/${adInfo.type}`, adInfo, adInfo.id)
+      ])
       .then(resolve()) // send mail to say ad is online
     })
     .catch(e=>reject(e.message))
@@ -273,7 +278,7 @@ export const validateAd = (userId, adInfo)=>{
 
 export const unValidateAd = (userId, adInfo)=>{
   return new Promise((resolve, reject)=>{
-    const ref = dbref(rtdb, `waitingAds/${ adInfo.tempId }`)
+    const ref = dbref(rtdb, `waitingAds/${adInfo.tempId}`)
     remove(ref)
     .then(()=>{
       adInfo.status = "refused",
