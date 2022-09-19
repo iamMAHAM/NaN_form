@@ -40,6 +40,21 @@
         <div class="price">
           <span>En {{ card?.proposition }}</span>
           <span>{{ card?.price?.toLocaleString('ci') }}</span> FCFA
+          <span class="button" v-if="admin">
+            <i
+              class="material-symbols-outlined"
+              title="valider"
+            >
+              check_circle
+            </i>
+            <i
+              class="material-symbols-outlined"
+              title="supprimer"
+              style="color: var(--red)"
+            >
+              delete
+            </i>
+          </span>
         </div>
       </div>
     </div>
@@ -65,6 +80,9 @@ export default {
   computed: {
     rightIcone(){
       return this.$route.path.includes("favorites") ? 'delete' : 'favorite'
+    },
+    admin(){
+      return this.$route.path.includes("/admin")
     }
   }
 }
@@ -111,7 +129,6 @@ export default {
 .card-container .box .top {
   height: calc(40%);
   position: relative;
-  background-color: var(--hovercolor);
 }
 
 .card-container .box .top:after {

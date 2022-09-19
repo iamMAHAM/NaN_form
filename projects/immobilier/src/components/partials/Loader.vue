@@ -11,57 +11,65 @@
 
 <script>
 export default {
-
+  mounted(){
+    const dot = document.querySelector(".dot")
+    const dots = document.querySelectorAll(".dots span")
+    Array.from(dots).map(d=>d.width = dot.offsetWidth)
+  }
 }
 </script>
 
 <style>
 .wrapper {
-    width: 14.2rem;
-    height: 1.6rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     filter: contrast(20);
 }
 
 .dot {
     z-index: 5;
-    position: absolute;
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 1%;
+    height: 1%;
     top: 0;
     left: .5rem;
-    background: var(--navcolor);
+    background: var(--white);
     border-radius: 50%;
     transform: translateX(0);
     animation: dot 1s infinite;
 }
 
 .dots {
-    filter: blur(.01rem);
-    z-index: 3;
-    transform: translateX(0);
-    margin-left: 3.1rem;
-    animation: dots 1s infinite;
+  justify-content: space-around;
+  display: flex;
+  height: 1%;
+  width: 5%;
+  /* filter: blur(.01rem); */
+  z-index: 3;
+  transform: translateX(0);
+  animation: dots 1s infinite;
 }
 
 .dots span {
     display: block;
-    float: left;
-    width: 1.6rem;
-    height: 1.6rem;
-    margin-left: 1.6rem;
-    background: var(--navcolor);
+    /* float: left; */
+    width: 20%;
+    height: 100%;
+    background: var(--white);
     border-radius: 50%;
 }
 
 @keyframes dot {
     50% {
-        transform: translateX(96px);
+        transform: translateX(4.5rem);
     }
 }
 
 @keyframes dots {
     50% {
-        transform: translateX(-31px);
+        transform: translateX(-2.5rem);
     }
 }
 </style>

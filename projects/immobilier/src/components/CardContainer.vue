@@ -144,8 +144,12 @@ export default {
   flex-wrap: wrap;
 }
 
-.wrapper{
-  margin: 20rem auto;
+.card-container :nth-child(1){
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--white);
+  width: 100%;
+  height: 100%;
 }
 
 @media only screen and (max-width: 1550px){

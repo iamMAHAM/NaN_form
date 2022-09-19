@@ -89,7 +89,7 @@
           <CardContainer
             :load="load"
             :cards="cards"
-            :message="'Auncune annonce en attente'"
+            :message="'Aucune annonce en attente'"
           />
 				</section>
 				<section class="report">
@@ -127,8 +127,8 @@ export default {
     onValue(wads, (snapshot)=>{
       const all = snapshot.val()
       console.log(all)
-     this.cards =  Object.values(all)
-     this.load = false
+      all ? this.cards = Object.values(all) : ''
+      this.load = false
     })
   }
 }
@@ -157,6 +157,7 @@ p{
 .tab-content .pending .card-container .box{
   margin: .5rem;
   width: 32%;
+  height: max-content;
 }
 li{
   list-style-type: none;
@@ -313,6 +314,7 @@ li{
 	width: 100%;
 	height: 100%;
 	display: none;
+  overflow: scroll;
 }
 
 .clear-backend > input.tab-1:checked ~ .tab-content .home {

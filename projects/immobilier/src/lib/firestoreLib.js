@@ -74,10 +74,7 @@ export const search = (categories=[], value="")=>{
 export const saveOne = (col="", d)=>{
     return new Promise(async (resolve, reject)=>{
         d.publishedAt = Date.now()
-        const q = await addDoc(collection(db, col), d)
-        if (!d.hasOwnProperty("id")){
-            await updateDoc(doc(db, col, q.id), {id: q.id})
-        }
+        await addDoc(collection(db, col), d)
         resolve(d)
     })
 }
@@ -232,13 +229,12 @@ export const postAd = (userId, adInfo={})=>{
     return new Promise((resolve, reject)=>{
         const images = []
         const id = uuidv4()
+        adInfo.id = id
         adInfo.images.map(async img=>{
             uploadImage(`images/${id + img.name}`, img).then(url=>{
-              console.log(url)
                 images.push(url)
             }).then(()=>{
               adInfo.images = images
-              console.log(adInfo)
               saveOne(`users/${userId}/ads`, adInfo)
               .then((ad)=>{
                   const waitRef = dbref(rtdb, `waitingAds/${id}`)

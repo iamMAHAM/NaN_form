@@ -177,7 +177,7 @@ export default {
                 this.form.images = this.fileList
                 postAd(auth.currentUser.uid, this.form)
                 .then(adInfo=>{
-                  console.log("info", adInfo)
+                  console.log(adInfo)
                   this.$refs.content.classList.remove("failed")
                   this.$refs.content.classList.add("success")
                 })
