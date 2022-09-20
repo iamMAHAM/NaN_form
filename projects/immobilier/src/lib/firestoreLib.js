@@ -100,6 +100,7 @@ export const deleteOne = async (col="", id="")=>{
 }
 
 export const updateOne = async(col="", id="", ...args)=>{
+  console.log("regrgregre", ...args)
 	await updateDoc(doc(db, col, id), ...args)
 }
 
@@ -282,8 +283,8 @@ export const unValidateAd = (userId, adInfo)=>{
 export const soldeAd = async (userId, adInfo)=>{
   adInfo.status = "solded"
   Promise.all([
-    updateOne(`users/${userId}/ads`, {...adInfo}),
-    saveOne(`admin/solded`, adInfo),
+    updateOne(`users/${userId}/ads`, adInfo.id, adInfo),
+    saveOne(`admin/vAJXH3iQabt9AjGLAaej/solded`, adInfo),
     deleteOne(`ads/X1eA1Bk8tfnVXHqduiTg/${adInfo.type}`, adInfo.id)
   ])
 }

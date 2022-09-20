@@ -119,7 +119,6 @@ export default {
   },
   async mounted(){
     await new Promise(r=>setTimeout(r, 1000))
-    console.log(auth?.currentUser?.uid)
     findOne("users", auth?.currentUser?.uid)
     .then(userData=>{
       this.user = {...userData}

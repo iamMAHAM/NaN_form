@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { updateUserInfo, deleteOne, auth, findOne,} from '@/lib/firestoreLib';
+import { updateOne, deleteOne, auth, findOne,} from '@/lib/firestoreLib';
 import axios from 'axios'
 // axios.defaults.baseURL = 'http://localhost:3000/'
 export default {
@@ -87,7 +87,7 @@ export default {
   data(){return {show: false, backup: {}}},
 	methods:{
 		async updateUser(){
-			updateUserInfo(this.user.id, this.user)
+			updateOne(`users`, this.user.id, this.user)
 			.then(alert("user updated with success"))
       .catch(e=>alerte(e))
 		},
