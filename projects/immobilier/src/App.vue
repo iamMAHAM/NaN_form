@@ -28,9 +28,6 @@
         }
         else this.isLogged = false
       })
-    },
-    updated(){
-      console.log("root updated")
     }
   }
 </script>

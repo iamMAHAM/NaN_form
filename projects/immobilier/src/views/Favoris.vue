@@ -39,12 +39,9 @@ export default {
   async mounted(){
     // find(`users/${auth?.currentUser?.uid}/favorites`)
     await new Promise(r=>setTimeout(r, 200))
-    console.log(auth?.currentUser?.uid)
     find(`users/${auth?.currentUser?.uid}/favorites`)
     .then(favorites=>{
-      console.log(favorites)
       this.cards = [...favorites]
-      console.log(this.cards)
       this.load = false
     })
   }

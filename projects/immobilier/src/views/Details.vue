@@ -109,7 +109,6 @@ export default {
       this.current = e.target.src
     },
     write(e){
-      console.log("writed", e.target.id)
       if (!auth?.currentUser){
         this.$router.push("/auth")
         return
@@ -123,7 +122,6 @@ export default {
                     window.location.pathname
                   )
       ).then(message=>{
-        console.log("message", message)
         this.$router.push({ path: '/messages', query: { id: this.cardInfo?.ownerId } })
       })
     }

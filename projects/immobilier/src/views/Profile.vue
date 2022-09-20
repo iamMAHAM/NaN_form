@@ -50,7 +50,7 @@
         </div>
         <div class="card bg-dark">
           <p>Popularité</p>
-          <p class="num bg-dark">422</p>
+          <p class="num">422</p>
         </div>
         <div class="card bg-dark">
           <p>Page Likes</p>
@@ -122,16 +122,14 @@ export default {
     console.log(auth?.currentUser?.uid)
     findOne("users", auth?.currentUser?.uid)
     .then(userData=>{
-      console.info(userData)
       this.user = {...userData}
     })
   },
   methods:{
     async fetchData(){
       onSnapshot(collection(db, `users/${auth?.currentUser?.uid}/ads`), (snap)=>{
-        console.log(snap.docs)
         const inter = []
-        snap.docs.map(d=>inter.push(d.data()))
+        snap.docs.map(d=>inter.push({...d.data(), id: d.id}))
         this.all = inter
         this.cards = inter
         this.load = false

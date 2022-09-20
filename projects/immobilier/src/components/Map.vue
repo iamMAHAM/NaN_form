@@ -37,7 +37,6 @@ export default {
   props: ['emp'],
   setup(props) {
     const mapRef = ref(null);
-    console.log(props.emp)
     onMounted(() => {
       let map = tt.map({ 
       key: 'LewEOWy1BOVXQS06aFf5gX65MsCcivvw', 

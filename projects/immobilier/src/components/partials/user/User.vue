@@ -89,11 +89,10 @@ export default {
 		async updateUser(){
 			updateUserInfo(this.user.id, this.user)
 			.then(alert("user updated with success"))
-			.catch(e=>console?.log(e))
+      .catch(e=>alerte(e))
 		},
 		async deleteUser(){
 			if (window.confirm("really delete this user ?")){
-				console.log(this.user)
 				deleteOne("users", this.user.id)
 			}
 		},
@@ -107,17 +106,17 @@ export default {
       this.user.isVerified = this.backup.isVerified
       this.show = false
     },
-    async blockUser(e){
-      const userToken = await auth?.currentUser.getIdToken()
-      console.log(userToken)
-      axios.post("/api/disable/2", {
-        headers: {
-          'content-type': 'application/json',
-          'authorization': 'Bearer' + userToken
-        }
-      }).then(res=> res.json())
-      .then(data=>console.log(data))
-    }
+    // async blockUser(e){
+    //   const userToken = await auth?.currentUser.getIdToken()
+    //   console.log(userToken)
+    //   axios.post("/api/disable/2", {
+    //     headers: {
+    //       'content-type': 'application/json',
+    //       'authorization': 'Bearer' + userToken
+    //     }
+    //   }).then(res=> res.json())
+    //   .then(data=>console.log(data))
+    // }
 	},
   computed:{
     role(){

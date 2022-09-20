@@ -80,7 +80,6 @@ export const saveOne = (col="", d)=>{
     })
 }
 export const setOne = async (col="", data={}, id='')=>{
-    console.log("idddd", id)
     data.id = id
     await setDoc(doc(db, col, id), data)
 }
@@ -100,8 +99,8 @@ export const deleteOne = async (col="", id="")=>{
     await deleteDoc(doc(db, col, id))
 }
 
-export const updateUserInfo = async(id="", news={})=>{
-	await updateDoc(doc(db, "users", id), news)
+export const updateOne = async(col="", id="", ...args)=>{
+	await updateDoc(doc(db, col, id), ...args)
 }
 
 export const signUp = async (data)=>{
@@ -278,6 +277,15 @@ export const unValidateAd = (userId, adInfo)=>{
       .then(resolve()) //send mail to tell user add is refused
     }).catch(e=>reject(e.message))
   })
+}
+
+export const soldeAd = async (userId, adInfo)=>{
+  adInfo.status = "solded"
+  Promise.all([
+    updateOne(`users/${userId}/ads`, {...adInfo}),
+    saveOne(`admin/solded`, adInfo),
+    deleteOne(`ads/X1eA1Bk8tfnVXHqduiTg/${adInfo.type}`, adInfo.id)
+  ])
 }
 
 export const abortPost = async (tempId)=>{

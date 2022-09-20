@@ -191,7 +191,6 @@ export default {
   },
   methods: {
     showError(message, time=0){
-      console.log("original", message)
       this.errors.message = message.replace("auth/", '').replace("-", ' ')
       this.errors.reqError = true
       setTimeout(()=>this.errors.reqError = false, time)
@@ -223,7 +222,6 @@ export default {
     login(){
       signIn(this.form)
       .then(user=>{
-        console.log(user)
         this.$router.push("/")
       })
       .catch(e=>{
@@ -233,7 +231,6 @@ export default {
     async register(){
       if (this.flag){
         const target = this.$refs.avatar
-        console.log(target)
         const avatar = await uploadImage(`images/${target?.files[0].name}`, target.files[0])
         this.form.avatar = avatar
       }

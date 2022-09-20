@@ -57,7 +57,7 @@ export default {
         this.cards[index].isFav = true
 				this.cards[index].isLoad = false
       })
-      .catch(e=>console.log("error", e))
+      .catch(e=>console.error("error", e))
 		},
 		removeFavs(card){ // remove to favorite
 			const index = this.cards.indexOf(card)

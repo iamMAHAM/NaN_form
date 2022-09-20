@@ -179,9 +179,7 @@ export default {
       document.querySelector(".emoji_picker").classList.toggle("active")
     },
     addEmoji(emoji){
-      console.log(emoji)
       this.message+= emoji
-      console.log(this.message.length)
     },
     readableDate(timestamp){
       const hours = new Date(timestamp).toLocaleString().replace("à", '').trim().split(" ")
@@ -223,9 +221,7 @@ export default {
     },
   deleteMessages(e){
     const message = e.target.parentElement
-    console.log("clicked for handle delete error")
     deleteMessage(this.uid, this.pers.id, message.id)
-    .then(console.log("success"))
   },
   switchMessages([cMessages, person]){
     this.messages = cMessages

@@ -16,6 +16,13 @@
         >
           delete
         </i>
+        <i
+          v-if="profile"
+          :class="`material-symbols-outlined solded`"
+          @click="soldeAds"
+        >
+          check_circle
+        </i>
       </div> 
       <div class="bottom">
         <h3>{{ card?.type }} à {{ card?.location?.toLocaleUpperCase() }}</h3>
@@ -72,7 +79,7 @@
 </template>
 
 <script>
-import { abortPost, auth, deleteOne, unValidateAd, validateAd } from '@/lib/firestoreLib'
+import { abortPost, auth, deleteOne, soldeAd, unValidateAd, validateAd } from '@/lib/firestoreLib'
 
 export default {
   name: 'Card',
@@ -91,16 +98,14 @@ export default {
 		},
     del(){
       unValidateAd(this.card.ownerId, this.card)
-      .then(console.log("refused ad with success"))
+      .then(alert("annonce refusé avec succès"))
     },
     validate(){
       validateAd(this.card.ownerId, this.card)
-      .then(alert("validated ads with success"))
+      .then(alert("annonce validé avec succès"))
       .catch(e=>alert(e))
-      console.log(this.card)
     },
     deleteAds(){
-      console.log(this?.card)
       Promise.all([
         deleteOne(`/users/${auth?.currentUser?.uid}/ads`, this.card.id),
         deleteOne(`ads/X1eA1Bk8tfnVXHqduiTg/${this.card.type}`, this.card.id),
@@ -108,8 +113,10 @@ export default {
       ])
       .then(alert("annonce supprimée avec succès"))
       .catch(e=>console.error(e))
-     
-      console.log(this.card)
+    },
+    soldeAds(){
+      soldeAd(auth?.currentUser.uid, this.card)
+      .then(alert("Annonce marquée comme vendu :)"))
     }
 
   },
@@ -126,9 +133,14 @@ export default {
   }
 }
 </script>
-
+<style scoped>
+p{
+  overflow: hidden;
+}
+</style>
 <style>
 
+.solded,
 .favs{
   position: absolute;
   pointer-events: visible;
@@ -139,10 +151,16 @@ export default {
   font-size: 3rem !important;
 }
 
+.solded{
+  color: var(--greenfun);
+  right: 5rem;
+}
 .favs.active{
   color: var(--red);
 }
 
+.buttonss i:hover,
+.solded:hover,
 .favs.active,
 .favs:hover{
   font-variation-settings:
@@ -286,6 +304,7 @@ export default {
   color: #3eaba1;
   font-size: 2.2rem;
 }
+
 
 .buttonss i{
   margin: .2rem;

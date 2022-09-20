@@ -154,7 +154,6 @@ export default {
       handleErrors(){
         const type = ['maison', 'terrain', 'magasin', 'hotel'].includes(this.form.type)
         const prop = ['vente', 'location'].includes(this.form.proposition)
-        console.log(this.form.title.trim() === this.form.title)
         this.errors.type = !validator.isAlpha(this.form.type) || !type
         this.errors.title = !(this.form.title.trim() === this.form.title && this.form.title.length >= 5)
         this.errors.description = this.form.description.length < 300 
@@ -165,7 +164,6 @@ export default {
         this.errors.files = !this.files.length || this.files.length > 3
       },
       postAds(){
-        console.log(this.fileList)
         this.handleErrors()
         if (!this.state){
           if (auth?.currentUser){
@@ -176,12 +174,10 @@ export default {
                 this.form.images = this.fileList
                 postAd(auth.currentUser.uid, this.form)
                 .then(adInfo=>{
-                  console.log(adInfo)
                   this.$refs.content.classList.remove("failed")
                   this.$refs.content.classList.add("success")
                 })
                 .catch(e=>{
-                  console.log(e)
                   alert(e)
                 })
               }else{
