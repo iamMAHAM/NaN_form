@@ -1,7 +1,7 @@
 <template>
   <Loader v-if="load"/>
   <div class="card-container" v-if="!load">
-    <div v-if="!load && !cards.length" class="em">{{ message }}</div>
+    <div v-if="!load && !cards?.length" class="em">{{ message }}</div>
     <Card
       v-for="card in cards"
       :key="card.id"
@@ -20,7 +20,7 @@ import Loader from './partials/Loader.vue';
 export default {
   name: 'CardContainer',
   props: ['cards', 'load', 'message'],
-  emits: ['filteringCard'],
+  emits: ['filteringCard', 'mounted'],
   components: {
     Card,
     Loader
@@ -37,6 +37,9 @@ export default {
       //     price: 2000000
       //   },
     }
+  },
+  mounted(){
+    this.$emit("mounted")
   },
   methods: {
     addFavs(card){ // add to favorite

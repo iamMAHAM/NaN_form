@@ -11,6 +11,8 @@
 
 <script>
 export default {
+  name: 'Loader',
+  props: ['color'],
   mounted(){
     const dot = document.querySelector(".dot")
     const dots = document.querySelectorAll(".dots span")
@@ -21,21 +23,22 @@ export default {
 
 <style>
 .wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    filter: contrast(20);
+  margin: 2rem auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: contrast(20);
 }
 
 .dot {
     z-index: 5;
-    width: 1.2%;
-    height: 1.2%;
+    width: 1.2rem;
+    height: 1.2rem;
     top: 0;
     left: .5rem;
-    background: var(--white);
+    background: var(--navcolor);
     border-radius: 50%;
     transform: translateX(0);
     animation: dot 1s infinite;
@@ -44,8 +47,8 @@ export default {
 .dots {
   justify-content: space-around;
   display: flex;
-  height: 1%;
-  width: 5%;
+  height: 1.2rem;
+  width: 5rem;
   /* filter: blur(.01rem); */
   z-index: 3;
   transform: translateX(0);
@@ -55,9 +58,9 @@ export default {
 .dots span {
     display: block;
     /* float: left; */
-    width: 20%;
+    width: 1.2rem;
     height: 100%;
-    background: var(--white);
+    background: var(--navcolor);
     border-radius: 50%;
 }
 

@@ -95,7 +95,7 @@
 
 <script>
 import validator from 'validator'
-import { auth, findOne,postAd, uploadImage } from '@/lib/firestoreLib'
+import { auth, findOne,postAd } from '@/lib/firestoreLib'
 
 export default {
     props: ['show'],
@@ -154,10 +154,11 @@ export default {
       handleErrors(){
         const type = ['maison', 'terrain', 'magasin', 'hotel'].includes(this.form.type)
         const prop = ['vente', 'location'].includes(this.form.proposition)
+        console.log(this.form.title.trim() === this.form.title)
         this.errors.type = !validator.isAlpha(this.form.type) || !type
-        this.errors.title = !validator.isAlpha(this.form.title)
+        this.errors.title = !(this.form.title.trim() === this.form.title && this.form.title.length >= 5)
         this.errors.description = this.form.description.length < 300 
-        this.errors.location = !validator.isAlpha(this.form.location)
+        this.errors.location = !(this.form.title.trim() === this.form.title && this.form.title.length >= 3)
         this.errors.proposition = !validator.isAlpha(this.form.proposition) || !prop 
         this.errors.area = validator.isNumeric(`${this.form.area}`) && parseFloat(this.form.area) <= 0
         this.errors.price = validator.isNumeric(`${this.form.price}`) && parseFloat(this.form.price) <= 1000
@@ -166,7 +167,6 @@ export default {
       postAds(){
         console.log(this.fileList)
         this.handleErrors()
-        console.log(this.state)
         if (!this.state){
           if (auth?.currentUser){
             findOne("users", auth.currentUser.uid)

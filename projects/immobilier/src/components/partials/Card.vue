@@ -3,13 +3,20 @@
       <div class="top" @click="handleClick">
         <img :src="card?.images.slice(0, 1)"/>
         <i
-          v-if="!admin"
+          v-if="!admin && !profile"
           :class="`material-symbols-outlined favs ${card?.isFav ? 'active' : ''}`"
           @click="handleFav"
         >
           {{ rightIcone }}
         </i>
-      </div>
+        <i
+          v-if="profile"
+          :class="`material-symbols-outlined favs`"
+          @click="deleteAds"
+        >
+          delete
+        </i>
+      </div> 
       <div class="bottom">
         <h3>{{ card?.type }} à {{ card?.location?.toLocaleUpperCase() }}</h3>
         <p>
@@ -65,7 +72,7 @@
 </template>
 
 <script>
-import { unValidateAd, validateAd } from '@/lib/firestoreLib'
+import { abortPost, auth, deleteOne, unValidateAd, validateAd } from '@/lib/firestoreLib'
 
 export default {
   name: 'Card',
@@ -91,7 +98,20 @@ export default {
       .then(alert("validated ads with success"))
       .catch(e=>alert(e))
       console.log(this.card)
+    },
+    deleteAds(){
+      console.log(this?.card)
+      Promise.all([
+        deleteOne(`/users/${auth?.currentUser?.uid}/ads`, this.card.id),
+        deleteOne(`ads/X1eA1Bk8tfnVXHqduiTg/${this.card.type}`, this.card.id),
+        abortPost(this.card.tempId)
+      ])
+      .then(alert("annonce supprimée avec succès"))
+      .catch(e=>console.error(e))
+     
+      console.log(this.card)
     }
+
   },
   computed: {
     rightIcone(){
@@ -99,6 +119,9 @@ export default {
     },
     admin(){
       return this.$route.path.includes("/admin")
+    },
+    profile(){
+      return this.$route.path.includes("/profile")
     }
   }
 }
@@ -135,6 +158,7 @@ export default {
 }
 
 .card-container .box {
+  transition: box-shadow .5s;
   pointer-events: none;
   width: 23%;
   height: auto;
@@ -145,6 +169,14 @@ export default {
 .card-container .box .top {
   height: calc(40%);
   position: relative;
+}
+
+.card-container .box:hover{
+  box-shadow: -8px 9px 5px 0px #ACBABF;
+}
+
+.card-container .box .bottom{
+  pointer-events: all;
 }
 
 .card-container .box .top:after {

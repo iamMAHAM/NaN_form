@@ -76,7 +76,6 @@ export const saveOne = (col="", d)=>{
         d.publishedAt = Date.now()
        const q = await addDoc(collection(db, col), d)
        d.id = q.id
-       console.log("new d", d)
        resolve(d)
     })
 }
@@ -238,6 +237,7 @@ export const postAd = (userId, adInfo={})=>{
             }).then(()=>{
               adInfo.images = images
               adInfo.status = "pending"
+              adInfo.tempId = id
               saveOne(`users/${userId}/ads`, adInfo)
               .then((ad)=>{
                   const waitRef = dbref(rtdb, `waitingAds/${id}`)
@@ -248,14 +248,6 @@ export const postAd = (userId, adInfo={})=>{
               .catch(e=>reject("failed to post ad : ", e.message))
             })
         })
-    })
-}
-
-export const deleteAd = (userId, adId="")=>{
-    return new Promise((resolve, reject)=>{
-      deleteOne(`users/${userId}/ads`, adId)
-      .then(resolve())
-      .catch(e=>reject("failed to delete ad : ", e.message))
     })
 }
 
@@ -286,6 +278,11 @@ export const unValidateAd = (userId, adInfo)=>{
       .then(resolve()) //send mail to tell user add is refused
     }).catch(e=>reject(e.message))
   })
+}
+
+export const abortPost = async (tempId)=>{
+  const ref = dbref(rtdb, `waitingAds/${tempId}`)
+  await remove(ref)
 }
 export const commentPost = (postId, message)=>{
     saveOne(`comments/${postId}`, message)
