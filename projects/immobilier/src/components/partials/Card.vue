@@ -1,6 +1,7 @@
 <template>
     <div class="box" :id="card.id">
       <div class="top" @click="handleClick">
+        <span v-if="solded" class="soldout">sold out</span>
         <img :src="card?.images.slice(0, 1)"/>
         <i
           v-if="!admin && !profile"
@@ -17,7 +18,7 @@
           delete
         </i>
         <i
-          v-if="profile"
+          v-if="profile && !solded &&!pending"
           :class="`material-symbols-outlined solded`"
           @click="soldeAds"
         >
@@ -80,6 +81,7 @@
 
 <script>
 import { abortPost, auth, deleteOne, soldeAd, unValidateAd, validateAd } from '@/lib/firestoreLib'
+import { waitForPendingWrites } from '@firebase/firestore'
 
 export default {
   name: 'Card',
@@ -129,8 +131,15 @@ export default {
     },
     profile(){
       return this.$route.path.includes("/profile")
+    },
+    pending(){
+      return this.card.status === "pending"
+    },
+    solded(){
+      return this.card.status === "solded"
     }
-  }
+  },
+
 }
 </script>
 <style scoped>
@@ -154,6 +163,12 @@ p{
 .solded{
   color: var(--greenfun);
   right: 5rem;
+}
+
+.soldout{
+  left: 0;
+  transform: rotate(20deg);
+  color: var(--greenfun) !important;
 }
 .favs.active{
   color: var(--red);
