@@ -39,6 +39,7 @@ export default {
   async mounted(){
     // find(`users/${auth?.currentUser?.uid}/favorites`)
     await new Promise(r=>setTimeout(r, 200))
+    if (!auth?.currentUser) {this.$router.push("/auth"); return}
     find(`users/${auth?.currentUser?.uid}/favorites`)
     .then(favorites=>{
       this.cards = [...favorites]

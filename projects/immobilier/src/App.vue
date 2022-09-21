@@ -21,12 +21,17 @@
     },
     mounted(){
       monitorState(user=>{
-        const forbiden = ['/auth', '/messages']
+        const notConnectedR = ['/profile', '/admin/dashboard', '/messages', '/favorites']
+        const connectedRoute = ['/auth']
+        console.log("auth change", user)
         if (user?.emailVerified){
           this.isLogged = true
-          forbiden.includes(this.$route.path) ? this.$router.go(-1) : ''
+          connectedRoute.includes(this.$route.path) ? this.$router.go(-1) : ''
         }
-        else this.isLogged = false
+        else {
+          this.isLogged = false
+          notConnectedR.includes(this.$route.path) ? this.$router.push("/") : ''
+        }
       })
     }
   }

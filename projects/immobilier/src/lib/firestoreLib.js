@@ -100,7 +100,6 @@ export const deleteOne = async (col="", id="")=>{
 }
 
 export const updateOne = async(col="", id="", ...args)=>{
-  console.log("regrgregre", ...args)
 	await updateDoc(doc(db, col, id), ...args)
 }
 

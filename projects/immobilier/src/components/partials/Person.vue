@@ -20,7 +20,7 @@
           v-if="person?.isVerified"
           class="material-symbols-outlined verified"
         >
-          verified_user
+          verified
         </i>
       </div>
       <div class="content">

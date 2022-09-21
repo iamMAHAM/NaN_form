@@ -1,25 +1,42 @@
 <template>
   <div class="main-container">
-  <div class="profile-content">
+  <div class="profile-content" v-if="user">
     <div class="profile-img">
       <img :src="user.avatar" />
       <div class="name">
-        <h2>{{ user.fullName }}</h2>
-        <span>{{ user.role }}</span>
+        <h2>{{ user?.fullName }}</h2>
+        <span>{{ user?.role }}</span>
         <span>{{ verified }}
           <i class="material-symbols-outlined verified"
           style="vertical-align: middle"
-          v-if="user.isVerified"
+          v-if="user?.isVerified"
         >
           verified
         </i>
       </span>
       </div>
     </div>
-    <!-- <button class="edit">
-    <i class="fas fa-edit"></i>
-    Edit
-    </button> -->
+    <button
+      class="edit"
+      v-if="infos"
+      @click="editProfile"
+    >
+      <span
+        style="
+          vertical-align: middle;
+          margin: 0;
+          color: var(--white);
+          font-size: 1.7rem;
+        "
+      >
+        {{ rightText}}
+      </span>
+      <i
+        class="material-symbols-outlined"
+      >
+        {{ rightIcon }}
+      </i>
+    </button>
   </div>
   <!-- break -->
   <hr class="break" />
@@ -85,7 +102,10 @@
       />
     </section>
     <section class="myinfos" v-if="infos">
-      <Uprofile />
+      <Uprofile
+        :form="user"
+        @changePass="updatePass"
+      />
     </section>
   </div>
 </div>
@@ -94,9 +114,10 @@
 <script>
 import CardContainer from '@/components/CardContainer.vue';
 import Uprofile from '@/components/partials/user/Uprofile.vue'
-import { auth, findOne } from '@/lib/firestoreLib';
-import { collection, onSnapshot } from '@firebase/firestore';
+import { auth, updateOne } from '@/lib/firestoreLib';
+import { collection, doc, onSnapshot } from '@firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
+import { updatePassword } from '@firebase/auth';
 
 export default {
   name: 'Profile',
@@ -106,20 +127,22 @@ export default {
   },
   data(){
     return {
-      user: {},
+      user: null,
       cards: [],
       all: [],
       load: true,
       infos: false,
       ads: false,
-      home: true
+      home: true,
+      pass: '',
+      flag: false
     }
   },
   async mounted(){
     await new Promise(r=>setTimeout(r, 1000))
-    findOne("users", auth?.currentUser?.uid)
-    .then(userData=>{
-      this.user = {...userData}
+    onSnapshot(doc(db, "users", auth?.currentUser?.uid), (snap)=>{
+      this.user = snap.data()
+      console.log(this.user)
     })
   },
   methods:{
@@ -151,6 +174,22 @@ export default {
     },
     filteringCards(v){
       return this.all.filter(c=> c.status.includes(v))
+    },
+    editProfile(e){
+      this.flag = !this.flag
+      const fields = document.querySelector("#fields")
+      fields.style.pointerEvents = this.flag ? 'auto' : 'none'
+      if (!this.flag){
+        this.pass
+        ? updatePassword(auth?.currentUser, this.pass)
+          .then(console.log("success updated password"))
+          .catch(e=>alert(e))
+        : updateOne("users", this.user?.id, this.user)
+      }
+    },
+    updatePass(pass){
+      this.pass = pass
+      console.log(this.pass)
     }
   },
   computed:{ 
@@ -164,7 +203,15 @@ export default {
       return this.all.filter(c=> c.status === 'solded').length
     },
     verified(){
-      return this.user.isVerified ? 'vérifié' : 'non vérifié'
+      return this.user?.isVerified ? 'vérifié' : 'non vérifié'
+    },
+    rightIcon(){
+      return this.flag ? 'save' : 'edit_square'
+    },
+    rightText(){
+      return this.rightIcon === 'save'
+      ? 'Valider'
+      : 'Modifier'
     }
   }
 }
@@ -373,5 +420,9 @@ a:hover {
 
 .card-container{
   margin: 2rem auto;
+}
+
+.edit{
+  cursor: pointer;
 }
 </style>

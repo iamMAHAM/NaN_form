@@ -83,7 +83,8 @@ export default {
         else this.show = true
     },
     signOut(){
-        signOutUser()
+      signOutUser()
+      this.$router.push("/")
     }
   }
 }

@@ -2,62 +2,53 @@
   <div class="profile">
     <table class="table-profile">
       <tr>
-        <td>
+        <td style="text-align:center; vertical-align: middle;">
           <section>
             <label for="avatar">
               <i class="fa material-symbols-outlined">
                 photo_camera
               </i>
-              <input type="file" id="avatar" style="visibility:hidden;" accept=".png,.jpg,jpeg,.PNG,.JPEG" name="avatar" @change="handleChange">
+              <input type="file" id="avatar" style="visibility:hidden;" accept=".png,.jpg,jpeg,.PNG,.JPEG" name="avatar" @change="changeAvatar">
             </label>
-            <img :src="form.avatar ? form.avatar : '../H.png'" ref="preview" id="preview" alt="Avatar">
+            <img :src="form.avatar" ref="preview" id="preview" alt="Avatar">
           </section>
-          <h1>{{ form.firstName }} {{ form.lastName }}</h1>
-          <h3>{{ form.role }}</h3>
         </td>
         <td>
           <ul id="fields" ref="ab">
             <li>
               <b>Full name</b>
-              <input type="text" class="fields" maxlength="100" :value='`${form.firstName} ${form.lastName}`' />
-              <i v-if="ok" class="material-symbols-outlined fa edit">
-                edit_square
-              </i>
+              <input type="text" class="fields" maxlength="100" v-model="form.fullName" style="pointer-events: none !important"/>
             </li>
             <li ref="ab">
               <b>Email</b>
               <input type="email" class="fields" maxlength="150" v-model="form.email" />
-              <i class="material-symbols-outlined fa edit">
-                edit_square
-              </i>
             </li>
             <li ref="ab">
-              <b>Contact number</b>
-              <input type="tel" class="fields" maxlength="10" v-model="form.contact" />
-              <i class="material-symbols-outlined fa edit">
-                edit_square
-              </i>
+              <b>Address</b>
+              <input type="tel" class="fields" maxlength="100" v-model="form.address" />
             </li>
             <li>
               <b>Birthday</b>
-              <input type="text" class="fields" maxlength="250" v-model="form.birth" />
-              <i class="material-symbols-outlined fa edit">
-                edit_square
-              </i>
+              <input type="text" class="fields" maxlength="250" v-model="form.birth" style="pointer-events: none !important"/>
             </li>
 
             <li>
-              <b>Change Password</b>
-              <input type="password" class="fields" maxlength="50" v-model="form.new_password" />
-              <i class="material-symbols-outlined fa edit">
-                edit_square
+              <b>Password</b>
+              <input
+                type="password"
+                class="fields"
+                maxlength="50"
+                @change="changePass"
+              />
+              <i
+                class="material-symbols-outlined vs"
+                @click="toggleVisibility"
+              >
+                visibility_off
               </i>
             </li>
+            <div class="error" v-if="error">minimum 8 caractères (majuscule, miniscule , symbole)</div>
           </ul>
-          <div class="subs">
-            <input ref="submit" type="submit" value="submit" id="submit" @click="submitForm" v-if="!request">
-            <!-- <img src="../assets/loading.gif" class="wait" v-if="request"> -->
-          </div>
         </td>
       </tr>
     </table>
@@ -65,86 +56,55 @@
 </template>
 
 <script>
-import { uploadImage, updateUserInfo } from '@/lib/firestoreLib'
-import { v4 } from "uuid"
+import { auth, updateOne, uploadImage } from '@/lib/firestoreLib'
+import { uuidv4 } from '@firebase/util'
+import { updateProfile } from '@firebase/auth'
+import validator from 'validator'
 export default {
 	name: 'profile',
-	data(){
-		return {
-			form: {
-				id: '',
-				avatar: null,
-				email: '',
-				password: '',
-				birth: '',
-				contact: '',
-				new_password: ''
-			},
-			ok: false,
-			edit_buttons: null,
-			edit_conf: null,
-			request: false
-		}
-	},
-	mounted(){
-		this.edit_buttons = document.querySelectorAll(".fa.edit")
-		const user = JSON.parse(localStorage.getItem("user"))
-		this.form = user
-		this.updateEvent(1, this.edit_buttons, this.editEvent)
+  props: ['form'],
+  data(){return { error: false}},
+  methods:{
+    changeAvatar(e){
+      const file = e.target.files[0]
+      const preview = this.$refs.preview
+      uploadImage(`profiles/${file.name + uuidv4()}`, file)
+      .then(url=>{
+        updateProfile(auth?.currentUser, {
+          photoURL: url
+        })
+        .then(()=>{
+          updateOne("users", auth?.currentUser?.uid, {avatar: url})
+        })
+        .then(()=>{
+          const url = window.URL.createObjectURL(file)
+          console.log(url)
+          preview.src = url
+        })
+      })
+    },
+    changePass(e){
+      if (validator.isStrongPassword(this.form.password)){
+        this.$emit("changePass", e.target.value)
+        this.error = false
+        return
+      }
+      this.error = true
+    }
+  },
+  setup(){
+    const toggleVisibility = (e)=>{
+      const vs = e.target
+      const ps = e.target.previousElementSibling
+      ps.type = ps.type === 'password' ? 'text' : 'password'
+      vs.textContent = ps.type ==='password' ? 'visibility_off' : 'visibility'
+    }
 
-	},
-	methods:{
-		editEvent(e){
-			const target = e.target
-			const field = target.previousElementSibling
-			field.style.pointerEvents = "auto"
-			field.focus()
-			target.outerHTML = '<i class="fa material-symbols-outlined">check</i>'
-			this.edit_conf = document.querySelectorAll(".fa")
-			this.updateEvent(0, this.edit_buttons, this.editEvent)
-    		this.updateEvent(1, this.edit_conf, this.closeEvent)
-		},
-		closeEvent(e){
-			const target = e.target
-			const field = target.previousElementSibling
-			field.style.pointerEvents = "none"
-			target.outerHTML = '<i class="fa material-symbols-outlined">edit_square</i>'
-			this.edit_buttons = document.querySelectorAll(".fa")
-			this.updateEvent(0, this.edit_conf, this.closeEvent)
-			this.updateEvent(1, this.edit_buttons, this.editEvent)
-		},
-		updateEvent(flag, array, listener){
-			if (flag){
-				Array.from(array).forEach(child=>{
-					child.addEventListener("click", listener)
-				})
-			} else{
-				Array.from(array).forEach(child=>{
-					child.removeEventListener("click", listener)
-				})
-			}
-		},
-		handleChange(e){
-			const target = e.target
-			const cleanName = target.files[0].name + v4()
-			this.$refs.preview.src = URL.createObjectURL(target.files[0])
-			uploadImage(`profiles/${cleanName}`, target.files[0], async url=>{
-				this.form.avatar = url
-				await updateUserInfo(this.form.id, {avatar: url})
-				localStorage.setItem("user", JSON.stringify(this.form))
-			})
-		},
-		async submitForm(e){
-			this.request = true
-			e.preventDefault()
-			await updateUserInfo(this.form.id, this.form)
-			localStorage.setItem("user", JSON.stringify(this.form))
-			this.request = false
-		}
-
-	}
+    return {toggleVisibility}
+  }
 }
 </script>
+
 
 <style scoped>
 .profile a, li, em, button, input, textarea, select{
@@ -155,25 +115,21 @@ export default {
 	transition: 0.5s;
 	resize: none;
 }
-
-.fields{
-	text-align: justify;
-	background:none;
-	font-size: 16px;
-	outline:none;
-	border:0;
-	color:gray;
-	width:60%;
-	pointer-events:none;
-}
-
 .profile .table-profile td:nth-child(1) section{
     position:relative;
-    width:200px;
-    height:200px;
-    margin:5vh auto;
+    width: 20rem;
+    margin: auto;
 }
 
+.fields{
+    margin: 0 .5rem;
+    background:none;
+    font-size: 16px;
+    outline:none;
+    border:0;
+    color:gray;
+    width:65%;
+  }
 
 .profile .table-profile td:nth-child(1) .fa{
     position:absolute;
@@ -207,18 +163,17 @@ export default {
 }
 
 #fields{
-    position: relative;
-    left: -20px;
+  position: relative;
+  vertical-align: middle;
+  padding: 2.5rem;
+  pointer-events: none;
 }
 
 #fields li{
     padding: 20px 0;
-    color: gray; 
-    border-bottom:1px solid var(--hovercolor);
-}
-
-b{
-    color:#fff;
+    border-bottom: .01rem solid var(--navcolor);
+    display: flex;
+    justify-content: space-between;
 }
 
 .input .wait{
@@ -236,7 +191,7 @@ b{
 
 .profile{
     width:90%;
-    margin: 2rem auto;
+    margin: 1.5rem auto;
 }
 
 .profile .table-profile{

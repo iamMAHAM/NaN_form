@@ -581,7 +581,6 @@ img {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 2.05rem;
 }
 
 .right > .top .information > .name {
