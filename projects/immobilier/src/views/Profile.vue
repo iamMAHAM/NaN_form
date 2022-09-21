@@ -1,6 +1,6 @@
 <template>
   <div class="main-container">
-  <div class="profile-content" v-if="user">
+  <div class="profile-content" v-if="!iLoad">
     <div class="profile-img">
       <img :src="user.avatar" />
       <div class="name">
@@ -39,8 +39,9 @@
     </button>
   </div>
   <!-- break -->
-  <hr class="break" />
-  <div class="body-content">
+  <hr class="break" v-if="!iLoad"/>
+  <Loader v-if="iLoad"/>
+  <div class="body-content" v-if="!iLoad">
     <ul @click="rightRoute" ref="routes" class="routes">
       <li class="home active">
         <i class="material-symbols-outlined">home</i>
@@ -118,18 +119,20 @@ import { auth, updateOne } from '@/lib/firestoreLib';
 import { collection, doc, onSnapshot } from '@firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
 import { updatePassword } from '@firebase/auth';
-
+import Loader from '@/components/partials/Loader.vue';
 export default {
   name: 'Profile',
   components:{
     CardContainer,
-    Uprofile
+    Uprofile,
+    Loader
   },
   data(){
     return {
       user: null,
       cards: [],
       all: [],
+      iLoad: true,
       load: true,
       infos: false,
       ads: false,
@@ -142,7 +145,7 @@ export default {
     await new Promise(r=>setTimeout(r, 1000))
     onSnapshot(doc(db, "users", auth?.currentUser?.uid), (snap)=>{
       this.user = snap.data()
-      console.log(this.user)
+      this.iLoad = false
     })
   },
   methods:{
@@ -425,4 +428,5 @@ a:hover {
 .edit{
   cursor: pointer;
 }
+
 </style>

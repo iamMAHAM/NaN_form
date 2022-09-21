@@ -34,7 +34,7 @@
           <div class="image">
             <img :src="pers?.avatar" class="imgLog e"/>
           </div>
-          <div class="online"></div>
+          <!-- <div class="online"></div> -->
         </div>
         <div class="information">
           <div class="username">
@@ -49,7 +49,8 @@
               </i>
             </a>
           </div>
-          <div class="name">Active now</div>
+          <!-- <div class="name">Active now</div> -->
+          <div class="name">{{ pers?.role }}</div>
         </div>
         <div class="options">
         </div>

@@ -11,7 +11,7 @@
             class="imgLog"
           />
       </div>
-      <div class="online"></div>
+      <!-- <div class="online"></div> -->
     </div>
     <div class="information">
       <div class="username">
