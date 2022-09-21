@@ -32,6 +32,17 @@
               </select>
             </div>
             <div class="error" v-if="errors.type">valeur de categorie inconnue</div>
+            <div class="kami" v-if="form.type === 'maison'" >
+              <div class="input">
+                <i class="material-symbols-outlined">bed</i>
+                <input type="number" placeholder="Chambres" v-model="form.options.beedroom">
+              </div>
+              <div class="input">
+                <i class="material-symbols-outlined">bathroom</i>
+                <input type="number" placeholder="Salle de bain" v-model="form.options.bathroom">
+              </div>
+              <div class="error" v-if="errors.options">renseignez ces champs</div>
+            </div>
             <div class="input">
               <i class="material-symbols-outlined">pentagon</i>
               <select v-model="form.proposition" required>
@@ -82,11 +93,13 @@
             <textarea class="pa" v-model="form.description"></textarea>
             <div class="error" v-if="errors.description">minimum 300 caractères</div>
             <input
+              v-if="!req"
               @click.prevent="postAds"
               class="button-style"
               type="submit"
               value="Poster"
             >
+            <Loader :view="3" :height="30" :width="30" v-if="req"/>
           </div>
       </div>
     </form>
@@ -96,9 +109,13 @@
 <script>
 import validator from 'validator'
 import { auth, findOne,postAd } from '@/lib/firestoreLib'
+import Loader from './Loader.vue'
 
 export default {
     props: ['show'],
+    components:{
+      Loader
+    },
     data(){
       return {
         get error(){
@@ -116,7 +133,8 @@ export default {
           location: '',
           proposition: '',
           area: 0,
-          price: 0
+          price: 0,
+          options: {}
         },
         errors:{
           type: false,
@@ -127,7 +145,9 @@ export default {
           area: false,
           price: false,
           files: false,
-        }
+          options: false
+        },
+        req: false
       }
     },
     methods:{
@@ -160,11 +180,16 @@ export default {
         this.errors.area = validator.isNumeric(`${this.form.area}`) && parseFloat(this.form.area) <= 0
         this.errors.price = validator.isNumeric(`${this.form.price}`) && parseFloat(this.form.price) <= 1000
         this.errors.files = !this.files.length || this.files.length > 3
+        this.errors.options = this.form.type === "maison" && this.form.options
+        if (this.form.type === "maison"){
+          this.errors.options = !(this.form?.options?.bathroom && this.form.options.beedroom)
+        }
       },
       postAds(){
         this.handleErrors()
         if (!this.error){
           if (auth?.currentUser){
+            this.req = true
             findOne("users", auth.currentUser.uid)
             .then(userInfo=>{
               if (userInfo.isVerified){
@@ -172,6 +197,7 @@ export default {
                 this.form.images = this.fileList
                 postAd(auth.currentUser.uid, this.form)
                 .then(adInfo=>{
+                  this.req = false
                   this.$refs.content.classList.remove("failed")
                   this.$refs.content.classList.add("success")
                 })
@@ -179,9 +205,12 @@ export default {
                   alert(e)
                 })
               }else{
+                alert("Vous devez confirmer votre compte avant de poster")
                 this.$refs.content.classList.remove("success")
                 this.$refs.content.classList.add("failed")
+                this.req = false
               }
+
             })
           }
           else {
