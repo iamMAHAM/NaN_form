@@ -1,13 +1,23 @@
 <template>
-  <div class="wrapper-sp" :style="{height: view + 'vh'}">
-    <div id="loading"></div>
+  <div class="wrapper-sp"
+    :style="{
+      height: view + 'vh'
+    }"
+  >
+    <div id="loading"
+      :style="{
+        height: height + 'px',
+        width: width + 'px'
+      }"
+    >
+  </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Loader',
-  props: ['view'],
+  props: ['view', 'height', 'width']
 }
 </script>
 
