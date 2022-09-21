@@ -24,7 +24,7 @@
   <!-- break -->
   <hr class="break" />
   <div class="body-content">
-    <ul @click="rightRoute" ref="routes">
+    <ul @click="rightRoute" ref="routes" class="routes">
       <li class="home active">
         <i class="material-symbols-outlined">home</i>
         <a href="#">Accueil</a>
@@ -84,19 +84,16 @@
         :message="'Rien à Signaler ici ...'"
       />
     </section>
-    <!-- <section class="myinfos" v-if="infos">
-        <CardContainer
-          :cards="cards"
-          :load="load"
-          :message="'Rien à Signaler ici ...'"
-        />
-    </section> -->
+    <section class="myinfos" v-if="infos">
+      <Uprofile />
+    </section>
   </div>
 </div>
 </template>
 
 <script>
 import CardContainer from '@/components/CardContainer.vue';
+import Uprofile from '@/components/partials/user/Uprofile.vue'
 import { auth, findOne } from '@/lib/firestoreLib';
 import { collection, onSnapshot } from '@firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
@@ -104,7 +101,8 @@ import { db } from '@/lib/firebaseConfig';
 export default {
   name: 'Profile',
   components:{
-    CardContainer
+    CardContainer,
+    Uprofile
   },
   data(){
     return {
@@ -190,14 +188,14 @@ export default {
   height: unset;
 }
 
-.body-content ul > li.active {
+.body-content .routes > li.active {
   color: var(--navcolor);
   font-size: 16px;
   font-weight: bold;
 }
 
 
-.body-content ul li :nth-child(1){
+.body-content .routes li :nth-child(1){
   display: none;
 }
 
@@ -254,11 +252,11 @@ export default {
     font-size: 1.5rem;
   }
 
-  /* .body-content ul{
+  /* .body-content .routes{
     justify-content: center !important;
   } */
 
-  .body-content ul li a{
+  .body-content .routes li a{
     display: none;
   }
 }
@@ -320,13 +318,13 @@ span:hover {
   opacity: 0.5;
 }
 
-.body-content ul{
+.body-content .routes{
   display: flex;
   justify-content: center;
   align-items: center;
   pointer-events: none;
 }
-.body-content ul > li {
+.body-content .routes > li {
   pointer-events: all;
   list-style: none;
   margin: 1rem;

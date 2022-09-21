@@ -1,5 +1,5 @@
 <template>
-  <table>
+  <table class="userTable">
     <caption>
       <input
         type="search"
@@ -87,7 +87,7 @@ export default {
 
 <style>
 
-table {
+.userTable {
   width: 100%;
   text-align: center;
   border: 1px solid var(--white);
@@ -100,12 +100,12 @@ caption {
   font-weight: bold;
 }
 
-table td {
+.userTable td {
   padding: .5rem;
   background-color: var(--gray);
 }
 
-table th {
+.userTable th {
   background-color: var(--hovercolor);
   color: var(--white);
   padding: .5rem;
