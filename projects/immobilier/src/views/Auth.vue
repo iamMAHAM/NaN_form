@@ -31,11 +31,13 @@
             </div>
             <div class="error" v-if="errors.reqError">{{ errors.message }}</div>
             <input
+              v-if="!req"
               type="submit"
               value="Se Connecter"
               @click.prevent="login"
             />
-            <p class="signup">
+            <Loader :view="3" :width="30" :height="30" v-if="req"/>
+            <p class="signup"  v-if="!req">
               Pas encore inscrit ?
               <a href="#" @click="toggleForm();">S'inscrire</a>
             </p>
@@ -136,12 +138,14 @@
               >
             </div>
             <input
+              v-if="!req"
               type="submit"
               value="S'inscrire"
               :disabled="state"
               @click.prevent="register"
             />
-            <p class="signup">
+            <Loader :view="3" :width="30" :height="30" v-if="req"/>
+            <p class="signup"  v-if="!req">
               déjà inscrit ?
               <a href="#" @click="toggleForm()">Se connecter.</a>
             </p>
@@ -155,9 +159,12 @@
 <script>
 import validator from 'validator';
 import { signUp, signIn, auth, uploadImage } from '@/lib/firestoreLib';
-
+import Loader from '@/components/partials/Loader.vue';
 export default {
   name: 'Auth',
+  components:{
+    Loader,
+  },
   data(){
     return{
       get state(){
@@ -186,7 +193,8 @@ export default {
         reqError: false,
         message: '',
       },
-      flag: false
+      flag: false,
+      req: false
     }
   },
   methods: {
@@ -220,15 +228,19 @@ export default {
       this.errors.address = !validator.isAlpha(this.form.address) && this.form.address.length >= 3
     },
     login(){
+      this.req = true
       signIn(this.form)
       .then(user=>{
+        this.req = false
         this.$router.push("/")
       })
       .catch(e=>{
+        this.req = false
         this.showError(e, 3500)
       })
     },
     async register(){
+      this.req = true
       if (this.flag){
         const target = this.$refs.avatar
         const avatar = await uploadImage(`images/${target?.files[0].name}`, target.files[0])
@@ -236,10 +248,11 @@ export default {
       }
       signUp(this.form)
       .then((userInfo)=>{
-        console.log(userInfo)
+        this.req = false
         this.$refs.container.classList.toggle("active")
       })
       .catch(e=>{
+        this.req = false
         this.showError(e, 3500)
       })
     }
