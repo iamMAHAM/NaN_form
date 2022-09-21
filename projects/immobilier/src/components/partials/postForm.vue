@@ -101,12 +101,10 @@ export default {
     props: ['show'],
     data(){
       return {
-        get state(){
+        get error(){
           const errors = Object.values(this.errors)
           let flag = false
-          errors.map(e =>{
-            e ? flag = true : ''
-          })
+          errors.map(e =>e ? flag = true : '')
           return flag
         },
         files: [],
@@ -165,7 +163,7 @@ export default {
       },
       postAds(){
         this.handleErrors()
-        if (!this.state){
+        if (!this.error){
           if (auth?.currentUser){
             findOne("users", auth.currentUser.uid)
             .then(userInfo=>{
