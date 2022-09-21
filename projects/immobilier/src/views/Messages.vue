@@ -1,13 +1,13 @@
 <template>
   <div class="case">
-  <div class="container">
+    <Loader v-if="load"/>
+  <div class="container" v-else>
     <div class="left">
       <div class="top">
         <div class="tub">
           <div class="username">
             <img :src="auth?.currentUser?.photoURL" width="3rem" height="3rem" ref="img"/>
-            <span ref="u">{{ auth?.currentUser?.displayName }}</span>
-            <i class="material-symbols-outlined">edit_square</i>
+            <span>{{ auth?.currentUser?.displayName }}</span>
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@
         />
       </div>
     </div>
-    <div class="right" v-if="!load && conversations.length">
+    <div class="right" v-if="conversations.length">
       <div class="top" v-if="pers">
         <div class="box">
           <div class="image">
@@ -144,8 +144,9 @@
 import Person from '@/components/partials/Person.vue'
 import Emojis from "@/components/partials/Emojis.vue"
 import { rtdb } from "@/lib/firebaseConfig"
-import {  auth, commentPost, deleteMessage, sendMessage, uploadImage } from '@/lib/firestoreLib'
-import { onValue, ref as dbref, query as dbquery, orderByChild } from "firebase/database"
+import {  auth, deleteMessage, sendMessage, uploadImage } from '@/lib/firestoreLib'
+import { onValue, ref as dbref, query as dbquery } from "firebase/database"
+import Loader from '@/components/partials/Loader.vue'
 
 const compare = ( a, b )=>{
   if ( a.timestamp < b.timestamp ){
@@ -160,7 +161,8 @@ export default {
   name: 'Messages',
   components: {
     Person,
-    Emojis
+    Emojis,
+    Loader,
   },
   data(){
     return {
@@ -272,15 +274,6 @@ export default {
         }
       })
     })
-    // if (auth?.currentUser.uid === "89tUBz2CfUY6aylA3fhYvmj4EPD2"){
-    //   sendMessage("89tUBz2CfUY6aylA3fhYvmj4EPD2", "zsHm67Xam6bfrPNUbPCRkHGJZz33", {
-    //     message: {
-    //       type: 'text',
-    //       content: 'Bonjour? bienvenue sur le site pour la première fois'
-    //     },
-    //   })
-    //   .then(console.log("success"))
-    // }
   },
 }
 </script>
@@ -346,13 +339,18 @@ img {
   width: 100%;
 }
 .left > .top > .tub > .username {
-  max-width: 50%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   display: flex;
   align-items: center;
   gap: .5rem;
+}
+
+.left > .top > .tub > .username img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
 .left > .top > .tub > .username > .down-arrow {
@@ -749,9 +747,9 @@ img {
 .time{
   font-size: 1rem;
 }
-.left{
+/* .left{
   border-right: .1rem solid rgba(0, 0, 0, .2);
-}
+} */
 
 .top{
   border-bottom: .1rem solid rgba(0, 0, 0, .2);

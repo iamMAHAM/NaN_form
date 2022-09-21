@@ -16,27 +16,46 @@
       </span>
       </div>
     </div>
-    <button
-      class="edit"
-      v-if="infos"
-      @click="editProfile"
-    >
-      <span
-        style="
-          vertical-align: middle;
-          margin: 0;
-          color: var(--white);
-          font-size: 1.7rem;
-        "
+    <div v-if="infos">
+      <button
+        class="edit"
+        @click="editProfile"
       >
-        {{ rightText}}
-      </span>
-      <i
-        class="material-symbols-outlined"
+        <span
+          style="
+            vertical-align: middle;
+            margin: 0;
+            color: var(--white);
+            font-size: 1.7rem;
+          "
+        >
+          {{ rightText}}
+        </span>
+        <i
+          class="material-symbols-outlined"
+        >
+          {{ rightIcon }}
+        </i>
+      </button>
+      <button
+        class="edit"
+        v-if="flag"
+        @click="cancel"
       >
-        {{ rightIcon }}
-      </i>
-    </button>
+        <span
+          style="
+            vertical-align: middle;
+            color: var(--white);
+            margin: 0;
+            font-size: 1.7rem;
+          "
+        >
+          Annuler
+        </span>
+        <i class="material-symbols-outlined" style="color: var(--red);">close</i>
+      </button>
+
+    </div>
   </div>
   <!-- break -->
   <hr class="break" v-if="!iLoad"/>
@@ -64,15 +83,11 @@
       <div class="homes" v-if="home">
         <div class="card bg-dark">
           <p>Annonces publiés</p>
-          <p class="num">1212</p>
+          <p class="num">{{ cards?.length}}</p>
         </div>
         <div class="card bg-dark">
           <p>Popularité</p>
-          <p class="num">422</p>
-        </div>
-        <div class="card bg-dark">
-          <p>Page Likes</p>
-          <p class="num">11</p>
+          <p class="num">{{ user?.popularity || 0}}</p>
         </div>
       </div>
       <div class="ads" v-if="ads" @click="rightFilter">
@@ -96,7 +111,6 @@
     </div>
     <section class="myads" v-if="ads">
       <CardContainer
-        @mounted="fetchData"
         :cards="cards"
         :load="load"
         :message="'Rien à Signaler ici ...'"
@@ -129,6 +143,7 @@ export default {
   },
   data(){
     return {
+      backup: null,
       user: null,
       cards: [],
       all: [],
@@ -143,8 +158,10 @@ export default {
   },
   async mounted(){
     await new Promise(r=>setTimeout(r, 1000))
+    this.fetchData()
     onSnapshot(doc(db, "users", auth?.currentUser?.uid), (snap)=>{
       this.user = snap.data()
+      this.backup = {...this.user}
       this.iLoad = false
     })
   },
@@ -192,7 +209,11 @@ export default {
     },
     updatePass(pass){
       this.pass = pass
-      console.log(this.pass)
+    },
+    cancel(){
+      this.user = {...this.backup}
+      this.flag = false
+      document.querySelector("#fields").style.pointerEvents = "none"
     }
   },
   computed:{ 
@@ -266,7 +287,9 @@ export default {
   .myads .card-container .box{
     flex-direction: column;
   }
-
+  .body-content{
+    margin: 1rem 1.5rem;
+  }
   .homes,
   .main .ads{
     gap: .2rem;
@@ -308,6 +331,9 @@ export default {
 
   .body-content .routes li a{
     display: none;
+  }
+  .body-content .routes li :nth-child(1){
+    display: block;
   }
 }
 </style>

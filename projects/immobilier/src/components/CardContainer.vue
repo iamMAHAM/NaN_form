@@ -20,7 +20,7 @@ import Loader from './partials/Loader.vue';
 export default {
   name: 'CardContainer',
   props: ['cards', 'load', 'message'],
-  emits: ['filteringCard', 'mounted'],
+  emits: ['filteringCard'],
   components: {
     Card,
     Loader
@@ -37,9 +37,6 @@ export default {
       //     price: 2000000
       //   },
     }
-  },
-  mounted(){
-    this.$emit("mounted")
   },
   methods: {
     addFavs(card){ // add to favorite

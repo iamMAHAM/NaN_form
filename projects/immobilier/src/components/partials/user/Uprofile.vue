@@ -225,8 +225,13 @@ export default {
     }
     .profile .table-profile td{
         display:block;
-        width:90%;
+        width:100%;
         margin:0px;
+    }
+
+    .profile{
+      width: 100%;
+      margin: 0;
     }
     .profile .table-profile .section2 .quantityselector section{
         width:41%;
