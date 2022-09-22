@@ -55,6 +55,8 @@
 <script>
 import { find } from '@/lib/firestoreLib';
 import User from './User.vue';
+import { collection, onSnapshot } from '@firebase/firestore';
+import { db } from '@/lib/firebaseConfig';
 export default {
   name: 'Users',
   components: { User },
@@ -76,10 +78,12 @@ export default {
     }
   },
   mounted(){
-    find("users", false)
-    .then(users=>{
-      this.users = users
-      this.allUsers = users
+    onSnapshot(collection(db, "users"), (snap)=>{
+      const inter = []
+      snap.docs.map(d=>inter.push(d.data()))
+      this.users = [...inter]
+      this.allUsers = [...this.users]
+      console.log(this.users)
     })
   }
 }
