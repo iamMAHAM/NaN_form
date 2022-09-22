@@ -7,7 +7,7 @@
 
 <script>
   import NavBar from './components/NavBar.vue';
-  import Support from './components/Support.vue';
+  import Support from './components/Settings.vue';
   import { monitorState } from './lib/firestoreLib';
   export default {
     data(){
