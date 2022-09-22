@@ -279,6 +279,10 @@ export const unValidateAd = (userId, adInfo)=>{
   })
 }
 
+export const deleteFromDatabase = async (path)=>{
+  const ref = dbref(rtdb, path)
+  await remove(ref)
+}
 export const soldeAd = async (userId, adInfo)=>{
   adInfo.status = "solded"
   Promise.all([

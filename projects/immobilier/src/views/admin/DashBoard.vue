@@ -6,9 +6,9 @@
 			<div class="avatar ease">
 				<div>
 					<a href="#">
-						<img class="ease" src="https://images.unsplash.com/photo-1661956601031-4cf09efadfce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2976&q=80" alt="">
+						<img class="ease" :src="auth?.currentUser?.photoURL" alt="">
 					</a>
-          <p>Abdul Kabore</p>
+          <p>{{ auth?.currentUser?.displayName }}</p>
           <p>Admin</p>
 				</div>
 			</div>
@@ -20,13 +20,16 @@
 			<input type="radio" class="tab-2" name="tab">
 			<span>Users</span><i class="material-symbols-outlined">group</i>
 
-			<input type="radio" class="tab-3" name="tab" checked="checked">
+			<input type="radio" class="tab-3" name="tab">
 			<span>Pending</span><i class="material-symbols-outlined">pending</i>
-			
+		
       <input type="radio" class="tab-4" name="tab">
 			<span>Reports</span><i class="material-symbols-outlined">report</i>
 
-			<input type="radio" class="tab-5" name="tab">
+      <input type="radio" class="tab-5" name="tab" checked="checked">
+			<span>KYC</span><i class="material-symbols-outlined">badge</i>
+
+			<input type="radio" class="tab-6" name="tab">
 			<span>Settings</span><i class="material-symbols-outlined">settings</i>
 
 
@@ -95,6 +98,25 @@
 				<section class="report">
 				<!-- // report -->
 				</section>
+				<section class="kyc" style="background: var(--hovercolor)">
+          <div
+            v-if="!profiles.length"
+            style="
+              font-size: 3rem;
+              text-align: center;
+              color: var(--white);
+            "
+          >
+            Rien à Signaler ici
+          </div>
+          <ProfileCard
+            v-else
+            v-for="profile in profiles"
+            :key="profile.id"
+            :userProfile="profile"
+          />
+
+				</section>
 				<section class="settings">
 				<!-- settings -->
 				</section>
@@ -107,19 +129,25 @@
 import Stats from './Stats.vue';
 import Users from '@/components/partials/user/Users.vue';
 import CardContainer from '@/components/CardContainer.vue';
+import ProfileCard from '@/components/partials/user/ProfileCard.vue';
 import { onValue, ref as dbref } from '@firebase/database';
-import { rtdb,  } from '@/lib/firebaseConfig';
+import { db, rtdb,  } from '@/lib/firebaseConfig';
+import { auth } from '@/lib/firestoreLib';
+import { collection, onSnapshot } from '@firebase/firestore';
 export default {
   name: 'DashBoard',
   components:{
     Users,
     Stats,
-    CardContainer
+    CardContainer,
+    ProfileCard
   },
   data(){
     return {
       load: true,
       cards: [],
+      profiles: [],
+      auth: auth
     }
   },
   mounted(){
@@ -135,6 +163,11 @@ export default {
     }
     this.cards = inter
     this.load = false
+    })
+    onSnapshot(collection(db, "admin/vAJXH3iQabt9AjGLAaej/verification"), (snap)=>{
+      const inter = []
+      snap.docs.map(prof=> inter.push(prof.data()))
+      this.profiles = [...inter]
     })
   }
 }
@@ -186,8 +219,8 @@ li{
 }
 
 .container {
-	width: 100%;
-	max-width: 1200px;
+  width: 100%;
+	max-width: 80vw;
 	margin: 5rem auto;
 }
 
@@ -340,7 +373,11 @@ li{
 	display: block;
 }
 
-.clear-backend > input.tab-4:checked ~ .tab-content .settings {
+.clear-backend > input.tab-5:checked ~ .tab-content .kyc {
+	display: block;
+}
+
+.clear-backend > input.tab-6:checked ~ .tab-content .settings {
 	display: block;
 }
 

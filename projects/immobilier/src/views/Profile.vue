@@ -252,7 +252,6 @@ export default {
     },
     verifyUser(){
       this.verify = !this.verify
-      // console.log("ready for user verification")
     }
   },
   computed:{ 
