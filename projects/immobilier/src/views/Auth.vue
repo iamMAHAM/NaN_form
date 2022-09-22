@@ -225,7 +225,10 @@ export default {
     },
     addressChange(){
       this.errors.start = false
-      this.errors.address = !validator.isAlpha(this.form.address) && this.form.address.length >= 3
+      this.errors.address = !(this.form.address.trim() === this.form.address
+      && this.form.address.length >= 3
+      && validator.isAlpha(this.form.address, {ignore: ' '})
+      )
     },
     login(){
       this.req = true
