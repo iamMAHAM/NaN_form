@@ -83,7 +83,6 @@ export default {
       snap.docs.map(d=>inter.push(d.data()))
       this.users = [...inter]
       this.allUsers = [...this.users]
-      console.log(this.users)
     })
   }
 }
