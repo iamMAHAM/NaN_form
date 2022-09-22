@@ -182,7 +182,9 @@ export default {
         this.errors.files = !this.files.length || this.files.length > 3
         this.errors.options = this.form.type === "maison" && this.form.options
         if (this.form.type === "maison"){
-          this.errors.options = !(this.form?.options?.bathroom && this.form.options.beedroom)
+          this.errors.options = !(this.form?.options?.bathroom && this.form.options.beedroom
+                                && validator.isNumeric(this.form.options?.bathroom)
+                                && validator.isNumeric(this.form.options?.beedroom))
         }
       },
       postAds(){

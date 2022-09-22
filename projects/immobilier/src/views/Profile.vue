@@ -56,6 +56,23 @@
       </button>
 
     </div>
+    <button
+        class="edit"
+        v-if="home && !user.isVerified"
+        @click="verifyUser"
+      >
+        <span
+          style="
+            vertical-align: middle;
+            color: var(--white);
+            margin: 0;
+            font-size: 1.7rem;
+          "
+        >
+          Verifier Identité
+        </span>
+        <i class="material-symbols-outlined" style="color: var(--greenfun);">fingerprint</i>
+    </button>
   </div>
   <!-- break -->
   <hr class="break" v-if="!iLoad"/>
@@ -82,7 +99,7 @@
     <div class="main" ref="main">
       <div class="homes" v-if="home">
         <div class="card bg-dark">
-          <p>Annonces publiés</p>
+          <p>Annonces publiées</p>
           <p class="num">{{ cards?.length}}</p>
         </div>
         <div class="card bg-dark">
@@ -108,6 +125,9 @@
           <p class="num">{{ pending }}</p>
         </div>
       </div>
+      <div v-if="home && verify" class="verify">
+        <userVerification />
+      </div>
     </div>
     <section class="myads" v-if="ads">
       <CardContainer
@@ -129,17 +149,20 @@
 <script>
 import CardContainer from '@/components/CardContainer.vue';
 import Uprofile from '@/components/partials/user/Uprofile.vue'
+import Loader from '@/components/partials/Loader.vue';
+import userVerification from '@/components/partials/user/userVerification.vue';
 import { auth, updateOne } from '@/lib/firestoreLib';
 import { collection, doc, onSnapshot } from '@firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
 import { updatePassword } from '@firebase/auth';
-import Loader from '@/components/partials/Loader.vue';
+
 export default {
   name: 'Profile',
   components:{
     CardContainer,
     Uprofile,
-    Loader
+    Loader,
+    userVerification
   },
   data(){
     return {
@@ -153,12 +176,14 @@ export default {
       ads: false,
       home: true,
       pass: '',
-      flag: false
+      flag: false,
+      verify: true
     }
   },
   async mounted(){
     await new Promise(r=>setTimeout(r, 1000))
     this.fetchData()
+    console.log(auth?.currentUser)
     onSnapshot(doc(db, "users", auth?.currentUser?.uid), (snap)=>{
       this.user = snap.data()
       this.backup = {...this.user}
@@ -214,6 +239,9 @@ export default {
       this.user = {...this.backup}
       this.flag = false
       document.querySelector("#fields").style.pointerEvents = "none"
+    },
+    verifyUser(){
+      console.log("ready for user verification")
     }
   },
   computed:{ 
@@ -455,4 +483,8 @@ a:hover {
   cursor: pointer;
 }
 
+.verify{
+  margin-top: 1.5rem;
+  text-align: center;
+}
 </style>
