@@ -123,12 +123,14 @@
   </div>
 
   <button
+    v-if="!req"
     type="button"
     class="submit-btn js-submit"
     @click="submitVerification"
   >
     Vérifier mon identité
   </button>
+  <Loader :view="3" :height="30" :width="30" v-else/>
   <svg class="mainSvg" viewBox="-448.5 266.5 28.9 29" style="display:none">
     <g id="upload-svg">
       <path class="st0" d="M-434,295.5c-8,0-14.5-6.5-14.5-14.5s6.5-14.5,14.5-14.5c2.5,0,5,0.7,7.2,1.9c0.3,0.2,0.4,0.6,0.2,0.8c-0.1,0.2-0.3,0.3-0.5,0.3c-0.1,0-0.2,0-0.3-0.1c-2-1.2-4.3-1.8-6.6-1.8c-7.3,0.1-13.3,6.1-13.3,13.4s5.9,13.3,13.3,13.3s13.3-6,13.3-13.3c0-0.6,0-1.2-0.1-1.8c-0.1-1-0.4-2-0.8-3c-0.2-0.6-0.5-1.3-0.9-1.8c-0.1-0.1-0.1-0.3-0.1-0.5c0-0.2,0.1-0.3,0.3-0.4c0.1-0.1,0.2-0.1,0.3-0.1c0.2,0,0.4,0.1,0.5,0.3c0.4,0.6,0.7,1.3,1,2c0.4,1.1,0.7,2.2,0.8,3.3c0.1,0.6,0.1,1.3,0.1,1.9C-419.5,289-426,295.5-434,295.5"/>
@@ -139,16 +141,21 @@
 </template>
 
 <script>
-import { auth, uploadImage } from '@/lib/firestoreLib'
+import { auth, findOne, setOne, updateOne, uploadImage } from '@/lib/firestoreLib'
+import Loader from '../Loader.vue'
 export default {
   name: 'userVerification',
+  components: {
+    Loader
+  },
   data(){
     return {
       selfie: '',
       recto: '',
       verso: '',
       facture: '',
-      error: false
+      error: false,
+      req: false
     }
   },
   methods:{
@@ -184,6 +191,7 @@ export default {
       this.rightValue('', id)
     },
     async submitVerification(){
+      this.req = true
       const images = []
       this.error = true
       let flag = false
@@ -191,14 +199,22 @@ export default {
       inputs.map(i=>!i.files[0] ? flag = true : '')
       if (!flag){
         this.error = false
-        inputs.map(i=>{
-          uploadImage(`verif/${auth?.currentUser?.uid}/${i.files[0].name}`, i.files[0])
-          .then(url=>images.push(url))
-        })
-        console.log(images)
+        for (const i of inputs){
+          const url = await uploadImage(`verif/${auth?.currentUser?.uid}/${i.files[0].name}`, i.files[0])
+          images.push(url)
+        }
+        const user = await findOne("users", auth?.currentUser?.uid)
+        user.verifInfoImages = images
+        Promise.all([
+          setOne("admin/vAJXH3iQabt9AjGLAaej/verification", user, auth?.currentUser?.uid),
+          updateOne("users", auth?.currentUser?.uid, {isAwaitingVerification: true}),
+        ])
+        // console.log(images)
+        this.req = false
         return
       }
       this.error = true
+      this.req = false
     }
   }
 }

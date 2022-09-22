@@ -56,9 +56,14 @@
       </button>
 
     </div>
+    <button v-if="home && user?.isAwaitingVerification">
+      vérification en cours...
+
+      <Loader :view="1" :height="15" :width="15"/>
+    </button>
     <button
         class="edit"
-        v-if="home && !user.isVerified"
+        v-if="home && !user.isVerified && !user?.isAwaitingVerification" 
         @click="verifyUser"
       >
         <span
@@ -69,9 +74,15 @@
             font-size: 1.7rem;
           "
         >
-          Verifier Identité
+          {{ verify ? 'Annuler' : 'Verifier Identité'}}
         </span>
-        <i class="material-symbols-outlined" style="color: var(--greenfun);">fingerprint</i>
+        <i class="material-symbols-outlined"
+          :style="{
+            color: verify ? 'red' : 'var(--greenfun)'
+          }"
+        >
+          {{ verify ? 'close' :  'fingerprint'}}
+        </i>
     </button>
   </div>
   <!-- break -->
@@ -177,13 +188,12 @@ export default {
       home: true,
       pass: '',
       flag: false,
-      verify: true
+      verify: false
     }
   },
   async mounted(){
     await new Promise(r=>setTimeout(r, 1000))
     this.fetchData()
-    console.log(auth?.currentUser)
     onSnapshot(doc(db, "users", auth?.currentUser?.uid), (snap)=>{
       this.user = snap.data()
       this.backup = {...this.user}
@@ -241,7 +251,8 @@ export default {
       document.querySelector("#fields").style.pointerEvents = "none"
     },
     verifyUser(){
-      console.log("ready for user verification")
+      this.verify = !this.verify
+      // console.log("ready for user verification")
     }
   },
   computed:{ 
