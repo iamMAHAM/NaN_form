@@ -10,7 +10,7 @@
       <h1 class="title">
           <span>Publier une Annonce</span>
       </h1>
-      <div class="main-content" ref="content">
+      <div class="main-content" ref="content" @click="clicked">
           <div class="ads-rows">
             <div class="input">
               <i class="material-symbols-outlined">title</i>
@@ -183,18 +183,26 @@ export default {
         this.errors.options = this.form.type === "maison" && this.form.options
         if (this.form.type === "maison"){
           this.errors.options = !(this.form?.options?.bathroom && this.form.options.beedroom
-                                && validator.isNumeric(this.form.options?.bathroom)
-                                && validator.isNumeric(this.form.options?.beedroom))
+                                && validator.isNumeric(String(this.form.options?.bathroom))
+                                && validator.isNumeric(String(this.form.options?.beedroom)))
+        }
+      },
+      clicked(e){
+        const target = e.target
+        if (target.classList.contains("main-content") && target.classList.contains("failed")){
+          console.log("bingo")
+          this.$router.push("/profile")
+          this.$emit("close")
         }
       },
       postAds(){
         this.handleErrors()
-        if (!this.error){
+        if (!this.error){ // add !
           if (auth?.currentUser){
             this.req = true
             findOne("users", auth.currentUser.uid)
-            .then(userInfo=>{
-              if (userInfo.isVerified){
+            .then(user=>{
+              if (user.isVerified){
                 this.form.ownerId = auth.currentUser.uid
                 this.form.images = this.fileList
                 postAd(auth.currentUser.uid, this.form)
@@ -202,6 +210,10 @@ export default {
                   this.req = false
                   this.$refs.content.classList.remove("failed")
                   this.$refs.content.classList.add("success")
+                  setTimeout(()=>{
+                    this.$refs.content.classList.remove("success")
+                    this.$emit('close')
+                  }, 5000)
                 })
                 .catch(e=>{
                   alert(e)
@@ -219,11 +231,6 @@ export default {
             this.$emit("close")
             this.$router.push("/auth")
           }
-          setTimeout(()=>{
-            this.$refs.content.classList.remove("success")
-            this.$refs.content.classList.remove("failed")
-            this.$emit('close')
-          }, 5000)
         }
       }
     }
@@ -370,19 +377,25 @@ select,
 
 .main-content.success::after,
 .main-content.failed::after{
+  padding: 1rem;
   text-align: center;
-  content: "Impossible de publier l'annonce : vous devez vérifier votre identité avant de poster";
-  color: red;
+  content: "Vérifier Mon identité";
+  background: var(--navcolor);
+  color: var(--white);
   font-size: 1.5rem;
-  width: 100%;
   position: absolute;
   left: 50%;
   transform: translate(-50%);
   bottom: -2rem;
+  border-radius: 1rem;
+  pointer-events: all;
+  cursor: pointer;
 }
 
 .main-content.success::after{
+  background: var(--white);
   color: green;
+  width: 100%;
   content: "Annonce publiée avec succès : En attente de validation ...";
 }
 

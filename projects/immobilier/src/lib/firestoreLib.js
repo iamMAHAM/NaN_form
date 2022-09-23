@@ -163,19 +163,29 @@ export const deleteUsers = ()=>{
 const setData = (info, receiver, message)=>{
     const banned = ['email', 'password', 'birth']
     const inter = {}
-    inter.lastMessage = {
-        senderId: message.senderId,
-        date: new Date(message.timestamp).toLocaleString().split(" ")[1].slice(0, 5),
-        message: message.message
+    if (message){
+      inter.lastMessage = {
+          senderId: message.senderId,
+          date: new Date(message.timestamp).toLocaleString().split(" ")[1].slice(0, 5),
+          message: message.message
+      }
     }
     for (const [k, v] of Object.entries(info)){
-        banned.includes(k) ? '' : inter[k] = v
+      banned.includes(k) ? '' : inter[k] = v
     }
     set(receiver, inter)
 }
 
 export const useRightRef = (path, from, to, id)=>{
     return [dbref(rtdb, `${path}/${from}/${to}/${id}`), dbref(rtdb, `${path}/${to}/${from}/${id}`)]
+}
+
+export const addConversation = async (senderId, receiverId)=>{
+  const myRef = dbref(rtdb, `messages/${senderId}/${receiverId}/info`)
+  findOne("users", receiverId) // find to person info
+  .then(receiverInfo=>{
+    setData(receiverInfo, myRef) // set his info to my ref
+  })
 }
 
 export const sendMessage = async (senderId, receiverId, message)=>{
@@ -322,8 +332,8 @@ export const messageTemplate = (type, proposition, price, link)=>{
             content:
             `
                 Bonjour je suis intéressé(e) par la ${proposition} de votre ${type} au prix de ${price.toLocaleString("ci")} FCFA. J'aimerais avoir de plus amples informations. Merci d'avance.
+                ${link}
             `.trim(),
-            link: link
         }
     })
 }
