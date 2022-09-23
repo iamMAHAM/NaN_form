@@ -72,8 +72,17 @@
           :id="cardInfo?.ownerId"
           @click="write"
         >
-          Ecrire au vendeur
+          Contacter
           <i class="material-symbols-outlined">forward_to_inbox</i>
+        </button>
+        <button
+          type="button"
+          class="btn button-style c"
+          :id="cardInfo?.ownerId"
+          @click="contact"
+        >
+          Profile
+          <i class="material-symbols-outlined">person</i>
         </button>
       </div>
     </div>
@@ -94,19 +103,23 @@ export default {
   name: 'Details',
   props: ['isLogged'],
   components: {
-    Maps
+    Maps,
   },
   data(){
     return {
       cardInfo: {},
       load: false,
       current: '',
-      emp: ''
+      emp: '',
+      ownerInfo: ''
     }
   },
   methods:{
     toggleImages(e){
       this.current = e.target.src
+    },
+    contact(){
+      this.$router.push({name: 'Profile', query:{id: this.cardInfo?.ownerId}})
     },
     write(e){
       if (!auth?.currentUser){

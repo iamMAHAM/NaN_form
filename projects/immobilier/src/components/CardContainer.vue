@@ -40,7 +40,9 @@ export default {
   },
   methods: {
     addFavs(card){ // add to favorite
+      card.isLoad = true
 			const index = this.cards.indexOf(card)
+      this.cards[index].isLoad = true
       const copy = {...card}
       delete copy.isLoad
       copy.isFav = true

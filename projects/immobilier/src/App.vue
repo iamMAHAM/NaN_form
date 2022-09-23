@@ -2,6 +2,7 @@
   <NavBar :isLogged="isLogged"/>
   <router-view :isLogged="isLogged"/>
   <Support :isAdmin="isAdmin" :uid="uid"/>
+  <Footer />
 </template>
 
 
@@ -9,6 +10,7 @@
   import NavBar from './components/NavBar.vue';
   import Support from './components/Settings.vue';
   import { auth, findOne, monitorState } from './lib/firestoreLib';
+  import Footer from './components/Footer.vue';
   export default {
     data(){
       return {
@@ -19,7 +21,8 @@
     },
     components:{
       NavBar,
-      Support
+      Support,
+      Footer
     },
     mounted(){
       monitorState(user=>{
@@ -73,5 +76,6 @@ body{
     --greenfun: #1ABC9C;
     --red: #E91E63;
     --blue: #03A9F4;
+    --orange: #ff9800
 }
 </style>

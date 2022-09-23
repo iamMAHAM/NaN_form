@@ -2,7 +2,7 @@
   <div class="main-container">
   <div class="profile-content" v-if="!iLoad">
     <div class="profile-img">
-      <img :src="user.avatar" />
+      <img :src="user?.avatar" />
       <div class="name">
         <h2>{{ user?.fullName }}</h2>
         <span>{{ user?.role }}</span>
@@ -89,7 +89,7 @@
   <hr class="break" v-if="!iLoad"/>
   <Loader v-if="iLoad"/>
   <div class="body-content" v-if="!iLoad">
-    <ul @click="rightRoute" ref="routes" class="routes">
+    <ul @click="rightRoute" ref="routes" class="routes" v-if="showRoutes">
       <li class="home active">
         <i class="material-symbols-outlined">home</i>
         <a href="#">Accueil</a>
@@ -109,11 +109,11 @@
     </div> -->
     <div class="main" ref="main">
       <div class="homes" v-if="home">
-        <div class="card bg-dark">
+        <div class="card bg-dark" style="cursor: normal">
           <p>Annonces publiées</p>
           <p class="num">{{ cards?.length}}</p>
         </div>
-        <div class="card bg-dark">
+        <div class="card bg-dark" style="cursor: normal">
           <p>Popularité</p>
           <p class="num">{{ user?.popularity || 0}}</p>
         </div>
@@ -162,7 +162,7 @@ import CardContainer from '@/components/CardContainer.vue';
 import Uprofile from '@/components/partials/user/Uprofile.vue'
 import Loader from '@/components/partials/Loader.vue';
 import userVerification from '@/components/partials/user/userVerification.vue';
-import { auth, updateOne } from '@/lib/firestoreLib';
+import { auth, findOne, updateOne } from '@/lib/firestoreLib';
 import { collection, doc, onSnapshot } from '@firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
 import { updatePassword } from '@firebase/auth';
@@ -194,11 +194,21 @@ export default {
   async mounted(){
     await new Promise(r=>setTimeout(r, 1000))
     this.fetchData()
-    onSnapshot(doc(db, "users", auth?.currentUser?.uid), (snap)=>{
-      this.user = snap.data()
-      this.backup = {...this.user}
-      this.iLoad = false
-    })
+    const id = this.$route.query.id
+    if (id && auth?.currentUser?.uid !== id){
+      findOne("users", this.$route.query.id)
+      .then(user=>{
+        this.user = user
+        this.iLoad = false
+      })
+    }
+    else{
+      onSnapshot(doc(db, "users", auth?.currentUser?.uid), (snap)=>{
+        this.user = snap.data()
+        this.backup = {...this.user}
+        this.iLoad = false
+      })
+    }
   },
   methods:{
     async fetchData(){
@@ -274,6 +284,9 @@ export default {
       return this.rightIcon === 'save'
       ? 'Valider'
       : 'Modifier'
+    },
+    showRoutes(){
+      return this.user?.id === auth?.currentUser?.uid
     }
   }
 }
@@ -378,7 +391,7 @@ export default {
 <style scoped>
 .main-container {
   background-color: #fff;
-  margin: 10rem auto;
+  margin: 21rem auto;
   width: 70vw;
   max-width: 100%;
   padding: 2rem;

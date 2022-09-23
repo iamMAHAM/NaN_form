@@ -1,7 +1,7 @@
 <template>
     <div class="box" :id="card.id">
       <div class="top" @click="handleClick">
-        <span v-if="solded" class="soldout">sold out</span>
+        <span v-if="solded" class="soldout">Vendu</span>
         <img :src="card?.images.slice(0, 1)"/>
         <i
           v-if="!admin && !profile"
@@ -24,6 +24,7 @@
         >
           check_circle
         </i>
+        <Loader :view="1" :height="24" :width="24" class="favs" :color="'var(--red)'" v-if="card?.isLoad"/>
       </div> 
       <div class="bottom">
         <h3>{{ card?.type }} à {{ card?.location?.toLocaleUpperCase() }}</h3>
@@ -81,11 +82,12 @@
 
 <script>
 import { abortPost, auth, deleteOne, soldeAd, unValidateAd, validateAd } from '@/lib/firestoreLib'
-import { waitForPendingWrites } from '@firebase/firestore'
+import Loader from './Loader.vue'
 
 export default {
   name: 'Card',
-  props: ['card'],
+  props: ['card', 'req'],
+  components: {Loader},
   methods:{
     handleClick(e){
       if (e.target.className !== 'top') return
@@ -185,6 +187,13 @@ p{
   'opsz' 48;
 }
 
+.favs.active:hover{
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48;
+}
 
 .card-container{
   position: relative;

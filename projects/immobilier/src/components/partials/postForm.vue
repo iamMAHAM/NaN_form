@@ -91,7 +91,7 @@
           </div>
           <div class="extra">
             <textarea class="pa" v-model="form.description"></textarea>
-            <div class="error" v-if="errors.description">minimum 300 caractères</div>
+            <div class="error" v-if="errors.description">minimum 150 caractères</div>
             <input
               v-if="!req"
               @click.prevent="postAds"
@@ -174,7 +174,7 @@ export default {
         const prop = ['vente', 'location'].includes(this.form.proposition)
         this.errors.type = !validator.isAlpha(this.form.type) || !type
         this.errors.title = !(this.form.title.trim() === this.form.title && this.form.title.length >= 5)
-        this.errors.description = this.form.description.length < 300 
+        this.errors.description = this.form.description.length < 150 
         this.errors.location = !(this.form.title.trim() === this.form.title && this.form.title.length >= 3)
         this.errors.proposition = !validator.isAlpha(this.form.proposition) || !prop 
         this.errors.area = validator.isNumeric(`${this.form.area}`) && parseFloat(this.form.area) <= 0
