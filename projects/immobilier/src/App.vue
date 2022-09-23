@@ -1,18 +1,20 @@
 <template>
   <NavBar :isLogged="isLogged"/>
   <router-view :isLogged="isLogged"/>
-  <Support />
+  <Support :isAdmin="isAdmin" :uid="uid"/>
 </template>
 
 
 <script>
   import NavBar from './components/NavBar.vue';
   import Support from './components/Settings.vue';
-  import { monitorState } from './lib/firestoreLib';
+  import { auth, findOne, monitorState } from './lib/firestoreLib';
   export default {
     data(){
       return {
         isLogged: false,
+        isAdmin: false,
+        uid: ''
       }
     },
     components:{
@@ -23,10 +25,14 @@
       monitorState(user=>{
         const notConnectedR = ['/profile', '/admin/dashboard', '/messages', '/favorites']
         const connectedRoute = ['/auth']
-        console.log("auth change", user)
         if (user?.emailVerified){
           this.isLogged = true
           connectedRoute.includes(this.$route.path) ? this.$router.go(-1) : ''
+          findOne("users", auth?.currentUser?.uid)
+          .then(user=>{
+            this.uid = user.id
+            this.isAdmin = user.role === 'admin'
+          })
         }
         else {
           this.isLogged = false

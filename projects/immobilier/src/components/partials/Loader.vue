@@ -7,7 +7,8 @@
     <div id="loading"
       :style="{
         height: height + 'px',
-        width: width + 'px'
+        width: width + 'px',
+        borderTopColor: color
       }"
     >
   </div>
@@ -17,7 +18,7 @@
 <script>
 export default {
   name: 'Loader',
-  props: ['view', 'height', 'width']
+  props: ['view', 'height', 'width', 'color']
 }
 </script>
 

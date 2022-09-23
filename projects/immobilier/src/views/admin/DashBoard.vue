@@ -132,7 +132,7 @@ import CardContainer from '@/components/CardContainer.vue';
 import ProfileCard from '@/components/partials/user/ProfileCard.vue';
 import { onValue, ref as dbref } from '@firebase/database';
 import { db, rtdb,  } from '@/lib/firebaseConfig';
-import { auth } from '@/lib/firestoreLib';
+import { auth, findOne } from '@/lib/firestoreLib';
 import { collection, onSnapshot } from '@firebase/firestore';
 export default {
   name: 'DashBoard',
@@ -149,6 +149,15 @@ export default {
       profiles: [],
       auth: auth
     }
+  },
+  beforeCreate(){
+    const uid = this.$route.query.uid
+    if (!uid){
+      this.$router.push('/404')
+      return
+    }
+    findOne("users", uid)
+    .then(user=> user.role === "admin" ? '' : this.$router.push("/404"))
   },
   mounted(){
     const wads = dbref(rtdb, `waitingAds`);

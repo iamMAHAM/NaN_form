@@ -78,9 +78,7 @@
 </template>
 
 <script>
-import { updateOne, deleteOne, auth, findOne,} from '@/lib/firestoreLib';
-import axios from 'axios'
-// axios.defaults.baseURL = 'http://localhost:3000/'
+import { updateOne, deleteOne} from '@/lib/firestoreLib';
 export default {
   name: 'User',
 	props: ["user"],
@@ -106,17 +104,14 @@ export default {
       this.user.isVerified = this.backup.isVerified
       this.show = false
     },
-    // async blockUser(e){
-    //   const userToken = await auth?.currentUser.getIdToken()
-    //   console.log(userToken)
-    //   axios.post("/api/disable/2", {
-    //     headers: {
-    //       'content-type': 'application/json',
-    //       'authorization': 'Bearer' + userToken
-    //     }
-    //   }).then(res=> res.json())
-    //   .then(data=>console.log(data))
-    // }
+    submit(){
+      window.confirm('valider les modifications ?')
+      ? updateOne("users", this.user?.id, this.user)
+        .then(alert("modifié avec succès"))
+        .catch(e=>alert("erreur : ", e.message ))
+      : ''
+      this.show = false
+    }
 	},
   computed:{
     role(){
