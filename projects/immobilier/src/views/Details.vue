@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { auth, findOne, messageTemplate, sendMessage } from '@/lib/firestoreLib'
+import { addConversation, auth, findOne, messageTemplate } from '@/lib/firestoreLib'
 import Maps from "../components/Map.vue"
 export default {
   name: 'Details',
@@ -114,16 +114,14 @@ export default {
         return
       }
       const receiverId = e.target.id
-      sendMessage(auth?.currentUser?.uid, receiverId,
-                  messageTemplate(
-                    this.cardInfo?.type,
-                    this.cardInfo?.proposition,
-                    this.cardInfo?.price,
-                    window.location.pathname
-                  )
-      ).then(message=>{
-        this.$router.push({ path: '/messages', query: { id: this.cardInfo?.ownerId } })
-      })
+      const template = messageTemplate(
+        this.cardInfo?.type,
+        this.cardInfo?.proposition,
+        this.cardInfo?.price,
+        window.location.href
+      )
+      addConversation(auth?.currentUser?.uid, receiverId)
+      .then(this.$router.push({ path: '/messages', query: { id: this.cardInfo?.ownerId, template: JSON.stringify(template) } }))
     }
   },
   mounted(){

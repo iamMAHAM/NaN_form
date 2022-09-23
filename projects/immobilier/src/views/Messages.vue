@@ -76,7 +76,7 @@
                 class="text"
               >
                 {{ message?.message.content }}
-                <router-link v-if="message?.message?.link" :to="message.message.link" class="link">voir l'annonce</router-link>
+                <router-link v-if="message?.message?.link" :to="message.message.link" class="link">voir le lien</router-link>
                 <span class="date">{{ readableDate(message.timestamp) }}</span>
               </div>
               <img v-else
@@ -110,6 +110,7 @@
             ref="textarea"
             @input="dropMessage"
             @keydown="sendMessages"
+            @paste="dropMessage"
             v-model="message"
           >
           </textarea>
@@ -157,6 +158,27 @@ const compare = ( a, b )=>{
   }
   return 0;
 }
+
+const waitForElm = (selector)=>{
+    return new Promise(resolve => {
+        if (document.querySelector(selector)) {
+            return resolve(document.querySelector(selector));
+        }
+        const observer = new MutationObserver(mutations => {
+            if (document.querySelector(selector)) {
+                resolve(document.querySelector(selector));
+                observer.disconnect();
+            }
+        });
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    });
+}
+
+const urlRegex = /\bhttps?:\/\/\S+/gi
+
 export default {
   name: 'Messages',
   components: {
@@ -174,10 +196,15 @@ export default {
       uid: '',
       pers: null,
       compare: compare,
-      auth: auth
+      auth: auth,
+      link: ''
     }
   },
   methods:{
+    linkOrNot(message){
+      const res = message.match(urlRegex)
+      return res ? res[0] : null
+    },
     toggle(){
       document.querySelector(".emoji_picker").classList.toggle("active")
     },
@@ -192,7 +219,7 @@ export default {
     dropMessage(){
       const textarea = this.$refs.textarea
       const scrollHeight = textarea.scrollHeight
-      this.show = this.message.trim().length > 0 
+      this.show = this.message.trim().length > 0
       textarea.style.height = scrollHeight + 'px'
     },
     async sendMessages(e){
@@ -210,10 +237,15 @@ export default {
       }).then(([type, content])=>{
         if (!((e.key==='Enter' || e.target.textContent === 'send' || e.target === this.$refs.tof) 
         && content.length > 0)) return
+        const hasUrl = this.message.match(urlRegex)
+        const link =  hasUrl ? hasUrl[0] : null
+        const a = document.createElement("a")
+        a.href = link
         sendMessage(this.uid, this.pers.id,{
           message:{
             type: type,
-            content: content
+            content: content.replace(link, ''),
+            link: a.pathname
           }
         }).then((message)=>{
           this.message = ''
@@ -246,6 +278,7 @@ export default {
     onValue(q, async (snapshot) => {
       const inter = []
       const data = snapshot.val();
+      
       await new Promise((r=>{
         if (data){
           for (const [k, v] of Object.entries(data)){
@@ -261,20 +294,26 @@ export default {
           }
         }
         r(inter)
-      })).then(async inter=>{
+      })).then(inter=>{
         this.conversations = inter
         this.load = false
         const ab = Object.filter(inter, v=> v?.info?.id === this.pers?.id)
-        // this.messages = ab[0]?.messages.filter()
         this.messages = ab[0]?.messages.sort(compare)
-        if (this.$route.query.id){
-          const id = this.$route.query.id
-          await new Promise(r=>setTimeout(r, 2000))
-          document.getElementById(id).click()
-        }
       })
-    })
+    }
+    )
+    if (this.$route.query.id){
+      const id = this.$route.query.id
+      const message = this.$route.query.template
+      this.message = JSON.parse(message)?.message?.content
+      const conversation = await waitForElm(`#${id}`)
+      conversation.click()
+      const textarea = await waitForElm("textarea")
+      textarea.style.height = "100px"
+      this.$router.replace("/messages")
+    }
   },
+
 }
 </script>
 
