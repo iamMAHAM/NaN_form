@@ -24,13 +24,13 @@ export default {
       cards: []
     }
   },
-  mounted(){
-    find(`ads/X1eA1Bk8tfnVXHqduiTg/maison`)
-    .then(maison=>{
-      this.cards = maison
-      this.load = false
-    })
-  }
+  // mounted(){
+  //   find(`ads/X1eA1Bk8tfnVXHqduiTg/maison`)
+  //   .then(maison=>{
+  //     this.cards = maison
+  //     this.load = false
+  //   })
+  // }
 
 }
 </script>

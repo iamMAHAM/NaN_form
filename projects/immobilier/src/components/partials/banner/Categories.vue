@@ -37,13 +37,13 @@
       <li class="nav__list-divider divider-b">
         <h3 class="nav-title">Spécification</h3>
       </li>
-      <li class="nav__item" data-tooltip="youtube">
+      <li class="nav__item" data-tooltip="Location">
         <a href="#" class="nav__link">
           <i class="material-symbols-outlined">component_exchange</i>
         <span class="nav__link-text">Location</span>
         </a>
       </li>
-      <li class="nav__item" data-tooltip="opera">
+      <li class="nav__item" data-tooltip="Vente">
         <a href="#" class="nav__link">
         <i class="material-symbols-outlined">sell</i>
         <span class="nav__link-text">Vente</span>
