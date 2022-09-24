@@ -6,6 +6,7 @@ import Messages from "../views/Messages.vue"
 import Favoris from "../views/Favoris.vue"
 import DashBoard from "@/views/admin/DashBoard.vue"
 import Profile from "@/views/Profile.vue"
+import Banner from "@/components/partials/Banner.vue"
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/admin/dashboard',
     name: 'DashBoard',
     component: DashBoard
+  },
+  {
+    path: '/bann',
+    name: 'Banner',
+    component: Banner
   },
 ]
 

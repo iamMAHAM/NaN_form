@@ -78,14 +78,25 @@ body{
 }
 
 :root{
-    --white: #fff;
-    --gray: #f0f0f0;
-    --navcolor: #1E262D;
-    --hovercolor: #34495e;
-    --green: #d9fdd2;
-    --greenfun: #1ABC9C;
-    --red: #E91E63;
-    --blue: #03A9F4;
-    --orange: #ff9800
+  --white: #fff;
+  --gray: #f0f0f0;
+  --navcolor: #1E262D;
+  --hovercolor: #34495e;
+  --green: #d9fdd2;
+  --greenfun: #1ABC9C;
+  --red: #E91E63;
+  --blue: #03A9F4;
+  --orange: #ff9800;
+  --light100: hsl(237, 14%, 72%);
+  --light200: hsl(240, 15%, 86%);
+  --light400: hsl(240, 20%, 92%);
+  --light600: hsl(214, 48%, 93%);
+  --dark400: hsl(240, 16%, 32%);
+  --dark600: hsl(238, 11%, 49%);
+  --accent1: hsl(239, 34%, 58%);
+  --accent2: hsl(214, 93%, 63%);
+
+  --shadow: 0px 2px 1px 0 #0001, 0 0.125em 0.25em 0.0625em #0002,
+    0 0.2em 0.5em #0002;
 }
 </style>
