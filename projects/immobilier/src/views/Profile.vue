@@ -1,5 +1,6 @@
 <template>
-  <div class="main-container">
+  <Loader v-if="iLoad"/>
+  <div class="main-container" v-if="!iLoad">
   <div class="profile-content" v-if="!iLoad">
     <div class="profile-img">
       <img :src="user?.avatar" />
@@ -87,7 +88,6 @@
   </div>
   <!-- break -->
   <hr class="break" v-if="!iLoad"/>
-  <Loader v-if="iLoad"/>
   <div class="body-content" v-if="!iLoad">
     <ul @click="rightRoute" ref="routes" class="routes" v-if="showRoutes">
       <li class="home active">

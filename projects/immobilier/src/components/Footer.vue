@@ -6,7 +6,7 @@
         <p>
           La solution aux problèmes immobiliers en Côte d'Ivoire
         </p>
-        <img src="@/assets/logo.png"  style="width: 50%; margin: 0 auto; border-radius: 50%;">
+        <img src="@/assets/logo.png">
       </div>
       <div class="footer-items">
         <h3>Nos Agences</h3>
@@ -84,6 +84,13 @@ export default {
 
 .footer-items h1 {
 	color: #fff;
+}
+
+.footer img{
+  height: 10rem;
+  width: 10rem;
+  margin: 0 auto;
+  border-radius: 50%;
 }
 
 .border1 {

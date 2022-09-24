@@ -1,8 +1,10 @@
 <template>
   <NavBar :isLogged="isLogged"/>
-  <router-view :isLogged="isLogged"/>
-  <Support :isAdmin="isAdmin" :uid="uid"/>
-  <Footer />
+  <div class="app-content">
+    <router-view :isLogged="isLogged"/>
+    <Support :isAdmin="isAdmin" :uid="uid"/>
+    <Footer />
+  </div>
 </template>
 
 
@@ -65,6 +67,14 @@ body{
     line-height:1.5;
     font-size: 1.6rem;
     font-family: 'Poppins', sans-serif;
+}
+
+.app-content{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: space-between;
+  height: 100vh;
 }
 
 :root{
