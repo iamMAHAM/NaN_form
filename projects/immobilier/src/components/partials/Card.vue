@@ -4,7 +4,7 @@
         <span v-if="solded" class="soldout">Vendu</span>
         <img :src="card?.images.slice(0, 1)"/>
         <i
-          v-if="!admin && !profile"
+          v-if="!admin && !profile && !card?.isLoad"
           :class="`material-symbols-outlined favs ${card?.isFav ? 'active' : ''}`"
           @click="handleFav"
         >
@@ -24,7 +24,7 @@
         >
           check_circle
         </i>
-        <Loader :view="1" :height="24" :width="24" class="favs" :color="'var(--red)'" v-if="card?.isLoad"/>
+        <Loader :view="2" :height="24" :width="24" class="favs" :color="'var(--red)'" v-if="card?.isLoad"/>
       </div> 
       <div class="bottom">
         <h3>{{ card?.type }} à {{ card?.location?.toLocaleUpperCase() }}</h3>

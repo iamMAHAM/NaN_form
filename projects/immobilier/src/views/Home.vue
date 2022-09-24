@@ -1,8 +1,10 @@
 <template>
-  <Banner />
-  <CardContainer
-    :cards="cards"
-    :load="load"/>
+  <div class="home-component">
+    <Banner />
+    <CardContainer
+      :cards="cards"
+      :load="load"/>
+  </div>
 </template>
 
 <script>
