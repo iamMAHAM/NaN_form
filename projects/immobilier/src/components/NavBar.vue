@@ -51,6 +51,9 @@
         <i class="material-symbols-outlined menu">menu</i>
         <postForm :show="show" @close="show=false"/>
     </div>
+    <div class="bot">
+        ezdzedezezdez
+    </div>
 </template>
 
 <script>

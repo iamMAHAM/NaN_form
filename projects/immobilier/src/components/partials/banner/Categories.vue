@@ -50,6 +50,17 @@
         </a>
       </li>
     </ul>
+    <ul id="secondary-navigation-b" class="nav__list">
+      <li class="nav__list-divider divider-b">
+        <h3 class="nav-title">Général</h3>
+      </li>
+      <li class="nav__item" data-tooltip="Tout">
+        <a href="#" class="nav__link">
+          <i class="material-symbols-outlined">all_inclusive</i>
+        <span class="nav__link-text">Tout</span>
+        </a>
+      </li>
+    </ul>
   </nav>
 </aside>
 </template>
@@ -58,23 +69,38 @@
 export default {
   name: 'Categories',
   mounted(){
-    const navigation = document.querySelector(".sidebar");
-    const navToggle = document.querySelector(".nav-toggle");
-
-    navToggle.addEventListener("click", () => {
-      navigation.classList.toggle("expand");
-    });
+    window.addEventListener("DOMContentLoaded", ()=>{
+      const navigation = document.querySelector(".sidebar");
+      const aside = document.querySelector("aside")
+      const navToggle = document.querySelector(".nav-toggle");
+      if (navigation.classList.contains("expand")){
+          console.log('great')
+          aside.classList.add("expand")
+      }
+      navToggle.addEventListener("click", () => {
+        navigation.classList.toggle("expand");
+        if (navigation.classList.contains("expand")){
+          aside.classList.add("expand")
+        }
+      });
+    })
   }
 }
 </script>
 
-<style scoped>
+<style>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
 
 aside {
+  position: relative;
   display: flex;
-  margin: auto;
-  width: 16.8rem;
+  /* margin: auto; */
+  width: 20rem;
+  height: 100%
+}
+
+aside.expand{
+  width: 5rem;
 }
 
 .sidebar {
@@ -227,6 +253,7 @@ aside {
 }
 
 [data-tooltip]::before {
+  z-index: 5;
   content: attr(data-tooltip);
   position: absolute;
   top: 50%;
