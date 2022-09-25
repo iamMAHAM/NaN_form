@@ -1,5 +1,5 @@
 <template>
-  <div class="carousel">
+  <div class="carousel" ref="crsl">
     <div class="carousel-inner">
       <carousel-indicators
         v-if="indicators"
@@ -101,6 +101,16 @@ export default {
   },
   mounted() {
     this.startSlideTimer();
+    window.addEventListener("DOMContentLoaded", ()=>{
+      this.$refs.crsl.addEventListener("mouseover", ()=>{
+        this.stopSlideTimer()
+      })
+
+      this.$refs.crsl.addEventListener("mouseout", ()=>{
+        this.startSlideTimer()
+      })
+
+    })
   },
   beforeUnmount() {
     this.stopSlideTimer();

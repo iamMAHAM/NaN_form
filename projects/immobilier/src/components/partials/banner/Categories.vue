@@ -95,7 +95,7 @@ aside {
   position: relative;
   display: flex;
   /* margin: auto; */
-  width: 20rem;
+  width: 17rem;
   height: 100%
 }
 

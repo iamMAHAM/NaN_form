@@ -11,13 +11,15 @@ export default {
 </script>
 <style scoped>
 .carousel-control {
+  padding: 1rem;
   font-size: 25px;
   border: none;
+  border-radius: 50%;
   display: inline-block;
   position: absolute;
-  height: 50px;
   top: calc(50% - 25px);
-  color: var(--white);
+  color: var(--navcolor);
+  background: var(--white);
   cursor: pointer;
 }
 .cleft {
