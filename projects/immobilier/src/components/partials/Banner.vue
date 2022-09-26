@@ -32,7 +32,7 @@ export default {
 .banner-component{
   margin: 0 auto;
   display: flex;
-  width: 80vw;
+  width: 50vw;
   height: 50vh;
   overflow: hidden;
 }
