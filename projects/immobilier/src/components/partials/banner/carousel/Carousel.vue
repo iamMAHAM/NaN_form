@@ -106,12 +106,12 @@ export default {
       .map(c=> c.style.opacity = value)
     }
     window.addEventListener("DOMContentLoaded", ()=>{
-      this.$refs.crsl.addEventListener("mouseover", ()=>{
+      this.$refs.crsl?.addEventListener("mouseover", ()=>{
         control(1)
         this.stopSlideTimer()
       })
 
-      this.$refs.crsl.addEventListener("mouseout", ()=>{
+      this.$refs.crsl?.addEventListener("mouseout", ()=>{
         this.startSlideTimer()
         control(0)
       })

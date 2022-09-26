@@ -1,7 +1,7 @@
 <template>
   <NavBar :isLogged="isLogged"/>
   <div class="app-content">
-    <router-view :isLogged="isLogged"/>
+    <router-view :isLogged="isLogged" :key="$route.path"/>
     <Support :isAdmin="isAdmin" :uid="uid"/>
     <Footer />
   </div>
@@ -18,7 +18,7 @@
       return {
         isLogged: false,
         isAdmin: false,
-        uid: ''
+        uid: '',
       }
     },
     components:{
@@ -99,4 +99,10 @@ body{
   --shadow: 0px 2px 1px 0 #0001, 0 0.125em 0.25em 0.0625em #0002,
     0 0.2em 0.5em #0002;
 }
+
+.router-link-active.router-link-exact-active .nav__link{
+  color: white;
+  background: var(--light400);
+}
+
 </style>

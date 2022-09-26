@@ -322,7 +322,8 @@ export const forbiden = (thiss)=>{
 export const allCategories = [
 	'terrain',
 	'maison',
-	'magasin'
+	'magasin',
+  'hotel'
 ]
 
 export const messageTemplate = (type, proposition, price, link)=>{

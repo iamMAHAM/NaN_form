@@ -90,6 +90,13 @@ export default {
 }
 </script>
 
+<style scoped>
+
+nav a:hover{
+    background: var(--hovercolor)
+}
+
+</style>
 <style>
 
 #logo{
@@ -158,9 +165,6 @@ nav .dropdown{
 nav a{
     padding: 1rem
 }
-nav a:hover{
-    background:#2C3E50
-}
 
 @media only screen and (max-width: 1346px){
 
@@ -171,10 +175,6 @@ nav a:hover{
     .logo a{
         width: max-content;
         padding: 0 1rem;
-    }
-
-    nav a{
-        padding: .5rem;
     }
 
     .search{

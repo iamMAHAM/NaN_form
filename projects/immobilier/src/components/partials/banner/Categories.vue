@@ -8,56 +8,45 @@
       <li class="nav__list-divider divider-a">
         <h3 class="nav-title">Catégories</h3>
       </li>
-      <li class="nav__item" data-tooltip="Maison">
+      <router-link to="/maison" class="nav__item" data-tooltip="Maison">
         <a href="#" class="nav__link">
         <i class="material-symbols-outlined">house</i>
         <span class="nav__link-text">Maison</span>
         </a>
-      </li>
-      <li class="nav__item" data-tooltip="Terrain">
+      </router-link>
+      <router-link to="/terrain" class="nav__item" data-tooltip="Terrain">
         <a href="#" class="nav__link">
         <i class="material-symbols-outlined">grass</i>
         <span class="nav__link-text">Terrain</span>
         </a>
-      </li>
-      <li class="nav__item" data-tooltip="Hotel">
+      </router-link>
+      <router-link to="/hotel" class="nav__item" data-tooltip="Hotel">
         <a href="#" class="nav__link">
         <i class="material-symbols-outlined">hotel</i>
         <span class="nav__link-text">Hotel</span>
         </a>
-      </li>
-      <li class="nav__item" data-tooltip="magasin">
+      </router-link>
+      <router-link to="/magasin" class="nav__item" data-tooltip="magasin">
         <a href="#" class="nav__link">
         <i class="material-symbols-outlined">store</i>
         <span class="nav__link-text">Magasin</span>
         </a>
-      </li>
+      </router-link>
     </ul>
     <ul id="secondary-navigation-a" class="nav__list">
       <li class="nav__list-divider divider-b">
         <h3 class="nav-title">Spécification</h3>
       </li>
-      <li class="nav__item" data-tooltip="Location">
+      <li class="nav__item" data-tooltip="Location" @click="$emit('filter', 'location')">
         <a href="#" class="nav__link">
           <i class="material-symbols-outlined">component_exchange</i>
         <span class="nav__link-text">Location</span>
         </a>
       </li>
-      <li class="nav__item" data-tooltip="Vente">
+      <li class="nav__item" data-tooltip="Vente" @click="$emit('filter', 'vente')">
         <a href="#" class="nav__link">
         <i class="material-symbols-outlined">sell</i>
         <span class="nav__link-text">Vente</span>
-        </a>
-      </li>
-    </ul>
-    <ul id="secondary-navigation-b" class="nav__list">
-      <li class="nav__list-divider divider-b">
-        <h3 class="nav-title">Général</h3>
-      </li>
-      <li class="nav__item" data-tooltip="Tout">
-        <a href="#" class="nav__link">
-          <i class="material-symbols-outlined">all_inclusive</i>
-        <span class="nav__link-text">Tout</span>
         </a>
       </li>
     </ul>
@@ -68,18 +57,19 @@
 <script>
 export default {
   name: 'Categories',
+  emits:['filter'],
   mounted(){
     window.addEventListener("DOMContentLoaded", ()=>{
       const navigation = document.querySelector(".sidebar");
       const aside = document.querySelector("aside")
       const navToggle = document.querySelector(".nav-toggle");
-      if (navigation.classList.contains("expand")){
-          aside.classList.add("expand")
+      if (navigation?.classList?.contains("expand")){
+          aside?.classList?.add("expand")
       }
-      navToggle.addEventListener("click", () => {
-        navigation.classList.toggle("expand");
-        if (navigation.classList.contains("expand")){
-          aside.classList.add("expand")
+      navToggle?.addEventListener("click", () => {
+        navigation?.classList?.toggle("expand");
+        if (navigation?.classList?.contains("expand")){
+          aside?.classList?.add("expand")
         }
       });
     })
@@ -176,7 +166,7 @@ aside.expand{
 }
 
 .nav__list:hover .nav-title {
-  color: var(--accent2);
+  color: var(--hovercolor);
 }
 
 .nav__list-divider:not(.divider-a) {
@@ -221,7 +211,7 @@ aside.expand{
   transform: scale(1);
   animation: beat 400ms cubic-bezier(0.35, 0.05, 0.62, 1.275);
   animation-iteration-count: 2;
-  color: var(--accent2);
+  /* color: var(--accent2); */
 }
 
 .nav__link-text {

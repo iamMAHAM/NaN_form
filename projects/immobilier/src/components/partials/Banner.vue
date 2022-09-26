@@ -1,6 +1,6 @@
 <template>
   <div class="banner-component">
-    <Categories class="ok"/>
+    <Categories class="ok" @filter="emit"/>
     <carousel :slides="slides" :interval="3000" controls indicators class="rightd"></carousel>
   </div>
 </template>
@@ -10,6 +10,7 @@ import Categories from './banner/Categories.vue';
 import Carousel from "@/components/partials/banner/carousel/Carousel.vue"
 export default {
   name: 'Banner',
+  emits: ['filter'],
   components: {
     Categories,
     Carousel
@@ -25,21 +26,22 @@ export default {
       ]
     }
   },
-  setup(){
-    let hasMatch = false
-
+  methods:{
+    emit(data){
+      console.log(data)
+      this.$emit('filter', data)
+    }
+  },
+  mounted(){
     const screenHandler = ()=>{
       const aside = document.getElementsByClassName("ok")[0]
       const sidebar = document.getElementsByClassName("sidebar")[0]
       if (window.matchMedia("(max-width: 800px)").matches){
-        console.log("ddzdzdza")
-        sidebar.classList.add("expand")
-        aside.classList.add("expand")
-        hasMatch = true
+        sidebar?.classList?.add("expand")
+        aside?.classList?.add("expand")
       }else{
-        console.log("not m,zenfez")
-        aside.classList.remove("expand")
-        sidebar.classList.remove("expand")
+        aside?.classList?.remove("expand")
+        sidebar?.classList?.remove("expand")
       }
     }
     const onResize = ()=>{
@@ -62,13 +64,13 @@ export default {
 }
 
 .rightd{
-  width: calc(55%)
+  width: calc(70%)
 }
 
 
 @media screen and (max-width: 959px){
   .banner-component{
-    height: 35vh;
+    height: 40vh;
   }
 
   .nav-title{
@@ -81,7 +83,7 @@ export default {
 }
 @media screen and (max-width: 609px){
   .banner-component{
-    height: 26vh;
+    height: 31vh;
   }
 
   .rightd{

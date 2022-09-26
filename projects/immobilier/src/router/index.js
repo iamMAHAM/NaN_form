@@ -7,10 +7,19 @@ import Favoris from "../views/Favoris.vue"
 import DashBoard from "@/views/admin/DashBoard.vue"
 import Profile from "@/views/Profile.vue"
 import Banner from "@/components/partials/Banner.vue"
+import NotFound from "@/views/404.vue"
 
 const routes = [
   {
     path: '/',
+    redirect: '/maison',
+  },
+  {
+    path: '/404',
+    component: NotFound
+  },
+  {
+    path: '/:categories',
     name: 'Home',
     component: Home
   },

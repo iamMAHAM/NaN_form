@@ -1,0 +1,14 @@
+[debug] [2022-09-26T12:44:14.799Z] ----------------------------------------------------------------------
+[debug] [2022-09-26T12:44:14.800Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2022-09-26T12:44:14.800Z] CLI Version:   11.8.0
+[debug] [2022-09-26T12:44:14.800Z] Platform:      darwin
+[debug] [2022-09-26T12:44:14.800Z] Node Version:  v16.16.0
+[debug] [2022-09-26T12:44:14.803Z] Time:          Mon Sep 26 2022 12:44:14 GMT+0000 (heure moyenne de Greenwich)
+[debug] [2022-09-26T12:44:14.803Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-09-26T12:44:14.831Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-09-26T12:44:14.831Z] > authorizing via signed-in user (abdul.kabore@uvci.edu.ci)
+[debug] [2022-09-26T12:44:14.831Z] [iam] checking project immobilier-0 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-09-26T12:44:14.832Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/immobilier-0:testIamPermissions [none]
+[debug] [2022-09-26T12:44:14.832Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/immobilier-0:testIamPermissions x-goog-quota-user=projects/immobilier-0
+[debug] [2022-09-26T12:44:14.832Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/immobilier-0:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
