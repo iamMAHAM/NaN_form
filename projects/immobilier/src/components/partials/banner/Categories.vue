@@ -74,7 +74,6 @@ export default {
       const aside = document.querySelector("aside")
       const navToggle = document.querySelector(".nav-toggle");
       if (navigation.classList.contains("expand")){
-          console.log('great')
           aside.classList.add("expand")
       }
       navToggle.addEventListener("click", () => {
@@ -95,7 +94,7 @@ aside {
   position: relative;
   display: flex;
   /* margin: auto; */
-  width: 17rem;
+  width: calc(15%);
   height: 100%
 }
 
@@ -104,14 +103,15 @@ aside.expand{
 }
 
 .sidebar {
-  flex-basis: 16.8rem;
-  min-width: 4.8rem;
+  /* flex-basis: 16.8rem; */
+  width: 100%;
   height: fit-content;
   background: #fff;
   border-radius: .4rem;
   box-shadow: var(--shadow);
   transition: flex 430ms ease;
   position: relative;
+  height: 100%;
 }
 
 .expand {
@@ -185,7 +185,7 @@ aside.expand{
 
 .expand .nav-title,
 .expand .nav__list-divider {
-  visibility: hidden;
+  display: none;
 }
 
 .nav__item {
