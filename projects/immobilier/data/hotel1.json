@@ -1,0 +1,257 @@
+[
+  {
+    "type": "hotel",
+    "title": "Bougainvilla",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/194612367.jpg?k=c98680414d02fe0e4a315473eec6a2b39964e9be288e72ab1af45af5c0066c5c&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/282497236.jpg?k=fd68cd0684aaac5d6f2f14731d52fa93527b237d05a17c2a308a02906cb0f84b&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/282497184.jpg?k=36dadab9f1f569501aa1cb34989c4bdbe9161341ef37c1ceee227b54a97474a9&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/282497244.jpg?k=ef151a072a16087a31cd6c2b7d11f285d60055707bca65fdcd3880bbf6a761e9&o=&hp=1"
+    ],
+    "description": "Vous pouvez bénéficier d'une réduction Genius dans l'établissement Bougainvilla ! Connectez-vous pour économiser.\nSitué à Abidjan, le Bougainvilla propose des hébergements avec une connexion Wi-Fi gratuite, la climatisation, un service de prêt de vélos et l'accès à un jardin avec une piscine extérieure ouverte toute l'année. Vous pourrez pratiquer diverses activités dans les environs, telles que la pêche et la randonnée.\nLa villa comprend 3 chambres, 4 salles de bains, du linge de lit, des serviettes, une télévision par câble à écran plat, un coin repas, une cuisine entièrement équipée et une terrasse avec vue sur le lac.\nUn petit-déjeuner continental est servi tous les matins sur place.\nLe Bougainvilla possède une aire de jeux pour enfants. Un service de location de voitures est assuré sur place.\nLe centre commercial Prima Centre et Cap Sud se trouvent à 18 km.",
+    "price": 168350,
+    "options": {
+      "chambre": 1,
+      "salle": 2
+    },
+    "area": 24,
+    "proposition": "location",
+    "coordinate": [
+      "5.27241224",
+      "-3.89266496"
+    ],
+    "location": "Abidjan (À proximité de&nbsp;: Grand-Bassam)",
+    "presloc": "Port-Bouet (Abouabou), Abidjan, Côte-d'Ivoire"
+  },
+  {
+    "type": "hotel",
+    "title": "Residence Delaure",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/297397038.jpg?k=6487ff49c891b823419a3f409b47a8c407688fea6713dfea07e5c6746ea6b384&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/376799328.jpg?k=eb1c400bd9bcd5fd3a64e8f0a05eaf98a7f28086b5bd392a6414b489032e5374&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/297397221.jpg?k=6567f92ffce7de03bab7742d7cc84bb1095ece630363825e2f1eaf745bb7524f&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/297387565.jpg?k=ac5a2805c8613c6e627649aa37abf639fe8fb1d99b8060389aa23c0ea4c82ce9&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/297387797.jpg?k=de4ec4163d4cc5c8226f08694ade18d781942ad95ffb7d9ce849565d17baf7f1&o=&hp=1"
+    ],
+    "description": "Dotée d'un jardin et d'une terrasse, la Residence Delaure propose un hébergement à Bingerville avec une connexion Wi-Fi gratuite et une vue sur le jardin. Vous séjournerez à 25 km de Yopougon.\nCet appartement climatisé comprend une chambre, un salon, une cuisine entièrement équipée avec un micro-ondes et une bouilloire ainsi que 2 salles de bains pourvues d'une baignoire et de peignoirs. Pour plus de commodité, l'établissement peut fournir des serviettes et du linge de lit moyennant des frais supplémentaires.\nVous séjournerez à 16 km d'Abidjan et à 22 km de Grand-Bassam.",
+    "price": 24050,
+    "options": {
+      "chambre": 1,
+      "salle": 2
+    },
+    "area": 20,
+    "proposition": "location",
+    "coordinate": [
+      "5.34646700",
+      "-3.87189400"
+    ],
+    "location": "Bingerville (À proximité de&nbsp;: Grand-Bassam)",
+    "presloc": "19 Residentiel Nanmoue, 0000 Bingerville, Côte-d'Ivoire"
+  },
+  {
+    "type": "hotel",
+    "title": "Hotel Madou Grand Bassam",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/293781910.jpg?k=22e316bdc187478c4f20c2c3c346e58f6af8d8c7981ffb1c80829c469103c760&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/293780934.jpg?k=09683fa6af1a0abaaff544ac27f5ab72eea43567698021b58ecc45e74364f367&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/293780702.jpg?k=530b13f6266aa0abb2b55243245dc0a0c693cdca62c571915a95524a454378db&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/293780333.jpg?k=bed2e7f56011186549c2c71d223a9364af4874e269735824730305af5a05f4c5&o=&hp=1"
+    ],
+    "description": "L'Hotel Madou Grand Bassam est un établissement 3 étoiles situé à Grand-Bassam, à 1,9 km de la plage de Bassam et à 2,2 km de celle de Drogba. Il propose un restaurant, une réception ouverte 24h/24, un service d'étage et une connexion Wi-Fi gratuite. L'hôtel propose des chambres familiales.\nToutes les chambres comprennent un bureau, une télévision à écran plat, une salle de bains privative, du linge de lit et des serviettes. Les logements disposent de la climatisation et d'une armoire.\nUn petit-déjeuner continental ou végétarien est servi sur place.\nVous séjournerez à 4,3 km du musée national du costume et à 5 km de la cathédrale du Sacré-Cœur.",
+    "price": 19500,
+    "options": {
+      "chambre": 1,
+      "salle": 2
+    },
+    "area": 24,
+    "proposition": "location",
+    "coordinate": [
+      "5.21787202",
+      "-3.76916816"
+    ],
+    "location": "Hôtel à Grand-Bassam",
+    "presloc": "Mockey-Ville, rue du chateau d'eau, Grand-Bassam, Côte-d'Ivoire"
+  },
+  {
+    "type": "hotel",
+    "title": "Hotel Eucalyptus Anan",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/153739107.jpg?k=8bd6cbbe45467f0f633cc32ab7be792c2388d3899cbed01561f76688c82144d3&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/206240667.jpg?k=df19b2de71e2f238180701c51cebcc10cb917d937f6b00e9099b0130cce3f0ab&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/205436315.jpg?k=fba9867883b48164bc7155a174d5193903d71645b137249cb2b0c7fe4793caf9&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/153739120.jpg?k=377e747ef7d1bf90090b9e59b0e3344183ea57e414feef79f525978e161db46d&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/205436306.jpg?k=ddccd4660917f9ce641ef685aaa9e09d86e3843004d4195d9b09cdb9dc2dab36&o=&hp=1"
+    ],
+    "description": "Doté d'un salon commun, l'Hotel Eucalyptus Anan est situé à Bingerville. Cet hôtel 3 étoiles dispose d'une réception ouverte 24h/24 et d'une cuisine commune. L'établissement possède un restaurant servant une cuisine africaine et un parking privé gratuit.\nLes chambres sont équipées de la climatisation et d'une télévision à écran plat.\nL'Hotel Eucalyptus Anan sert un petit-déjeuner continental.\nUne terrasse bien exposée est présente. Vous pourrez pratiquer diverses activités à Bingerville et dans ses environs, telles que le vélo.\nVous séjournerez à 16 km d'Abidjan et à 23 km de Grand-Bassam.",
+    "price": 35750,
+    "options": {
+      "chambre": 1,
+      "salle": 4
+    },
+    "area": 20,
+    "proposition": "location",
+    "coordinate": [
+      "5.35035900",
+      "-3.87571200"
+    ],
+    "location": "Hôtel à Bingerville",
+    "presloc": "Bingerville Village Anan 600 m du Carrefour Manguier, Bingerville, Côte-d'Ivoire"
+  },
+  {
+    "type": "hotel",
+    "title": "Boblin la Mer hotel restaurant plage",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/283052631.jpg?k=ffc79a5780b335fc14f325fd7983b4db74eb3f6fd588217cc462c93ba89ddb23&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/283052666.jpg?k=ea7da4253814fdd62a572253234da20209b56e9a502ddc303d63e6149fb83525&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/283052662.jpg?k=abd655b6d612c37298baa354d1fadee5678559fec52d57926a7eb26776e06355&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/283052671.jpg?k=d6d69d6f9959fcaefb93f5c57f690f227bf60afd8dc5286accc6adbef67c4382&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/283052676.jpg?k=1039d9c439d09a840c419e325468db6124dac8569d0cd65783bd76725626a3f7&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/283052635.jpg?k=c2273b6b1e6398b5b768b57b269cc29c3e7db7fb331f60b165d4afe738c6acf3&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/283052690.jpg?k=171d23b2017770a3c456debd197cc7b551bf280e1ba475e5af66bdcb9fbfbc4b&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/283052680.jpg?k=1b2f1454328bde5b88089f77cc361b69c31ea159a57bf13ca9261f546aef3281&o=&hp=1"
+    ],
+    "description": "Situé à Grand-Bassam, à quelques pas de la plage de Drogba, le Boblin la Mer hotel restaurant plage propose un restaurant, un parking privé gratuit, un bar et un jardin. Doté d'une plage privée, l'hôtel se trouve à proximité de plusieurs attractions réputées, à environ 1,4 km de la plage de Bassam, à 1,4 km de la plage d'Assoyam et à 1,5 km du musée national du costume. Vous profiterez d'une terrasse, d'une réception ouverte 24h/24, d'une connexion Wi-Fi gratuite et d'un bureau d'excursions.\nToutes les chambres comprennent une armoire, une télévision à écran plat et une salle de bains privative.\nLe Boblin la Mer hotel restaurant plage se trouve à 1,9 km de la cathédrale du Sacré-Cœur et à 2,6 km de La Maison Ganamet.",
+    "price": 34450,
+    "options": {
+      "chambre": 1,
+      "salle": 2
+    },
+    "area": 24,
+    "proposition": "location",
+    "coordinate": [
+      "5.19721269",
+      "-3.75052214"
+    ],
+    "location": "Hôtel à Grand-Bassam (Drogba Beach )",
+    "presloc": "bp 721, Grand-Bassam, Côte-d'Ivoire"
+  },
+  {
+    "type": "hotel",
+    "title": "Hotel La Madrague",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/263081205.jpg?k=76fa96c6946fd430385d48cade6dbe9164d1b8970c528d02ab3d907564efe4a2&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/264617048.jpg?k=910ede5277c356416ca976b2b31f58de0144f6c421c33b2543e33a6a9486c19f&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/263113120.jpg?k=01e50f9cbd9090db91a8ddfa92bfc7f61bab350be5d05ec1a2900f354075b7fc&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/263088884.jpg?k=a8648be86ab779c9295edd7b1d715821b7c483cf7b889f51876d853b950ef54b&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/264616937.jpg?k=8984dc9362317e95d7f91aa9d022d4eacdfc6acab22b7a750345c5f0763982f1&o=&hp=1"
+    ],
+    "description": "Situé à Grand-Bassam, l'Hôtel La Madrague dispose d'un restaurant, d'une piscine extérieure, d'un bar et d'un jardin. Ce logement se trouve à quelques pas de la plage de Drogba, à 500 mètres de la plage de Bassam et à 2,3 km de la plage d'Assoyam. Vous pourrez profiter d’une vue sur le jardin, d’une terrasse bien exposée, d’une réception ouverte 24h/24 et d’une connexion Wi-Fi gratuite dans l’ensemble des locaux.\nToutes les chambres de l’hôtel sont équipées d’un bureau. Les logements de l’Hotel La Madrague disposent d’une salle de bains privative pourvue d’une douche et d’articles de toilette gratuits, d’une télévision à écran plat et de la climatisation. Certaines chambres bénéficient d’un coin salon. Toutes les chambres comprennent une armoire.\nVous pourrez déguster un petit-déjeuner continental ou à la carte.\nLe musée national du costume de Grand-Bassam se trouve à 2,4 km de l'Hotel La Madrague, et la cathédrale du Sacré-Cœur est à 2,8 km.",
+    "price": 54600,
+    "options": {
+      "chambre": 1,
+      "salle": 4
+    },
+    "area": 22,
+    "proposition": "location",
+    "coordinate": [
+      "5.19852160",
+      "-3.75816280"
+    ],
+    "location": "Hôtel à Grand-Bassam (Drogba Beach )",
+    "presloc": "Route d'Azuretti, Grand-Bassam, Côte-d'Ivoire"
+  },
+  {
+    "type": "hotel",
+    "title": "Rundbungalow auf Lionsrest",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/377810264.jpg?k=f6874d87f31c4ec2695aa07d424a12554b48e51591d46570cd4ff80c327f9f95&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/377804175.jpg?k=cbbaf34d820c5c247275b6d7f367ba26efdeab7a62c0f92aa0f8009243ac0e9a&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/377804558.jpg?k=8ac8c59f7f40bf1781d660340dabdc95576c688a7ee1d603009c5e8e2e4cd2b4&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/377804505.jpg?k=1059011690786a0af5962aa51e1db13af46d683dd09931f85a47135eebe45a6f&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/377725404.jpg?k=edd7f82c2c6a92b59886a6ee0bcfba16405f6d59913bd90b0cb8665005c8ab63&o=&hp=1"
+    ],
+    "description": "Doté d'un barbecue et offrant une vue sur le jardin, le Rundbungalow auf Lionsrest est situé à Grand-Bassam, à 5 km de La Maison Ganamet et à 6 km de la cathédrale du Sacré-Cœur. Vous bénéficierez gratuitement d'un parking privé et d'une connexion Wi-Fi.\nCette maison de vacances climatisée comprend une chambre séparée, une salle de bains et un coin salon. Les serviettes et le linge de lit sont fournis.\nVous pourrez profiter d'une terrasse bien exposée. Après une journée de randonnée, de plongée ou de pêche, vous pourrez vous détendre dans le jardin ou le coin salon commun.\nLe musée national du costume se trouve à 6 km.",
+    "price": 19500,
+    "options": {
+      "chambre": 1,
+      "salle": 1
+    },
+    "area": 23,
+    "proposition": "location",
+    "coordinate": [
+      "5.19202568",
+      "-3.68346355"
+    ],
+    "location": "Grand-Bassam",
+    "presloc": "Route de l'embouchure, Grand-Bassam, Côte-d'Ivoire"
+  },
+  {
+    "type": "hotel",
+    "title": "L'elephant blanc",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/224894238.jpg?k=2c60b19d024727d023f47f768330e7d60dd5ce52573b17427c94197e20fcfb12&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/290960516.jpg?k=131c4f2c7cd1cba0775e1013b64c56b2114e22dda5c28305d703f448cb9117c9&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/290963003.jpg?k=e7371e162d232f9790f8cba62c229647ac23d06e913f4f62b74fddd341390ad5&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/290958654.jpg?k=37654757aa8ed9f4331005919ee209c7cab0c083d1ccc8e9bea2432c8586ce79&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/345051850.jpg?k=968ff07fb3ea62cccb71c3e509d05ee3ea5730206361f4f4c36a15cb4ed32b03&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/345051787.jpg?k=17462a131983f1e832ecb9abea89f5af951192b381aebc31a5feeb9b479d1e6a&o=&hp=1"
+    ],
+    "description": "L'Elephant blanc est un hébergement en bord de mer situé à Grand-Bassam, à 12 km du musée national du costume et à 13 km de la cathédrale du Sacré-Cœur. Cette maison de vacances dispose d'un jardin, d'un barbecue, ainsi que d'une connexion Wi-Fi et d'un parking privé gratuits.\nCette maison de vacances comprend une chambre, une salle de bains, du linge de lit, des serviettes, une télévision par satellite à écran plat, un coin repas, une cuisine entièrement équipée et une terrasse avec vue sur le jardin.\nLa Maison Ganamet se trouve à 13 km.",
+    "price": 35750,
+    "options": {
+      "chambre": 1,
+      "salle": 2
+    },
+    "area": 22,
+    "proposition": "location",
+    "coordinate": [
+      "5.18395841",
+      "-3.66420693"
+    ],
+    "location": "Grand-Bassam",
+    "presloc": "national 1 mondoukou, Grand-Bassam, Côte-d'Ivoire"
+  },
+  {
+    "type": "hotel",
+    "title": "Appartement Cosy et Moderne à Riviera Faya",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/381801397.jpg?k=9cc8356568a93481e2d2be398f79ac96abb24547b38c11eeaca8a22eddebbfce&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/381801391.jpg?k=8666bc0a0027d4e2ee67251ee0c8d2d33496f8fd664bc2984078829fe519019e&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/381801404.jpg?k=0266e22f9c927145e61856d5883d99cb82db6a5d37b9bd669482b0b7bc5bdc4b&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/381801412.jpg?k=9849f81a933ecb39231e4adbaa9fdf00a3f491b7725bb16900b297f7ae187d4f&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/381801420.jpg?k=cee246ca15b4b357becfb6f8a4cc669c6bed99b9ba3582ff4b3e3016d7f9d99f&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/381801425.jpg?k=be4139f9a76a8d4ad3507fdfe2aff44b3a6798069527276998b8f55d2572710f&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/381801430.jpg?k=be040b47b72016c7f7fc2a8c793f553ad727f851847edbe7f76bf778f6509d02&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/381801437.jpg?k=d4fbcc338157f0f1882fb1b4514f8e9e31eaa2d45a0695062fa177e53773be74&o=&hp=1"
+    ],
+    "description": "Doté d'une terrasse, l'Appartement Cosy et Moderne à Riviera Faya est situé à Abidjan, à 10 km du centre commercial Abidjan, à 12 km de l'université Félix Houphouët-Boigny et à 13 km du centre commercial Prima. Vous bénéficierez gratuitement d'un parking privé et d'une connexion Wi-Fi.\nCet appartement climatisé comprend 2 chambres, une télévision à écran plat et une cuisine.\nUn petit-déjeuner à la carte est servi sur place.\nCap Sud et PlaYce Marcory se trouvent à 14 km de l'Appartement Cosy et Moderne à Riviera Faya.",
+    "price": 77350,
+    "options": {
+      "chambre": 1,
+      "salle": 3
+    },
+    "area": 21,
+    "proposition": "location",
+    "coordinate": [
+      "5.35035900",
+      "-3.87571200"
+    ],
+    "location": "Abidjan (À proximité de&nbsp;: Grand-Bassam)",
+    "presloc": "Route de Bingerville face au Collège Jules Verne, Côte d’Ivoire, Abidjan, Côte-d'Ivoire"
+  },
+  {
+    "type": "hotel",
+    "title": "Hotel Restaurant La Playa",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/90259737.jpg?k=8bbde2cfe6bbffa948a1e9350d5583a67dbdad785a5406bef5aef72bb9545138&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/108216322.jpg?k=6323deb41b8e14835ee19ea28f1d929a1ff849882d1c2153a539718ac84ad97f&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/90259674.jpg?k=23a4fb054d40bbef727b86b41b0336e50ce62fc08d5ce83b32d38231430918fa&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/108222684.jpg?k=b2193c3dc922af3c5f8eef8515d9334ab7eee0c74199e3f9e5f76e18ff70d461&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/90248418.jpg?k=f261450c4277d7984b3c841e4ca9f91759516006ea5273e2001c435cd12dc56a&o=&hp=1"
+    ],
+    "description": "Situé à Grand-Bassam, à 50 mètres de la plage de Drogba, l'Hotel Restaurant La Playa propose un restaurant, un parking privé gratuit, une piscine extérieure et un bar. Vous profiterez d'une plage privée, d'un salon commun et d'un jardin. La réception est ouverte 24h/24. Des services d'étage et de change sont assurés.\nToutes les chambres comprennent une armoire. Leur salle de bains privative est pourvue d'une douche et d'articles de toilette gratuits. Les logements disposent d'une télévision à écran plat et de la climatisation. Certains comprennent un coin salon.\nUn petit-déjeuner buffet ou continental est servi sur place.\nL'Hotel Restaurant La Playa possède une aire de jeux pour enfants.\nVous séjournerez à proximité de la plage d'Assoyam, du musée national du costume et de la cathédrale du Sacré-Cœur.",
+    "price": 44850,
+    "options": {
+      "chambre": 1,
+      "salle": 1
+    },
+    "area": 22,
+    "proposition": "location",
+    "coordinate": [
+      "5.19562902",
+      "-3.74126583"
+    ],
+    "location": "Hôtel à Grand-Bassam (Drogba Beach )",
+    "presloc": "Route d'Azuretti Grand Bassam, Grand-Bassam, Côte-d'Ivoire"
+  }
+]

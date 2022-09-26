@@ -1,0 +1,26 @@
+[
+  {
+    "type": "hotel",
+    "title": "Residence Heaven",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/99098393.jpg?k=b050e9202ac53df8e002c2b33263538c06e71cac03b8ba3eef9f0e83003ec339&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/120468661.jpg?k=3a036aae9d85895f9a41aa6253bcf444192f54eed0538369501d57d059e7a7a8&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/99095337.jpg?k=a77192e43d9bdbdbda00f96b2fe0626c44ba5f5a1547109647a4b0ec1e382338&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/99093953.jpg?k=579dc99c78406a060fc168a8091c001c421f60e3aeeccb3e7e18f67026d2f64a&o=&hp=1"
+    ],
+    "description": "Vous pouvez bénéficier d'une réduction Genius dans l'établissement Residence Heaven ! Connectez-vous pour économiser.\nDotée d'un bar, d'un jardin et offrant une vue sur le jardin, la Residence Heaven est située à Yamoussoukro, à 5 km de la mosquée. Cet hôtel 3 étoiles propose une réception ouverte 24h/24 et une connexion Wi-Fi gratuite. Cet établissement non-fumeurs se trouve à 9 km de la basilique Notre-Dame de la Paix de Yamoussoukro.\nToutes les chambres comprennent une armoire. Les chambres de la Residence Heaven sont équipées d'une télévision par satellite à écran plat et d'un ordinateur.\nL'ONUCI Banbat et l'ONUCI se trouvent à 7 km.",
+    "price": 22100,
+    "options": {
+      "chambre": 1,
+      "salle": 3
+    },
+    "area": 22,
+    "proposition": "location",
+    "coordinate": [
+      "6.81987358",
+      "-5.24183437"
+    ],
+    "location": "Hôtel à Yamoussoukro",
+    "presloc": "Quartier millionnaire, Yamoussoukro, Côte-d'Ivoire"
+  }
+]

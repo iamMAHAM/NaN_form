@@ -35,7 +35,7 @@ const saveFile = (file, collect)=>{
 	})
 }
 
-saveFile(path.join(__dirname, "./scraped.json"), 'maison')
+saveFile(path.join(__dirname, "./plan.json"), 'plan')
 
 // const ok = (...args)=>{
 //   console.log(args)
