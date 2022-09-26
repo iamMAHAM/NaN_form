@@ -323,7 +323,8 @@ export const allCategories = [
 	'terrain',
 	'maison',
 	'magasin',
-  'hotel'
+  'hotel',
+  'plan'
 ]
 
 export const messageTemplate = (type, proposition, price, link)=>{

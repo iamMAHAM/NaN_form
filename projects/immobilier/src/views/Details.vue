@@ -1,6 +1,7 @@
 <template>
 <div class = "card-wrapper">
-  <div class = "card">
+  <Loader v-if="!load"/>
+  <div class = "card" v-else>
     <!-- card left -->
     <div class = "product-imgs">
       <div class = "img-display">
@@ -14,7 +15,7 @@
         <div class = "img-item">
           <a href = "#" data-id = "1">
           <img
-            src = "../assets/m1.jpg"
+            :src = "cardInfo?.images[0]"
             @click="toggleImages"
           >
           </a>
@@ -22,7 +23,7 @@
         <div class = "img-item">
           <a href = "#" data-id = "2">
           <img
-            src = "../assets/m2.jpg"
+            :src = "cardInfo?.images[1]"
             @click="toggleImages"
           >
           </a>
@@ -30,7 +31,7 @@
         <div class = "img-item">
           <a href = "#" data-id = "3">
           <img
-            src = "../assets/m3.jpeg"
+            :src = "cardInfo?.images[2]"
             @click="toggleImages"
           >
           </a>
@@ -40,13 +41,13 @@
     <!-- card right -->
     <div class = "product-content">
       <h2 class = "product-title">{{ cardInfo?.title }}</h2>
-      <div class = "product-price">
+      <div class = "product-price" v-if="price">
         <p class = "price">Prix: <span>{{ cardInfo?.price?.toLocaleString('ci') }} FCFA</span></p>
       </div>
       <div class = "product-detail">
         <h2>Description</h2>
         <p>{{ cardInfo?.description }}</p>
-        <ul>
+        <ul v-if="price">
           <li>
             <i class="material-symbols-outlined">home_work</i>
             <span>{{ cardInfo?.type }}</span>
@@ -90,7 +91,7 @@
 </div>
 
 <Maps
-  v-if="emp"
+  v-if="emp && price"
   :emp="emp"
 />
 
@@ -99,16 +100,18 @@
 <script>
 import { addConversation, auth, findOne, messageTemplate } from '@/lib/firestoreLib'
 import Maps from "../components/Map.vue"
+import Loader from '@/components/partials/Loader.vue'
 export default {
   name: 'Details',
   props: ['isLogged'],
   components: {
     Maps,
+    Loader
   },
   data(){
     return {
       cardInfo: {},
-      load: false,
+      load: true,
       current: '',
       emp: '',
       ownerInfo: ''
@@ -143,8 +146,13 @@ export default {
     .then(detailInfo=>{
       this.current = detailInfo?.images?.slice(0, 1)
       this.cardInfo = detailInfo
+      console.log(this.cardInfo)
       this.emp = detailInfo?.location
+      this.load = false
     })
+  },
+  computed(){
+    return this.cardInfo.type !== 'plan'
   }
 }
 </script>
@@ -175,6 +183,7 @@ export default {
 
 .img-showcase img {
   min-width: 100%;
+  max-height: 300px;
 }
 
 .img-select {
@@ -193,6 +202,9 @@ export default {
 }
 
 .product-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   padding: 1rem;
 }
 

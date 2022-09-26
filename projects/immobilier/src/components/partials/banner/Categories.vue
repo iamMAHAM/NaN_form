@@ -26,10 +26,16 @@
         <span class="nav__link-text">Hotel</span>
         </a>
       </router-link>
-      <router-link to="/magasin" class="nav__item" data-tooltip="magasin">
+      <router-link to="/magasin" class="nav__item" data-tooltip="Magasin">
         <a href="#" class="nav__link">
         <i class="material-symbols-outlined">store</i>
         <span class="nav__link-text">Magasin</span>
+        </a>
+      </router-link>
+      <router-link to="/plan" class="nav__item" data-tooltip="Plan">
+        <a href="#" class="nav__link">
+        <i class="material-symbols-outlined">map</i>
+        <span class="nav__link-text">Plan</span>
         </a>
       </router-link>
     </ul>

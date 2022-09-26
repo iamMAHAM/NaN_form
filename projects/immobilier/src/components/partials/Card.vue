@@ -27,11 +27,13 @@
         <Loader :view="2" :height="24" :width="24" class="favs" :color="'var(--red)'" v-if="card?.isLoad"/>
       </div> 
       <div class="bottom">
-        <h3>{{ card?.type }} à {{ card?.location?.toLocaleUpperCase() }}</h3>
+        <h3>
+          {{ price ?  card?.type  + 'à' + card?.location?.toLocaleUpperCase() : 'Plan de Maison'}}
+        </h3>
         <p>
          {{ card.description.slice(0, 80)}} ...
         </p>
-        <div class="advants">
+        <div class="advants" v-if="price">
           <div v-if="card?.type === 'maison'">
             <span>Chambres</span>
             <div>
@@ -54,7 +56,7 @@
             </div>
           </div>
         </div>
-        <div class="price">
+        <div class="price" v-if="price">
           <span>En {{ card?.proposition }}</span>
           <span>{{ card?.price?.toLocaleString('ci') }}</span> FCFA
           <div class="buttonss" v-if="admin">
@@ -139,6 +141,9 @@ export default {
     },
     solded(){
       return this.card.status === "solded"
+    },
+    price(){
+      return this.card.type !== "plan"
     }
   },
 
@@ -203,7 +208,7 @@ p{
   transition: box-shadow .5s;
   pointer-events: none;
   width: 23%;
-  height: auto;
+  height: max-content;
   background-color: white;
   position: relative;
   margin: 1rem 0;

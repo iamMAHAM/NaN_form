@@ -56,14 +56,14 @@ const scraper = (url="https://www.maisonsclairlogis.fr/plan-maison/")=>{
     const { document } = new JSDOM(res.data).window
     Array.from(document.querySelectorAll(".item"))
     .map(div=>{
-      const images = [document.querySelector("img").getAttribute("data-lazy-src")]
+      const images = [div.querySelector("img").getAttribute("data-lazy-src")]
       const title = div.querySelector(".nom").textContent.trim()
       const type = div.querySelector(".gamme").textContent.trim()
-      const description = div.querySelector(".description").textContent.trim() + ' personnalisable'
+      const description = type + div.querySelector(".description").textContent.trim().replace("...", '') + ' personnalisable /'
       cardInfos.push({
         title: title,
         images: images,
-        type: type,
+        type: 'plan',
         description: description
       })
     })
