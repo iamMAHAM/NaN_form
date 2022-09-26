@@ -11,6 +11,7 @@ export default {
 </script>
 <style scoped>
 .carousel-control {
+  opacity: 0;
   padding: 1rem;
   font-size: 25px;
   border: none;

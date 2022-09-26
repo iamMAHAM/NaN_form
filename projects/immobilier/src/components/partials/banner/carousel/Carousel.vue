@@ -101,13 +101,19 @@ export default {
   },
   mounted() {
     this.startSlideTimer();
+    const control = (value=1)=>{
+      Array.from(document.getElementsByClassName("carousel-control"))
+      .map(c=> c.style.opacity = value)
+    }
     window.addEventListener("DOMContentLoaded", ()=>{
       this.$refs.crsl.addEventListener("mouseover", ()=>{
+        control(1)
         this.stopSlideTimer()
       })
 
       this.$refs.crsl.addEventListener("mouseout", ()=>{
         this.startSlideTimer()
+        control(0)
       })
 
     })
