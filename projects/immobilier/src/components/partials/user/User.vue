@@ -6,7 +6,7 @@
   <td>{{ age }}</td>
   <td>{{ user.address }}</td>
   <td>{{ user.isVerified}}</td>
-  <td>
+  <td v-if="user.role !== 'admin'">
     <button
       class="view"
     >
@@ -33,6 +33,9 @@
       <i class="material-symbols-outlined">delete</i>
     </button>
   </td>
+  <td v-else>
+    <i class="material-symbols-outlined">block</i>
+  </td>
   <div class="modal-user" v-if="show">
     <div class="user-info-content">
       <div class="lslslsl">
@@ -55,8 +58,9 @@
         <i class="material-symbols-outlined">local_police</i>
         <select v-model="user.role">
           <option disabled :value="undefined">choisir un rôle</option>
-          <option value="user">user</option>
-          <option value="admin">admin</option>
+          <option value="acheteur">acheteur</option>
+          <option value="vendeur">vendeur</option>
+          <!-- <option value="admin">admin</option> -->
         </select>
       </div>
       <button
@@ -115,7 +119,7 @@ export default {
 	},
   computed:{
     role(){
-      return this.user.role = this.user.role ? this.user.role : 'user'
+      return this.user.role = this.user.role ? this.user.role : 'acheteur'
     },
     age(){
       return new Date().getFullYear() -  parseInt(this.user?.birth?.split("-")[0])

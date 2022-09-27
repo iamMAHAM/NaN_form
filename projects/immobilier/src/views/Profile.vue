@@ -480,6 +480,7 @@ a:hover {
 
 /* card */
 .card {
+  justify-content: space-between;
   background-color: #fff;
   border: 1px solid whitesmoke;
   padding: 1.2rem;
@@ -504,7 +505,6 @@ a:hover {
   color: #fff;
   border: none;
   box-shadow: 1px 2px 3px rgba(212, 208, 208, 0.2);
-  justify-content: space-between;
 }
 
 .card-container{

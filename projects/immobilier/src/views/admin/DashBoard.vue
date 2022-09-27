@@ -6,10 +6,8 @@
 			<div class="avatar ease">
 				<div>
 					<a href="#">
-						<img class="ease" :src="auth?.currentUser?.photoURL" alt="">
+						<img class="ease" :src="auth?.currentUser?.photoURL">
 					</a>
-          <p>{{ auth?.currentUser?.displayName }}</p>
-          <p>Admin</p>
 				</div>
 			</div>
 
@@ -36,6 +34,9 @@
 			<!-- tab-top-bar -->
 			<div class="top-bar">
 				<ul>
+          <a style="display: inline-block;">
+            <div>{{'Admin : ' + auth?.currentUser?.displayName }}</div>
+          </a>
 					<li>
 						<a href="" title="Log Out">
 							<i class="material-symbols-outlined">logout</i>
@@ -229,7 +230,8 @@ li{
 
 .container {
   width: 100%;
-	max-width: 80vw;
+	max-width: 90vw;
+  height: 100vh;
 	margin: 5rem auto;
 }
 
@@ -239,7 +241,7 @@ li{
   border: .1rem solid var(--white);
 	background: var(--white);
 	width: 100%;
-	height: 800px;
+	height: 950px;
 	position: relative;
 }
 
@@ -264,9 +266,9 @@ li{
 	border-radius: 50%;
 }
 
-.avatar div img:hover  {
+/* .avatar div img:hover  {
 	transform: rotate(360deg);
-}
+} */
 
 .clear-backend > input {
 	position: absolute;

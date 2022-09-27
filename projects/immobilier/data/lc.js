@@ -36,7 +36,7 @@ const scrape = (
         const coordinate = document.querySelector("#item_coordinates").textContent.split("\n").filter(c=>c.length > 0)
         const location = document.querySelector(".address >div >div").children[0].textContent
 				cardInfos.push({
-					type: 'terrain',
+					type: 'maison',
 					title: title,
 					images: images,
 					description: descriptiton,
@@ -49,13 +49,14 @@ const scrape = (
 				})
       })
       .then(()=>{
-        fs.writeFile(path.join(__dirname, `./maisonLocation.json`), JSON.stringify(cardInfos, null, space=2), (err)=>{
+        fs.writeFile(path.join(__dirname, `./maisonLd.json`), JSON.stringify(cardInfos, null, space=2), (err)=>{
           err ? console.log(err) : console.log("write done !")
         })
       })
+      .catch(e=>console.log(e.message))
     })
   })
 }
 
-scrape("https://abidjan.locanto.ci/Terrains-a-vendre/352/?query=terrain+%C3%A0+location&geoid=&dist=0")
-// saveFile('./terrainl.json', 'terrain')
+// scrape("https://www.locanto.ci/Location-maison/307/")
+saveFile('./maisonLd.json', 'maison')  

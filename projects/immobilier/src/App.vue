@@ -44,6 +44,9 @@
           notConnectedR.includes(this.$route.path) ? this.$router.push("/") : ''
         }
       })
+    },
+    updated(){
+      console.log('updated')
     }
   }
 </script>

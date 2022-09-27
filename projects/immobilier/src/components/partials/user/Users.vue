@@ -14,9 +14,9 @@
         style="cursor: pointer; text-align:center; width: max-content;"
         v-model="filter">
         <option value="">Tout Le Monde</option>
-        <option value="user">users</option>
-        <option value="admin">admin</option>
-        <option value="vendor">partnaires</option>
+        <option value="acheteur">acheteurs</option>
+        <option value="admin">admins</option>
+        <option value="vendeur">vendeurs</option>
       </select>
       <i
         class="material-symbols-outlined"

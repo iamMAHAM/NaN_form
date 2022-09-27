@@ -28,7 +28,7 @@
       </div> 
       <div class="bottom">
         <h3>
-          {{ !isPlan ?  card?.title  + ' || ' + card?.location?.toLocaleUpperCase() : 'Plan de Maison'}}
+          {{ !isPlan ?  title  + ' || ' + card?.location?.toLocaleUpperCase() : 'Plan de Maison'}}
         </h3>
         <p>
          {{ card.description.slice(0, 80)}} ...
@@ -146,6 +146,9 @@ export default {
     },
     isPlan(){
       return this.card.type === "isPlan"
+    },
+    title(){
+      return this.card.title.slice(0, 17)
     }
   },
 
@@ -251,6 +254,7 @@ p{
 
 .card-container .box .top img {
   width: 100%;
+  min-height: 200px;
   max-height: 200px;
   margin-bottom: -.5rem;
 }
