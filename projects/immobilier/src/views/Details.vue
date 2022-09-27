@@ -135,6 +135,7 @@ export default {
   },
   mounted(){
     const params = this.$route.params
+    console.log(params)
     findOne(`ads/X1eA1Bk8tfnVXHqduiTg/${params.categorie}`, params.id)
     .then(detailInfo=>{
       this.current = detailInfo?.images?.slice(0, 1)

@@ -1,0 +1,263 @@
+[
+  {
+    "type": "hotel",
+    "title": "Novotel Abidjan",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/251611763.jpg?k=e2415a01b1851d7f32c10b7bb0284a697f214afa18d423a902b69d88500a3796&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/160657011.jpg?k=5894ec034600fb932554dc05208c87070330b342c5cc1342fbec82d740e7877b&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/160657098.jpg?k=10297aa9789ae2896cec8521fba0a061c8e021681c3fa457f743c9b773919aa1&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/160656986.jpg?k=fc2ddf3eb2852ab9493dcf14faff88bce4dbbdc4df4a78e5c31b13b9ffc9dfc4&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/251611772.jpg?k=833d6294bdbc70b1f8c9c5b13894eaefea2de3037c9b187aec8675f2114787ea&o=&hp=1"
+    ],
+    "description": "Doté d'une piscine extérieure et d'une salle de réunion, le Novotel Abidjan est situé à 10 minutes en voiture du centre-ville d'Abidjan et à 5 minutes de route du stade Boigny. Une connexion Wi-Fi est disponible gratuitement dans tout l'établissement.\nToutes les chambres climatisées comprennent un coin salon ainsi que la télévision par satellite. Chaque salle de bains privative est pourvue d'une baignoire.\nVous pourrez déguster des plats locaux et internationaux dans le restaurant de l'établissement. Le bar, quant à lui, propose une sélection de boissons.\nLe Novotel Abidjan possède un centre de remise en forme. Les autres installations incluent une aire de jeux pour enfants et une blanchisserie.\nL'aéroport Félix Houphouët-Boigny est implanté à 14 km du Novotel Abidjan. Sur place, vous aurez accès à un parking privé gratuit.",
+    "price": 215490,
+    "options": {
+      "chambre": 1,
+      "salle": 2
+    },
+    "area": 23,
+    "proposition": "location",
+    "coordinate": [
+      "5.31601291",
+      "-4.01616544"
+    ],
+    "location": "Hôtel à Abidjan (Le Plateau)",
+    "presloc": "10, Avenue du Général de Gaulle, Le Plateau, 3718 Abidjan, Côte-d'Ivoire",
+    "ownerId": "zsHm67Xam6bfrPNUbPCRkHGJZz33"
+  },
+  {
+    "type": "hotel",
+    "title": "Pullman Abidjan",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/251920769.jpg?k=483c00c72f3868c63c862b5df003c2fad93a82a0faec4b95c367cba51ad581b7&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/251920770.jpg?k=d947474accbe3cf96052bb242b467acfaa5e7fca8cf951408003e1f2aac175c2&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/251920811.jpg?k=93956099722b9ef35e5e51c5e50c6c4c5c703ff378dcc8771d0fa638491a988c&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/251920786.jpg?k=583f83631a8e5852e7e732ee696802576b2a5c0e4708f4fe8360b0410655101e&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/251920795.jpg?k=b29fdc64309fdf259bd6f8e547632d8fde400e268101cb4719545e24a7d3ad28&o=&hp=1"
+    ],
+    "description": "Doté d'une piscine extérieure, le Pullman Abidjan propose une connexion Wi-Fi gratuite dans tout l'établissement.\nLes chambres, climatisées, comportent un coin salon et une télévision à écran plat. Certaines offrent une vue sur le lagon. Leur salle de bains privative est munie d'une baignoire. Un spa, une salle de sport et un bar de piscine sont par ailleurs présents.\nVous pourrez profiter d'un petit-déjeuner buffet chaque matin ou déguster des plats locaux et internationaux au restaurant. Le bar sert un éventail de boissons. \nLa réception est ouverte 24h/24. \nL'aéroport international Félix-Houphouët-Boigny est à 12 km. Le parking privé sur place est gratuit et un service de navette aéroport peut être assuré.",
+    "price": 215490,
+    "options": {
+      "chambre": 1,
+      "salle": 4
+    },
+    "area": 20,
+    "proposition": "location",
+    "coordinate": [
+      "5.32240664",
+      "-4.01354141"
+    ],
+    "location": "Hôtel à Abidjan (Le Plateau)",
+    "presloc": "Avenue Abdoulaye Fadiga, Le Plateau, 01 BP 2185 Abidjan, Côte-d'Ivoire",
+    "ownerId": "zsHm67Xam6bfrPNUbPCRkHGJZz33"
+  },
+  {
+    "type": "hotel",
+    "title": "Ibis Abidjan Plateau",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/251658078.jpg?k=e51cc64406c89096cf180ac7d69b59324e76ec694fc2c70c32862a041981c353&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/253936687.jpg?k=079d03871c41cd747fce3009228da2a57fa9a929e3faa120c57fb5e917aef91a&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/251658094.jpg?k=f71126bcac1ce021f80564376872ec1d22cb0356e99b4d8224e1c80569eb5950&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/251658079.jpg?k=5e35a95ba5bf1e1fb320428366c41c2f6eda11bd4dbce9bebe0455f49e123c3d&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/256063570.jpg?k=40c41c16b68251ca4fa450ff0e0ef17c5590d7c6e6f54ccc448764618938d8e2&o=&hp=1"
+    ],
+    "description": "L'hôtel Ibis Abidjan Plateau, à Abidjan, est doté d'un centre d'affaires et de salles de réunion. Une connexion Wi-Fi gratuite est disponible dans tout l'établissement. Vous pourrez profiter d'un parking privé gratuit sur place.\nLes chambres, climatisées, disposent d'un coin salon et d'une télévision à écran plat. Les salles de bains privatives sont pourvues d'une baignoire.\nUn petit-déjeuner buffet est servi chaque matin sur place. Vous pourrez déguster des plats locaux et internationaux au restaurant de l'établissement, tandis que le bar propose une bonne sélection de boissons.\nÀ l’hôtel Ibis Abidjan Plateau, vous trouverez une réception ouverte 24h/24 ainsi qu'un jardin et un bureau d'excursions.\nL'aéroport Félix-Houphouët-Boigny est à 13 km de l'hôtel Ibis Abidjan Plateau. L'établissement peut organiser un service de navette aéroport.",
+    "price": 215490,
+    "options": {
+      "chambre": 1,
+      "salle": 2
+    },
+    "area": 20,
+    "proposition": "location",
+    "coordinate": [
+      "5.32708560",
+      "-4.02322955"
+    ],
+    "location": "Hôtel à Abidjan (Le Plateau)",
+    "presloc": "07 Boulevard Roume, Le Plateau, 1185 Abidjan, Côte-d'Ivoire",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2"
+  },
+  {
+    "type": "hotel",
+    "title": "Residence Bethany Palace",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/301538599.jpg?k=07c966a8745899f3f7d9dc0d8f9b9f3dd9e0cdf96c6fa000470f43e585f32a57&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/319999880.jpg?k=e320be7e4b103c98669b01f6185c0333750f2d1a1921a5c7c6cfec3023d123f1&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/301536413.jpg?k=6dd50c0b5e9adde71e96c6229a8316204c13118acaebf2cdca8e187b33943fb5&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/319865572.jpg?k=555e11b30068a9fde803f20b483d118604080b786e06c2ec98a604a192f91efd&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/320097489.jpg?k=642c35ffa16be76f4d66caec29164fd62a51a42226fcb996000d86e7b2ee32cd&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/319865573.jpg?k=3f3a0b96ddf050d7da27523c23839cc31520eb5ca9babc38aa0ac522b1807363&o=&hp=1"
+    ],
+    "description": "Située à Abidjan, à 3,9 km de l'université Félix-Houphouët-Boigny, la Residence Bethany Palace propose un restaurant, un parking privé gratuit, un bar et un salon commun. Cet hôtel 3 étoiles dispose d'un bureau d'excursions et d'une bagagerie. Il propose une réception ouverte 24h/24, un service de navette, un service de concierge et une connexion Wi-Fi gratuite dans l'ensemble de ses locaux.\nLes chambres comprennent une armoire. Leur salle de bains privative est pourvue d'une douche et d'articles de toilette gratuits. Certaines chambres comprennent un coin salon.\nUn petit-déjeuner continental est servi sur place.\nLa Residence Bethany Palace possède une terrasse.\nVous séjournerez à 4,2 km du centre commercial Abidjan Mall et à 7 km de la cathédrale Saint-Paul.",
+    "price": 127800,
+    "options": {
+      "chambre": 1,
+      "salle": 4
+    },
+    "area": 21,
+    "proposition": "location",
+    "coordinate": [
+      "5.35629868",
+      "-3.98951232"
+    ],
+    "location": "Hôtel à Abidjan (Cocody)",
+    "presloc": "Cocody Deux plateaux Vallons rue J93 en face de l’ONEP et derrière le supermarché Casino et Zino boutique, Cocody, Abidjan, Côte-d'Ivoire",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2"
+  },
+  {
+    "type": "hotel",
+    "title": "Détente Hôtel",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/185648210.jpg?k=e169a89773ed92f3086ea944fa85a35bb19dc7c15a1d7af39c7bf01ce98a8e13&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/185648210.jpg?k=1be4283646f7c3534eee6a10ae0a1accfb5d2da72b08e7222769467b456e9724&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/262341337.jpg?k=cc891c40a914c883585d9db10a912f019395485f589b6953a48f84981f13fca5&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/298966436.jpg?k=1df5088a458767db1e2c510e3937f1cc824bdd5e4585623405643c7dd83fa165&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/137149625.jpg?k=9e85cd37ae4cdfbd1501c025ac4865637a20b58ade3598234e62b30e900a903d&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/298966898.jpg?k=a44e773a872efa9090f613cc59aceb02cd168f8164f8702fce6ab45457197a25&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/298966757.jpg?k=ac58d4ff0048b80192c4d1d37fd57749dc5414ae6b4c300cf2c945f05f1b56c0&o=&hp=1"
+    ],
+    "description": "Vous pouvez bénéficier d'une réduction Genius dans l'établissement Détente Hôtel ! Connectez-vous pour économiser.\nDoté d'un restaurant, le Détente Hôtel 2* est situé à Abidjan. Une connexion Wi-Fi est disponible gratuitement.\nToutes les chambres sont climatisées et disposent d'une télévision avec chaînes à la carte. La salle de bains privative est pourvue d'une douche, d'une baignoire et d'articles de toilette gratuits. Vous bénéficierez en outre d'une vue sur le jardin.\nLe Détente Hôtel 2* possède une réception ouverte 24h/24, un jardin et une terrasse. Une bagagerie est également à votre disposition. Le stationnement sur place est gratuit.",
+    "price": 127800,
+    "options": {
+      "chambre": 1,
+      "salle": 3
+    },
+    "area": 20,
+    "proposition": "location",
+    "coordinate": [
+      "5.34212978",
+      "-4.05930609"
+    ],
+    "location": "Hôtel à Abidjan (Yopougon)",
+    "presloc": "Banco Nord Abidjan Côte d’Ivoire, Yopougon, Abidjan, Côte-d'Ivoire",
+    "ownerId": "zsHm67Xam6bfrPNUbPCRkHGJZz33"
+  },
+  {
+    "type": "hotel",
+    "title": "Hôtel Ivotel Abidjan",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/326183386.jpg?k=a9ae8a5ca41f948f6426a0bf8bb43d3758caa2418608c1e362c6a711285b7746&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/319463685.jpg?k=23988012dfdcce6c700036fc0dbcb57c2209975b6fca60f973b53ddfd705efc5&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/326238715.jpg?k=b624e5ed585e000cf790d26c4fc0992b629bf170b54563867a2f21329438f0ef&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/234606050.jpg?k=7d4bfb82651d7f45bf2b60d24e4d095f57b037daaea9d0504a3c19d159c2ad16&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/326238818.jpg?k=d22df646ffa41c47d6cb444387f60d4294a0c57d6c1069fe88c189c5bf0b4d0f&o=&hp=1"
+    ],
+    "description": "Vous pouvez bénéficier d'une réduction Genius dans l'établissement Hôtel Ivotel Abidjan ! Connectez-vous pour économiser.\nSitué à Abidjan, l'Hôtel Ivotel Abidjan bénéficie d'une salle de sport et d'une connexion Wi-Fi gratuite. Un parking privé surveillé est disponible gratuitement sur place.\nLes appartements de cet hôtel sont dotés d'une télévision et d'un coin salon. Tous les logements sont équipés de la climatisation. Leur salle de bains privative est pourvue d'une baignoire ou d'une douche, d'un sèche-cheveux et d'articles de toilette gratuits.\nL'Hôtel Ivotel Abidjan sert un petit-déjeuner continental tous les matins. Ouvert pour le déjeuner et le dîner, le restaurant sur place sert un buffet et des plats à la carte. Vous pourrez prendre un verre au bar. \nLe personnel de la réception ouverte 24h/24 se fera un plaisir de répondre à toutes vos demandes.\nL'Hôtel Ivotel Abidjan est situé à 12,5 km de l'aéroport international Félix-Houphouët-Boigny. Des services de navette sont assurés sur demande.",
+    "price": 215490,
+    "options": {
+      "chambre": 1,
+      "salle": 2
+    },
+    "area": 22,
+    "proposition": "location",
+    "coordinate": [
+      "5.32313361",
+      "-4.01860356"
+    ],
+    "location": "Hôtel à Abidjan (Le Plateau)",
+    "presloc": "01 BP 1560 , Le Plateau, Abidjan, Côte-d'Ivoire",
+    "ownerId": "zsHm67Xam6bfrPNUbPCRkHGJZz33"
+  },
+  {
+    "type": "hotel",
+    "title": "Hotel Tiama Abidjan",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/330967561.jpg?k=fd51f9e48c3dc0ca1701ae203e90cf1d2adafe7cfa9f8035619abbc59066eb99&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/330957340.jpg?k=eabed4c57a3f12a02869ad8d2a44934fa2567a6c5e4cb2838afdc8f3669d503f&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/266957021.jpg?k=b8ea8a7fc4220bf539a920487887133390bac14cd0cacc79b39f1a23e3359e95&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/266506702.jpg?k=5a3f2bf49ae26372d795809645799180e5fb2b8386382efd34f0f78b744afd89&o=&hp=1"
+    ],
+    "description": "Vous pouvez bénéficier d'une réduction Genius dans l'établissement Hotel Tiama Abidjan ! Connectez-vous pour économiser.\nDoté d'une connexion Wi-Fi gratuite et d'une piscine extérieure, l'Hotel Tiama Abidjan propose des chambres à Abidjan, à 200 mètres de l'ambassade de France. L'établissement se trouve à environ 4 minutes à pied du consulat de France et à 1,4 km de l'hôpital La PISAM. L'hôtel est à 1,6 km du siège de la mission ONUCI (Opération des Nations Unies en Côte d'Ivoire).\nLes logements disposent de la climatisation, d'un micro-ondes, d'un réfrigérateur, d'une machine à café, d'une baignoire ou d'une douche, d'articles de toilette gratuits et d'un bureau. Tous comprennent une télévision et certains possèdent une terrasse. Les chambres de l'hôtel comportent un coin salon.\nVous pourrez savourer diverses formules de petit-déjeuner dans la salle prévue à cet effet : continental, sans gluten ou buffet. Le restaurant de l’Hotel Tiama Abidjan est spécialisé dans la cuisine européenne.\nL’espace bien-être inclut une salle de sport.\nL’hôtel possède également un centre d'affaires. Parlant arabe et anglais, le personnel de la réception se fera un plaisir de vous fournir des informations pratiques sur la région.\nL'Hotel Tiama Abidjan se trouve à 2 km d'un centre commercial et à 5 km de la polyclinique.",
+    "price": 124677,
+    "options": {
+      "chambre": 1,
+      "salle": 3
+    },
+    "area": 22,
+    "proposition": "location",
+    "coordinate": [
+      "5.32651876",
+      "-4.01969403"
+    ],
+    "location": "Hôtel à Abidjan (Le Plateau)",
+    "presloc": "Boulevard de la Republique, Le Plateau, Abidjan, Côte-d'Ivoire",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2"
+  },
+  {
+    "type": "hotel",
+    "title": "Seen Hotel Abidjan Plateau",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/130661051.jpg?k=161f18b1d8cb3e116e49add35758e05657e70be671edf2cd096f0beeb1b4872e&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/171363164.jpg?k=70adc8f72148366481a46f64768eafc5a2c4a6142f8141c70a0ca7fe60cb9be7&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/197879709.jpg?k=854b9a81bf988dc22f562190728b0cd8bac2dc43f842655e38b637b57e4857ce&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/130675126.jpg?k=a02ed7220e8c145596e348c4122f8df9e893f8623cff5ee400de99e50480d7f0&o=&hp=1"
+    ],
+    "description": "Vous pouvez bénéficier d'une réduction Genius dans l'établissement Seen Hotel Abidjan Plateau ! Connectez-vous pour économiser.\nSitué à Abidjan, à 8 minutes à pied du consulat de France, le Seen Hotel Abidjan Plateau propose une connexion Wi-Fi gratuite, une terrasse et un bar.\nLes chambres du Seen Hotel Abidjan Plateau comprennent un bureau, une télévision par satellite à écran plat, une armoire, la climatisation et un coin salon. La salle de bains privative est pourvue d'articles de toilette gratuits.\nL'établissement sert un petit-déjeuner continental. Le restaurant sur place prépare des spécialités africaines et des plats européens.\nLe Seen Hotel Abidjan Plateau comporte un centre d'affaires et une salle de sport. Le personnel de la réception ouverte 24h/24 se fera un plaisir de vous renseigner sur les environs.",
+    "price": 357800,
+    "options": {
+      "chambre": 1,
+      "salle": 2
+    },
+    "area": 23,
+    "proposition": "location",
+    "coordinate": [
+      "5.31943161",
+      "-4.01773069"
+    ],
+    "location": "Hôtel à Abidjan (Le Plateau)",
+    "presloc": "Avenue Lamblin, Le Plateau, Abidjan, Côte-d'Ivoire",
+    "ownerId": "zsHm67Xam6bfrPNUbPCRkHGJZz33"
+  },
+  {
+    "type": "hotel",
+    "title": "Azalaï Hôtel Abidjan",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/189176296.jpg?k=6728031647d63b08ec33b925ec0dd2a9fc2a0f9cb0f828278e1f6308611bbfd4&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/264841311.jpg?k=8442801a1484d7b6d8a31782eaea120168b77f47fbbd0bd4d8721a0040725145&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/278374790.jpg?k=9e4b407a801b9492312dcd7d825e90495fae483a073160cfde60dd5d8309073c&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/98287470.jpg?k=43f2fe12e1bc3fa806226c6a8fe63e90ce846e3a83b7d1b0cc4c39d860108158&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/278382670.jpg?k=1f3be02227ad9d48c2346fd3b1814ef5c07a6c9af7604a26c768f052f9ea87e4&o=&hp=1"
+    ],
+    "description": "Vous pouvez bénéficier d'une réduction Genius dans l'établissement Azalaï Hôtel Abidjan ! Connectez-vous pour économiser.\nDoté d'une connexion Wi-Fi gratuite, d'un restaurant et d'une piscine extérieure, l'Azalaï Hôtel Abidjan vous accueille à Abidjan. Sur place, vous pourrez également profiter d'un bar et d'un parking gratuit.\nToutes les chambres sont équipées de la climatisation et d'une télévision par câble à écran plat. Certaines comprennent un coin salon idéal pour se détendre.\nL'établissement propose un salon de coiffure.\nL'Azalaï Hôtel Abidjan assure un service de location de voitures. Il se trouve à 100 mètres d'un centre commercial et à 1,5 km de la clinique Nautic. L'aéroport Félix Houphouët-Boigny, le plus proche de l'Azalaï Hôtel Abidjan est installé à 8 km.",
+    "price": 124677,
+    "options": {
+      "chambre": 1,
+      "salle": 2
+    },
+    "area": 21,
+    "proposition": "location",
+    "coordinate": [
+      "5.29797289",
+      "-3.98534846"
+    ],
+    "location": "Hôtel à Abidjan (Marcory)",
+    "presloc": "Boulevard Valéry Giscard d'Estaing, Marcory, Abidjan, Côte-d'Ivoire",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2"
+  },
+  {
+    "type": "hotel",
+    "title": "ONOMO Hotel Abidjan",
+    "images": [
+      "https://cf.bstatic.com/xdata/images/hotel/square200/54279988.jpg?k=3f6a70b1161235c38df8a50e61d47045b518ff7cf5662ca9e6f7d231fb2fc67e&o=",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/204947912.jpg?k=a38290775d5069b323c6c47bb318359ec28a563d8182555a3d207bd45c730591&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/190287579.jpg?k=d61cf65c9c2629dd90e930e812b2a20f4ab5e09e55c208022fb2f00a35272afa&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/190286903.jpg?k=cd74546680b6a80141184383904cd4caf5831a1617f6e35a5bbbad40311d9c25&o=&hp=1",
+      "https://cf.bstatic.com/xdata/images/hotel/max300/76253077.jpg?k=528954436f62cbe76e61444e2dbae0407c040b792cbe39bf761107109e66db1f&o=&hp=1"
+    ],
+    "description": "Vous pouvez bénéficier d'une réduction Genius dans l'établissement ONOMO Hotel Abidjan ! Connectez-vous pour économiser.\nDoté d'une connexion Wi-Fi gratuite, l'Onomo Abidjan propose un hébergement acceptant les animaux domestiques à Abidjan. Sur place, vous profiterez d'un bar et d'un parking privé gratuit.\nChaque chambre est équipée de la climatisation et d'une télévision. Certaines comprennent également un coin salon, idéal pour se détendre après une journée bien remplie.\nL'Onomo Abidjan met également à votre disposition un service de navette gratuit et une boutique de souvenirs.",
+    "price": 258000,
+    "options": {
+      "chambre": 1,
+      "salle": 1
+    },
+    "area": 22,
+    "proposition": "location",
+    "coordinate": [
+      "5.25782606",
+      "-3.93729776"
+    ],
+    "location": "Hôtel à Abidjan",
+    "presloc": "Boulevard de l'Aéroport, Abidjan, Ivoorkust, Abidjan, Côte-d'Ivoire",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2"
+  }
+]

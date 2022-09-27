@@ -16,6 +16,7 @@ const prices = [
 const axios = require("axios")
 const { JSDOM } = require('jsdom')
 const fs = require("fs");
+const saveFile = require("./save");
 const numberPattern = /\d+/g;
 const stringPattern = /^[A-Za-z]+$/
 
@@ -66,17 +67,17 @@ const scraper = (
             presloc : presloc.trim(),
             ownerId: randomChoice(['zsHm67Xam6bfrPNUbPCRkHGJZz33', '89tUBz2CfUY6aylA3fhYvmj4EPD2'])
           })
-          console.log(cardInfos)
-          fs.writeFile(path.join(__dirname, "./maisonLocation.json"), JSON.stringify(cardInfos, null, space=2), (err)=>{
+        })
+        .then(()=>{
+          fs.writeFile(path.join(__dirname, "./hotel.json"), JSON.stringify(cardInfos, null, space=2), (err)=>{
             err ? console.log(err) : console.log("write done !")
           })
         })
-        
 			})
     })
     .catch(e=>console.log(e.message))
 }
 
-scraper("https://www.booking.com/searchresults.fr.html?aid=356980&label=gog235jc-1DCAMY6wcoggJCB2FiaWRqYW5IDVgDaC2IAQGYAQ24AQfIAQzYAQPoAQH4AQKIAgGoAgO4AqeYx5kGwAIB0gIkM2Q4ZDAzZGQtNWE4Yy00ODU5LWI3YWUtNmMzMzg2ZjEyYmUx2AIE4AIB&sid=9d2478dc87e247cba934b69ffbdc9af6&city=-2115275;nflt=sth%253D74;pptfromtl=74;src=theme_landing_city")
-
+// scraper("https://www.booking.com/city/ci/abidjan.fr.html?label=abidjan-PiUbqVBIxCvFYhNaB3WzCwS496646975247%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-417548833093%3Alp1003643%3Ali%3Adec%3Adm;ws=;aid=1610680;gclid=CjwKCAjwvsqZBhAlEiwAqAHElYqeKttVlfuJkAJwRvDWaAAjCJC7uOvvayeGKWaUyzL1dVfBCJLXxBoCKSIQAvD_BwE")
+saveFile(path.join(__dirname, './hotel.json'), 'hotel')
 	
