@@ -1,5 +1,5 @@
 <template>
-  <NavBar :isLogged="isLogged"/>
+  <NavBar :isLogged="isLogged" :user="user"/>
   <div class="app-content">
     <router-view :isLogged="isLogged" :key="$route.path"/>
     <Support :isAdmin="isAdmin" :uid="uid"/>
@@ -19,6 +19,7 @@
         isLogged: false,
         isAdmin: false,
         uid: '',
+        user: {}
       }
     },
     components:{
@@ -36,6 +37,7 @@
           findOne("users", auth?.currentUser?.uid)
           .then(user=>{
             this.uid = user.id
+            this.user = user
             this.isAdmin = user.role === 'admin'
           })
         }
@@ -46,7 +48,7 @@
       })
     },
     updated(){
-      console.log('updated')
+      console.log(this.$route.path)
     }
   }
 </script>

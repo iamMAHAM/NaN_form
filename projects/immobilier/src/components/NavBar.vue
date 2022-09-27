@@ -15,13 +15,13 @@
                         Connexion
                     </a>
                 </router-link>
-                <router-link to="/profile"  v-if="isLogged" class="navLink">
+                <router-link to="/profile"  v-if="isLogged && user?.role !== 'admin'" class="navLink">
                     <a href="">
                         <i class="material-symbols-outlined">person</i>
                         Profile
                     </a>
                 </router-link>
-                <a @click="publish">
+                <a @click="publish" v-if="user?.role !== 'admin'">
                     <a href="#" class="item">
                         <i class="material-symbols-outlined">publish</i>
                         Publier
@@ -39,7 +39,7 @@
                         Messages
                     </a>  
                 </router-link>
-                <a @click="signOut" v-if="isLogged">
+                <a @click="signOut" v-if="isLogged && user?.role !== 'admin'" >
                     <a href="#" class="item" style="color: var(--red); opacity: .5;">
                         <i class="material-symbols-outlined">logout</i>
                         Déconnexion
@@ -57,7 +57,7 @@ import { auth, signOutUser } from '@/lib/firestoreLib'
 import postForm from './partials/postForm.vue'
 export default {
   name: 'NavBar',
-  props: ['isLogged'],
+  props: ['isLogged', 'user'],
   data(){
     return {
       show: false,

@@ -51,7 +51,11 @@ const routes = [
     path: '/admin/dashboard',
     name: 'DashBoard',
     component: DashBoard
-  }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/404'
+  },
 ]
 
 const router = createRouter({

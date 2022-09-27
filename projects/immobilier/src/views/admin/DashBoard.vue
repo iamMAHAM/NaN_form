@@ -12,43 +12,43 @@
 			</div>
 
 			<!-- tab-menu -->
-			<input type="radio" class="tab-1" name="tab">
-			<span>Home</span><i class="material-symbols-outlined">home</i>
+			<input type="radio" class="tab-1" name="tab" checked="checked">
+			<span>Accueil</span><i class="material-symbols-outlined">home</i>
 
 			<input type="radio" class="tab-2" name="tab">
-			<span>Users</span><i class="material-symbols-outlined">group</i>
+			<span>Utilisateurs</span><i class="material-symbols-outlined">group</i>
 
 			<input type="radio" class="tab-3" name="tab">
-			<span>Pending</span><i class="material-symbols-outlined">pending</i>
+			<span>En attente</span><i class="material-symbols-outlined">pending</i>
 		
       <input type="radio" class="tab-4" name="tab">
-			<span>Reports</span><i class="material-symbols-outlined">report</i>
+			<span>Signalé</span><i class="material-symbols-outlined">report</i>
 
-      <input type="radio" class="tab-5" name="tab" checked="checked">
+      <input type="radio" class="tab-5" name="tab">
 			<span>KYC</span><i class="material-symbols-outlined">badge</i>
 
-			<input type="radio" class="tab-6" name="tab">
-			<span>Settings</span><i class="material-symbols-outlined">settings</i>
+			<!-- <input type="radio" class="tab-6" name="tab">
+			<span>Profile</span><i class="material-symbols-outlined">person</i> -->
 
 
 			<!-- tab-top-bar -->
 			<div class="top-bar">
 				<ul>
-          <a style="display: inline-block;">
+          <a style="display: inline-block; pointer-events: none;">
             <div>{{'Admin : ' + auth?.currentUser?.displayName }}</div>
           </a>
-					<li>
-						<a href="" title="Log Out">
+					<li @click="signOutUser().then($router.push('/'))" >
+						<a href="" title="Log Out" >
 							<i class="material-symbols-outlined">logout</i>
 						</a>
 					</li>
 					<li>
-						<a href="" title="Messages">
+						<a href="#" title="Messages" @click="messages">
 							<i class="material-symbols-outlined">message</i>
             </a>
 					</li>
 					<li>
-						<a href="" title="Edit">
+						<a href="#" title="Edit">
 							<i class="material-symbols-outlined">edit_square</i>
 						</a>
 					</li>
@@ -61,19 +61,19 @@
 					<div class="home-top">
             <div class="item">
               <div class="ileft">
-                Total Users
+                Utilisateurs
               </div>
               <div class="iright">30</div>
             </div>
             <div class="item">
               <div class="ileft">
-                Partners
+                Vendeurs
               </div>
               <div class="iright">30</div>
             </div>
             <div class="item">
               <div class="ileft">
-                Total ads
+                Total Annonces
               </div>
               <div class="iright">30</div>
             </div>
@@ -133,8 +133,9 @@ import CardContainer from '@/components/CardContainer.vue';
 import ProfileCard from '@/components/partials/user/ProfileCard.vue';
 import { onValue, ref as dbref } from '@firebase/database';
 import { db, rtdb,  } from '@/lib/firebaseConfig';
-import { auth, findOne } from '@/lib/firestoreLib';
+import { auth, findOne, signOutUser } from '@/lib/firestoreLib';
 import { collection, onSnapshot } from '@firebase/firestore';
+
 export default {
   name: 'DashBoard',
   components:{
@@ -148,7 +149,8 @@ export default {
       load: true,
       cards: [],
       profiles: [],
-      auth: auth
+      auth: auth,
+      signOutUser: signOutUser
     }
   },
   beforeCreate(){
