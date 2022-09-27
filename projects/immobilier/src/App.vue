@@ -48,7 +48,7 @@
       })
     },
     updated(){
-      console.log(this.$route.path)
+      console.log(this.$route.path)// hvuhve
     }
   }
 </script>
