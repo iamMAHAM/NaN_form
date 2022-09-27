@@ -63,7 +63,8 @@ const scraper = (
             proposition: 'location',
             coordinate: coordinate,
             location: location.trim(),
-            presloc : presloc.trim()
+            presloc : presloc.trim(),
+            ownerId: randomChoice(['zsHm67Xam6bfrPNUbPCRkHGJZz33', '89tUBz2CfUY6aylA3fhYvmj4EPD2'])
           })
           console.log(cardInfos)
           fs.writeFile(path.join(__dirname, "./maisonLocation.json"), JSON.stringify(cardInfos, null, space=2), (err)=>{

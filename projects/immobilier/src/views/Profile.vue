@@ -1,160 +1,162 @@
 <template>
-  <Loader v-if="iLoad"/>
-  <div class="main-container" v-if="!iLoad">
-  <div class="profile-content" v-if="!iLoad">
-    <div class="profile-img">
-      <img :src="user?.avatar" />
-      <div class="name">
-        <h2>{{ user?.fullName }}</h2>
-        <span>{{ user?.role }}</span>
-        <span>{{ verified }}
-          <i class="material-symbols-outlined verified"
-          style="vertical-align: middle"
-          v-if="user?.isVerified"
-        >
-          verified
-        </i>
-      </span>
+  <div class="profile-container">
+    <Loader v-if="iLoad"/>
+    <div class="main-container" v-if="!iLoad">
+      <div class="profile-content" v-if="!iLoad">
+        <div class="profile-img">
+          <img :src="user?.avatar" />
+          <div class="name">
+            <h2>{{ user?.fullName }}</h2>
+            <span>{{ user?.role }}</span>
+            <span>{{ verified }}
+              <i class="material-symbols-outlined verified"
+              style="vertical-align: middle"
+              v-if="user?.isVerified"
+            >
+              verified
+            </i>
+          </span>
+          </div>
+        </div>
+        <div v-if="infos">
+          <button
+            class="edit"
+            @click="editProfile"
+          >
+            <span
+              style="
+                vertical-align: middle;
+                margin: 0;
+                color: var(--white);
+                font-size: 1.7rem;
+              "
+            >
+              {{ rightText}}
+            </span>
+            <i
+              class="material-symbols-outlined"
+            >
+              {{ rightIcon }}
+            </i>
+          </button>
+          <button
+            class="edit"
+            v-if="flag"
+            @click="cancel"
+          >
+            <span
+              style="
+                vertical-align: middle;
+                color: var(--white);
+                margin: 0;
+                font-size: 1.7rem;
+              "
+            >
+              Annuler
+            </span>
+            <i class="material-symbols-outlined" style="color: var(--red);">close</i>
+          </button>
+    
+        </div>
+        <button v-if="home && user?.isAwaitingVerification">
+          vérification en cours...
+    
+          <Loader :view="1" :height="15" :width="15"/>
+        </button>
+        <button
+            class="edit"
+            v-if="home && !user.isVerified && !user?.isAwaitingVerification" 
+            @click="verifyUser"
+          >
+            <span
+              style="
+                vertical-align: middle;
+                color: var(--white);
+                margin: 0;
+                font-size: 1.7rem;
+              "
+            >
+              {{ verify ? 'Annuler' : 'Verifier Identité'}}
+            </span>
+            <i class="material-symbols-outlined"
+              :style="{
+                color: verify ? 'red' : 'var(--greenfun)'
+              }"
+            >
+              {{ verify ? 'close' :  'fingerprint'}}
+            </i>
+        </button>
+      </div>
+      <!-- break -->
+      <hr class="break" v-if="!iLoad"/>
+      <div class="body-content" v-if="!iLoad">
+        <ul @click="rightRoute" ref="routes" class="routes" v-if="showRoutes">
+          <li class="home active">
+            <i class="material-symbols-outlined">home</i>
+            <a href="#">Accueil</a>
+          </li>
+          <li class="ad">
+            <i class="material-symbols-outlined">ads_click</i>
+            <a href="#">Annonces</a>
+          </li>
+          <li  class="info">
+            <i class="material-symbols-outlined">info</i>
+            <a href="#">Informations</a>
+          </li>
+        </ul>
+        <!-- <div class="main-title">
+          <p>Derniere vue</p>
+          <p>Aujoudhui à 15h</p>
+        </div> -->
+        <div class="main" ref="main">
+          <div class="homes" v-if="home">
+            <div class="card bg-dark" style="cursor: normal">
+              <p>Annonces publiées</p>
+              <p class="num">{{ cards?.length}}</p>
+            </div>
+            <div class="card bg-dark" style="cursor: normal">
+              <p>Popularité</p>
+              <p class="num">{{ user?.popularity || 0}}</p>
+            </div>
+          </div>
+          <div class="ads" v-if="ads" @click="rightFilter">
+            <div class="card bg-dark">
+              <p title="">Total</p>
+              <p class="num">{{ all?.length }}</p>
+            </div>
+            <div class="card">
+              <p title="online">En ligne</p>
+              <p class="num">{{ online }}</p>
+            </div>
+            <div class="card">
+              <p title="sold">Soldés</p>
+              <p class="num">{{ solded }}</p>
+            </div>
+            <div class="card">
+              <p title="pending">En attente</p>
+              <p class="num">{{ pending }}</p>
+            </div>
+          </div>
+          <div v-if="home && verify" class="verify">
+            <userVerification />
+          </div>
+        </div>
+        <section class="myads" v-if="ads">
+          <CardContainer
+            :cards="cards"
+            :load="load"
+            :message="'Rien à Signaler ici ...'"
+          />
+        </section>
+        <section class="myinfos" v-if="infos">
+          <Uprofile
+            :form="user"
+            @changePass="updatePass"
+          />
+        </section>
       </div>
     </div>
-    <div v-if="infos">
-      <button
-        class="edit"
-        @click="editProfile"
-      >
-        <span
-          style="
-            vertical-align: middle;
-            margin: 0;
-            color: var(--white);
-            font-size: 1.7rem;
-          "
-        >
-          {{ rightText}}
-        </span>
-        <i
-          class="material-symbols-outlined"
-        >
-          {{ rightIcon }}
-        </i>
-      </button>
-      <button
-        class="edit"
-        v-if="flag"
-        @click="cancel"
-      >
-        <span
-          style="
-            vertical-align: middle;
-            color: var(--white);
-            margin: 0;
-            font-size: 1.7rem;
-          "
-        >
-          Annuler
-        </span>
-        <i class="material-symbols-outlined" style="color: var(--red);">close</i>
-      </button>
-
-    </div>
-    <button v-if="home && user?.isAwaitingVerification">
-      vérification en cours...
-
-      <Loader :view="1" :height="15" :width="15"/>
-    </button>
-    <button
-        class="edit"
-        v-if="home && !user.isVerified && !user?.isAwaitingVerification" 
-        @click="verifyUser"
-      >
-        <span
-          style="
-            vertical-align: middle;
-            color: var(--white);
-            margin: 0;
-            font-size: 1.7rem;
-          "
-        >
-          {{ verify ? 'Annuler' : 'Verifier Identité'}}
-        </span>
-        <i class="material-symbols-outlined"
-          :style="{
-            color: verify ? 'red' : 'var(--greenfun)'
-          }"
-        >
-          {{ verify ? 'close' :  'fingerprint'}}
-        </i>
-    </button>
   </div>
-  <!-- break -->
-  <hr class="break" v-if="!iLoad"/>
-  <div class="body-content" v-if="!iLoad">
-    <ul @click="rightRoute" ref="routes" class="routes" v-if="showRoutes">
-      <li class="home active">
-        <i class="material-symbols-outlined">home</i>
-        <a href="#">Accueil</a>
-      </li>
-      <li class="ad">
-        <i class="material-symbols-outlined">ads_click</i>
-        <a href="#">Annonces</a>
-      </li>
-      <li  class="info">
-        <i class="material-symbols-outlined">info</i>
-        <a href="#">Informations</a>
-      </li>
-    </ul>
-    <!-- <div class="main-title">
-      <p>Derniere vue</p>
-      <p>Aujoudhui à 15h</p>
-    </div> -->
-    <div class="main" ref="main">
-      <div class="homes" v-if="home">
-        <div class="card bg-dark" style="cursor: normal">
-          <p>Annonces publiées</p>
-          <p class="num">{{ cards?.length}}</p>
-        </div>
-        <div class="card bg-dark" style="cursor: normal">
-          <p>Popularité</p>
-          <p class="num">{{ user?.popularity || 0}}</p>
-        </div>
-      </div>
-      <div class="ads" v-if="ads" @click="rightFilter">
-        <div class="card bg-dark">
-          <p title="">Total</p>
-          <p class="num">{{ all?.length }}</p>
-        </div>
-        <div class="card">
-          <p title="online">En ligne</p>
-          <p class="num">{{ online }}</p>
-        </div>
-        <div class="card">
-          <p title="sold">Soldés</p>
-          <p class="num">{{ solded }}</p>
-        </div>
-        <div class="card">
-          <p title="pending">En attente</p>
-          <p class="num">{{ pending }}</p>
-        </div>
-      </div>
-      <div v-if="home && verify" class="verify">
-        <userVerification />
-      </div>
-    </div>
-    <section class="myads" v-if="ads">
-      <CardContainer
-        :cards="cards"
-        :load="load"
-        :message="'Rien à Signaler ici ...'"
-      />
-    </section>
-    <section class="myinfos" v-if="infos">
-      <Uprofile
-        :form="user"
-        @changePass="updatePass"
-      />
-    </section>
-  </div>
-</div>
 </template>
 
 <script>
@@ -175,6 +177,7 @@ export default {
     Loader,
     userVerification
   },
+  props:['isLogged'],
   data(){
     return {
       backup: null,
@@ -293,6 +296,11 @@ export default {
 </script>
 
 <style>
+
+.profile-container{
+  height: 100vh;
+  width: 100vw;
+}
 .myads div.card-container{
   background: var(--hovercolor);
   margin: 2rem auto;

@@ -35,8 +35,9 @@ const saveFile = (file, collect)=>{
 	})
 }
 
-saveFile(path.join(__dirname, "./plan.json"), 'plan')
+// saveFile(path.join(__dirname, "./plan.json"), 'plan')
 
+module.exports = saveFile
 // const ok = (...args)=>{
 //   console.log(args)
 // }

@@ -1,145 +1,147 @@
 <template>
-  <div class="case">
-    <Loader v-if="load"/>
-  <div class="container" v-else>
-    <div class="left">
-      <div class="top">
-        <div class="tub">
-          <div class="username">
-            <img :src="auth?.currentUser?.photoURL" width="3rem" height="3rem" ref="img"/>
-            <span>{{ auth?.currentUser?.displayName }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="conversations">
-        <div
-            v-if="!load && !conversations.length"
-            class="notFound"
-        >
-          <i class="material-symbols-outlined">filter_none</i>
-          Aucune Conversation
-        </div>
-        <Person
-          v-else
-          v-for="conversation in conversations" :key="conversation.id"
-          :person="conversation.info"
-          :messages="conversation.messages.sort(compare)"
-          @switch="switchMessages"
-        />
-      </div>
-    </div>
-    <div class="right" v-if="conversations.length">
-      <div class="top" v-if="pers">
-        <div class="box">
-          <div class="image">
-            <img :src="pers?.avatar" class="imgLog e"/>
-          </div>
-          <!-- <div class="online"></div> -->
-        </div>
-        <div class="information">
-          <div class="username">
-            <a href="#">
-              {{ pers?.fullName}}
-              <i
-                class="material-symbols-outlined verified"
-                title="compte verifié"
-                  v-if="pers?.isVerified"
-                >
-                  verified
-              </i>
-            </a>
-          </div>
-          <!-- <div class="name">Active now</div> -->
-          <div class="name">{{ pers?.role }}</div>
-        </div>
-        <div class="options">
-        </div>
-      </div>
-      <div v-else class="top">selectionnez une conversation</div>
-      <div class="middle">
-        <div class="tumbler">
-          <div class="messages" ref="messages">
-            <div
-              v-for="message in messages" :key="message.id"
-              :id="message?.id"
-              :class="message?.senderId === uid ? ' clip sent' : 'clip received'"
-            >
-              <i
-                class="material-symbols-outlined delete"
-                v-if="message?.senderId === auth?.currentUser.uid"
-                @click="deleteMessages"
-              >
-                delete
-              </i>
-              <div
-                v-if="message?.message?.type === 'text'"
-                class="text"
-              >
-                {{ message?.message.content }}
-                <router-link v-if="message?.message?.link" :to="message.message.link" class="link">voir le lien</router-link>
-                <span class="date">{{ readableDate(message.timestamp) }}</span>
+  <div class="messages-container">
+      <div class="case">
+        <Loader v-if="load"/>
+      <div class="container" v-else>
+        <div class="left">
+          <div class="top">
+            <div class="tub">
+              <div class="username">
+                <img :src="auth?.currentUser?.photoURL" width="3rem" height="3rem" ref="img"/>
+                <span>{{ auth?.currentUser?.displayName }}</span>
               </div>
-              <img v-else
-                class="text"
-                :src="message?.message?.content"
-              >
             </div>
           </div>
-        </div>
-      </div>
-      <div class="bottom" v-if="pers">
-        <div class="cup">
-          <div class="picker">
-            <i
-              class="material-symbols-outlined"
-              @click="toggle"
+          <div class="conversations">
+            <div
+                v-if="!load && !conversations.length"
+                class="notFound"
             >
-              mood
-            </i>
+              <i class="material-symbols-outlined">filter_none</i>
+              Aucune Conversation
+            </div>
+            <Person
+              v-else
+              v-for="conversation in conversations" :key="conversation.id"
+              :person="conversation.info"
+              :messages="conversation.messages.sort(compare)"
+              @switch="switchMessages"
+            />
           </div>
-          <Emojis
-            ref="emoji"
-            class="show-emoji"
-            @emoji_click="addEmoji"
-          />
-          <textarea
-            id="message"
-            cols="30"
-            rows="1"
-            placeholder="Message..."
-            ref="textarea"
-            @input="dropMessage"
-            @keydown="sendMessages"
-            @paste="dropMessage"
-            v-model="message"
-          >
-          </textarea>
-          <button
-            class="send"
-            v-show="show"
-            ref="send"
-            @click="sendMessages"
-          >
-              <i class="material-symbols-outlined">send</i>
-          </button>
-          <div class="picker photo">
-            <input
-              @change="sendMessages"
-              type="file"
-              accept="*.png; *.jpeg; *.svg"
-              id="photof"
-              style="display: none;"
-              ref="tof"
-            >
-            <label for="photof" style="cursor: pointer;">
-              <i class="material-symbols-outlined">imagesmode</i>
-            </label>
+        </div>
+        <div class="right" v-if="conversations.length">
+          <div class="top" v-if="pers">
+            <div class="box">
+              <div class="image">
+                <img :src="pers?.avatar" class="imgLog e"/>
+              </div>
+              <!-- <div class="online"></div> -->
+            </div>
+            <div class="information">
+              <div class="username">
+                <a href="#">
+                  {{ pers?.fullName}}
+                  <i
+                    class="material-symbols-outlined verified"
+                    title="compte verifié"
+                      v-if="pers?.isVerified"
+                    >
+                      verified
+                  </i>
+                </a>
+              </div>
+              <!-- <div class="name">Active now</div> -->
+              <div class="name">{{ pers?.role }}</div>
+            </div>
+            <div class="options">
+            </div>
+          </div>
+          <div v-else class="top">selectionnez une conversation</div>
+          <div class="middle">
+            <div class="tumbler">
+              <div class="messages" ref="messages">
+                <div
+                  v-for="message in messages" :key="message.id"
+                  :id="message?.id"
+                  :class="message?.senderId === uid ? ' clip sent' : 'clip received'"
+                >
+                  <i
+                    class="material-symbols-outlined delete"
+                    v-if="message?.senderId === auth?.currentUser.uid"
+                    @click="deleteMessages"
+                  >
+                    delete
+                  </i>
+                  <div
+                    v-if="message?.message?.type === 'text'"
+                    class="text"
+                  >
+                    {{ message?.message.content }}
+                    <router-link v-if="message?.message?.link" :to="message.message.link" class="link">voir le lien</router-link>
+                    <span class="date">{{ readableDate(message.timestamp) }}</span>
+                  </div>
+                  <img v-else
+                    class="text"
+                    :src="message?.message?.content"
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bottom" v-if="pers">
+            <div class="cup">
+              <div class="picker">
+                <i
+                  class="material-symbols-outlined"
+                  @click="toggle"
+                >
+                  mood
+                </i>
+              </div>
+              <Emojis
+                ref="emoji"
+                class="show-emoji"
+                @emoji_click="addEmoji"
+              />
+              <textarea
+                id="message"
+                cols="30"
+                rows="1"
+                placeholder="Message..."
+                ref="textarea"
+                @input="dropMessage"
+                @keydown="sendMessages"
+                @paste="dropMessage"
+                v-model="message"
+              >
+              </textarea>
+              <button
+                class="send"
+                v-show="show"
+                ref="send"
+                @click="sendMessages"
+              >
+                  <i class="material-symbols-outlined">send</i>
+              </button>
+              <div class="picker photo">
+                <input
+                  @change="sendMessages"
+                  type="file"
+                  accept="*.png; *.jpeg; *.svg"
+                  id="photof"
+                  style="display: none;"
+                  ref="tof"
+                >
+                <label for="photof" style="cursor: pointer;">
+                  <i class="material-symbols-outlined">imagesmode</i>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 <script>
 import Person from '@/components/partials/Person.vue'
@@ -319,6 +321,9 @@ export default {
 
 <style>
 
+.messages-container{
+  height: 100vh;
+}
 .navigation {
   width: 100%;
   min-height: 6rem;
@@ -337,7 +342,7 @@ export default {
 }
 
 .case .container {
-  height: 70vh;
+  height: 50vh;
   width: 70%;
   display: flex;
   justify-content: center;

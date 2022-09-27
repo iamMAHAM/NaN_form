@@ -70,10 +70,7 @@ body{
 }
 
 .app-content{
-  display: flex;
-  flex-direction: column;
   position: relative;
-  justify-content: space-between;
   height: 100vh;
 }
 
@@ -100,9 +97,16 @@ body{
     0 0.2em 0.5em #0002;
 }
 
+.router-link-active.router-link-exact-active.navLink{
+  background: var(--hovercolor);
+}
+
 .router-link-active.router-link-exact-active .nav__link{
   color: white;
   background: var(--light400);
+  border-radius: 99px;
 }
+
+
 
 </style>

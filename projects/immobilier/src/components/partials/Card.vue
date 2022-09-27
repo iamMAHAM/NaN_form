@@ -28,12 +28,12 @@
       </div> 
       <div class="bottom">
         <h3>
-          {{ price ?  card?.type  + 'à' + card?.location?.toLocaleUpperCase() : 'Plan de Maison'}}
+          {{ !isPlan ?  card?.title  + ' à ' + card?.location?.toLocaleUpperCase() : 'Plan de Maison'}}
         </h3>
         <p>
          {{ card.description.slice(0, 80)}} ...
         </p>
-        <div class="advants" v-if="price">
+        <div class="advants">
           <div v-if="card?.type === 'maison'">
             <span>Chambres</span>
             <div>
@@ -56,8 +56,10 @@
             </div>
           </div>
         </div>
-        <div class="price" v-if="price">
-          <span>En {{ card?.proposition }}</span>
+        <div class="price">
+          <span v-if="!isPlan">En {{ card?.proposition }}</span>
+          <span v-else>Devis à partir de :</span>
+          {{ card?.proposition === "location" ? 'Loyer : ': ''}}
           <span>{{ card?.price?.toLocaleString('ci') }}</span> FCFA
           <div class="buttonss" v-if="admin">
             <i
@@ -142,8 +144,8 @@ export default {
     solded(){
       return this.card.status === "solded"
     },
-    price(){
-      return this.card.type !== "plan"
+    isPlan(){
+      return this.card.type === "isPlan"
     }
   },
 
@@ -249,8 +251,8 @@ p{
 
 .card-container .box .top img {
   width: 100%;
-  height: 100%;
-  margin-bottom: -.4rem;
+  max-height: 200px;
+  margin-bottom: -.5rem;
 }
 
 .card-container .box .top span {

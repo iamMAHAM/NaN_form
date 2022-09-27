@@ -1,19 +1,35 @@
 [
   {
-    "title": "Joy",
+    "title": "Turquoise",
     "images": [
-      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-moderne-joy_version-bonus.jpg"
+      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-contemporaine-turquoise.jpg"
     ],
     "type": "plan",
-    "description": "Maison moderneDe part son architecture en forme de U, cette maison moderne de plain-pied offre un agencement intérieur idéal. Avec deux espaces de vie distincts personnalisable /"
+    "description": "Maison contemporaine La forme insolite du plan intérieur de cette maison contemporaine offre un agencement original. Son design raffiné ainsi que ses prestations de personnalisable /",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2",
+    "area": 94,
+    "options": {
+      "chambre": 2
+    },
+    "proposition": "devis",
+    "price": 50000000,
+    "location": "Angré"
   },
   {
-    "title": "Orchidée – C",
+    "title": "Lauziere",
     "images": [
-      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-toit-plat-orchidee_2020.jpg"
+      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-traditionnelle-lauziere_version-g40.jpg"
     ],
     "type": "plan",
-    "description": "Maison contemporaineDesign, élégante et compacte, cette maison à toit plat vous séduira par son architecture cubique, ultra-contemporaine, et son cadre de vie personnalisable /"
+    "description": "Maison traditionnelle Un plan intérieur avec deux volumes de vie distincts pour plus de confort : cette maison individuelle à étage vous offre confort, sérénité et personnalisable /",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2",
+    "area": 65,
+    "options": {
+      "chambre": 3
+    },
+    "proposition": "devis",
+    "price": 50000000,
+    "location": "Yopougon"
   },
   {
     "title": "Smile",
@@ -21,55 +37,31 @@
       "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-plain-pied-smile_2020.jpg"
     ],
     "type": "plan",
-    "description": "Maison traditionnelleIdéale pour un jeune couple, cette maison de plain-pied vous apportera confort et bien-être. Evolutive, elle s'adaptera aux besoins de votre personnalisable /"
+    "description": "Maison traditionnelle Idéale pour un jeune couple, cette maison de plain-pied vous apportera confort et bien-être. Evolutive, elle s'adaptera aux besoins de votre personnalisable /",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2",
+    "area": 94,
+    "options": {
+      "chambre": 1
+    },
+    "proposition": "devis",
+    "price": 35000000,
+    "location": "Man"
   },
   {
-    "title": "Villa",
+    "title": "Lys",
     "images": [
-      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-moderne-villa_version-nuit.jpg"
+      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-toit-plat-lys.jpg"
     ],
     "type": "plan",
-    "description": "Maison modernePlongez dans l'univers de cette belle maison moderne à étage, dont l'agencement vous séduira. Conviviale, chaleureuse et confortable, vous allez personnalisable /"
-  },
-  {
-    "title": "Ventoux",
-    "images": [
-      "https://www.maisonsclairlogis.fr/wp-content/uploads/ventoux-tuiles-grises_maison-en-v.jpg"
-    ],
-    "type": "plan",
-    "description": "Maison traditionnelleDécouvrez ce modèle de plain-pied en V qui conjugue tradition et modernité. Idéal pour une famille, avec son espace de vie à triple personnalisable /"
-  },
-  {
-    "title": "Iris",
-    "images": [
-      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-individuelle-iris_version-moderne.jpg"
-    ],
-    "type": "plan",
-    "description": "Maison moderneL'architecture en U de cette maison moderne de plain-pied offre un agencement intérieur optimisé, avec très peu de dégagements pour un maximum de personnalisable /"
-  },
-  {
-    "title": "Java",
-    "images": [
-      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-en-l-java_enduit-biton.jpg"
-    ],
-    "type": "plan",
-    "description": "Maison traditionnelleDécouvrez l'univers de cette maison en L de plain-pied. Son architecture traditionnelle au look tendance ne vous laissera pas indifférent. Une personnalisable /"
-  },
-  {
-    "title": "Atria",
-    "images": [
-      "https://www.maisonsclairlogis.fr/wp-content/uploads/atria-t-hd-2-scaled.jpg"
-    ],
-    "type": "plan",
-    "description": "Maison moderneTrès moderne et originale avec son patio central, l'architecture de ce modèle va vous séduire ! Elle offre des espaces lumineux et bien distincts personnalisable /"
-  },
-  {
-    "title": "Poitevine",
-    "images": [
-      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-individuelle-poitevine_enduit-gris.jpg"
-    ],
-    "type": "plan",
-    "description": "Maison traditionnelleAvec son garage à toit plat, cette maison individuelle associe tradition et modernité. Très fonctionnelle, cette villa offre de grands espaces de personnalisable /"
+    "description": "Maison contemporaine De conception résolument contemporaine, cette maison à toit plat se distingue par ses lignes pures, élégantes et harmonieuses. Pensé pour la vie personnalisable /",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2",
+    "area": 89,
+    "options": {
+      "chambre": 1
+    },
+    "proposition": "devis",
+    "price": 60000000,
+    "location": "Angré"
   },
   {
     "title": "Oisans",
@@ -77,22 +69,126 @@
       "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-sur-sous-sol-oisans.jpg"
     ],
     "type": "plan",
-    "description": "Maison traditionnelleCette maison en L sur sous-sol complet fera le bonheur des adeptes du rangement et du bricolage. Son architecture permet de répondre aux personnalisable /"
+    "description": "Maison traditionnelle Cette maison en L sur sous-sol complet fera le bonheur des adeptes du rangement et du bricolage. Son architecture permet de répondre aux personnalisable /",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2",
+    "area": 65,
+    "options": {
+      "chambre": 3
+    },
+    "proposition": "devis",
+    "price": 30000000,
+    "location": "Bassam"
   },
   {
-    "title": "Bleuet",
+    "title": "Tournette",
     "images": [
-      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-moderne-bleuet_tuiles-anthracite.jpg"
+      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-plain-pied-tournette_version-nuit.jpg"
     ],
     "type": "plan",
-    "description": "Maison moderneLaissez-vous conquérir par cette maison moderne, à l'architecture originale en forme de Y et à l'agencement intérieur pensé pour la vie de personnalisable /"
+    "description": "Maison traditionnelle Cette maison individuelle de plain-pied, avec garage accolé, allie confort et modernité. Son architecture soignée et élégante est mise en valeur personnalisable /",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2",
+    "area": 94,
+    "options": {
+      "chambre": 2
+    },
+    "proposition": "devis",
+    "price": 765000000,
+    "location": "Abidjan"
   },
   {
-    "title": "Mimosa",
+    "title": "Azur",
     "images": [
-      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-provencale-mimosa_2020.jpg"
+      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-toit-plat-azur_2020.jpg"
     ],
     "type": "plan",
-    "description": "Maison traditionnellePensée pour les zones urbaines, cette maison individuelle s'adapte à tous types de terrain et vous offre une belle surface habitable pour une personnalisable /"
+    "description": "Maison contemporaine Cette maison contemporaine à toit plat se démarque par ses lignes pures et son look unique. Grâce à son plan intérieur optimisé, vous profitez personnalisable /",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2",
+    "area": 100,
+    "options": {
+      "chambre": 3
+    },
+    "proposition": "devis",
+    "price": 60000000,
+    "location": "Man"
+  },
+  {
+    "title": "Iseran",
+    "images": [
+      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-individuelle-iseran_porche.jpg"
+    ],
+    "type": "plan",
+    "description": "Maison traditionnelle Avec cette maison individuelle, profitez du confort offert par une construction à étage avec deux espaces de vie séparés. Ses plans ont été personnalisable /",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2",
+    "area": 90,
+    "options": {
+      "chambre": 3
+    },
+    "proposition": "devis",
+    "price": 35000000,
+    "location": "Man"
+  },
+  {
+    "title": "Infinity",
+    "images": [
+      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-double-logement-infinity_vue-drone.jpg"
+    ],
+    "type": "plan",
+    "description": "Maison moderne Laissez-vous séduire par les lignes de cette belle villa moderne qui accueille deux habitations indépendantes l'une de l'autre : un logement T2 et personnalisable /",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2",
+    "area": 94,
+    "options": {
+      "chambre": 2
+    },
+    "proposition": "devis",
+    "price": 765000000,
+    "location": "Bassam"
+  },
+  {
+    "title": "Influence",
+    "images": [
+      "https://www.maisonsclairlogis.fr/wp-content/uploads/maison-double-logement-influence_vue-jardin.jpg"
+    ],
+    "type": "plan",
+    "description": "Maison traditionnelle Découvrez cette maison de ville qui a été conçu pour accueillir deux logements. Optimisée pour s'adapter facilement à tout type de terrains, personnalisable /",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2",
+    "area": 94,
+    "options": {
+      "chambre": 3
+    },
+    "proposition": "devis",
+    "price": 765000000,
+    "location": "Angré"
+  },
+  {
+    "title": "Atria",
+    "images": [
+      "https://www.maisonsclairlogis.fr/wp-content/uploads/atria-t-hd-2-scaled.jpg"
+    ],
+    "type": "plan",
+    "description": "Maison moderne Très moderne et originale avec son patio central, l'architecture de ce modèle va vous séduire ! Elle offre des espaces lumineux et bien distincts personnalisable /",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2",
+    "area": 94,
+    "options": {
+      "chambre": 2
+    },
+    "proposition": "devis",
+    "price": 35000000,
+    "location": "Bassam"
+  },
+  {
+    "title": "Orchidée – T",
+    "images": [
+      "https://www.maisonsclairlogis.fr/wp-content/uploads/2015/07/orchidee_maison-traditionnelle_tuiles-canal_vue-jardin_style-provencal-scaled.jpg"
+    ],
+    "type": "plan",
+    "description": "Maison traditionnelle Cette maison provençale à étage vous séduira par son architecture méditerranéenne et son agencement intérieur optimisé, qui offre confort et personnalisable /",
+    "ownerId": "89tUBz2CfUY6aylA3fhYvmj4EPD2",
+    "area": 94,
+    "options": {
+      "chambre": 2
+    },
+    "proposition": "devis",
+    "price": 60000000,
+    "location": "Korhogo"
   }
 ]

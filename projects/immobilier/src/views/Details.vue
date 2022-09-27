@@ -1,37 +1,22 @@
 <template>
 <div class = "card-wrapper">
-  <Loader v-if="!load"/>
+  <Loader v-if="load" :view="80" :height="50" :width="50" :padding="0"/>
   <div class = "card" v-else>
     <!-- card left -->
     <div class = "product-imgs">
       <div class = "img-display">
         <div class = "img-showcase">
           <img :src = "current">
-          <img src = "../assets/m2.jpg">
-          <img src = "../assets/m3.jpeg">
         </div>
       </div>
       <div class = "img-select">
-        <div class = "img-item">
-          <a href = "#" data-id = "1">
+        <div class = "img-item"
+          v-for="(image, index) in cardInfo?.images"
+          :key="index"
+        >
+          <a href = "#" :data-id = "index + 1">
           <img
-            :src = "cardInfo?.images[0]"
-            @click="toggleImages"
-          >
-          </a>
-        </div>
-        <div class = "img-item">
-          <a href = "#" data-id = "2">
-          <img
-            :src = "cardInfo?.images[1]"
-            @click="toggleImages"
-          >
-          </a>
-        </div>
-        <div class = "img-item">
-          <a href = "#" data-id = "3">
-          <img
-            :src = "cardInfo?.images[2]"
+            :src = "image"
             @click="toggleImages"
           >
           </a>
@@ -41,13 +26,21 @@
     <!-- card right -->
     <div class = "product-content">
       <h2 class = "product-title">{{ cardInfo?.title }}</h2>
-      <div class = "product-price" v-if="price">
-        <p class = "price">Prix: <span>{{ cardInfo?.price?.toLocaleString('ci') }} FCFA</span></p>
+      <div class = "product-price">
+        <p class = "price">
+          <i v-if="!isPlan && !location">Prix : </i>
+          <i v-else-if="!isPlan && location">Loyer : </i>
+          <i v-else>Devis à partir de : </i>
+          <span>{{ cardInfo?.price?.toLocaleString('ci') }} FCFA
+          </span>
+          <i> par Nuit</i>
+          <i v-if="cardInfo?.options?.day"> par Jour</i>
+        </p>
       </div>
       <div class = "product-detail">
         <h2>Description</h2>
         <p>{{ cardInfo?.description }}</p>
-        <ul v-if="price">
+        <ul>
           <li>
             <i class="material-symbols-outlined">home_work</i>
             <span>{{ cardInfo?.type }}</span>
@@ -91,7 +84,7 @@
 </div>
 
 <Maps
-  v-if="emp && price"
+  v-if="emp"
   :emp="emp"
 />
 
@@ -151,8 +144,13 @@ export default {
       this.load = false
     })
   },
-  computed(){
-    return this.cardInfo.type !== 'plan'
+  computed: {
+    isPlan(){
+      return this.cardInfo.type === 'plan'
+    },
+    location(){
+      return this.cardInfo?.proposition === 'location'
+    }
   }
 }
 </script>
@@ -160,12 +158,19 @@ export default {
 <style scoped>
   img{
     width: 100%;
+    min-height: 80px;
+    max-height: 80px;
     display: block;
 }
 </style>
 <style>
+
+.img-select{
+  overflow: scroll;
+}
 .card-wrapper {
-  border-radius: 2rem;
+  overflow: hidden;
+  border-radius: .5rem;
   background: var(--white);
   max-width: 1100px;
   margin: 0 auto;
@@ -298,17 +303,14 @@ export default {
 
 @media screen and (min-width: 992px) {
   .card {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 1.5rem;
+    display: flex;
   }
 
   .card-wrapper {
-    padding: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
   }
 
   .product-imgs {
@@ -316,6 +318,8 @@ export default {
     flex-direction: column;
     justify-content: center;
     margin: .5rem auto;
+    min-width: 50%;
+    max-width: 50%;
   }
 
   .product-content {

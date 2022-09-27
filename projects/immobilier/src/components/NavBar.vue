@@ -9,43 +9,42 @@
         </div>
         <nav>
             <ul class="ul">
-
-                <router-link to="/auth"  v-if="!isLogged">
+                <router-link to="/auth"  v-if="!isLogged" class="navLink">
                     <a href="">
                         <i class="material-symbols-outlined">person</i>
                         Connexion
                     </a>
                 </router-link>
-                <router-link to="/profile"  v-if="isLogged">
+                <router-link to="/profile"  v-if="isLogged" class="navLink">
                     <a href="">
                         <i class="material-symbols-outlined">person</i>
                         Profile
                     </a>
                 </router-link>
-                <a @click="signOut" v-if="isLogged">
-                    <a href="#" class="item">
-                        <i class="material-symbols-outlined">logout</i>
-                        Déconnexion
-                    </a>
-                </a>
                 <a @click="publish">
                     <a href="#" class="item">
                         <i class="material-symbols-outlined">publish</i>
                         Publier
                     </a>
                 </a>
-                <router-link to="/favorites">
+                <router-link to="/favorites" class="navLink">
                     <a href="" class="item">
                         <i class="material-symbols-outlined">favorite</i>
                         Favoris
                     </a>
                 </router-link>
-                <router-link to="/messages" v-if="isLogged">
+                <router-link to="/messages" v-if="isLogged" class="navLink">
                     <a href="" class="item">
                         <i class="material-symbols-outlined">mail</i>
                         Messages
                     </a>  
                 </router-link>
+                <a @click="signOut" v-if="isLogged">
+                    <a href="#" class="item" style="color: var(--red); opacity: .5;">
+                        <i class="material-symbols-outlined">logout</i>
+                        Déconnexion
+                    </a>
+                </a>
             </ul>
         </nav>
         <i class="material-symbols-outlined menu">menu</i>
@@ -93,7 +92,10 @@ export default {
 <style scoped>
 
 nav a:hover{
-    background: var(--hovercolor)
+  background: var(--hovercolor)
+}
+nav a{
+  border-radius: 99px;
 }
 
 </style>
@@ -107,8 +109,8 @@ nav a:hover{
 }
 
 a{
-    text-decoration:none;
-    color:#fff
+  text-decoration:none;
+  color:#fff
 }
 
 .ul{

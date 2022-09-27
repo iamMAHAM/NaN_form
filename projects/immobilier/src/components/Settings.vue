@@ -2,7 +2,7 @@
   <i
   class="material-symbols-outlined support"
   @click="$router.push({ path: '/admin/dashboard', query: { uid: uid } })"
-  v-if="isAdmin && !flag">settings</i>
+  v-if="isAdmin">settings</i>
 </template>
 
 <script>
