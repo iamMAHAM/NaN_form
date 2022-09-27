@@ -28,7 +28,7 @@ export const findOne = (col="", id="")=>{
             resolve(found)
             return
         }
-        reject("user not found")
+        reject("notFound")
     })
 }
 

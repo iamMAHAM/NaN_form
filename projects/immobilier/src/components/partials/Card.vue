@@ -1,5 +1,5 @@
 <template>
-    <div class="box" :id="card.id">
+    <div class="box" :id="card.id" v-if="card?.images?.length">
       <div class="top" @click="handleClick">
         <span v-if="solded" class="soldout">Vendu</span>
         <img :src="card?.images.slice(0, 1)"/>
@@ -28,7 +28,7 @@
       </div> 
       <div class="bottom">
         <h3>
-          {{ !isPlan ?  card?.title  + ' à ' + card?.location?.toLocaleUpperCase() : 'Plan de Maison'}}
+          {{ !isPlan ?  card?.title  + ' || ' + card?.location?.toLocaleUpperCase() : 'Plan de Maison'}}
         </h3>
         <p>
          {{ card.description.slice(0, 80)}} ...

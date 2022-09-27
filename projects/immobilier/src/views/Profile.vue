@@ -504,6 +504,7 @@ a:hover {
   color: #fff;
   border: none;
   box-shadow: 1px 2px 3px rgba(212, 208, 208, 0.2);
+  justify-content: space-between;
 }
 
 .card-container{

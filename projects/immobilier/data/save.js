@@ -28,7 +28,7 @@ const saveDocs = (collect="", docs=[])=>{
 }
 
 const saveFile = (file, collect)=>{
-	fs.readFile(file, (err, data)=>{
+	fs.readFile(path.join(__dirname, file), (err, data)=>{
 		err ? console.log(err) : ''
 		const loaded = JSON.parse(data.toString())
 		saveDocs(`ads/X1eA1Bk8tfnVXHqduiTg/${collect}`, loaded)

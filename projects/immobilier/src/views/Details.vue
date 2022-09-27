@@ -33,7 +33,7 @@
           <i v-else>Devis à partir de : </i>
           <span>{{ cardInfo?.price?.toLocaleString('ci') }} FCFA
           </span>
-          <i> par Nuit</i>
+          <i v-if="cardInfo?.options?.night"> par Nuit</i>
           <i v-if="cardInfo?.options?.day"> par Jour</i>
         </p>
       </div>
@@ -135,7 +135,6 @@ export default {
   },
   mounted(){
     const params = this.$route.params
-    console.log(params)
     findOne(`ads/X1eA1Bk8tfnVXHqduiTg/${params.categorie}`, params.id)
     .then(detailInfo=>{
       this.current = detailInfo?.images?.slice(0, 1)
@@ -143,6 +142,11 @@ export default {
       console.log(this.cardInfo)
       this.emp = detailInfo?.location
       this.load = false
+    })
+    .catch(e=>{
+      if (e === 'notFound'){
+        this.$router.push("/404")
+      }
     })
   },
   computed: {
