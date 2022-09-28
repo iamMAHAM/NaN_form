@@ -1,6 +1,6 @@
 <template>
   <div class="home-component">
-    <Banner @filter="filter"/>
+    <Banner @filter="filter" :match="match"/>
     <CardContainer
       :cards="cards"
       :load="load"
@@ -25,6 +25,7 @@ export default {
       load: true,
       allCards: [],
       cards: [],
+      match: false,
     }
   },
   methods:{
@@ -39,6 +40,7 @@ export default {
     : this.$router.push('/404')
   },
   mounted(){
+    this.match = window.matchMedia("(max-width: 800px)").matches
     find(`ads/X1eA1Bk8tfnVXHqduiTg${this.$route.path}`)
     .then(data=>{
       this.cards = data

@@ -1,6 +1,6 @@
 <template>
   <div class="banner-component">
-    <Categories class="ok" @filter="emit"/>
+    <Categories class="ok" @filter="emit" :match="match"/>
     <carousel :slides="slides" :interval="3000" controls indicators class="rightd"></carousel>
   </div>
 </template>
@@ -11,6 +11,7 @@ import Carousel from "@/components/partials/banner/carousel/Carousel.vue"
 export default {
   name: 'Banner',
   emits: ['filter'],
+  props:['match'],
   components: {
     Categories,
     Carousel

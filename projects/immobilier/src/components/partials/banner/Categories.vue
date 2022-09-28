@@ -1,6 +1,6 @@
 <template>
-  <aside>
-  <nav class="sidebar">
+  <aside :class="match ? 'expand' : ''">
+  <nav :class="`sidebar ${match  ? 'expand' : ''}`">
     <button class="nav-toggle">
     <i class="fas fa-angle-left"></i>
     </button>
@@ -9,31 +9,31 @@
         <h3 class="nav-title">Catégories</h3>
       </li>
       <router-link to="/maison" class="nav__item" data-tooltip="Maison">
-        <a href="#" class="nav__link">
+        <a class="nav__link">
         <i class="material-symbols-outlined">house</i>
         <span class="nav__link-text">Maison</span>
         </a>
       </router-link>
       <router-link to="/terrain" class="nav__item" data-tooltip="Terrain">
-        <a href="#" class="nav__link">
+        <a class="nav__link">
         <i class="material-symbols-outlined">grass</i>
         <span class="nav__link-text">Terrain</span>
         </a>
       </router-link>
       <router-link to="/hotel" class="nav__item" data-tooltip="Hotel">
-        <a href="#" class="nav__link">
+        <a class="nav__link">
         <i class="material-symbols-outlined">hotel</i>
         <span class="nav__link-text">Hotel</span>
         </a>
       </router-link>
       <router-link to="/magasin" class="nav__item" data-tooltip="Magasin">
-        <a href="#" class="nav__link">
+        <a class="nav__link">
         <i class="material-symbols-outlined">store</i>
         <span class="nav__link-text">Magasin</span>
         </a>
       </router-link>
       <router-link to="/plan" class="nav__item" data-tooltip="Plan">
-        <a href="#" class="nav__link">
+        <a class="nav__link">
         <i class="material-symbols-outlined">map</i>
         <span class="nav__link-text">Plan</span>
         </a>
@@ -44,13 +44,13 @@
         <h3 class="nav-title">Spécification</h3>
       </li>
       <li class="nav__item" data-tooltip="Location" @click="$emit('filter', 'location')">
-        <a href="#" class="nav__link">
+        <a class="nav__link">
           <i class="material-symbols-outlined">component_exchange</i>
         <span class="nav__link-text">Location</span>
         </a>
       </li>
       <li class="nav__item" data-tooltip="Vente" @click="$emit('filter', 'vente')">
-        <a href="#" class="nav__link">
+        <a class="nav__link">
         <i class="material-symbols-outlined">sell</i>
         <span class="nav__link-text">Vente</span>
         </a>
@@ -64,22 +64,7 @@
 export default {
   name: 'Categories',
   emits:['filter'],
-  mounted(){
-    window.addEventListener("DOMContentLoaded", ()=>{
-      const navigation = document.querySelector(".sidebar");
-      const aside = document.querySelector("aside")
-      const navToggle = document.querySelector(".nav-toggle");
-      if (navigation?.classList?.contains("expand")){
-          aside?.classList?.add("expand")
-      }
-      navToggle?.addEventListener("click", () => {
-        navigation?.classList?.toggle("expand");
-        if (navigation?.classList?.contains("expand")){
-          aside?.classList?.add("expand")
-        }
-      });
-    })
-  }
+  props: ['match']
 }
 </script>
 
