@@ -1,78 +1,85 @@
 <template>
-    <div id="header">
-        <div class="logo">
-            <router-link to="/"><img id="logo" src="../assets/logo.png" alt=""/></router-link>
-        </div>
-        <div class="search"> 
-                <input name="q" placeholder="recherche..." type="search" class="search-i">
-                <i class="material-symbols-outlined">search</i>
-        </div>
-        <nav>
-            <ul class="ul">
-                <router-link to="/auth"  v-if="!isLogged" class="navLink">
-                    <a href="">
-                        <i class="material-symbols-outlined">person</i>
-                        Connexion
-                    </a>
-                </router-link>
-                <router-link to="/profile"  v-if="isLogged && user?.role !== 'admin'" class="navLink">
-                    <a href="">
-                        <i class="material-symbols-outlined">person</i>
-                        Profile
-                    </a>
-                </router-link>
-                <a @click="publish" v-if="user?.role !== 'admin'">
-                    <a href="#" class="item">
-                        <i class="material-symbols-outlined">publish</i>
-                        Publier
-                    </a>
-                </a>
-                <router-link to="/favorites" class="navLink">
-                    <a href="" class="item">
-                        <i class="material-symbols-outlined">favorite</i>
-                        Favoris
-                    </a>
-                </router-link>
-                <router-link to="/messages" v-if="isLogged" class="navLink">
-                    <a href="" class="item">
-                        <i class="material-symbols-outlined">mail</i>
-                        Messages
-                    </a>  
-                </router-link>
-                <a @click="signOut" v-if="isLogged && user?.role !== 'admin'" >
-                    <a href="#" class="item" style="color: var(--red); opacity: .5;">
-                        <i class="material-symbols-outlined">logout</i>
-                        Déconnexion
-                    </a>
-                </a>
-            </ul>
-        </nav>
-        <i class="material-symbols-outlined menu">menu</i>
-        <postForm :show="show" @close="show=false"/>
-    </div>
+  <div id="header" v-if="!auth">
+      <div class="logo">
+          <router-link to="/"><img id="logo" src="../assets/logo.png" alt=""/></router-link>
+      </div>
+      <div class="search"> 
+              <input name="q" placeholder="recherche..." type="search" class="search-i">
+              <i class="material-symbols-outlined">search</i>
+      </div>
+      <nav>
+          <ul class="ul">
+              <router-link to="/auth"  v-if="!isLogged" class="navLink">
+                  <a href="">
+                      <i class="material-symbols-outlined">person</i>
+                      Connexion
+                  </a>
+              </router-link>
+              <router-link to="/profile"  v-if="isLogged && user?.role !== 'admin'" class="navLink">
+                  <a href="">
+                      <i class="material-symbols-outlined">person</i>
+                      Profile
+                  </a>
+              </router-link>
+              <a @click="publish" v-if="user?.role !== 'admin'">
+                  <a href="#" class="item">
+                      <i class="material-symbols-outlined">publish</i>
+                      Publier
+                  </a>
+              </a>
+              <router-link to="/favorites" class="navLink">
+                  <a href="" class="item">
+                      <i class="material-symbols-outlined">favorite</i>
+                      Favoris
+                  </a>
+              </router-link>
+              <router-link to="/messages" v-if="isLogged" class="navLink">
+                  <a href="" class="item">
+                      <i class="material-symbols-outlined">mail</i>
+                      Messages
+                  </a>  
+              </router-link>
+              <a @click="signOut" v-if="isLogged && user?.role !== 'admin'" >
+                  <a href="#" class="item" style="color: var(--red); opacity: .5;">
+                      <i class="material-symbols-outlined">logout</i>
+                      Déconnexion
+                  </a>
+              </a>
+          </ul>
+      </nav>
+      <i class="material-symbols-outlined menu">menu</i>
+      <postForm :show="show" @close="show=false"/>
+  </div>
+  <Logo v-else/>
+  <!-- <div class="authls" v-else>
+    <img src="@/assets/logo.png">
+    <span>La Solution aux Problèmes Immobiliers</span>
+  </div> -->
 </template>
 
 <script>
 import { auth, signOutUser } from '@/lib/firestoreLib'
 import postForm from './partials/postForm.vue'
+import Logo from "@/components/partials/Logo.vue"
 export default {
   name: 'NavBar',
-  props: ['isLogged', 'user'],
+  props: ['isLogged', 'user', 'auth'],
   data(){
     return {
       show: false,
     }
   },
   components: {
-    postForm
+    postForm,
+    Logo
   },
   setup(){
     window.addEventListener("DOMContentLoaded", ()=>{
         const ul = document.querySelector(".ul")
         const menu = document.querySelector(".material-symbols-outlined.menu")
-        menu.addEventListener("click", ()=>{
-            ul.classList.toggle("active")
-            menu.textContent = menu.textContent === "close" ? "menu" : "close"
+        menu?.addEventListener("click", ()=>{
+            ul?.classList?.toggle("active")
+            menu.textContent = menu?.textContent === "close" ? "menu" : "close"
         })
     })
   },
@@ -117,6 +124,24 @@ a{
     z-index: 10;
     display: flex;
 }
+
+.authls{
+  gap: 5%;
+  align-items: center;
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+}
+
+.authls img{
+  border-radius: 50%;
+}
+
+.authls span{
+  text-transform: uppercase;
+  font-size: 5rem;
+}
+
 #header{
     display: flex;
     align-items: center;

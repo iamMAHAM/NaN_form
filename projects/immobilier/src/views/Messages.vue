@@ -150,6 +150,7 @@ import { rtdb } from "@/lib/firebaseConfig"
 import {  auth, deleteMessage, sendMessage, uploadImage } from '@/lib/firestoreLib'
 import { onValue, ref as dbref, query as dbquery } from "firebase/database"
 import Loader from '@/components/partials/Loader.vue'
+import Messages from "@/views/admin/DashBoard.vue"
 
 const compare = ( a, b )=>{
   if ( a.timestamp < b.timestamp ){

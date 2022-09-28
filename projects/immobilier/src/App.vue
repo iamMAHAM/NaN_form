@@ -1,5 +1,5 @@
 <template>
-  <NavBar :isLogged="isLogged" :user="user"/>
+  <NavBar :isLogged="isLogged" :user="user" :auth="auth"/>
   <div class="app-content">
     <router-view :isLogged="isLogged" :key="$route.path"/>
     <Support :isAdmin="isAdmin && !flag" :uid="uid"/>
@@ -21,6 +21,7 @@
         uid: '',
         user: {},
         flag: false,
+        auth:false
       }
     },
     components:{
@@ -50,6 +51,7 @@
     },
     updated(){
       this.flag = this.$route.path === "/admin/dashboard"
+      this.auth = this.$route.path === "/auth"
     }
   }
 </script>
@@ -96,9 +98,7 @@ body{
   --light600: hsl(214, 48%, 93%);
   --dark400: hsl(240, 16%, 32%);
   --dark600: hsl(238, 11%, 49%);
-  --accent1: hsl(239, 34%, 58%);
-  --accent2: hsl(214, 93%, 63%);
-
+  --anim-dur: 3s;
   --shadow: 0px 2px 1px 0 #0001, 0 0.125em 0.25em 0.0625em #0002,
     0 0.2em 0.5em #0002;
 }
