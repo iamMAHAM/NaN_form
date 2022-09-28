@@ -21,7 +21,7 @@
         uid: '',
         user: {},
         flag: false,
-        auth:false
+        auth:false,
       }
     },
     components:{
