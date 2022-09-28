@@ -472,7 +472,7 @@ div.error{
   font-weight: 300;
 }
 
-@media (max-width: 99.1px) {
+@media (max-width: 991px) {
   section .container {
     max-width: 40rem;
   }
