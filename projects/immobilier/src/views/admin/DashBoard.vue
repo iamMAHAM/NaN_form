@@ -13,19 +13,19 @@
 
 			<!-- tab-menu -->
 			<input type="radio" class="tab-1" name="tab" checked="checked">
-			<span>Accueil</span><i class="material-symbols-outlined">home</i>
+			<span>Home</span><i class="material-symbols-outlined">home</i>
 
 			<input type="radio" class="tab-2" name="tab">
-			<span>Utilisateurs</span><i class="material-symbols-outlined">group</i>
+			<span>Users</span><i class="material-symbols-outlined">group</i>
 
 			<input type="radio" class="tab-3" name="tab">
-			<span>En attente</span><i class="material-symbols-outlined">pending</i>
+			<span>Pending</span><i class="material-symbols-outlined">pending</i>
 		
       <input type="radio" class="tab-4" name="tab">
-			<span>Signalé</span><i class="material-symbols-outlined">report</i>
+			<span>Reported</span><i class="material-symbols-outlined">report</i>
 
       <input type="radio" class="tab-5" name="tab">
-			<span>Vérification KYC</span><i class="material-symbols-outlined">badge</i>
+			<span>KYC</span><i class="material-symbols-outlined">badge</i>
 
 			<!-- <input type="radio" class="tab-6" name="tab">
 			<span>Profile</span><i class="material-symbols-outlined">person</i> -->
@@ -61,33 +61,33 @@
 					<div class="home-top">
             <div class="item">
               <div class="ileft">
-                Utilisateurs
+                Total users
               </div>
-              <div class="iright">30</div>
+              <div class="iright">{{ users.length }}</div>
             </div>
             <div class="item">
               <div class="ileft">
-                Vendeurs
+                Total Ads
               </div>
-              <div class="iright">30</div>
+              <div class="iright">{{ totals_ads.length }}</div>
             </div>
             <div class="item">
               <div class="ileft">
-                Total Annonces
+                Solded Ads
               </div>
-              <div class="iright">30</div>
+              <div class="iright">{{ totals_ads.filter(a=>a.status === 'solded').length }}</div>
             </div>
 					</div>
           <div class="bottom">
             <Stats
-              :width="1000"
-              :height="600"
+              v-if="mounted"
+              :data="data"
             />
           </div>
 
 				</section>
 				<section class="users">
-          <Users />
+          <Users @userUpdated="updatedUsers"/>
 				</section>
 				<section class="pending">
           <CardContainer
@@ -108,7 +108,7 @@
               color: var(--white);
             "
           >
-            Rien à Signaler ici
+            Aucune vérification en attente
           </div>
           <ProfileCard
             v-else
@@ -144,19 +144,49 @@ export default {
     CardContainer,
     ProfileCard
   },
+  methods:{
+    updatedUsers(users){
+      this.users = [ ...users]
+      this.getDataArray(this.users, 'registratedAt', 'users')
+    },
+    getDataArray(array=[], property, type){
+      const adsData = []
+      const months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+      ]
+      months.map(m=>{
+        adsData.push(array.filter(t => t[property]?.toDate()?.toLocaleString('en', { month: 'long' }) === m).length)
+      })
+      this.data[type] = adsData
+    }
+  },
   data(){
     return {
       load: true,
       cards: [],
       profiles: [],
       auth: auth,
+      users: [],
+      totals_ads: [],
+      data:{},
+      mounted:false,
       signOutUser: signOutUser
     }
   },
   beforeCreate(){
     const uid = this.$route.query.uid
     if (!uid){
-      console.log("push to 4040")
       this.$router.push('/404')
       return
     }
@@ -178,10 +208,27 @@ export default {
     this.load = false
     })
     onSnapshot(collection(db, "admin/vAJXH3iQabt9AjGLAaej/verification"), (snap)=>{
-      const inter = []
-      snap.docs.map(prof=> inter.push(prof.data()))
-      this.profiles = [...inter]
+      this.profiles = [...snap.docs.map(s=>s.data())]
     })
+
+    onSnapshot(collection(db, "totals_ads"), (snap)=>{
+      this.totals_ads = [...snap.docs.map(s=>s.data())]
+      this.getDataArray(this.totals_ads, 'publishedAt', 'totalAds')
+      const solded = this.totals_ads.filter(a => a.status === "solded")
+      this.getDataArray(solded, 'publishedAt', 'soldedAds')
+      this.mounted = true
+    })
+  },
+  computed: {
+    usersLength(){
+      return this.users.filter(u => u.role === "acheteur").length
+    },
+    sellerLength(){
+      return this.users.filter(u => u.role === "vendeur").length
+    },
+    adminLength(){
+      return this.users.filter(u => u.role === "admin").length
+    }
   }
 }
 </script>
@@ -244,7 +291,7 @@ li{
   border: .1rem solid var(--white);
 	background: var(--white);
 	width: 100%;
-	height: 950px;
+	height: 80vh;
 	position: relative;
 }
 
@@ -359,7 +406,7 @@ li{
 	width: calc(100% - 200px);
 	height: 100%;
 	padding-top: 60px;
-	overflow: hidden;
+	overflow: scroll;
 }
 
 .tab-content section {
@@ -367,7 +414,6 @@ li{
 	width: 100%;
 	height: 100%;
 	display: none;
-  overflow: scroll;
 }
 
 .clear-backend > input.tab-1:checked ~ .tab-content .home {
@@ -405,6 +451,7 @@ li{
 }
 
 .tab-content .item{
+  margin: .5rem;
 	padding: 2rem;
 	display: flex;
 	justify-content: space-between;
@@ -413,8 +460,13 @@ li{
 	color: var(--white);
 }
 
+.bottom{
+  height: calc(100% - 60px);
+}
+
 .tab-content .home .bottom > div{
-  height: 50%;
+  overflow: scroll;
+  height: calc(100% - 62px);
 }
 
 /* Responsive */

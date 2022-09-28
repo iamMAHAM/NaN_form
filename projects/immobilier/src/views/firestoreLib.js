@@ -113,7 +113,7 @@ export const signUp = async (data)=>{
                 photoURL: data.avatar,
             })
             delete data.password
-            await setOne("users", data, u.user.uid)
+            await setOne("users", data, u.user.uid, true)
             resolve(data)
         }).catch(e => reject(e.code ? e.code : e.message))
     })

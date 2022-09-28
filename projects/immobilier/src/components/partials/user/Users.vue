@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import { find } from '@/lib/firestoreLib';
 import User from './User.vue';
 import { collection, onSnapshot } from '@firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
@@ -83,6 +82,7 @@ export default {
       snap.docs.map(d=>inter.push(d.data()))
       this.users = [...inter]
       this.allUsers = [...this.users]
+      this.$emit("userUpdated", this.allUsers)
     })
   }
 }

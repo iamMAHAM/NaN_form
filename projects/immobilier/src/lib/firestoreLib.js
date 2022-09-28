@@ -73,14 +73,15 @@ export const search = (categories=[], value="")=>{
 
 export const saveOne = (col="", d)=>{
     return new Promise(async (resolve)=>{
-        d.publishedAt = Date.now()
-       const q = await addDoc(collection(db, col), d)
-       d.id = q.id
-       resolve(d)
+      d.publishedAt = Date.now()
+      const q = await addDoc(collection(db, col), d)
+      d.id = q.id
+      resolve(d)
     })
 }
-export const setOne = async (col="", data={}, id='')=>{
+export const setOne = async (col="", data={}, id='', first=false)=>{
     data.id = id
+    first ? data.registratedAt = sT() : ''
     await setDoc(doc(db, col, id), data)
 }
 
@@ -113,7 +114,7 @@ export const signUp = async (data)=>{
                 photoURL: data.avatar,
             })
             delete data.password
-            await setOne("users", data, u.user.uid)
+            await setOne("users", data, u.user.uid, true)
             resolve(data)
         }).catch(e => reject(e.code ? e.code : e.message))
     })

@@ -15,11 +15,11 @@ export default {
 
 <style>
 .material-symbols-outlined.support{
-  color: var(--white);
+  color: var(--greenfun);
   cursor: pointer;
   font-size: 5rem;
   position: fixed;
-  left: 1%;
+  right: 5%;
   top: 10%;
   font-variation-settings:
   'FILL' 1,

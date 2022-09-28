@@ -61,7 +61,7 @@ export default {
   display: flex;
   justify-content: center;
   overflow: hidden;
-  height: 50vh;
+  height: 70vh;
 }
 
 .rightd{

@@ -139,7 +139,6 @@ export default {
     .then(detailInfo=>{
       this.current = detailInfo?.images?.slice(0, 1)
       this.cardInfo = detailInfo
-      console.log(this.cardInfo)
       this.emp = detailInfo?.location
       this.load = false
     })
@@ -198,12 +197,12 @@ export default {
 
 .img-select {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
 .img-item {
-  height: 15rem;
-  width: 15rem;
+  width: 7.8rem;
   margin: 0.3rem;
 }
 
@@ -306,6 +305,12 @@ export default {
   background: var(--hovercolor);
 }
 
+.card{
+  padding: 3rem;
+  width: 100%;
+  align-items: center;
+}
+
 @media screen and (min-width: 992px) {
   .card {
     display: flex;
@@ -316,6 +321,7 @@ export default {
     justify-content: center;
     align-items: center;
     margin-top: 1.5rem;
+    height: max-content;
   }
 
   .product-imgs {

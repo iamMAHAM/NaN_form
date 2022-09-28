@@ -34,7 +34,6 @@
         const notConnectedR = ['/profile', '/admin/dashboard', '/messages', '/favorites']
         const connectedRoute = ['/auth']
         if (user?.emailVerified){
-          this.isLogged = true
           connectedRoute.includes(this.$route.path) ? this.$router.go(-1) : ''
           findOne("users", auth?.currentUser?.uid)
           .then(user=>{
@@ -50,9 +49,16 @@
       })
     },
     updated(){
+      console.log("app updated")
       this.flag = this.$route.path === "/admin/dashboard"
       this.auth = this.$route.path === "/auth"
+    },
+
+    watch:{
+    $route (to, from){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  } 
   }
 </script>
 <style>
