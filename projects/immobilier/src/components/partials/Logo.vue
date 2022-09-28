@@ -1,16 +1,16 @@
 <template>
   <div id="logo-container">
     <div class="content">
-    <div class="logo">
-      <div class="logo__block"><img src="@/assets/logo.png"></div>
-      <div class="logo__shadow"></div>
-    </div>
-    <div class="tagline">
-      <div class="tagline__mask">
-        <div class="tagline__main">IMMO SOLUCE</div>
-        <div class="tagline__sub">La Solution aux problèmes immobiliers</div>
+      <div class="logo">
+        <div class="logo__block"><img src="@/assets/logo.png"></div>
+        <div class="logo__shadow"></div>
       </div>
-    </div>
+      <div class="tagline">
+        <div class="tagline__mask">
+          <div class="tagline__main">IMMO SOLUCE</div>
+          <div class="tagline__sub">La Solution aux problèmes immobiliers</div>
+        </div>
+      </div>
   </div>
 </div>
 </template>
@@ -22,6 +22,7 @@
   display: flex;
   justify-content: center;
   font-size: clamp(1rem, 6vmin, 4rem);
+  height: 15rem;
 }
 
 .content {
@@ -41,6 +42,7 @@
 }
 
 .logo__block img{
+  border: 1px solid var(--white);
   border-radius: 50%;
 }
 
@@ -123,34 +125,42 @@
 @media screen and (max-width: 883px) {
 
   .logo__block img{
-    height: 10rem;
-    width: 10rem;
+    height: 12rem;
+    width: 12rem;
+  }
+
+  #logo-container{
+    height: 12rem;
   }
 }
 
 @media screen and (max-width: 563px){
-  .tagline,
-  .logo__block{
-    animation: unset;
-  }
-
 
   .content{
     justify-content: space-around;
   }
 
-  .tagline__main{
-    font-size: 2rem;
-  }
-  .tagline__sub{
-    font-size: 1.5rem;
+  .logo__block,
+  .tagline{
+    animation: unset;
   }
 
   .tagline{
     width: calc(66%);
   }
+
+  .tagline__main{
+    font-size: 2.5rem;
+  }
+  .tagline__sub{
+    font-size: 2rem;
+  }
 }
 @media screen and (max-width: 397px){
+
+  #logo-container{
+    height: 8rem;
+  }
   .tagline__main{
     font-size: 1.7rem;
   }
@@ -163,8 +173,8 @@
   }
 
   .logo__block img{
-    height: 6rem;
-    width: 6rem;
+    height: 8rem;
+    width: 10rem;
   }
 }
 </style>
