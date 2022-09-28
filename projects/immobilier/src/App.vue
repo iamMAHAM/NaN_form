@@ -2,7 +2,7 @@
   <NavBar :isLogged="isLogged" :user="user"/>
   <div class="app-content">
     <router-view :isLogged="isLogged" :key="$route.path"/>
-    <Support :isAdmin="isAdmin" :uid="uid"/>
+    <Support :isAdmin="isAdmin && !flag" :uid="uid"/>
     <Footer />
   </div>
 </template>
@@ -19,7 +19,8 @@
         isLogged: false,
         isAdmin: false,
         uid: '',
-        user: {}
+        user: {},
+        flag: false,
       }
     },
     components:{
@@ -48,7 +49,7 @@
       })
     },
     updated(){
-      console.log(this.$route.path)// hvuhve
+      this.flag = this.$route.path === "/admin/dashboard"
     }
   }
 </script>

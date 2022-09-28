@@ -25,7 +25,7 @@
 			<span>Signalé</span><i class="material-symbols-outlined">report</i>
 
       <input type="radio" class="tab-5" name="tab">
-			<span>KYC</span><i class="material-symbols-outlined">badge</i>
+			<span>Vérification KYC</span><i class="material-symbols-outlined">badge</i>
 
 			<!-- <input type="radio" class="tab-6" name="tab">
 			<span>Profile</span><i class="material-symbols-outlined">person</i> -->
@@ -156,6 +156,7 @@ export default {
   beforeCreate(){
     const uid = this.$route.query.uid
     if (!uid){
+      console.log("push to 4040")
       this.$router.push('/404')
       return
     }

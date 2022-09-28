@@ -1,8 +1,9 @@
 <template>
   <i
+  data-tooltip="admin"
   class="material-symbols-outlined support"
   @click="$router.push({ path: '/admin/dashboard', query: { uid: uid } })"
-  v-if="isAdmin">settings</i>
+  v-if="isAdmin">admin_panel_settings</i>
 </template>
 
 <script>
@@ -16,9 +17,22 @@ export default {
 .material-symbols-outlined.support{
   color: var(--white);
   cursor: pointer;
-  font-size: 6rem;
+  font-size: 5rem;
   position: fixed;
-  right: 5%;
-  bottom: 5%;
+  left: 1%;
+  top: 10%;
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48;
+}
+
+.support[data-tooltip]:hover::before{
+  font-size: 1.5rem;
+  animation: showTooltip 200ms linear 100ms forwards;
+  background: var(--navcolor);
+  color: var(--white);
+  text-transform: lowercase;
 }
 </style>

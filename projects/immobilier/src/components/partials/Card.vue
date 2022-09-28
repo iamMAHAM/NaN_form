@@ -28,7 +28,7 @@
       </div> 
       <div class="bottom">
         <h3>
-          {{ !isPlan ?  title  + ' || ' + card?.location?.toLocaleUpperCase() : 'Plan de Maison'}}
+          {{ !isPlan ?  title  + ' || ' + location : 'Plan de Maison'}}
         </h3>
         <p>
          {{ card.description.slice(0, 80)}} ...
@@ -45,7 +45,7 @@
             <span>Bain</span>
             <div>
               <i class="material-symbols-outlined">bathroom</i>
-              <span>{{ card?.options?.salle }}</span>
+              <span>{{ card?.options?.salle || 1}}</span>
             </div>
           </div>
           <div>
@@ -148,7 +148,12 @@ export default {
       return this.card.type === "isPlan"
     },
     title(){
-      return this.card.title.slice(0, 17)
+      const t = this.card.title
+      return t.replace(t.substring(17), '...').toLowerCase()
+    },
+    location(){
+      const l = this.card.location
+      return l.replace(l.substring(12), '...').toLowerCase()
     }
   },
 
