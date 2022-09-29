@@ -1,5 +1,14 @@
 <template>
   <Loader v-if="load"/>
+  <div class="text" align="center"
+    :style="{
+      fontSize: '2rem',
+      color: 'var(--white)'
+    }"
+    v-if="isSearch && cards.length"
+  >
+    RECHERCHE - {{ cards.length + ' Correspondances à : ' + searchTerm}}
+  </div>
   <div class="card-container" v-if="!load">
     <div v-if="!load && !cards?.length" class="em">{{ message }}</div>
     <Card
@@ -19,7 +28,7 @@ import Loader from './partials/Loader.vue';
 
 export default {
   name: 'CardContainer',
-  props: ['cards', 'load', 'message'],
+  props: ['cards', 'load', 'message', 'searchTerm', 'isSearch'],
   emits: ['filteringCard'],
   components: {
     Card,

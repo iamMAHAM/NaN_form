@@ -31,7 +31,7 @@
           {{ !isPlan ?  title  + ' || ' + location : 'Plan de Maison'}}
         </h3>
         <p>
-         {{ card.description.slice(0, 80)}} ...
+         {{ card.description.replace(card.description.substring(70), '...').toLowerCase()}}
         </p>
         <div class="advants">
           <div v-if="card?.type === 'maison'">

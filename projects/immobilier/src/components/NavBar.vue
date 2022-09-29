@@ -1,11 +1,41 @@
 <template>
+  <div id="search">
+    <span class="close">X</span>
+    <div>
+      <div class="to-absolute">
+        <div class="tops" align=center style="width: 50%">
+          <input name="q" type="search" placeholder="rechercher un texte dans ..." v-model="searchTerm"/>
+          <select name="" id="" v-model="categorie">
+            <option disabled selected="selected" value="">Choisir une catégorie</option>
+            <option
+              v-for="(cat, index) in categories"
+              :key="index"
+              :value="cat"
+            >
+            {{ cat }}
+          </option>
+          </select>
+        </div>
+        <i
+          title="rechercher"
+          class="material-symbols-outlined"
+          @click="search"
+        >
+          search
+        </i>
+      </div>
+    </div>
+  </div>
   <div id="header" v-if="!auth">
       <div class="logo">
           <router-link to="/"><img id="logo" src="../assets/logo.png" alt=""/></router-link>
       </div>
       <div class="search"> 
-              <input name="q" placeholder="recherche..." type="search" class="search-i">
-              <i class="material-symbols-outlined">search</i>
+              <input name="q" placeholder="recherche..." type="search" class="search-i" v-model="searchTerm" @click="click">
+              <i class="material-symbols-outlined"
+              >
+                search
+              </i>
       </div>
       <nav>
           <ul class="ul">
@@ -58,15 +88,20 @@
 </template>
 
 <script>
-import { auth, signOutUser } from '@/lib/firestoreLib'
+import { allCategories, auth, signOutUser } from '@/lib/firestoreLib'
 import postForm from './partials/postForm.vue'
 import Logo from "@/components/partials/Logo.vue"
+
 export default {
   name: 'NavBar',
   props: ['isLogged', 'user', 'auth'],
+  emits: ['search'],
   data(){
     return {
       show: false,
+      searchTerm: '',
+      categories: allCategories,
+      categorie: ''
     }
   },
   components: {
@@ -75,12 +110,20 @@ export default {
   },
   setup(){
     window.addEventListener("DOMContentLoaded", ()=>{
-        const ul = document.querySelector(".ul")
-        const menu = document.querySelector(".material-symbols-outlined.menu")
-        menu?.addEventListener("click", ()=>{
-            ul?.classList?.toggle("active")
-            menu.textContent = menu?.textContent === "close" ? "menu" : "close"
-        })
+      const ul = document.querySelector(".ul")
+      const menu = document.querySelector(".material-symbols-outlined.menu")
+      const search = document.getElementById('search')
+      menu?.addEventListener("click", ()=>{
+          ul?.classList?.toggle("active")
+          menu.textContent = menu?.textContent === "close" ? "menu" : "close"
+      })
+      search.addEventListener("click", e=>{
+        const target = e.target
+        console.log(e.target)
+        if (e.target === search || e.target.className === 'close'){
+          search.classList.remove("open")
+        }
+      })
     })
   },
   methods:{
@@ -91,6 +134,18 @@ export default {
     signOut(){
       signOutUser()
       this.$router.push("/")
+    },
+    search(){
+      if (this.searchTerm && this.categorie){
+        this.$emit('search', [this.categorie, this.searchTerm])
+        document.getElementById("search").classList.remove('open')
+      }else{
+        alert("le champ et la catégorie sont obligatoire")
+      }
+    },
+    click(){
+      const search = document.getElementById('search')
+      search.classList.add('open')
     }
   }
 }
@@ -104,6 +159,100 @@ nav a:hover{
 nav a{
   border-radius: 99px;
 }
+/* Search Style */
+#search {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translate(0px, -100%) scale(0, 0);
+  -moz-transform: translate(0px, -100%) scale(0, 0);
+  -ms-transform: translate(0px, -100%) scale(0, 0);
+  -o-transform: translate(0px, -100%) scale(0, 0);
+  transform: translate(0px, -100%) scale(0, 0);
+  opacity: 0;
+  display: none;
+}
+
+#search.open {
+  -webkit-transform: translate(0px, 0px) scale(1, 1);
+  -moz-transform: translate(0px, 0px) scale(1, 1);
+  -ms-transform: translate(0px, 0px) scale(1, 1);
+  -o-transform: translate(0px, 0px) scale(1, 1);
+  transform: translate(0px, 0px) scale(1, 1);
+  opacity: 1;
+  z-index: 106;
+  display: block;
+}
+
+#search input[type="search"] {
+  color: var(--white);
+  border: 1px solid var(--white);
+  width: 100%;
+  background: transparent;
+  font-size: 2.5rem;
+  font-weight: 300;
+  text-align: center;
+  outline: none;
+  padding: 10px;
+}
+
+.to-absolute i{
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid var(--white);
+  border-radius: 50%;
+  font-size: 5rem;
+  color: var(--white);
+}
+
+.to-absolute i:hover{
+  background: var(--white);
+  color: var(--navcolor);
+}
+
+.to-absolute{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2%;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  left: 0;
+}
+
+.to-absolute select{
+  border: .5px solid var(--white);
+  color: var(--white);
+  background: transparent;
+  cursor: pointer;
+  font-size: 2.5rem;
+  width: max-content
+}
+#search .close {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  opacity: 1;
+  font-size: 27px;
+  color: #fff;
+}
+
+#search .close:hover {
+  color: var(--red);
+  cursor: pointer;
+}
+
 
 </style>
 <style>
@@ -174,7 +323,7 @@ a{
 
 .search i{
     border-left: .1rem solid var(--navcolor);
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin: auto 0;
     cursor: pointer;
 }
@@ -191,6 +340,13 @@ nav .dropdown{
 }
 nav a{
     padding: 1rem
+}
+
+.searchs{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
 @media only screen and (max-width: 1346px){

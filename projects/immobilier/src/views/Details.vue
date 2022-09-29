@@ -96,7 +96,7 @@ import Maps from "../components/Map.vue"
 import Loader from '@/components/partials/Loader.vue'
 export default {
   name: 'Details',
-  props: ['isLogged'],
+  props: ['isLogged', 'searchData'],
   components: {
     Maps,
     Loader

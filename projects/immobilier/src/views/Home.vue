@@ -4,7 +4,9 @@
     <CardContainer
       :cards="cards"
       :load="load"
-      :message="'Rien dans cette section'"
+      :message="message"
+      :searchTerm="searchTerm"
+      :isSearch="isSearch"
       />
   </div>
 </template>
@@ -12,10 +14,10 @@
 <script>
 import Banner from '@/components/partials/Banner.vue';
 import CardContainer from '@/components/CardContainer.vue';
-import { allCategories, find } from '@/lib/firestoreLib';
+import { allCategories, find, searchLow } from '@/lib/firestoreLib';
 export default {
   name: 'Home',
-  props: ['isLogged'],
+  props: ['isLogged', 'searchData'],
   components: {
       Banner,
       CardContainer
@@ -26,6 +28,9 @@ export default {
       allCards: [],
       cards: [],
       match: false,
+      message: '',
+      searchTerm: '',
+      isSearch: false
     }
   },
   methods:{
@@ -46,7 +51,23 @@ export default {
       this.cards = data
       this.allCards = [...data]
       this.load = false
+      this.message = 'Rien dans cette section'
     })
+  },
+  watch:{
+    searchData (value){
+      const [categorie, searchTerm ] = value
+      this.load = true
+      this.searchTerm = searchTerm
+      searchLow(categorie, searchTerm)
+      .then(datas=>{
+        this.isSearch = true
+        console.log(datas)
+        this.cards = [...datas]
+        this.message = this.cards.length ? 'Rien dans cette section' : 'Aucun resultat correspondant'
+        this.load = false
+      })
+    }
   }
 
 }

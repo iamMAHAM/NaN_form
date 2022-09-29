@@ -1,7 +1,7 @@
 <template>
-  <NavBar :isLogged="isLogged" :user="user" :auth="auth"/>
+  <NavBar :isLogged="isLogged" :user="user" :auth="auth" @search="search"/>
   <div class="app-content">
-    <router-view :isLogged="isLogged" :key="$route.path"/>
+    <router-view :isLogged="isLogged" :key="$route.path" :searchData="searchData"/>
     <Support :isAdmin="isAdmin && !flag" :uid="uid"/>
     <Footer />
   </div>
@@ -22,12 +22,18 @@
         user: {},
         flag: false,
         auth:false,
+        searchData: []
       }
     },
     components:{
       NavBar,
       Support,
       Footer
+    },
+    methods:{
+      search(data){
+        this.searchData = data
+      }
     },
     mounted(){
       monitorState(user=>{
@@ -39,6 +45,7 @@
           .then(user=>{
             this.uid = user.id
             this.user = user
+            this.isLogged = true
             this.isAdmin = user.role === 'admin'
           })
         }
@@ -49,7 +56,6 @@
       })
     },
     updated(){
-      console.log("app updated")
       this.flag = this.$route.path === "/admin/dashboard"
       this.auth = this.$route.path === "/auth"
     },

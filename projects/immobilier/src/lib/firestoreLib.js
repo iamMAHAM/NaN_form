@@ -71,6 +71,20 @@ export const search = (categories=[], value="")=>{
     })
 }
 
+export const searchLow = (_collection, searchTerm)=>{
+  return new Promise(async (resolve)=>{
+    const results = []
+    const q = collection(db, `ads/X1eA1Bk8tfnVXHqduiTg/${_collection}`)
+    const qs = await getDocs(q)
+    for (const _doc of qs.docs){
+      _doc.data().title.includes(searchTerm) && _doc.data().status !== 'solded'
+      ? results.push({..._doc.data(), id: _doc.id})
+      : ''
+    }
+    resolve(results)
+  })
+}
+
 export const saveOne = (col="", d)=>{
     return new Promise(async (resolve)=>{
       d.publishedAt = Date.now()
