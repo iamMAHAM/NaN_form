@@ -40,12 +40,12 @@
         const notConnectedR = ['/profile', '/admin/dashboard', '/messages', '/favorites']
         const connectedRoute = ['/auth']
         if (user?.emailVerified){
+          this.isLogged = true
           connectedRoute.includes(this.$route.path) ? this.$router.go(-1) : ''
           findOne("users", auth?.currentUser?.uid)
           .then(user=>{
             this.uid = user.id
             this.user = user
-            this.isLogged = true
             this.isAdmin = user.role === 'admin'
           })
         }

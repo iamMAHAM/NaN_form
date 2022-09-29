@@ -291,7 +291,7 @@ li{
   border: .1rem solid var(--white);
 	background: var(--white);
 	width: 100%;
-	height: 100vh;
+	height: 80vh;
 	position: relative;
 }
 

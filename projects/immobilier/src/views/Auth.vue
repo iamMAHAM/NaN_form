@@ -126,6 +126,7 @@
                 v-model="form.birth" 
                 @change="birthChange"
                 type="date"
+                min="1900-01-01" max="2003-01-01"
               >
             </div>
             <div class="error"

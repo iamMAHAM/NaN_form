@@ -46,21 +46,13 @@ export default {
   },
   mounted(){
     this.match = window.matchMedia("(max-width: 800px)").matches
-    // find(`ads/X1eA1Bk8tfnVXHqduiTg${this.$route.path}`)
-    // .then(data=>{
-    //   this.cards = data
-    //   this.allCards = [...data]
-    //   this.load = false
-    //   this.message = 'Rien dans cette section'
-    // })
-    // find("totals_ads")
-    // .then(ads=>{
-    //   ads.map(ad=>{
-    //     ad.status = 'online'
-    //     setOne(`users/${ad.ownerId}/ads`, ad, ad.id)
-    //     .then(console.log('saved success'))
-    //   })
-    // })
+    find(`ads/X1eA1Bk8tfnVXHqduiTg${this.$route.path}`)
+    .then(data=>{
+      this.cards = data
+      this.allCards = [...data]
+      this.load = false
+      this.message = 'Rien dans cette section'
+    })
   },
   watch:{
     searchData (value){

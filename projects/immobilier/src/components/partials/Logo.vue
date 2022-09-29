@@ -1,7 +1,7 @@
 <template>
   <div id="logo-container">
     <div class="content">
-      <div class="logo">
+      <div class="logo" @click="$router.push('/')">
         <div class="logo__block"><img src="@/assets/logo.png"></div>
         <div class="logo__shadow"></div>
       </div>
