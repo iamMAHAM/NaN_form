@@ -13,7 +13,7 @@
               </svg>
             </span>
             <div style="text-align:justify">
-              <span class="docName">Selfie</span>
+              <span class="docName">Selfie (photo de vous)</span>
               <div class="docType"><span class="fileName"></span> <i class="mdot"></i><span class="fileSize"></span></div>
               <div class="msg"></div>
             </div>
@@ -40,7 +40,7 @@
               </svg>
             </span>
             <div style="text-align:justify">
-              <span class="docName">Recto</span>
+              <span class="docName">Recto de la pièce d'identité</span>
               <div class="docType"><span class="fileName"></span> <i class="mdot"></i><span class="fileSize"></span></div>
               <div class="msg"></div>
             </div>
@@ -67,7 +67,7 @@
               </svg>
             </span>
             <div style="text-align:justify">
-              <span class="docName">Verso</span>
+              <span class="docName">Verso de la pièce d'identité</span>
               <div class="docType"><span class="fileName"></span> <i class="mdot"></i><span class="fileSize"></span></div>
               <div class="msg"></div>
             </div>

@@ -164,7 +164,7 @@ import CardContainer from '@/components/CardContainer.vue';
 import Uprofile from '@/components/partials/user/Uprofile.vue'
 import Loader from '@/components/partials/Loader.vue';
 import userVerification from '@/components/partials/user/userVerification.vue';
-import { auth, findOne, updateOne } from '@/lib/firestoreLib';
+import { auth, find, findOne, updateOne } from '@/lib/firestoreLib';
 import { collection, doc, onSnapshot } from '@firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
 import { updatePassword } from '@firebase/auth';
@@ -196,7 +196,6 @@ export default {
   },
   async mounted(){
     await new Promise(r=>setTimeout(r, 1000))
-    this.fetchData()
     const id = this.$route.query.id
     if (id && auth?.currentUser?.uid !== id){
       findOne("users", this.$route.query.id)
@@ -204,8 +203,13 @@ export default {
         this.user = user
         this.iLoad = false
       })
+      .then(
+        find(`users/${id}/ads`)
+        .then(ads=>this.cards = [...ads])
+      )
     }
     else{
+      this.fetchData(auth?.currentUser?.uid)
       onSnapshot(doc(db, "users", auth?.currentUser?.uid), (snap)=>{
         this.user = snap.data()
         this.backup = {...this.user}
@@ -214,8 +218,8 @@ export default {
     }
   },
   methods:{
-    async fetchData(){
-      onSnapshot(collection(db, `users/${auth?.currentUser?.uid}/ads`), (snap)=>{
+    async fetchData(id){
+      onSnapshot(collection(db, `users/${id}/ads`), (snap)=>{
         const inter = []
         snap.docs.map(d=>inter.push({...d.data(), id: d.id}))
         this.all = inter
