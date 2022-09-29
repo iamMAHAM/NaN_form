@@ -121,7 +121,8 @@ export default {
       Promise.all([
         deleteOne(`/users/${auth?.currentUser?.uid}/ads`, this.card.id),
         deleteOne(`ads/X1eA1Bk8tfnVXHqduiTg/${this.card.type}`, this.card.id),
-        abortPost(this.card.tempId)
+        abortPost(this.card.tempId),
+        deleteOne('totals_ads', this.card.id)
       ])
       .then(alert("annonce supprimée avec succès"))
       .catch(e=>console.error(e))

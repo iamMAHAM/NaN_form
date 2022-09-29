@@ -298,7 +298,7 @@ export default {
 <style>
 
 .profile-container{
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
 }
 .myads div.card-container{
@@ -415,6 +415,7 @@ export default {
   align-items: center;
 }
 .body-content {
+  height: 100%;
   margin: 1rem 2.5rem;
 }
 .profile-img {

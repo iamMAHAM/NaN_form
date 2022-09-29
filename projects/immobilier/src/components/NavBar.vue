@@ -46,7 +46,7 @@
                       Connexion
                   </a>
               </router-link>
-              <router-link to="/profile"  v-if="isLogged && user?.role !== 'admin'" class="navLink">
+              <router-link to="/profile"  v-if="isLogged" class="navLink">
                   <a href="">
                       <i class="material-symbols-outlined">person</i>
                       Profile

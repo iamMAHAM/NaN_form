@@ -14,7 +14,7 @@
 <script>
 import Banner from '@/components/partials/Banner.vue';
 import CardContainer from '@/components/CardContainer.vue';
-import { allCategories, find, searchLow } from '@/lib/firestoreLib';
+import { allCategories, find, searchLow, setOne } from '@/lib/firestoreLib';
 export default {
   name: 'Home',
   props: ['isLogged', 'searchData'],
@@ -46,13 +46,21 @@ export default {
   },
   mounted(){
     this.match = window.matchMedia("(max-width: 800px)").matches
-    find(`ads/X1eA1Bk8tfnVXHqduiTg${this.$route.path}`)
-    .then(data=>{
-      this.cards = data
-      this.allCards = [...data]
-      this.load = false
-      this.message = 'Rien dans cette section'
-    })
+    // find(`ads/X1eA1Bk8tfnVXHqduiTg${this.$route.path}`)
+    // .then(data=>{
+    //   this.cards = data
+    //   this.allCards = [...data]
+    //   this.load = false
+    //   this.message = 'Rien dans cette section'
+    // })
+    // find("totals_ads")
+    // .then(ads=>{
+    //   ads.map(ad=>{
+    //     ad.status = 'online'
+    //     setOne(`users/${ad.ownerId}/ads`, ad, ad.id)
+    //     .then(console.log('saved success'))
+    //   })
+    // })
   },
   watch:{
     searchData (value){

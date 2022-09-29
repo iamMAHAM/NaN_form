@@ -464,7 +464,6 @@ li{
 }
 
 .tab-content .home .bottom > div{
-  /* overflow: scroll; */
   height: calc(100% - 62px);
 }
 

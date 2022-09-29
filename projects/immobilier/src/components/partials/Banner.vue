@@ -30,7 +30,6 @@ export default {
   },
   methods:{
     emit(data){
-      console.log(data)
       this.$emit('filter', data)
     }
   },
@@ -67,7 +66,6 @@ export default {
       ]
     }
     this.slides = sliders[this.$route.path.replace('/', '').trim()]
-    console.log(this.slides)
     const screenHandler = ()=>{
       const aside = document.getElementsByClassName("ok")[0]
       const sidebar = document.getElementsByClassName("sidebar")[0]

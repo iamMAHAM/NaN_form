@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { h, onMounted, onUpdated, ref } from 'vue'
+import { h, onMounted, onUpdated, ref, watchEffect } from 'vue'
 import { Bar } from 'vue-chartjs'
 import {
   Chart as ChartJS,
@@ -107,13 +107,15 @@ export default {
       maintainAspectRatio: false
     }
     onMounted(()=>{
-      console.log("mounted stats")
       usersData.value = props.data.users
       adsData.value = props.data.totalAds
       soldedData.value = props.data.soldedAds
     })
     onUpdated(()=>{
       console.log("update", props.data)
+    })
+    watchEffect(()=>{
+      console.log(props)
     })
 
     return () =>
