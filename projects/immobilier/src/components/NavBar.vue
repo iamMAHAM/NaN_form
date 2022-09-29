@@ -363,10 +363,6 @@ nav a{
         padding: 0 1rem;
     }
 
-    .search{
-        width: 35%;
-    }
-
     .search-i{
         padding: 1rem;
     }
@@ -402,6 +398,13 @@ nav a{
 
     .ul a i{
         margin: 0 .8rem;
+    }
+    .to-absolute{
+      flex-direction: column;
+    }
+
+    .to-absolute select{
+      font-size: 1.7rem;
     }
     
 }

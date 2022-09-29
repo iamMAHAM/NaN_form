@@ -343,7 +343,7 @@ export default {
 }
 
 .case .container {
-  height: 50vh;
+  height: 70vh;
   width: 70%;
   display: flex;
   justify-content: center;

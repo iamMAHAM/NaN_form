@@ -349,5 +349,9 @@ export default {
   .product-content {
     padding-top: 0;
   }
+
+  #map{
+    width: 75vw;
+  }
 }
 </style>

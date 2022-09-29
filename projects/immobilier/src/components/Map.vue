@@ -61,7 +61,7 @@ export default {
 <style> 
   #map {
     height: 70vh; 
-    width: 75vw;
+    width: 90vw;
     margin: 2rem auto;
     border-radius: 1rem;
   } 
