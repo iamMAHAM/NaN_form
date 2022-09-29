@@ -162,8 +162,7 @@ export default {
       const l = this.card.location
       return l.replace(l.substring(12), '...').toLowerCase()
     }
-  },
-
+  }
 }
 </script>
 <style scoped>

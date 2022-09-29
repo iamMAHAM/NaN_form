@@ -17,7 +17,7 @@ export default {
   props: ["slide", "currentSlide", "index", "direction"],
   methods:{
     getImage(path){
-      return require('@/' + path)
+      return this.slide.startsWith('http') ? this.slide : require('@/' + path)
     }
   },
   computed: {
