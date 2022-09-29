@@ -291,7 +291,7 @@ li{
   border: .1rem solid var(--white);
 	background: var(--white);
 	width: 100%;
-	height: 80vh;
+	height: 100vh;
 	position: relative;
 }
 
@@ -406,7 +406,6 @@ li{
 	width: calc(100% - 200px);
 	height: 100%;
 	padding-top: 60px;
-	overflow: scroll;
 }
 
 .tab-content section {
@@ -465,7 +464,7 @@ li{
 }
 
 .tab-content .home .bottom > div{
-  overflow: scroll;
+  /* overflow: scroll; */
   height: calc(100% - 62px);
 }
 

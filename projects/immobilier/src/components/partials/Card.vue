@@ -95,7 +95,11 @@ export default {
   methods:{
     handleClick(e){
       if (e.target.className !== 'top') return
-      this.$router.push(`/details/${this.card.type}/${this.card.id}`)
+      if (this.$route.path.includes('admin/dashboard')){
+        this.$router.push(`/details/${this.card.type}/${this.card.id}?tempId=${this.card.tempId}`)
+      }else{
+        this.$router.push(`/details/${this.card.type}/${this.card.id}`)
+      }
     },
     handleFav(e){
 			if (e.target.classList.contains("active")){

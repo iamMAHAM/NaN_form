@@ -3,7 +3,7 @@ import { db, storage, rtdb } from "./firebaseConfig"
 import { ref, uploadBytes,getDownloadURL } from "firebase/storage"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged,signOut, updateProfile, deleteUser } from "firebase/auth"
 import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, updateDoc, orderBy, serverTimestamp as sT } from "firebase/firestore"
-import { set, ref as dbref, remove } from "firebase/database"
+import { set, ref as dbref, remove, get } from "firebase/database"
 import { uuidv4 } from "@firebase/util"
 
 /**********CONST VARIABLES********************/
@@ -87,7 +87,7 @@ export const searchLow = (_collection, searchTerm)=>{
 
 export const saveOne = (col="", d)=>{
     return new Promise(async (resolve)=>{
-      d.publishedAt = Date.now()
+      d.publishedAt = sT()
       const q = await addDoc(collection(db, col), d)
       d.id = q.id
       resolve(d)
@@ -203,6 +203,15 @@ export const addConversation = async (senderId, receiverId)=>{
   })
 }
 
+export const getRtdbOne = (_collection, tempId)=>{
+  return new Promise(async resolve=>{
+    const r = dbref(rtdb, `${_collection}/${tempId}`)
+    const d = await get(r)
+    d.exists() ? resolve(d.val()) : resolve({})
+  })
+  
+
+}
 export const sendMessage = async (senderId, receiverId, message)=>{
     return new Promise((resolve, reject)=>{
         const id = uuidv4()
@@ -284,7 +293,8 @@ export const validateAd = (userId, adInfo)=>{
       delete adInfo.tempId
       Promise.all([
         setOne(`users/${userId}/ads`, adInfo, adInfo.id),
-        setOne(`ads/X1eA1Bk8tfnVXHqduiTg/${adInfo.type}`, adInfo, adInfo.id)
+        setOne(`ads/X1eA1Bk8tfnVXHqduiTg/${adInfo.type}`, adInfo, adInfo.id),
+        setOne(`totals_ads`, adInfo, adInfo.id)
       ])
       .then(resolve()) // send mail to say ad is online
     })
@@ -308,11 +318,13 @@ export const deleteFromDatabase = async (path)=>{
   const ref = dbref(rtdb, path)
   await remove(ref)
 }
+
 export const soldeAd = async (userId, adInfo)=>{
   adInfo.status = "solded"
   Promise.all([
     updateOne(`users/${userId}/ads`, adInfo.id, adInfo),
     saveOne(`admin/vAJXH3iQabt9AjGLAaej/solded`, adInfo),
+    updateOne('totals_ads', adInfo.id, adInfo),
     deleteOne(`ads/X1eA1Bk8tfnVXHqduiTg/${adInfo.type}`, adInfo.id)
   ])
 }
@@ -321,6 +333,7 @@ export const abortPost = async (tempId)=>{
   const ref = dbref(rtdb, `waitingAds/${tempId}`)
   await remove(ref)
 }
+
 export const commentPost = (postId, message)=>{
     saveOne(`comments/${postId}`, message)
 }

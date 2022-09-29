@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { addConversation, auth, findOne, messageTemplate } from '@/lib/firestoreLib'
+import { addConversation, auth, findOne, getRtdbOne, messageTemplate } from '@/lib/firestoreLib'
 import Maps from "../components/Map.vue"
 import Loader from '@/components/partials/Loader.vue'
 export default {
@@ -146,9 +146,22 @@ export default {
       this.load = false
     })
     .catch(e=>{
-      if (e === 'notFound'){
-        this.$router.push("/404")
-      }
+      findOne("users", auth.currentUser?.uid)
+      .then(user=>{
+        if (user.role === "admin"){
+          const tempId = this.$route.query.tempId
+          getRtdbOne('waitingAds', tempId)
+          .then(card=>{
+            this.cardInfo = {...card}
+            this.current = card.images[0]
+          })
+        }else{
+          if (e === 'notFound'){
+            this.$router.push("/404")
+          }
+        }
+        this.load = false
+      })
     })
   },
   computed: {
@@ -172,9 +185,6 @@ export default {
 </style>
 <style>
 
-.img-select{
-  overflow: scroll;
-}
 .card-wrapper {
   overflow: hidden;
   border-radius: .5rem;

@@ -52,7 +52,7 @@ export default {
 <style>
   div.favorites{
     display: inline-block;
-    height: 80vh;
+    height: 100vh;
     width: 100%;
   }
   div.empty *, div.empty{
