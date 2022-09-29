@@ -1,8 +1,8 @@
 <template>
-    <div class="box" :id="card.id" v-if="card?.images?.length">
+    <div class="box" :id="card.id">
       <div class="top" @click="handleClick">
         <span v-if="solded" class="soldout">Vendu</span>
-        <img :src="card?.images.slice(0, 1)"/>
+        <img :src="card?.images[0] || getImage('assets/home.svg')"/>
         <i
           v-if="!admin && !profile && !card?.isLoad"
           :class="`material-symbols-outlined favs ${card?.isFav ? 'active' : ''}`"
@@ -125,6 +125,9 @@ export default {
     soldeAds(){
       soldeAd(auth?.currentUser.uid, this.card)
       .then(alert("Annonce marquée comme vendu :)"))
+    },
+    getImage(path){
+      return require('@/' + path)
     }
 
   },

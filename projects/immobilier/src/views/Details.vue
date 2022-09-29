@@ -6,7 +6,7 @@
     <div class = "product-imgs">
       <div class = "img-display">
         <div class = "img-showcase">
-          <img :src = "current">
+          <img :src = "current || getImage('assets/home.svg')">
         </div>
       </div>
       <div class = "img-select">
@@ -131,13 +131,16 @@ export default {
       )
       addConversation(auth?.currentUser?.uid, receiverId)
       .then(this.$router.push({ path: '/messages', query: { id: this.cardInfo?.ownerId, template: JSON.stringify(template) } }))
+    },
+    getImage(path){
+      return require('@/' + path)
     }
   },
   mounted(){
     const params = this.$route.params
     findOne(`ads/X1eA1Bk8tfnVXHqduiTg/${params.categorie}`, params.id)
     .then(detailInfo=>{
-      this.current = detailInfo?.images?.slice(0, 1)
+      this.current = detailInfo?.images[0]
       this.cardInfo = detailInfo
       this.emp = detailInfo?.location
       this.load = false

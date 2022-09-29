@@ -30,12 +30,13 @@
       <div class="logo">
           <router-link to="/"><img id="logo" src="../assets/logo.png" alt=""/></router-link>
       </div>
-      <div class="search"> 
-              <input name="q" placeholder="recherche..." type="search" class="search-i" v-model="searchTerm" @click="click">
+      <div class="search" @click="click"> 
+              <!-- <input name="q" placeholder="recherche..." type="search" class="search-i" v-model="searchTerm" > -->
               <i class="material-symbols-outlined"
               >
                 search
               </i>
+              <p>Rechercher</p>
       </div>
       <nav>
           <ul class="ul">
@@ -305,10 +306,13 @@ a{
     display:block
 }
 .search{
-    border-radius: 1.5rem;
-    width: 25%;
+    padding: .5rem;
     height: max-content;
     background: var(--white);
+    border: 1px solid var(--white);
+    border-radius: .5rem;
+    color: var(--navcolor);
+    cursor: pointer;
     display: flex;
     float:left;
     align-self: center;
@@ -322,7 +326,6 @@ a{
 }
 
 .search i{
-    border-left: .1rem solid var(--navcolor);
     font-size: 2.5rem;
     margin: auto 0;
     cursor: pointer;
