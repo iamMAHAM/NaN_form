@@ -77,7 +77,7 @@
                     class="text"
                   >
                     {{ message?.message.content }}
-                    <router-link v-if="message?.message?.link" :to="message.message.link" class="link">voir le lien</router-link>
+                    <router-link v-if="message?.message?.link.startsWith('/details')" :to="message.message.link" class="link">voir le lien</router-link>
                     <span class="date">{{ readableDate(message.timestamp) }}</span>
                   </div>
                   <img v-else
@@ -150,7 +150,6 @@ import { rtdb } from "@/lib/firebaseConfig"
 import {  auth, deleteMessage, sendMessage, uploadImage } from '@/lib/firestoreLib'
 import { onValue, ref as dbref, query as dbquery } from "firebase/database"
 import Loader from '@/components/partials/Loader.vue'
-import Messages from "@/views/admin/DashBoard.vue"
 
 const compare = ( a, b )=>{
   if ( a.timestamp < b.timestamp ){
@@ -263,6 +262,7 @@ export default {
   },
   switchMessages([cMessages, person]){
     this.messages = cMessages
+    console.log(this.messages)
     this.pers = person
   }
   },
