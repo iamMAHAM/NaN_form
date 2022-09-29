@@ -41,6 +41,10 @@
               Pas encore inscrit ?
               <a href="#" @click="toggleForm();">S'inscrire</a>
             </p>
+            <p class="signup"  v-if="!req">
+              Mot de passe oublié ?
+              <a href="#" @click="passr = true">Réinitialiser</a>
+            </p>
           </form>
         </div>
       </div>
@@ -151,14 +155,37 @@
             </p>
           </form>
         </div>
-        <div class="imgBx"><img src="../assets/reg.jpg" alt="" /></div></div>
+      <div class="imgBx"><img src="../assets/reg.jpg" alt="" /></div></div>
+      <div class="reset-password" v-if="passr">
+         <div class="input">
+          <i class="material-symbols-outlined">alternate_email</i>
+          <input type="text" v-model="form.email" placeholder="Adresse email">
+         </div>
+         <div class="reset-actions">
+           <input type="submit"
+              style="
+              padding: 1rem;
+              "
+              @click="reinitPassword"
+              value="Soumettre"
+            >
+           <input type="submit"
+              style="
+              padding: 1rem;
+              color: var(--red);
+              "
+              @click="passr = false"
+              value="Annuler"
+            >
+         </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
 import validator from 'validator';
-import { signUp, signIn, auth, uploadImage } from '@/lib/firestoreLib';
+import { signUp, signIn, uploadImage, resetPassword } from '@/lib/firestoreLib';
 import Loader from '@/components/partials/Loader.vue';
 export default {
   name: 'Auth',
@@ -194,7 +221,8 @@ export default {
         message: '',
       },
       flag: false,
-      req: false
+      req: false,
+      passr: false
     }
   },
   methods: {
@@ -231,6 +259,10 @@ export default {
       )
     },
     login(){
+      if (!this.form.password){
+        this.showError('incorrect password', 3500)
+        return
+      }
       this.req = true
       signIn(this.form)
       .then(user=>{
@@ -257,6 +289,17 @@ export default {
       .catch(e=>{
         this.req = false
         this.showError(e, 3500)
+      })
+    },
+    reinitPassword(){
+      console.log(this.form.email)
+      resetPassword(this.form.email)
+      .then(()=>{
+        alert("consulter votre boite email : ", this.form.email, ' afin de reinitialiser votre mot de passe')
+        this.passr = false
+      })
+      .catch(e=>{
+        alert(e.code ? e.code : e.message)
       })
     }
   },
@@ -347,6 +390,7 @@ section .container .user .formBx form h2 {
   color: #555;
 }
 
+.reset-password .input input,
 section .container .user .formBx form input {
   position: relative;
   width: 100%;
@@ -362,6 +406,7 @@ section .container .user .formBx form input {
   font-weight: 300;
 }
 
+section .reset-password input[type="submit"],
 section .container .user .formBx form input[type='submit'] {
   border-radius: 1rem;
   max-width: max-content;
@@ -374,10 +419,12 @@ section .container .user .formBx form input[type='submit'] {
   transition: 0.5s;
 }
 
+section .reset-password input[type="submit"]:disabled,
 section .container .user .formBx form input[type='submit']:disabled{
   background: var(--hovercolor);
 }
 
+section .reset-password input[type="submit"]:hover,
 section .container .user .formBx form input[type='submit']:hover{
   background: var(--hovercolor);
 }
@@ -441,6 +488,32 @@ section .container .signinBx .imgBx {
 
 section .container.active .signinBx .imgBx {
   left: -100%;
+}
+
+section .reset-password{
+  display: flex;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+section .reset-password div.input{
+  width: 45%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+section .reset-password div.reset-actions{
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 100%);
 }
 
 div.input{
