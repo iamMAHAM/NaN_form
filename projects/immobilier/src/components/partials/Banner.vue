@@ -61,7 +61,6 @@ export default {
       ],
       magasin:[
         'https://cdn.shopify.com/s/files/1/0249/6376/files/10_Conseils_d_Experts_Pour_augmenter_Vos_Ventes_en_magasin.png?15743940905870153897&format=jpg&quality=90',
-        'https://www.latelier-web.fr/wp-content/uploads/2017/03/retail.jpg',
         'https://blog-assets.lightspeedhq.com/img/2022/04/49bf6fb5-7-tips-to-speed-up-the-checkout-process-in-your-store-fr.png'
       ]
     }
