@@ -6,7 +6,7 @@
           <i class="material-symbols-outlined" v-if="type === 'info'" style="color:lightblue">info</i>
           <i class="material-symbols-outlined" v-if="type === 'warning'" style="color: lightyellow">warning</i>
           <i class="material-symbols-outlined" v-if="type === 'confirm'" style="color: var(--greenfun)">check</i>
-          <slot></slot>
+          {{ title }}
         </h2>
         <div class="content" align="center" style="padding: 1rem; color: var(--navcolor);">
           <p v-if="!result">{{ message }}</p>
@@ -37,29 +37,16 @@
 <script>
 export default {
   name: 'Modal',
-  props: {
-    type: {
-      type: String,
-      required: true,
-      default: 'confirm'
-    },
-    message:{
-      type: String,
-      required: false,
-      default: 'Voulez vous continuer ?'
-    },
-    display:{
-      type: Boolean,
-      required: false,
-      default: true
-    }
-  },
   data(){
     return {
       isVisible: false,
       resolvePromise: null,
       result: false,
       resultMessage: '',
+      type: 'confirm',
+      message : 'Voulez vous continuer ?',
+      display: true,
+      title: 'Confirmation'
     }
   },
   methods:{
@@ -70,7 +57,11 @@ export default {
       this.isVisible = false
       this.result = false
     },
-    show(){
+    show(options={}){
+      this.title = options.title || this.title
+      this.message = options.message || this.message
+      this.type = options.type || this.type
+      this.display = options.display || this.display
       this.open()
       return new Promise((resolve)=>{
         this.resolvePromise = resolve

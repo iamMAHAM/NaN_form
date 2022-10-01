@@ -1,11 +1,5 @@
 <template>
-  <Modal
-    ref="modal"
-    :type="type"
-    :message="'Voulez vous continuer ?'"
-  >
-    {{ message }}
-  </Modal>
+  <Modal ref="modal" />
   <div class="flex-container space-between">
     <div class="vas">
       <button
@@ -51,15 +45,14 @@ import Modal from '../Modal.vue'
 export default {
   name: 'ProfileCard',
   props: ['userProfile'],
-  data(){ return { message : '', type: 'confirmation'}},
   components: {
     Modal
   },
   methods:{
     async verify(){
-      this.type = 'confirm'
-      this.message = 'Verify user identity?'
-      const ok = this.$refs.modal.show()
+      const ok = this.$refs.modal.show({
+        title: 'Verify user identity ?'
+      })
       if (ok){
         Promise.all([
           updateOne("users", this.userProfile.id, {
@@ -73,9 +66,9 @@ export default {
       }
     },
     deny(){
-      this.type = 'confirm'
-      this.message = 'Deny user identity?'
-      const ok = this.$refs.modal.show()
+      const ok = this.$refs.modal.show({
+        title: 'Deny user identity ? '
+      })
       if (ok){
         Promise.all([
             updateOne("users", this.userProfile.id, {
