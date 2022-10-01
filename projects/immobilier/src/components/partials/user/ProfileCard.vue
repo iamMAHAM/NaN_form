@@ -1,4 +1,11 @@
 <template>
+  <Modal
+    ref="modal"
+    :type="type"
+    :message="'Voulez vous continuer ?'"
+  >
+    {{ message }}
+  </Modal>
   <div class="flex-container space-between">
     <div class="vas">
       <button
@@ -40,13 +47,20 @@
 </template>
 <script>
 import { deleteOne, updateOne } from '@/lib/firestoreLib'
+import Modal from '../Modal.vue'
 export default {
   name: 'ProfileCard',
   props: ['userProfile'],
+  data(){ return { message : '', type: 'confirmation'}},
+  components: {
+    Modal
+  },
   methods:{
-    verify(){
-      console.log("verify request", this.userProfile)
-      if (window.confirm("vérifier cet utilisateur ?")){
+    async verify(){
+      this.type = 'confirm'
+      this.message = 'Verify user identity?'
+      const ok = this.$refs.modal.show()
+      if (ok){
         Promise.all([
           updateOne("users", this.userProfile.id, {
             isVerified: true,
@@ -59,7 +73,10 @@ export default {
       }
     },
     deny(){
-      if (window.confirm("refuser cet utilisateurs ?")){
+      this.type = 'confirm'
+      this.message = 'Deny user identity?'
+      const ok = this.$refs.modal.show()
+      if (ok){
         Promise.all([
             updateOne("users", this.userProfile.id, {
               isAwaitingVerification: false
@@ -107,9 +124,6 @@ export default {
   background-color: #fff;
   display: flex;
   column-gap: 20px;
-  box-shadow: 1px 1px 16px -6px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 1px 1px 16px -6px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 1px 1px 16px -6px rgba(0, 0, 0, 0.5);
 }
 
 .card img {
@@ -121,9 +135,6 @@ export default {
   max-height: 200px;
   overflow: hidden;
   border-radius: 15px;
-  box-shadow: 1px 1px 16px -6px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 1px 1px 16px -6px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 1px 1px 16px -6px rgba(0, 0, 0, 0.75);
 }
 
 h3 {

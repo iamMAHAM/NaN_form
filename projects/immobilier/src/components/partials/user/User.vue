@@ -1,4 +1,11 @@
 <template>
+  <Modal
+    ref="modal"
+    :type="'confirm'"
+    :display="showss"
+  >
+    {{ title }}
+  </Modal>
   <td><img :src="user.avatar" alt="img"></td>
   <td>{{ user.fullName}}</td>
   <td>{{ user.email }}</td>
@@ -83,20 +90,30 @@
 
 <script>
 import { updateOne, deleteOne} from '@/lib/firestoreLib';
+import Modal from '../Modal.vue';
 export default {
   name: 'User',
 	props: ["user"],
-  data(){return {show: false, backup: {}}},
+  components: {Modal},
+  data(){
+    return {
+    show: false,
+    backup: {},
+    resultMessage: '',
+    message: '',
+    title: '',
+    showss: true
+  }},
 	methods:{
-		async updateUser(){
-			updateOne(`users`, this.user.id, this.user)
-			.then(alert("user updated with success"))
-      .catch(e=>alerte(e))
-		},
 		async deleteUser(){
-			if (window.confirm("really delete this user ?")){
+      this.title = 'Delete user'
+      const ok = await this.$refs.modal.show()
+			if (ok){
+        this.resultMessage = 'Success'
 				deleteOne("users", this.user.id)
-			}
+			}else{
+        this.resultMessage = 'Cancelled'
+      }
 		},
     shows(){
       this.backup.role = this.user.role
@@ -108,11 +125,11 @@ export default {
       this.user.isVerified = this.backup.isVerified
       this.show = false
     },
-    submit(){
-      window.confirm('valider les modifications ?')
+    async submit(){
+      this.title = 'Update user'
+      const ok = await this.$refs.modal.show()
+      ok
       ? updateOne("users", this.user?.id, this.user)
-        .then(alert("modifié avec succès"))
-        .catch(e=>alert("erreur : ", e.message ))
       : ''
       this.show = false
     }

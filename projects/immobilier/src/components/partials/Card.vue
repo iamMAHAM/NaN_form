@@ -1,6 +1,10 @@
 <template>
     <div class="box" :id="card.id">
-      <div class="top" @click="handleClick">
+      <div class="top" @click="handleClick"
+          :style="{
+            pointerEvents: solded ? 'none' : 'all'
+          }"
+      >
         <span v-if="solded" class="soldout">Vendu</span>
         <img :src="card?.images[0] || getImage('assets/home.svg')"/>
         <i
@@ -11,7 +15,7 @@
           {{ rightIcone }}
         </i>
         <i
-          v-if="profile"
+          v-if="profile && !solded"
           :class="`material-symbols-outlined favs`"
           @click="deleteAds"
         >
@@ -236,7 +240,9 @@ p{
 }
 
 .card-container .box:hover{
-  box-shadow: -8px 9px 5px 0px #ACBABF;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
 .card-container .box .bottom{
@@ -266,7 +272,7 @@ p{
 
 .card-container .box .top img {
   width: 100%;
-  min-height: 200px;
+  min-height: 100%;
   max-height: 200px;
   margin-bottom: -.5rem;
 }

@@ -12,17 +12,17 @@
 			</div>
 
 			<!-- tab-menu -->
-			<input type="radio" class="tab-1" name="tab" checked="checked">
+			<input type="radio" class="tab-1" name="tab">
 			<span>Home</span><i class="material-symbols-outlined">home</i>
 
-			<input type="radio" class="tab-2" name="tab">
+			<input type="radio" class="tab-2" name="tab" checked="checked">
 			<span>Users</span><i class="material-symbols-outlined">group</i>
 
 			<input type="radio" class="tab-3" name="tab">
 			<span>Pending</span><i class="material-symbols-outlined">pending</i>
 		
-      <input type="radio" class="tab-4" name="tab">
-			<span>Reported</span><i class="material-symbols-outlined">report</i>
+      <!-- <input type="radio" class="tab-4" name="tab">
+			<span>Reported</span><i class="material-symbols-outlined">report</i> -->
 
       <input type="radio" class="tab-5" name="tab">
 			<span>KYC</span><i class="material-symbols-outlined">badge</i>
