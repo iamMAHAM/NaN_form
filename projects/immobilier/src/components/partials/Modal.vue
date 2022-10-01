@@ -12,7 +12,7 @@
           <p v-if="!result">{{ message }}</p>
           <p v-if="result"> {{ resultMessage }}</p>
         </div>
-        <div class="bottom-modal">
+        <div class="bottom-modal" align="center">
           <div
             v-if="!result && type ==='confirm'"
             :style="{

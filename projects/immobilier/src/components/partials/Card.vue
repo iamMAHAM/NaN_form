@@ -1,5 +1,13 @@
 <template>
     <div class="box" :id="card.id">
+      <Modal
+        ref="modal"
+        :type="'info'"
+        :message="message"
+        :display="false"
+      >
+        Information
+      </Modal>
       <div class="top" @click="handleClick"
           :style="{
             pointerEvents: solded ? 'none' : 'all'
@@ -91,11 +99,17 @@
 <script>
 import { abortPost, auth, deleteOne, soldeAd, unValidateAd, validateAd } from '@/lib/firestoreLib'
 import Loader from './Loader.vue'
+import Modal from './Modal.vue'
 
 export default {
   name: 'Card',
   props: ['card', 'req'],
   components: {Loader},
+  data(){
+    return {
+      message: ''
+    }
+  },
   methods:{
     handleClick(e){
       if (e.target.className !== 'top') return
@@ -114,12 +128,21 @@ export default {
 		},
     del(){
       unValidateAd(this.card.ownerId, this.card)
-      .then(alert("annonce refusé avec succès"))
+      .then(()=>{
+        this.message = "annonce refusé avec succès"
+        this.$refs.modal.open()
+      })
     },
     validate(){
       validateAd(this.card.ownerId, this.card)
-      .then(alert("annonce validé avec succès"))
-      .catch(e=>alert(e))
+      .then(()=>{
+        this.message = "annonce validé avec succès"
+        this.$refs.modal.open()
+      })
+      .catch(e=>{
+        this.message = e.code ? e.code : e.message
+        this.$refs.modal.open()
+      })
     },
     deleteAds(){
       Promise.all([
@@ -128,7 +151,10 @@ export default {
         abortPost(this.card.tempId),
         deleteOne('totals_ads', this.card.id)
       ])
-      .then(alert("annonce supprimée avec succès"))
+      .then(()=>{
+        this.message = "annonce supprimée avec succès"
+        this.$refs.modal.open()
+      })
       .catch(e=>console.error(e))
     },
     soldeAds(){
