@@ -4,7 +4,6 @@
     :type="'confirm'"
     :display="showss"
   >
-    {{ title }}
   </Modal>
   <td><img :src="user.avatar" alt="img"></td>
   <td>{{ user.fullName}}</td>
@@ -100,14 +99,13 @@ export default {
     show: false,
     backup: {},
     resultMessage: '',
-    message: '',
-    title: '',
     showss: true
   }},
 	methods:{
 		async deleteUser(){
-      this.title = 'Delete user'
-      const ok = await this.$refs.modal.show()
+      const ok = await this.$refs.modal.show({
+        title: 'Delete user',
+      })
 			if (ok){
         this.resultMessage = 'Success'
 				deleteOne("users", this.user.id)
@@ -126,8 +124,9 @@ export default {
       this.show = false
     },
     async submit(){
-      this.title = 'Update user'
-      const ok = await this.$refs.modal.show()
+      const ok = await this.$refs.modal.show({
+        title: 'Update user'
+      })
       ok
       ? updateOne("users", this.user?.id, this.user)
       : ''

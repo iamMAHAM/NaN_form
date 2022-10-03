@@ -5,9 +5,7 @@
       :type="'info'"
       :message="message"
       :display="false"
-    >
-      Information
-    </Modal>
+    ></Modal>
     <span class="close">X</span>
     <div>
       <div class="to-absolute">
@@ -200,7 +198,7 @@ nav a{
   -o-transform: translate(0px, 0px) scale(1, 1);
   transform: translate(0px, 0px) scale(1, 1);
   opacity: 1;
-  z-index: 106;
+  z-index: 11;
   display: block;
 }
 

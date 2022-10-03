@@ -1,4 +1,5 @@
 <template>
+  <Modal ref="modal"/>
   <div class="profile-container">
     <Loader v-if="iLoad"/>
     <div class="main-container" v-if="!iLoad">
@@ -168,6 +169,7 @@ import { auth, find, findOne, updateOne } from '@/lib/firestoreLib';
 import { collection, doc, onSnapshot } from '@firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
 import { updatePassword } from '@firebase/auth';
+import Modal from '@/components/partials/Modal.vue';
 
 export default {
   name: 'Profile',
@@ -175,7 +177,8 @@ export default {
     CardContainer,
     Uprofile,
     Loader,
-    userVerification
+    userVerification,
+    Modal
   },
   props:['isLogged'],
   data(){
@@ -255,7 +258,14 @@ export default {
         this.pass
         ? updatePassword(auth?.currentUser, this.pass)
           .then(console.log("success updated password"))
-          .catch(e=>alert(e))
+          .catch(e=>{
+            this.$refs.modal.show({
+              type: 'error',
+              title: 'Erreur',
+              display: false,
+              errorMessage: e.code ? e.code : e?.message,
+          })
+          })
         : updateOne("users", this.user?.id, this.user)
       }
     },

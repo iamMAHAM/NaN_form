@@ -1,13 +1,8 @@
 <template>
+    <Modal
+      ref="modal"
+    ></Modal>
     <div class="box" :id="card.id">
-      <Modal
-        ref="modal"
-        :type="'info'"
-        :message="message"
-        :display="false"
-      >
-        Information
-      </Modal>
       <div class="top" @click="handleClick"
           :style="{
             pointerEvents: solded ? 'none' : 'all'
@@ -104,12 +99,7 @@ import Modal from './Modal.vue'
 export default {
   name: 'Card',
   props: ['card', 'req'],
-  components: {Loader},
-  data(){
-    return {
-      message: ''
-    }
-  },
+  components: {Loader, Modal},
   methods:{
     handleClick(e){
       if (e.target.className !== 'top') return
@@ -126,40 +116,64 @@ export default {
 				this.$emit("addFav", this.card)
 			}
 		},
-    del(){
-      unValidateAd(this.card.ownerId, this.card)
-      .then(()=>{
-        this.message = "annonce refusé avec succès"
-        this.$refs.modal.open()
+    async del(){
+      const ok = await this.$refs.modal.show({
+        message: 'refuser l\'annonce?',
       })
+      if (ok){
+        unValidateAd(this.card.ownerId, this.card)
+        .catch(e=>{
+          this.$refs.modal.show({
+              type: 'error',
+              title: 'Erreur',
+              display: false,
+              errorMessage: e.code ? e.code : e?.message,
+          })
+        })
+      }
     },
-    validate(){
-      validateAd(this.card.ownerId, this.card)
-      .then(()=>{
-        this.message = "annonce validé avec succès"
-        this.$refs.modal.open()
+    async validate(){
+      const ok = await this.$refs.modal.show({
+        message: 'valider l\'annonce?',
       })
-      .catch(e=>{
-        this.message = e.code ? e.code : e.message
-        this.$refs.modal.open()
-      })
+      if (ok){
+        validateAd(this.card.ownerId, this.card)
+        .catch(e=>{
+          this.$refs.modal.show({
+            type: 'error',
+            title: 'Erreur',
+            display: false,
+            errorMessage: e.code ? e.code : e?.message,
+          })
+        })
+      }
     },
-    deleteAds(){
-      Promise.all([
-        deleteOne(`/users/${auth?.currentUser?.uid}/ads`, this.card.id),
-        deleteOne(`ads/X1eA1Bk8tfnVXHqduiTg/${this.card.type}`, this.card.id),
-        abortPost(this.card.tempId),
-        deleteOne('totals_ads', this.card.id)
-      ])
-      .then(()=>{
-        this.message = "annonce supprimée avec succès"
-        this.$refs.modal.open()
+    async deleteAds(){
+      const ok = await this.$refs.modal.show({
+        message: 'supprimer l\'annonce?',
       })
-      .catch(e=>console.error(e))
+      if (ok){
+        Promise.all([
+          deleteOne(`/users/${auth?.currentUser?.uid}/ads`, this.card.id),
+          deleteOne(`ads/X1eA1Bk8tfnVXHqduiTg/${this.card.type}`, this.card.id),
+          abortPost(this.card.tempId),
+          deleteOne('totals_ads', this.card.id)
+        ])
+        .catch(e=>{
+          this.$refs.modal.show({
+              type: 'error',
+              title: 'Erreur',
+              display: false,
+              errorMessage: e.code ? e.code : e?.message,
+          })
+        })
+      }
     },
-    soldeAds(){
-      soldeAd(auth?.currentUser.uid, this.card)
-      .then(alert("Annonce marquée comme vendu :)"))
+    async soldeAds(){
+      const ok = await this.$refs.modal.show({
+        type: 'confirm',
+      })
+      if (ok) soldeAd(auth?.currentUser.uid, this.card)
     },
     getImage(path){
       return require('@/' + path)

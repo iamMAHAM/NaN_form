@@ -1,4 +1,5 @@
 <template>
+  <Modal ref="modal"/>
   <div class="messages-container">
       <div class="case">
         <Loader v-if="load"/>
@@ -150,7 +151,7 @@ import { rtdb } from "@/lib/firebaseConfig"
 import {  auth, deleteMessage, sendMessage, uploadImage } from '@/lib/firestoreLib'
 import { onValue, ref as dbref, query as dbquery } from "firebase/database"
 import Loader from '@/components/partials/Loader.vue'
-
+import Modal from '@/components/partials/Modal.vue'
 const compare = ( a, b )=>{
   if ( a.timestamp < b.timestamp ){
     return -1;
@@ -187,6 +188,7 @@ export default {
     Person,
     Emojis,
     Loader,
+    Modal
   },
   data(){
     return {
@@ -253,7 +255,14 @@ export default {
           this.message = ''
           this.$refs.textarea.style.height = '16px'
         }
-        ).catch(e=>alert(e))
+        ).catch(e=>{
+          this.$refs.modal.show({
+              type: 'error',
+              title: 'Erreur',
+              display: false,
+              errorMessage: e.code ? e.code : e?.message,
+          })
+        })
       })
     },
   deleteMessages(e){

@@ -1,4 +1,5 @@
 <template>
+  <Modal ref="modal"/>
   <div class="post-modal" v-if="show">
     <form class="post-modal-form" @submit.prevent="">
       <span
@@ -110,11 +111,13 @@
 import validator from 'validator'
 import { auth, findOne,postAd } from '@/lib/firestoreLib'
 import Loader from './Loader.vue'
+import Modal from './Modal.vue'
 
 export default {
     props: ['show'],
     components:{
-      Loader
+      Loader,
+      Modal
     },
     data(){
       return {
@@ -216,10 +219,17 @@ export default {
                   }, 5000)
                 })
                 .catch(e=>{
-                  alert(e)
+                  this.$refs.modal.show({
+                    type: 'error',
+                    errorMessage: e.code ? e.code : e.message
+                  })
                 })
               }else{
-                alert("Vous devez confirmer votre compte avant de poster")
+                this.$refs.modal.show({
+                  type: 'info',
+                  title: 'Vérification',
+                  message: 'veuillez verifier votre identité'
+                })
                 this.$refs.content.classList.remove("success")
                 this.$refs.content.classList.add("failed")
                 this.req = false

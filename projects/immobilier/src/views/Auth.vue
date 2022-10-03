@@ -296,11 +296,21 @@ export default {
       console.log(this.form.email)
       resetPassword(this.form.email)
       .then(()=>{
-        alert("consulter votre boite email : ", this.form.email, ' afin de reinitialiser votre mot de passe')
+        this.$refs.modal.show({
+              type: 'info',
+              title: 'confirmation email',
+              message: 'consultez votre boite mail afin de\
+              reinitialiser votre mot de passe',
+          })
         this.passr = false
       })
       .catch(e=>{
-        alert(e.code ? e.code : e.message)
+        this.$refs.modal.show({
+              type: 'error',
+              title: 'Erreur',
+              display: false,
+              errorMessage: e.code ? e.code : e?.message,
+        })
       })
     }
   },

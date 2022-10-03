@@ -1,4 +1,5 @@
 <template>
+  <Modal ref="modal"/>
   <Loader v-if="load"/>
   <div class="text" align="center"
     :style="{
@@ -25,6 +26,7 @@
 import { auth, deleteOne, override } from '@/lib/firestoreLib';
 import Card from './partials/Card.vue';
 import Loader from './partials/Loader.vue';
+import Modal from './partials/Modal.vue';
 
 export default {
   name: 'CardContainer',
@@ -32,20 +34,8 @@ export default {
   emits: ['filteringCard'],
   components: {
     Card,
-    Loader
-  },
-  data(){
-    return {
-      // cards : [
-      //   {
-      //     type: 'magasin',
-      //     proposition: 'vente',
-      //     location: 'Abidjan',
-      //     description: 'lorem 20 je xjnj ckn c ezv zivz vrzvnz v ezvnzvzvezvez veznvebzve',
-      //     superficie: 500,
-      //     price: 2000000
-      //   },
-    }
+    Loader,
+    Modal
   },
   methods: {
     addFavs(card){ // add to favorite
@@ -65,7 +55,14 @@ export default {
         this.cards[index].isFav = true
 				this.cards[index].isLoad = false
       })
-      .catch(e=>console.error("error", e))
+      .catch(e=>{
+        this.$refs.modal.show({
+              type: 'error',
+              title: 'Erreur',
+              display: false,
+              errorMessage: e.code ? e.code : e?.message,
+          })
+      })
 		},
 		removeFavs(card){ // remove to favorite
 			const index = this.cards.indexOf(card)

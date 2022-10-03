@@ -62,7 +62,14 @@ export default {
           deleteOne("admin/vAJXH3iQabt9AjGLAaej/verification", this.userProfile.id)
         ])
         .then(console.log("user verified with success"))
-        .catch(e=>alert(e.message))
+        .catch(e=>{
+          this.$refs.modal.show({
+              type: 'error',
+              title: 'Erreur',
+              display: false,
+              errorMessage: e.code ? e.code : e?.message,
+          })
+        })
       }
     },
     deny(){
@@ -77,7 +84,14 @@ export default {
             deleteOne("admin/vAJXH3iQabt9AjGLAaej/verification", this.userProfile.id)
           ])
           .then(console.log("user denied with success"))
-          .catch(e=>alert(e.message))
+          .catch(e=>{
+            this.$refs.modal.show({
+              type: 'error',
+              title: 'Erreur',
+              display: false,
+              errorMessage: e.code ? e.code : e?.message,
+          })
+        })
       }
     }
   }
