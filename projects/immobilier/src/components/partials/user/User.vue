@@ -1,8 +1,6 @@
 <template>
   <Modal
     ref="modal"
-    :type="'confirm'"
-    :display="showss"
   >
   </Modal>
   <td><img :src="user.avatar" alt="img"></td>
@@ -98,7 +96,6 @@ export default {
     return {
     show: false,
     backup: {},
-    resultMessage: '',
     showss: true
   }},
 	methods:{
@@ -107,10 +104,8 @@ export default {
         title: 'Delete user',
       })
 			if (ok){
-        this.resultMessage = 'Success'
 				deleteOne("users", this.user.id)
 			}else{
-        this.resultMessage = 'Cancelled'
       }
 		},
     shows(){

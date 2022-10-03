@@ -13,6 +13,7 @@ import data from '../../assets/emojis-data.json';
 
 export default {
 	name: 'Emojis',
+  emits: ['emoji_click'],
 	props:
 	{
 		show_arrow:

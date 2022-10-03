@@ -49,6 +49,7 @@ import { auth } from '@/lib/firestoreLib';
 export default {
   name: 'Person',
   props: ['person', 'messages'],
+  emits: ['switch'],
   data(){
     return {auth: auth}
   },

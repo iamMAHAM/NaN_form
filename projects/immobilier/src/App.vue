@@ -97,7 +97,7 @@ body{
 :root{
   --white: #fff;
   --gray: #f0f0f0;
-  --navcolor: #1E262D;
+  --navcolor: #12192c;
   --hovercolor: #34495e;
   --green: #d9fdd2;
   --greenfun: #1ABC9C;

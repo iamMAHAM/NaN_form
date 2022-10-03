@@ -80,8 +80,8 @@ export default {
 
 <style>
 .card-container {
-  width: calc(80%);
-  margin: 100px auto;
+  width: calc(90%);
+  margin: 50px auto;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -90,7 +90,7 @@ export default {
 .card-container .em{
   font-size: 2.5rem;
   text-align: center;
-  color: var(--white);
+  color: var(--navcolor);
   width: 100%;
   height: 100%;
 }

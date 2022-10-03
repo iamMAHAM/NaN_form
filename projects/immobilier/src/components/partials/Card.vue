@@ -100,6 +100,7 @@ export default {
   name: 'Card',
   props: ['card', 'req'],
   components: {Loader, Modal},
+  emits: ['addFav', 'removeFav'],
   methods:{
     handleClick(e){
       if (e.target.className !== 'top') return
@@ -267,6 +268,8 @@ p{
 
 .card-container .box {
   transition: box-shadow .5s;
+  overflow: hidden;
+  border-radius: 1rem;
   pointer-events: none;
   width: 23%;
   height: max-content;
@@ -280,9 +283,7 @@ p{
 }
 
 .card-container .box:hover{
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  transform: translateY(-10px);
 }
 
 .card-container .box .bottom{
@@ -312,7 +313,7 @@ p{
 
 .card-container .box .top img {
   width: 100%;
-  min-height: 100%;
+  min-height: 200px;
   max-height: 200px;
   margin-bottom: -.5rem;
 }

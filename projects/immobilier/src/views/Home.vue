@@ -1,13 +1,5 @@
 <template>
   <div class="home-component">
-    <Modal
-      ref="modal"
-      :type="'confirm'"
-      :message="'Voulez vous continuer ?'"
-      :result-message="resultMessage"
-    >
-      Confirmation
-    </Modal>
     <Banner @filter="filter" :match="match"/>
     <CardContainer
       :cards="cards"
@@ -23,14 +15,12 @@
 import Banner from '@/components/partials/Banner.vue';
 import CardContainer from '@/components/CardContainer.vue';
 import { allCategories, find, searchLow, setOne } from '@/lib/firestoreLib';
-import Modal from '@/components/partials/Modal.vue';
 export default {
   name: 'Home',
   props: ['isLogged', 'searchData'],
   components: {
       Banner,
       CardContainer,
-      Modal
   },
   data(){
     return {

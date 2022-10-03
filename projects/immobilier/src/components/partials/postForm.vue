@@ -114,11 +114,12 @@ import Loader from './Loader.vue'
 import Modal from './Modal.vue'
 
 export default {
-    props: ['show'],
+    props: ['show', 'close'],
     components:{
       Loader,
       Modal
     },
+    emits: ['close'],
     data(){
       return {
         get error(){

@@ -63,6 +63,7 @@ import validator from 'validator'
 export default {
 	name: 'profile',
   props: ['form'],
+  emits: ['changePass'], 
   data(){return { error: false}},
   methods:{
     changeAvatar(e){
