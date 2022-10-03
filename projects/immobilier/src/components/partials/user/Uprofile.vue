@@ -79,7 +79,6 @@ export default {
         })
         .then(()=>{
           const url = window.URL.createObjectURL(file)
-          console.log(url)
           preview.src = url
         })
       })

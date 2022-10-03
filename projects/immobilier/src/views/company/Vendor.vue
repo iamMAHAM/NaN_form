@@ -149,7 +149,6 @@ export default {
     }
   },
   beforeCreate(){
-    console.log(this.$route.params.id)
     const uid = this.$route.params.id
     if (!uid){
       this.$router.push('/404')
@@ -159,13 +158,11 @@ export default {
     .then(user=> user.role === "company" ? '' : this.$router.push("/404"))
   },
   mounted(){
-    console.log(this.$route.params.id)
     onSnapshot(collection(db, `users/${this.$route.params.id}/ads`), snap=>{
       this.totals_ads = [...snap.docs.map(d => {
         return {...d.data(), id: d.id}
       })]
       this.ads = [...this.totals_ads]
-      console.log(this.totals_ads)
       const online = this.totals_ads.filter(a => a.status === 'online')
       const solded = this.totals_ads.filter(a=>a .status === 'solded')
       this.getDataArray(this.totals_ads, 'publishedAt', 'totalsAds')

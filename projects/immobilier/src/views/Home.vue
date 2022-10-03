@@ -61,7 +61,6 @@ export default {
       searchLow(categorie, searchTerm)
       .then(datas=>{
         this.isSearch = true
-        console.log(datas)
         this.cards = [...datas]
         this.message = this.cards.length ? 'Rien dans cette section' : 'Aucun resultat correspondant'
         this.load = false

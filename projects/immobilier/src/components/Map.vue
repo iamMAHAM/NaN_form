@@ -48,9 +48,6 @@ export default {
       map.addControl(new tt.NavigationControl());
       addMarker(map, props?.emp)
     })
-    onUpdated(()=>
-      console.log("updated")
-    )
     return { 
       mapRef, 
     }; 

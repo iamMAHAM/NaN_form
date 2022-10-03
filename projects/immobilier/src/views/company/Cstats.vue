@@ -111,12 +111,6 @@ export default {
       online.value = props.data.online
       solded.value = props.data.solded
     })
-    onUpdated(()=>{
-      console.log("update", props.data)
-    })
-    watchEffect(()=>{
-      console.log(props)
-    })
 
     return () =>
       h(Bar, {

@@ -194,7 +194,6 @@ export default {
       clicked(e){
         const target = e.target
         if (target.classList.contains("main-content") && target.classList.contains("failed")){
-          console.log("bingo")
           this.$router.push("/profile")
           this.$emit("close")
         }
@@ -213,7 +212,6 @@ export default {
                 this.form.ownerId = auth.currentUser.uid
                 this.form.images = this.fileList
                 if (this.form.flag === 'edit'){
-                  console.log(this.form)
                   delete this.form?.flag
                   Promise.all([
                     updateOne('totals_ads', this.form.id, this.form),
@@ -235,7 +233,6 @@ export default {
                     return
                   })
                 }else{
-                  console.log('not return ')
                   postAd(auth.currentUser.uid, this.form)
                   .then(adInfo=>{
                     this.req = false

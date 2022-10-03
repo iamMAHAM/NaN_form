@@ -128,7 +128,6 @@ export default {
       })
       search.addEventListener("click", e=>{
         const target = e.target
-        console.log(e.target)
         if (e.target === search || e.target.className === 'close'){
           search.classList.remove("open")
         }

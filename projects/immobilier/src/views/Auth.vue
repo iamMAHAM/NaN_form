@@ -293,7 +293,6 @@ export default {
       })
     },
     reinitPassword(){
-      console.log(this.form.email)
       resetPassword(this.form.email)
       .then(()=>{
         this.$refs.modal.show({

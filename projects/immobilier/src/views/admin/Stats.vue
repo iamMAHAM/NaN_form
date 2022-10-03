@@ -67,7 +67,6 @@ export default {
     const usersData = ref(props.data.users)
     const adsData = ref(props.data.totalAds)
     const soldedData = ref(props.data.soldedAds)
-    console.log(usersData.value)
     const chartData = {
       labels: [
         'January',
@@ -110,12 +109,6 @@ export default {
       usersData.value = props.data.users
       adsData.value = props.data.totalAds
       soldedData.value = props.data.soldedAds
-    })
-    onUpdated(()=>{
-      console.log("update", props.data)
-    })
-    watchEffect(()=>{
-      console.log(props)
     })
 
     return () =>
