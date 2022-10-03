@@ -98,7 +98,7 @@
               @click.prevent="postAds"
               class="button-style"
               type="submit"
-              value="Poster"
+              :value="this.form.flag === 'edit' ? 'modifier' : 'Poster'"
             >
             <Loader :view="3" :height="30" :width="30" v-if="req"/>
           </div>
@@ -109,12 +109,12 @@
 
 <script>
 import validator from 'validator'
-import { auth, findOne,postAd } from '@/lib/firestoreLib'
+import { auth, findOne,postAd, updateOne } from '@/lib/firestoreLib'
 import Loader from './Loader.vue'
 import Modal from './Modal.vue'
 
 export default {
-    props: ['show', 'close'],
+    props: ['show', 'close', 'formDetails'],
     components:{
       Loader,
       Modal
@@ -130,7 +130,7 @@ export default {
         },
         files: [],
         fileList: [],
-        form: {
+        form: { ...this.formDetails, options:this.formDetails?.options || {}}  || {
           title: '',
           type: '',
           description: 'description ...',
@@ -201,6 +201,9 @@ export default {
       },
       postAds(){
         this.handleErrors()
+        if (this.form.flag === 'edit'){
+          Object.keys(this.errors).map(e=> this.errors[e] = false)
+        }
         if (!this.error){ // add !
           if (auth?.currentUser){
             this.req = true
@@ -209,30 +212,56 @@ export default {
               if (user.isVerified){
                 this.form.ownerId = auth.currentUser.uid
                 this.form.images = this.fileList
-                postAd(auth.currentUser.uid, this.form)
-                .then(adInfo=>{
-                  this.req = false
-                  this.$refs.content.classList.remove("failed")
-                  this.$refs.content.classList.add("success")
-                  setTimeout(()=>{
-                    this.$refs.content.classList.remove("success")
-                    this.$emit('close')
-                  }, 5000)
-                })
-                .catch(e=>{
-                  this.$refs.modal.show({
-                    type: 'error',
-                    errorMessage: e.code ? e.code : e.message
+                if (this.form.flag === 'edit'){
+                  console.log(this.form)
+                  delete this.form?.flag
+                  Promise.all([
+                    updateOne('totals_ads', this.form.id, this.form),
+                    updateOne(`users/${auth?.currentUser.uid}/ads`, this.form.id, this.form)
+                  ])
+                  .then(()=>{
+                    this.$refs.modal.show({
+                      type: 'info',
+                      display: true,
+                    })
                   })
-                })
+                  .catch(e=>{
+                    this.$refs.modal.show({
+                      type: 'error',
+                      title: 'Erreur',
+                      display: false,
+                      message: e?.code ? e.code : e.message
+                    })
+                    return
+                  })
+                }else{
+                  console.log('not return ')
+                  postAd(auth.currentUser.uid, this.form)
+                  .then(adInfo=>{
+                    this.req = false
+                    this.$refs.modal.show({
+                      type: 'info',
+                      title: 'Annonce',
+                      display: true,
+                      message: 'Annonce publiée avec succès . En attente de validation ...'
+                    })
+                    setTimeout(()=>{
+                      this.$emit('close')
+                    }, 5000)
+                  })
+                  .catch(e=>{
+                    this.$refs.modal.show({
+                      type: 'error',
+                      errorMessage: e.code ? e.code : e.message
+                    })
+                  })
+                } // vendor update
               }else{
                 this.$refs.modal.show({
                   type: 'info',
                   title: 'Vérification',
                   message: 'veuillez verifier votre identité'
                 })
-                this.$refs.content.classList.remove("success")
-                this.$refs.content.classList.add("failed")
                 this.req = false
               }
 
@@ -244,6 +273,9 @@ export default {
           }
         }
       }
+    },
+    updated(){
+      console.log(this.form)
     }
 }
 </script>
@@ -265,10 +297,11 @@ export default {
 .post-modal{
     z-index: 12;
     top: 0;
+    left: 0;
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, .6);
+    background: rgba(0, 0, 0, .1);
 }
 
 form.post-modal-form{

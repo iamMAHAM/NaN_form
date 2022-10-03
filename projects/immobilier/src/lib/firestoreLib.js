@@ -264,26 +264,21 @@ export const uploadImage = (path, file)=>{
 }
 
 export const postAd = (userId, adInfo={})=>{
-    return new Promise((resolve, reject)=>{
+    return new Promise(async (resolve)=>{
         const images = []
         const id = uuidv4()
-        adInfo.images.map(async img=>{
-            uploadImage(`images/${id + img.name}`, img).then(url=>{
-                images.push(url)
-            }).then(()=>{
-              adInfo.images = images
-              adInfo.status = "pending"
-              adInfo.tempId = id
-              saveOne(`users/${userId}/ads`, adInfo)
-              .then((ad)=>{
-                  const waitRef = dbref(rtdb, `waitingAds/${id}`)
-                  ad.images = images
-                  set(waitRef, ad)
-                  resolve(ad)
-              })
-              .catch(e=>reject("failed to post ad : ", e.message))
-            })
-        })
+        for (const img of adInfo.images){
+          const url = await uploadImage(`images/${id + img.name}`, img)
+          images.push(url)
+        }
+        adInfo.images = images
+        adInfo.status = "pending"
+        adInfo.tempId = id
+        const ad = await saveOne(`users/${userId}/ads`, adInfo)
+        ad.images = images
+        const waitRef = dbref(rtdb, `waitingAds/${id}`)
+        set(waitRef, ad)
+        resolve(ad)
     })
 }
 

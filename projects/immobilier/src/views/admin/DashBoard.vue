@@ -420,6 +420,7 @@ li{
 }
 
 .clear-backend > input.tab-2:checked ~ .tab-content .users {
+  overflow: scroll;
 	display: block;
 }
 

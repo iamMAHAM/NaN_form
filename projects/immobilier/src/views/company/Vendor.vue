@@ -12,10 +12,10 @@
 			</div>
 
 			<!-- tab-menu -->
-			<input type="radio" class="tab-1" name="tab" checked="checked">
+			<input type="radio" class="tab-1" name="tab">
 			<span>Overview</span><i class="material-symbols-outlined">home</i>
 
-			<input type="radio" class="tab-2" name="tab">
+			<input type="radio" class="tab-2" name="tab" checked="checked">
 			<span>Ads</span><i class="material-symbols-outlined">group</i>
 
 			<input type="radio" class="tab-3" name="tab">
@@ -75,13 +75,13 @@
 
 				</section>
 				<section class="users">
+          <Ads
+            :ads="ads"
+            :load="load"
+            @filterAds="filter"
+          />
 				</section>
 				<section class="pending">
-          <CardContainer
-            :load="load"
-            :cards="cards"
-            :message="'Aucune annonce publiée pour l\'instant'"
-          />
 				</section>
 				<section class="report">
 				<!-- // report -->
@@ -129,6 +129,12 @@ export default {
         adsData.push(array.filter(t => t[property]?.toDate()?.toLocaleString('en', { month: 'long' }) === m).length)
       })
       this.data[type] = adsData
+    },
+    filter([filter, search]){
+      if (!filter) this.ads = this.totals_ads
+      this.ads = this.totals_ads.filter(u=>
+      u.status.includes(filter)
+      && u.title.toLowerCase().includes(search.toLowerCase()))
     }
   },
   data(){
@@ -138,31 +144,37 @@ export default {
       totals_ads: [],
       data:{},
       mounted:false,
+      ads: [],
       signOutUser: signOutUser
     }
   },
-  // beforeCreate(){
-  //   // const uid = this.$route.params.uid
-  //   // if (!uid){
-  //   //   this.$router.push('/404')
-  //   //   return
-  //   // }
-  //   findOne("users", uid)
-  //   .then(user=> user.role === "company" ? '' : this.$router.push("/404"))
-  // },
+  beforeCreate(){
+    console.log(this.$route.params.id)
+    const uid = this.$route.params.id
+    if (!uid){
+      this.$router.push('/404')
+      return
+    }
+    findOne("users", uid)
+    .then(user=> user.role === "company" ? '' : this.$router.push("/404"))
+  },
   mounted(){
     console.log(this.$route.params.id)
     onSnapshot(collection(db, `users/${this.$route.params.id}/ads`), snap=>{
-      console.log(snap.docs)
-      this.totals_ads.push(...snap.docs.map(d => d.data()))
+      this.totals_ads = [...snap.docs.map(d => {
+        return {...d.data(), id: d.id}
+      })]
+      this.ads = [...this.totals_ads]
+      console.log(this.totals_ads)
       const online = this.totals_ads.filter(a => a.status === 'online')
       const solded = this.totals_ads.filter(a=>a .status === 'solded')
       this.getDataArray(this.totals_ads, 'publishedAt', 'totalsAds')
       this.getDataArray(online, 'publishedAt', 'online')
       this.getDataArray(solded, 'publishedAt', 'solded')
       this.mounted = true
+      this.load = false
     })
-  }
+  },
 }
 </script>
 

@@ -4,8 +4,8 @@
       <div class="modal">
         <h2 class="title" align="center" style="padding: 1rem">
           <i class="material-symbols-outlined" v-if="type === 'info'" style="color:blue">info</i>
-          <i class="material-symbols-outlined" v-if="type === 'error'" style="color: var(--red)">error</i>
-          <i class="material-symbols-outlined" v-if="type === 'confirm'" style="color: var(--greenfun)">check</i>
+          <i class="material-symbols-outlined" v-else-if="type === 'error'" style="color: var(--red)">error</i>
+          <i class="material-symbols-outlined" v-else style="color: var(--greenfun)">check</i>
           {{ title }}
         </h2>
         <div class="content" align="center" style="padding: 1rem; color: var(--navcolor);">
@@ -65,6 +65,7 @@ export default {
       this.type = options.type || this.type
       this.display = options.display || this.display
       this.errorMessage = options.errorMessage
+      this.resultMessage = options.resultMessage || this.resultMessage
       this.open()
       return new Promise((resolve)=>{
         this.resolvePromise = resolve
@@ -75,8 +76,9 @@ export default {
       this.display
       ?
       this.resultMessage = e.target.textContent === 'oui'
-        ? 'Success' : 'Cancelled'
-      : ''
+        ? this.resultMessage
+        : 'Cancelled'
+      :''
       this.result = true
     }
   },

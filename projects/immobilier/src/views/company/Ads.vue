@@ -1,22 +1,22 @@
 <template>
-  <table class="userTable">
+  <Loader v-if="load"/>
+  <table class="userTable" v-else-if="!load && ads.length">
     <caption>
       <input
         type="search"
         role="search"
-        placeholder="rechercher un utilisateur dans ..."
+        placeholder="rechercher une annonce dans ..."
         v-model="search"
-        @input="filterUsers"
+        @input="filterAds"
         style="min-width: 35rem; height: ; padding: .5rem; margin: .5rem;"
       >
       <select
-        @change="filterUsers"
+        @change="filterAds"
         style="cursor: pointer; text-align:center; width: max-content;"
         v-model="filter">
-        <option value="">Tout Le Monde</option>
-        <option value="acheteur">acheteurs</option>
-        <option value="admin">admins</option>
-        <option value="vendeur">vendeurs</option>
+        <option value="">Toutes les annonces</option>
+        <option value="online">en ligne</option>
+        <option value="solded">soldé</option>
       </select>
       <i
         class="material-symbols-outlined"
@@ -28,62 +28,50 @@
     </caption>
     <thead>
       <tr>
-        <th>Avatar</th>
-        <th>Nom complet</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>age</th>
-        <th>Address</th>
-        <th>Verifié</th>
+        <th>Image</th>
+        <th>Titre</th>
+        <th>Type</th>
+        <th>Proposition</th>
+        <th>Date publication</th>
+        <th>Date vente</th>
+        <th>status</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr
-        v-for="user in users"
-        :key="user.id"
+        v-for="ad in ads"
+        :key="ad.id"
       >
-        <User :user="user" />
+        <Ad :ad="ad" />
       </tr>
     </tbody>
     <tfoot>
       <td colspan="8" class="tablefoot"></td>
     </tfoot>
   </table>
+  <div align="center" v-else>Aucune Annonce pour l'instant ...</div>
 </template>
 
 <script>
-import { collection, onSnapshot } from '@firebase/firestore';
-import { db } from '@/lib/firebaseConfig';
+import Ad from './Ad.vue';
+import Loader from '@/components/partials/Loader.vue';
+
 export default {
   name: 'Ads',
-  // components: { User },
-  emits: ['userUpdated'],
-  methods: {
-    filterUsers(){
-      if (!this.filter) this.users = this.allUsers
-      this.users = this.allUsers.filter(u=>
-      u.role.includes(this.filter)
-      && u.fullName.toLowerCase().includes(this.search.toLowerCase()))
-    }
-  },
+  components: { Ad, Loader },
+  emits: ['filterAds'],
   data(){
     return {
-      users:[
-      ],
       filter: '',
-      allUsers: [],
       search: ''
     }
   },
-  mounted(){
-    onSnapshot(collection(db, "users"), (snap)=>{
-      const inter = []
-      snap.docs.map(d=>inter.push(d.data()))
-      this.users = [...inter]
-      this.allUsers = [...this.users]
-      this.$emit("userUpdated", this.allUsers)
-    })
+  props: ['ads', 'load'],
+  methods:{
+    filterAds(){
+      this.$emit('filterAds', [this.filter, this.search])
+    }
   }
 }
 </script>
@@ -142,6 +130,7 @@ caption {
   padding: 0;
   border-bottom: 3px solid var(--greenfun);
 }
+
 </style>
 
 <style scoped>
