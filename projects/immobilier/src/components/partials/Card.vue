@@ -104,7 +104,7 @@ export default {
   methods:{
     handleClick(e){
       if (e.target.className !== 'top') return
-      if (this.$route.path.includes('admin/dashboard')){
+      if (this.$route.path.includes('admin/dashboard') || this.card.status === 'pending'){
         this.$router.push(`/details/${this.card.type}/${this.card.id}?tempId=${this.card.tempId}`)
       }else{
         this.$router.push(`/details/${this.card.type}/${this.card.id}`)

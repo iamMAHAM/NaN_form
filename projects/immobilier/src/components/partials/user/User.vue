@@ -62,9 +62,10 @@
         <i class="material-symbols-outlined">local_police</i>
         <select v-model="user.role">
           <option disabled :value="undefined">choisir un rôle</option>
-          <option value="acheteur">acheteur</option>
-          <option value="vendeur">vendeur</option>
-          <!-- <option value="admin">admin</option> -->
+          <option value="customer">customer</option>
+          <option value="seller">seller</option>
+          <option value="company">company</option>
+          <option value="admin" v-if="isOwner">admin</option>
         </select>
       </div>
       <button
@@ -90,7 +91,7 @@ import { updateOne, deleteOne} from '@/lib/firestoreLib';
 import Modal from '../Modal.vue';
 export default {
   name: 'User',
-	props: ["user"],
+	props: ['user', 'isOwner'],
   components: {Modal},
   data(){
     return {

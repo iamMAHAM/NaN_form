@@ -136,9 +136,15 @@ export default {
       return require('@/' + path)
     }
   },
-  mounted(){
+  async mounted(){
+    let func = async ()=>{}
     const params = this.$route.params
-    findOne(`ads/X1eA1Bk8tfnVXHqduiTg/${params.categorie}`, params.id)
+    if (this.$route.path.includes("/refused")){
+      func = getRtdbOne('refusedAds', this.$route.params.id)
+    }else{
+      func = findOne(`ads/X1eA1Bk8tfnVXHqduiTg/${params.categorie}`, params.id)
+    }
+    func
     .then(detailInfo=>{
       this.current = detailInfo?.images[0]
       this.cardInfo = detailInfo
@@ -148,12 +154,14 @@ export default {
     .catch(e=>{
       findOne("users", auth.currentUser?.uid)
       .then(user=>{
-        if (user.role === "admin"){
-          const tempId = this.$route.query.tempId
+        if (user.role === "admin" || user.id === auth?.currentUser.uid){
+          const tempId = this.$route.query.tempId || this.$route.params.id
+          console.log(tempId)
           getRtdbOne('waitingAds', tempId)
           .then(card=>{
             this.cardInfo = {...card}
-            this.current = card.images[0]
+            console.log(this.cardInfo)
+            this.current = card?.images[0]
           })
         }else{
           if (e === 'notFound'){
@@ -166,7 +174,7 @@ export default {
   },
   computed: {
     isPlan(){
-      return this.cardInfo.type === 'plan'
+      return this.cardInfo?.type === 'plan'
     },
     location(){
       return this.cardInfo?.proposition === 'location'

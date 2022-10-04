@@ -14,9 +14,10 @@
         style="cursor: pointer; text-align:center; width: max-content;"
         v-model="filter">
         <option value="">Tout Le Monde</option>
-        <option value="acheteur">acheteurs</option>
+        <option value="customer">acheteurs</option>
+        <option value="seller">vendeurs</option>
+        <option value="company">company</option>
         <option value="admin">admins</option>
-        <option value="vendeur">vendeurs</option>
       </select>
       <i
         class="material-symbols-outlined"
@@ -43,7 +44,7 @@
         v-for="user in users"
         :key="user.id"
       >
-        <User :user="user" />
+        <User :user="user" :isOwner="isOwner"/>
       </tr>
     </tbody>
     <tfoot>
@@ -59,6 +60,7 @@ import { db } from '@/lib/firebaseConfig';
 export default {
   name: 'Users',
   components: { User },
+  props: ['isOwner'],
   methods: {
     filterUsers(){
       if (!this.filter) this.users = this.allUsers

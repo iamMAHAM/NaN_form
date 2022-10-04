@@ -87,7 +87,7 @@
 
 				</section>
 				<section class="users">
-          <Users @userUpdated="updatedUsers"/>
+          <Users @userUpdated="updatedUsers" :isOwner="isOwner"/>
 				</section>
 				<section class="pending">
           <CardContainer
@@ -181,6 +181,7 @@ export default {
       totals_ads: [],
       data:{},
       mounted:false,
+      isOwner:false,
       signOutUser: signOutUser
     }
   },
@@ -191,7 +192,10 @@ export default {
       return
     }
     findOne("users", uid)
-    .then(user=> user.role === "admin" ? '' : this.$router.push("/404"))
+    .then(user=>{
+      this.isOwner = user.owner
+      user.role === "admin" ? '' : this.$router.push("/404")
+    })
   },
   mounted(){
     const wads = dbref(rtdb, `waitingAds`);

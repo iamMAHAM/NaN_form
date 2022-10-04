@@ -288,6 +288,7 @@ export const validateAd = (userId, adInfo)=>{
     remove(ref)
     .then(()=>{
       adInfo.status = "online"
+      adInfo.publishedAt = sT()
       delete adInfo.tempId
       Promise.all([
         setOne(`users/${userId}/ads`, adInfo, adInfo.id),

@@ -125,11 +125,10 @@ export default {
         'November',
         'December'
       ]
-      array.map(t=> console.log(new Date(t[property])))
-      // months.map(m=>{
-      //   adsData.push(array.filter(t => t[property]?.toDate()?.toLocaleString('en', { month: 'long' }) === m).length)
-      // })
-      // this.data[type] = adsData
+      months.map(m=>{
+        adsData.push(array.filter(t => t[property]?.toDate()?.toLocaleString('en', { month: 'long' }) === m).length)
+      })
+      this.data[type] = adsData
     },
     filter([filter, search]){
       if (!filter) this.ads = this.totals_ads
