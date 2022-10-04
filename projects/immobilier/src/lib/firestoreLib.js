@@ -324,6 +324,7 @@ export const deleteFromDatabase = async (path)=>{
 
 export const soldeAd = async (userId, adInfo)=>{
   adInfo.status = "solded"
+  adInfo.soldedAt = sT()
   Promise.all([
     updateOne(`users/${userId}/ads`, adInfo.id, adInfo),
     saveOne(`admin/vAJXH3iQabt9AjGLAaej/solded`, adInfo),
