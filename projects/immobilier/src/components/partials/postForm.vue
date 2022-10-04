@@ -269,9 +269,6 @@ export default {
           }
         }
       }
-    },
-    updated(){
-      console.log(this.form)
     }
 }
 </script>
@@ -310,7 +307,7 @@ form.post-modal-form{
   left: 50%;
   transform: translate(-50%, -50%);
   background: var(--white);
-  height: 60%;
+  height: 70%;
 }
 
 h1.title{
@@ -340,9 +337,9 @@ h1.title{
 .pa{
   text-align: center;
   outline-color: var(--navcolor);
-  min-width: 20vw;
-  max-width: 20vw;
-  min-height: 30vh;
+  min-width: 22vw;
+  max-width: 22vw;
+  min-height: 40vh;
   max-height: 45vh;
 }
 .main-content >div{
@@ -477,7 +474,7 @@ select,
   }
 
   .pa{
-    min-height: 10vh;
+    min-height: 20vh;
     min-width: 35vw;
   }
 
