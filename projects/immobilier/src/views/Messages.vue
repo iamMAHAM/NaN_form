@@ -190,6 +190,7 @@ export default {
     Loader,
     Modal
   },
+  props: ['searchData', 'isLogged'],
   data(){
     return {
       messages:[],
@@ -272,6 +273,7 @@ export default {
   },
   switchMessages([cMessages, person]){
     this.messages = cMessages
+    console.log('switch received')
     console.log(this.messages)
     this.pers = person
   }
@@ -319,7 +321,7 @@ export default {
       const id = this.$route.query.id
       const message = this.$route.query.template
       this.message = JSON.parse(message)?.message?.content
-      const conversation = await waitForElm(`#${id}`)
+      const conversation = await waitForElm(`#user-${id}`)
       conversation.click()
       const textarea = await waitForElm("textarea")
       textarea.style.height = "100px"

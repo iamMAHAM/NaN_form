@@ -1,7 +1,7 @@
 <template>
   <div
     @click="showConversation"
-    :id="person?.id"
+    :id="'user-'+person?.id"
     class="person"
   >
     <div class="box">

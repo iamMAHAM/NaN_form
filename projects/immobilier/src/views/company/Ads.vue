@@ -47,7 +47,7 @@
       </tr>
     </tbody>
     <div align="center" v-else>Rien à signaler ici ...</div>
-    <tfoot>
+    <tfoot v-if="ads.length">
       <td colspan="8" class="tablefoot"></td>
     </tfoot>
   </table>

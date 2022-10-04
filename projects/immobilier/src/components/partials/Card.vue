@@ -123,11 +123,18 @@ export default {
         display: true,
       })
       if (ok){
+        const urlRegex = /\bhttps?:\/\/\S+/gi
+        const content = 'Votre annonce à été refusée car elle ne respecte pas nos standards \n\
+        http://localhost:8080/details/refused/'+ this.card.tempId
+        const hasUrl = content.match(urlRegex)
+        const link =  hasUrl ? hasUrl[0] : null
+        const a = document.createElement("a")
+        a.href = link
         const messages = {
           message: {
             type: 'text',
-            content: 'Votre annonce à été refusée car elle ne respecte pas nos standards',
-            link: 'https://localhost:8080/refused/'+ this.card.tempId
+            content: content.replace(link, ''),
+            link: a.pathname
           }
         }
         unValidateAd(this.card.ownerId, auth?.currentUser?.uid, this.card, messages)
