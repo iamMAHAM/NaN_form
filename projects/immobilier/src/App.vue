@@ -1,5 +1,5 @@
 <template>
-  <i v-if="user.role === 'company'" class="vcompany material-symbols-outlined" @click="$router.push(`/pro/vendor/${user.id}`)">dashboard</i>
+  <i v-if="user.role === 'company' && !flag1" class="vcompany material-symbols-outlined" @click="$router.push(`/pro/vendor/${user.id}`)">dashboard</i>
   <NavBar :isLogged="isLogged" :user="user" :auth="auth" @search="search"/>
   <div class="app-content">
     <router-view :isLogged="isLogged" :key="$route.path" :searchData="searchData"/>
@@ -22,6 +22,7 @@
         uid: '',
         user: {},
         flag: false,
+        flag1: false,
         auth:false,
         searchData: []
       }
@@ -59,6 +60,7 @@
     updated(){
       this.flag = this.$route.path === "/admin/dashboard"
       this.auth = this.$route.path === "/auth"
+      this.flag1 = this.$route.path.includes('/pro/vendor')
     },
 
     watch:{
@@ -128,6 +130,11 @@ body{
 
 
 .vcompany{
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 700,
+  'GRAD' 200,
+  'opsz' 48;
   z-index: 3;
   cursor: pointer;
   font-size: 4rem !important;
