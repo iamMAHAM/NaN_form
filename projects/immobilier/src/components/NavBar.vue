@@ -70,7 +70,7 @@
                       Favoris
                   </a>
               </router-link>
-              <router-link to="/messages" v-if="isLogged" class="navLink">
+              <router-link to="/messages" v-if="isLogged && user.role !== 'admin' && user.role !== 'company'" class="navLink">
                   <a href="" class="item">
                       <i class="material-symbols-outlined">mail</i>
                       Messages

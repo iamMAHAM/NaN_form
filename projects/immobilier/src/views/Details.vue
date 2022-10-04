@@ -59,7 +59,7 @@
           </li>
         </ul>
       </div>
-      <div class = "purchase-info">
+      <div class = "purchase-info" v-if="notMe">
         <button
           type="button"
           class="btn button-style c"
@@ -107,7 +107,6 @@ export default {
       load: true,
       current: '',
       emp: '',
-      ownerInfo: ''
     }
   },
   methods:{
@@ -178,6 +177,9 @@ export default {
     },
     location(){
       return this.cardInfo?.proposition === 'location'
+    },
+    notMe(){
+      return auth?.currentUser?.uid !== this.cardInfo?.ownerId
     }
   }
 }

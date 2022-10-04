@@ -13,10 +13,10 @@
         @change="filterUsers"
         style="cursor: pointer; text-align:center; width: max-content;"
         v-model="filter">
-        <option value="">Tout Le Monde</option>
-        <option value="customer">acheteurs</option>
-        <option value="seller">vendeurs</option>
-        <option value="company">company</option>
+        <option value="">anybody</option>
+        <option value="customer">customers</option>
+        <option value="seller">sellers</option>
+        <option value="company">companies</option>
         <option value="admin">admins</option>
       </select>
       <i

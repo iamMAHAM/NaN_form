@@ -31,12 +31,12 @@
 							<i class="material-symbols-outlined">logout</i>
 						</a>
 					</li>
-					<li>
-						<a href="#" title="Messages" @click="messages">
+					<li @click="$router.push('/messages')">
+						<a href="#" title="Messages">
 							<i class="material-symbols-outlined">message</i>
             </a>
 					</li>
-					<li>
+					<li @click="$router.push('/profile')">
 						<a href="#" title="Edit">
 							<i class="material-symbols-outlined">edit_square</i>
 						</a>
@@ -81,14 +81,6 @@
             @filterAds="filter"
           />
 				</section>
-				<section class="pending">
-				</section>
-				<section class="report">
-				<!-- // report -->
-				</section>
-				<section class="settings">
-				<!-- settings -->
-				</section>
 			</div>
 		</div>
 	</div>
@@ -97,9 +89,8 @@
 <script>
 import Stats from './Cstats.vue';
 import Ads from '@/views/company/Ads.vue'
-import { onValue, ref as dbref } from '@firebase/database';
-import { db, rtdb,  } from '@/lib/firebaseConfig';
-import { auth, findOne, signOutUser, soldeAd } from '@/lib/firestoreLib';
+import { db } from '@/lib/firebaseConfig';
+import { auth, findOne, signOutUser} from '@/lib/firestoreLib';
 import { collection, onSnapshot } from '@firebase/firestore';
 
 export default {

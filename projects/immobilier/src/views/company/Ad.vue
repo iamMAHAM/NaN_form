@@ -13,6 +13,17 @@
   <td>{{ ad.status}}</td>
   <td>
     <button
+      title="view"
+      v-if="ad.status !== 'pending'"
+      class="deleteA"
+      style="background: var(--hovercolor)"
+      @click="$router.push(`/details/${ad.type}/${ad.id}`)"
+    >
+      <i class="material-symbols-outlined">visibility</i>
+    </button>
+
+    <button
+      title="edit"
       v-if="ad.status !== 'pending'"
       class="view"
     >
@@ -24,6 +35,15 @@
       </i>
     </button>
     <button
+      title="solde"
+      class="deleteA"
+      style="background: var(--greenfun)"
+      @click="soldeAds"
+    >
+      <i class="material-symbols-outlined">sell</i>
+    </button>
+    <button
+      title="delete"
       class="deleteA"
       @click="deleteAd"
     >
@@ -33,7 +53,7 @@
 </template>
 
 <script>
-import { deleteOne, auth, abortPost} from '@/lib/firestoreLib';
+import { deleteOne, auth, abortPost, soldeAd} from '@/lib/firestoreLib';
 import Modal from '@/components/partials/Modal.vue';
 import postForm from '@/components/partials/postForm.vue';
 export default {
@@ -53,6 +73,8 @@ export default {
 		async deleteAd(){
       const ok = await this.$refs.modal.show({
         title: 'Delete ad',
+        message: 'supprimer l\'annonce ?',
+        resultMessage: 'supprimé avec succès',
       })
 			if (ok){
         Promise.all([
@@ -73,7 +95,14 @@ export default {
     shows(){
       this.backup = {...this.ad}
       this.show = true
-    }
+    },
+    async soldeAds(){
+      const ok = await this.$refs.modal.show({
+        message: 'marqué comme vendu ?',
+        resultMessage: 'annonce marqué comme vendu'
+      })
+      if (ok) soldeAd(auth?.currentUser.uid, this.card)
+    },
 	},
 }
 </script>
@@ -118,5 +147,9 @@ export default {
   background: var(--white);
   width: 15rem;
   height: 15rem;
+}
+
+td button:hover{
+  opacity: .9;
 }
 </style>

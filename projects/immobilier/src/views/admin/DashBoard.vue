@@ -12,6 +12,7 @@
 			</div>
 
 			<!-- tab-menu -->
+      
 			<input type="radio" class="tab-1" name="tab">
 			<span>Home</span><i class="material-symbols-outlined">home</i>
 
@@ -19,13 +20,13 @@
 			<span>Users</span><i class="material-symbols-outlined">group</i>
 
 			<input type="radio" class="tab-3" name="tab">
-			<span>Pending</span><i class="material-symbols-outlined">pending</i>
+			<span>Pending <span class="alerte">{{ cards.length }}</span></span><i class="material-symbols-outlined">pending</i>
 		
       <!-- <input type="radio" class="tab-4" name="tab">
 			<span>Reported</span><i class="material-symbols-outlined">report</i> -->
 
       <input type="radio" class="tab-5" name="tab">
-			<span>KYC</span><i class="material-symbols-outlined">badge</i>
+			<span>KYC <span class="alerte">{{ profiles.length }}</span></span><i class="material-symbols-outlined">badge</i>
 
 			<!-- <input type="radio" class="tab-6" name="tab">
 			<span>Profile</span><i class="material-symbols-outlined">person</i> -->
@@ -42,12 +43,12 @@
 							<i class="material-symbols-outlined">logout</i>
 						</a>
 					</li>
-					<li>
-						<a href="#" title="Messages" @click="messages">
+					<li @click="$router.push('/messages')">
+						<a href="#" title="Messages">
 							<i class="material-symbols-outlined">message</i>
             </a>
 					</li>
-					<li>
+					<li @click="$router.push('/profile')">
 						<a href="#" title="Edit">
 							<i class="material-symbols-outlined">edit_square</i>
 						</a>
@@ -472,6 +473,11 @@ li{
   height: calc(100% - 62px);
 }
 
+span.alerte{
+  float: right;
+  transform: translateX(-20px);
+  color: var(--red);
+}
 /* Responsive */
 @media only screen and (max-width: 641px) {
 	.avatar, 
