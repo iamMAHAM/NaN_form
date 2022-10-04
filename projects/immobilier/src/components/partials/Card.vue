@@ -285,7 +285,7 @@ p{
 }
 
 .card-container .box {
-  transition: box-shadow .5s;
+  transition: box-shadow .2s;
   overflow: hidden;
   border-radius: 1rem;
   pointer-events: none;
@@ -302,6 +302,9 @@ p{
 
 .card-container .box:hover{
   transform: translateY(-10px);
+  box-shadow: -2px 10px 5px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -2px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -2px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
 .card-container .box .bottom{
