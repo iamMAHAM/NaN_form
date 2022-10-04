@@ -300,14 +300,18 @@ export const validateAd = (userId, adInfo)=>{
   })
 }
 
-export const unValidateAd = (userId, adInfo)=>{
+export const unValidateAd = (userId, refusedById, adInfo, message)=>{
   return new Promise((resolve, reject)=>{
     const ref = dbref(rtdb, `waitingAds/${adInfo.tempId}`)
+    const refusedRed = dbref(rtdb, `refusedAds/${adInfo.tempId}`)
+    set(refusedRed, adInfo)
     remove(ref)
     .then(()=>{
-      adInfo.status = "refused",
-      setOne(`users/${userId}/ads`, adInfo, adInfo.id)
-      .then(resolve()) //send mail to tell user add is refused
+      deleteOne(`users/${userId}/ads`, adInfo.id)
+      .then(async ()=>{
+        await sendMessage(refusedById, userId, message)
+        resolve()
+      }) //send mail to tell user add is refused
     }).catch(e=>reject(e.message))
   })
 }

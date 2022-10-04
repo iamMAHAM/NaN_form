@@ -10,7 +10,7 @@
   <td>{{ age }}</td>
   <td>{{ user.address }}</td>
   <td>{{ user.isVerified}}</td>
-  <td v-if="user.role !== 'admin'">
+  <td v-if="!user.owner">
     <button
       class="view"
     >

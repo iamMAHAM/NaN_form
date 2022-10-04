@@ -9,7 +9,7 @@
 <script>
 export default {
   name: 'Settings',
-  props: ['isAdmin', 'uid']
+  props: ['isAdmin', 'uid'],
 }
 </script>
 

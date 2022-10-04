@@ -120,9 +120,17 @@ export default {
     async del(){
       const ok = await this.$refs.modal.show({
         message: 'refuser l\'annonce?',
+        display: true,
       })
       if (ok){
-        unValidateAd(this.card.ownerId, this.card)
+        const messages = {
+          message: {
+            type: 'text',
+            content: 'Votre annonce à été refusée car elle ne respecte pas nos standards',
+            link: 'https://localhost:8080/refused/'+ this.card.tempId
+          }
+        }
+        unValidateAd(this.card.ownerId, auth?.currentUser?.uid, this.card, messages)
         .catch(e=>{
           this.$refs.modal.show({
               type: 'error',

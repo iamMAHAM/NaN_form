@@ -106,7 +106,6 @@ export default {
       maintainAspectRatio: false
     }
     onMounted(()=>{
-      console.log(props.data)
       totalAds.value = props.data.totalsAds
       online.value = props.data.online
       solded.value = props.data.solded

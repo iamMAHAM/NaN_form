@@ -1,6 +1,6 @@
 <template>
   <Loader v-if="load"/>
-  <table class="userTable" v-else-if="!load && ads.length">
+  <table class="userTable" v-else>
     <caption>
       <input
         type="search"
@@ -26,7 +26,7 @@
       </i>
 
     </caption>
-    <thead>
+    <thead v-if="ads.length">
       <tr>
         <th>Image</th>
         <th>Titre</th>
@@ -38,7 +38,7 @@
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody v-if="ads.length">
       <tr
         v-for="ad in ads"
         :key="ad.id"
@@ -46,11 +46,11 @@
         <Ad :ad="ad" />
       </tr>
     </tbody>
+    <div align="center" v-else>Rien à signaler ici ...</div>
     <tfoot>
       <td colspan="8" class="tablefoot"></td>
     </tfoot>
   </table>
-  <div align="center" v-else>Aucune Annonce pour l'instant ...</div>
 </template>
 
 <script>

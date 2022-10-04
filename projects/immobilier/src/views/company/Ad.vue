@@ -9,10 +9,11 @@
   <td>{{ ad.type }}</td>
   <td>{{ ad.proposition }}</td>
   <td>{{ ad?.publishedAt?.toDate()?.toLocaleString() }}</td>
-  <td>{{ ad.soldedAt }}</td>
+  <td>{{ ad.soldedAt || NaN }}</td>
   <td>{{ ad.status}}</td>
   <td>
     <button
+      v-if="ad.status !== 'pending'"
       class="view"
     >
       <i

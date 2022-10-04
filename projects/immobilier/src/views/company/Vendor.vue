@@ -125,10 +125,11 @@ export default {
         'November',
         'December'
       ]
-      months.map(m=>{
-        adsData.push(array.filter(t => t[property]?.toDate()?.toLocaleString('en', { month: 'long' }) === m).length)
-      })
-      this.data[type] = adsData
+      array.map(t=> console.log(new Date(t[property])))
+      // months.map(m=>{
+      //   adsData.push(array.filter(t => t[property]?.toDate()?.toLocaleString('en', { month: 'long' }) === m).length)
+      // })
+      // this.data[type] = adsData
     },
     filter([filter, search]){
       if (!filter) this.ads = this.totals_ads
@@ -163,6 +164,7 @@ export default {
         return {...d.data(), id: d.id}
       })]
       this.ads = [...this.totals_ads]
+      console.log(this.ads)
       const online = this.totals_ads.filter(a => a.status === 'online')
       const solded = this.totals_ads.filter(a=>a .status === 'solded')
       this.getDataArray(this.totals_ads, 'publishedAt', 'totalsAds')

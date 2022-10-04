@@ -1,4 +1,5 @@
 <template>
+  <i v-if="user.role === 'company'" class="vcompany material-symbols-outlined" @click="$router.push(`/pro/vendor/${user.id}`)">dashboard</i>
   <NavBar :isLogged="isLogged" :user="user" :auth="auth" @search="search"/>
   <div class="app-content">
     <router-view :isLogged="isLogged" :key="$route.path" :searchData="searchData"/>
@@ -125,6 +126,16 @@ body{
   border-radius: 99px;
 }
 
+
+.vcompany{
+  z-index: 3;
+  cursor: pointer;
+  font-size: 4rem !important;
+  position: fixed;
+  top: 10%;
+  right: 5%;
+  color: var(--greenfun);
+}
 
 
 </style>

@@ -245,6 +245,7 @@ export default {
         const link =  hasUrl ? hasUrl[0] : null
         const a = document.createElement("a")
         a.href = link
+        console.log(link)
         sendMessage(this.uid, this.pers.id,{
           message:{
             type: type,
