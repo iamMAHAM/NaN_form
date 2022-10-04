@@ -38,11 +38,11 @@ export default{
     background-color: #d8d8d8;
   }
   .active-page {
-    background-color: #3498db;
-    border: 1px solid #3498db;
+    background-color: var(--greenfun);
+    border: 1px solid var(--white);
     color: white;
   }
   .active-page:hover {
-    background-color: #2988c8;
+    background-color: var(--greenfun);
   }
 </style>
