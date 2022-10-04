@@ -87,6 +87,29 @@
               {{ verify ? 'close' :  'fingerprint'}}
             </i>
         </button>
+        <button
+            class="edit"
+            v-if="home" 
+            @click="like"
+          >
+            <span
+              style="
+                vertical-align: middle;
+                color: var(--white);
+                margin: 0;
+                font-size: 1.7rem;
+              "
+            >
+              {{ !isLiked ? 'j\'aime' : 'j\'aime déjà'}}
+            </span>
+            <i class="material-symbols-outlined"
+              :style="{
+                color: !isLiked ? 'var(--greenfun)' : 'red'
+              }"
+            >
+              {{ !isLiked ? 'thumb_up_off' :  'thumb_down'}}
+            </i>
+        </button>
       </div>
       <!-- break -->
       <hr class="break" v-if="!iLoad"/>
@@ -116,8 +139,8 @@
               <p class="num">{{ cards?.length}}</p>
             </div>
             <div class="card bg-dark" style="cursor: normal">
-              <p>Popularité</p>
-              <p class="num">{{ user?.popularity || 0}}</p>
+              <p>J'aimes</p>
+              <p class="num">{{ user?.likes?.length || 0}}</p>
             </div>
           </div>
           <div class="ads" v-if="ads" @click="rightFilter">
@@ -279,6 +302,28 @@ export default {
     },
     verifyUser(){
       this.verify = !this.verify
+    },
+    like(){
+    console.log(this.isLiked)
+    let inter = []
+     if (this.isLiked){
+      this.user.likes = this.user.likes.filter(s => s!== this.user.id)
+     }else{
+      inter = typeof(this.user.likes) === Array
+      ? this.user.likes.push(this.user.id)
+      : [auth?.currentUser?.uid]
+     }
+     this.user.likes = inter
+      updateOne("users", this.user.id, {
+        likes: this.user.likes
+      }).then(()=>{
+        this.$refs.modal.show({
+          title: 'Like',
+          type: 'info',
+          display: false,
+          message: 'Success'
+        })
+      })
     }
   },
   computed:{ 
@@ -304,6 +349,9 @@ export default {
     },
     showRoutes(){
       return this.user?.id === auth?.currentUser?.uid
+    },
+    isLiked(){
+      return this.user?.likes?.includes(auth?.currentUser?.uid)
     }
   }
 }

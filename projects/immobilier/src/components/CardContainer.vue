@@ -20,7 +20,7 @@
       @removeFav="removeFavs"
     />
   </div>
-  <div align="center"><Pagination class="paginate" :items="cards" @changePage="newItems"/></div>
+  <div align="center" style="margin-bottom: 5px"><Pagination class="paginate" :items="cards" @changePage="newItems"/></div>
 </template>
 
 <script>
