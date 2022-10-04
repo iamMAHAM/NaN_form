@@ -239,7 +239,6 @@ export default {
                     this.$refs.modal.show({
                       type: 'info',
                       title: 'Annonce',
-                      display: true,
                       message: 'Annonce publiée avec succès . En attente de validation ...'
                     })
                     setTimeout(()=>{

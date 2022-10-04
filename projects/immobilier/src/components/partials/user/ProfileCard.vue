@@ -66,7 +66,6 @@ export default {
           this.$refs.modal.show({
               type: 'error',
               title: 'Erreur',
-              display: false,
               errorMessage: e.code ? e.code : e?.message,
           })
         })
@@ -88,7 +87,6 @@ export default {
             this.$refs.modal.show({
               type: 'error',
               title: 'Erreur',
-              display: false,
               errorMessage: e.code ? e.code : e?.message,
           })
         })

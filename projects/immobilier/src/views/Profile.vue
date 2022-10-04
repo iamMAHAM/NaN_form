@@ -180,7 +180,7 @@ export default {
     userVerification,
     Modal
   },
-  props:['isLogged'],
+  props:['isLogged', 'searchData'],
   data(){
     return {
       backup: null,

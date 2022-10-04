@@ -120,7 +120,7 @@ export default {
     async del(){
       const ok = await this.$refs.modal.show({
         message: 'refuser l\'annonce?',
-        display: true,
+        resultMessage: 'annonce refusé'
       })
       if (ok){
         const urlRegex = /\bhttps?:\/\/\S+/gi
@@ -151,6 +151,7 @@ export default {
     async validate(){
       const ok = await this.$refs.modal.show({
         message: 'valider l\'annonce?',
+        resultMessage: 'Annonce validée'
       })
       if (ok){
         validateAd(this.card.ownerId, this.card)
@@ -167,6 +168,7 @@ export default {
     async deleteAds(){
       const ok = await this.$refs.modal.show({
         message: 'supprimer l\'annonce?',
+        resultMessage: 'annonce supprimée.'
       })
       if (ok){
         Promise.all([
@@ -187,7 +189,8 @@ export default {
     },
     async soldeAds(){
       const ok = await this.$refs.modal.show({
-        type: 'confirm',
+        message: 'marqué comme vendu ?',
+        resultMessage: 'annonce marqué comme vendu'
       })
       if (ok) soldeAd(auth?.currentUser.uid, this.card)
     },

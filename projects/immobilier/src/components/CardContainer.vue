@@ -88,9 +88,9 @@ export default {
 }
 
 .card-container .em{
-  font-size: 2.5rem;
+  font-size: 3rem;
   text-align: center;
-  color: var(--navcolor);
+  color: var(--white);
   width: 100%;
   height: 100%;
 }
