@@ -246,7 +246,6 @@ export default {
         const link =  hasUrl ? hasUrl[0] : null
         const a = document.createElement("a")
         a.href = link
-        console.log(link)
         sendMessage(this.uid, this.pers.id,{
           message:{
             type: type,
@@ -258,11 +257,12 @@ export default {
           this.$refs.textarea.style.height = '16px'
         }
         ).catch(e=>{
+          console.log(e)
           this.$refs.modal.show({
-              type: 'error',
-              title: 'Erreur',
-              display: false,
-              errorMessage: e.code ? e.code : e?.message,
+            type: 'error',
+            title: 'Erreur',
+            display: false,
+            errorMessage: e?.code ? e?.code : e?.message,
           })
         })
       })
@@ -312,7 +312,7 @@ export default {
       })).then(inter=>{
         this.conversations = inter
         this.load = false
-        const ab = Object.filter(inter, v=> v?.info?.id === this.pers?.id)
+        const ab = inter.filter(c => c?.info?.id === this.pers?.id)
         this.messages = ab[0]?.messages.sort(compare)
       })
     }
