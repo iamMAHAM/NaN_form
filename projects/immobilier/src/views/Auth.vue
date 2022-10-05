@@ -1,57 +1,59 @@
 <template>
-  <section>
-    <div class="container" ref="container">
-      <div class="user signinBx">
-        <div class="imgBx"><img src="../assets/reg.jpg" alt="" /></div>
-        <div class="formBx">
-          <form>
-            <h2>Connexion</h2>
-            <div class="input">
-              <i class="material-symbols-outlined">alternate_email</i>
-              <input
-                v-model="form.email"
-                type="email"
-                placeholder="Email"
-              >
-            </div>
-            <div class="input">
-              <i class="material-symbols-outlined">lock</i>
-              <input
-                v-model="form.password"
-                type="password"
-                class="ps"
-                placeholder="Mot de passe"
-              >
-              <i
-                class="material-symbols-outlined vs"
-                @click="toggleVisibility"
-              >
-                visibility_off
-              </i>
-            </div>
-            <div class="error" v-if="errors.reqError">{{ errors.message }}</div>
+<section>
+  <Modal ref="modal"/>
+  <div class="container" ref="container">
+    <div class="user signinBx">
+      <div class="imgBx"><img src="../assets/reg.jpg" alt="" /></div>
+      <div class="formBx">
+        <form>
+          <h2>Connexion</h2>
+          <div class="input">
+            <i class="material-symbols-outlined">alternate_email</i>
             <input
-              v-if="!req"
-              type="submit"
-              value="Se Connecter"
-              @click.prevent="login"
+              v-model="form.email"
+              type="email"
+              placeholder="Email"
+              >
+          </div>
+          <div class="input">
+            <i class="material-symbols-outlined">lock</i>
+            <input
+              v-model="form.password"
+              type="password"
+              class="ps"
+              placeholder="Mot de passe"
+              >
+            <i
+              class="material-symbols-outlined vs"
+              @click="toggleVisibility"
+              >
+            visibility_off
+            </i>
+          </div>
+          <div class="error" v-if="errors.reqError">{{ errors.message }}</div>
+          <input
+            v-if="!req"
+            type="submit"
+            value="Se Connecter"
+            @click.prevent="login"
             />
-            <Loader :view="3" :width="30" :height="30" v-if="req"/>
-            <p class="signup"  v-if="!req">
-              Pas encore inscrit ?
-              <a href="#" @click="toggleForm();">S'inscrire</a>
-            </p>
-            <p class="signup"  v-if="!req">
-              Mot de passe oublié ?
-              <a href="#" @click="passr = true">Réinitialiser</a>
-            </p>
-          </form>
-        </div>
+          <Loader :view="3" :width="30" :height="30" v-if="req"/>
+          <p class="signup"  v-if="!req">
+            Pas encore inscrit ?
+            <a href="#" @click="toggleForm();">S'inscrire</a>
+          </p>
+          <p class="signup"  v-if="!req">
+            Mot de passe oublié ?
+            <a href="#" @click="passr = true">Réinitialiser</a>
+          </p>
+        </form>
       </div>
-      <div class="user signupBx">
+    </div>
+    <div class="proper">
+      <div class="user signupBx" v-if="userSign">
         <div class="formBx">
           <form action="" onsubmit="return false;">
-            <h2>Inscription</h2>
+            <h2>Inscription particulier</h2>
             <div class="error" v-if="errors.reqError">{{ errors.message }}</div>
             <div class="input">
               <i class="material-symbols-outlined">badge</i>
@@ -66,7 +68,7 @@
               v-if="errors.fullName"
               class="error"
               >
-                nom invalide
+              nom invalide
             </div>
             <div class="input">
               <i class="material-symbols-outlined">alternate_email</i>
@@ -75,12 +77,12 @@
                 @change="emailChange"
                 type="email"
                 placeholder="Email"
-            >
+                >
             </div>
             <div
               v-if="errors.email"
               class="error"
-            >
+              >
               email invalide
             </div>
             <div class="input">
@@ -91,20 +93,20 @@
                 class="ps"
                 placeholder="Mot de passe"
                 @change="passwordChange"
-              >
+                >
               <i
                 class="material-symbols-outlined vs"
                 @click="toggleVisibility"
-              >
-                visibility_off
+                >
+              visibility_off
               </i>
             </div>
             <div
               v-if="errors.password"
               class="error"
-            >
-             minimum 8 caractères <br>
-             (symbole, majuscule, chiffre, lettre)
+              >
+              minimum 8 caractères <br>
+              (symbole, majuscule, chiffre, lettre)
             </div>
             <div class="input">
               <i class="material-symbols-outlined">location_city</i>
@@ -117,7 +119,7 @@
             <div
               v-if="errors.address"
               class="error"
-            >
+              >
               address invalide
             </div>
             <div class="input">
@@ -127,11 +129,11 @@
                 @change="birthChange"
                 type="date"
                 min="1900-01-01" max="2003-01-01"
-              >
+                >
             </div>
             <div class="error"
               v-if="errors.birth"
-            >
+              >
               date invalide
             </div>
             <div class="input">
@@ -140,7 +142,7 @@
                 type="file"
                 ref="avatar"
                 @change="flag = true"
-              >
+                >
             </div>
             <input
               v-if="!req"
@@ -148,7 +150,160 @@
               value="S'inscrire"
               :disabled="state"
               @click.prevent="register"
+              />
+            <Loader :view="3" :width="30" :height="30" v-if="req"/>
+            <p class="signup"  v-if="!req">
+              Inscription entreprise ?
+              <a href="#" @click="userSign=false">cliquez ici</a>
+            </p>
+            <p class="signup"  v-if="!req">
+              déjà inscrit ?
+              <a href="#" @click="toggleForm()">Se connecter.</a>
+            </p>
+          </form>
+        </div>
+        <div class="imgBx"><img src="../assets/reg.jpg" alt="" /></div>
+      </div>
+      <div class="user signupBx" v-else>
+        <div class="formBx">
+          <form action="" onsubmit="return false;">
+            <h2>Inscription entreprise</h2>
+            <div class="error" v-if="errors.reqError">{{ errors.message }}</div>
+            <div class="input">
+              <i class="material-symbols-outlined">badge</i>
+              <input
+                v-model="form.fullName"
+                @change="nameChange"
+                type="text"
+                placeholder="Nom de l'entreprise"
+                >
+            </div>
+            <div
+              v-if="errors.fullName"
+              class="error"
+              >
+              nom invalide
+            </div>
+            <div class="input">
+              <i class="material-symbols-outlined">alternate_email</i>
+              <input
+                v-model="form.email"
+                @change="emailChange"
+                type="email"
+                placeholder="Email business"
+                >
+            </div>
+            <div
+              v-if="errors.email"
+              class="error"
+              >
+              email invalide
+            </div>
+            <div class="input">
+              <i class="material-symbols-outlined">lock</i>
+              <input
+                v-model="form.password"
+                type="password"
+                class="ps"
+                placeholder="Mot de passe"
+                @change="passwordChange"
+                >
+              <i
+                class="material-symbols-outlined vs"
+                @click="toggleVisibility"
+                >
+              visibility_off
+              </i>
+            </div>
+            <div
+              v-if="errors.password"
+              class="error"
+              >
+              minimum 8 caractères <br>
+              (symbole, majuscule, chiffre, lettre)
+            </div>
+            <div class="input">
+              <i class="material-symbols-outlined">location_city</i>
+              <input
+                v-model="form.address"
+                @change="addressChange"
+                type="text"
+                placeholder="Address de l'Entreprise">
+            </div>
+            <div
+              v-if="errors.address"
+              class="error"
+              >
+              address invalide
+            </div>
+            <div class="input">
+              <i class="material-symbols-outlined">calendar_month</i>
+              <input
+                v-model="form.birth" 
+                @change="birthChange"
+                placeholder="Date de création de l'entreprise"
+                type="text"
+                onfocus="(this.type='date')"
+                >
+            </div>
+            <div class="input">
+              <i class="material-symbols-outlined">imagesmode</i>
+              <input
+                type="text"
+                placeholder="Avatar de l'entreprise"
+                onfocus="this.type='file'"
+                ref="avatar"
+                @change="flag = true"
+                >
+            </div>
+            <input
+              v-if="!req"
+              type="submit"
+              value="Suivant"
+              :disabled="state"
+              @click.prevent="next"
+              />
+            <Loader :view="3" :width="30" :height="30" v-if="req"/>
+            <p class="signup"  v-if="!req">
+              inscription particulier ?
+              <a href="#" @click="userSign=true">cliquez ici</a>
+            </p>
+            <p class="signup"  v-if="!req">
+              déjà inscrit ?
+              <a href="#" @click="toggleForm()">Se connecter.</a>
+            </p>
+          </form>
+        </div>
+        <div class="formBx company" style="width: 100%; overflow: scroll; display: none;">
+          <form action="" onsubmit="return false;">
+            <h2>Verification des informations</h2>
+            <userVerification
+              ref="verif"
+              :props="{
+                company: true,
+                selfie: 'photo de l\'entrprise (vue de déhors)',
+                recto: 'une copie de la pièce d\'identité du propriétaire de la société ou représentant légal',
+                verso: 'une copie de l\'extrait du Registre du Commerce et De Crédit Mobilier (RCCM) ou une copie du Certificat d\'Immatriculation Unique de l\'Entreprise',
+                facture: 'une copie de la Déclaration Fiscale d\'Existence (DFE) ou une copie du Certificat d\'Immatriculation Unique de l\'Entreprise',
+                show: false
+              }"
+              @fileAdd="addFile"
+              @fileRemove="removeFile"
             />
+            <input
+              v-if="!req"
+              type="submit"
+              value="Précédent"
+              @click.prevent="prev"
+              />
+            <input
+              style="margin-left: 1rem"
+              v-if="!req"
+              type="submit"
+              value="Soumettre"
+              :disabled="state || companyForm.fileList.length !== 4"
+              @click.prevent="companyRegister"
+              />
             <Loader :view="3" :width="30" :height="30" v-if="req"/>
             <p class="signup"  v-if="!req">
               déjà inscrit ?
@@ -156,42 +311,48 @@
             </p>
           </form>
         </div>
-      <div class="imgBx"><img src="../assets/reg.jpg" alt="" /></div></div>
-      <div class="reset-password" v-if="passr">
-         <div class="input">
-          <i class="material-symbols-outlined">alternate_email</i>
-          <input type="text" v-model="form.email" placeholder="Adresse email">
-         </div>
-         <div class="reset-actions">
-           <input type="submit"
-              style="
-              padding: 1rem;
-              "
-              @click="reinitPassword"
-              value="Soumettre"
-            >
-           <input type="submit"
-              style="
-              padding: 1rem;
-              color: var(--red);
-              "
-              @click="passr = false"
-              value="Annuler"
-            >
-         </div>
+        <div class="imgBx"><img src="../assets/reg.jpg" alt="" /></div>
       </div>
     </div>
-  </section>
+    <div class="reset-password" v-if="passr">
+      <div class="input">
+        <i class="material-symbols-outlined">alternate_email</i>
+        <input type="text" v-model="form.email" placeholder="Adresse email">
+      </div>
+      <div class="reset-actions">
+        <input type="submit"
+          style="
+          padding: 1rem;
+          "
+          @click="reinitPassword"
+          value="Soumettre"
+          >
+        <input type="submit"
+          style="
+          padding: 1rem;
+          color: var(--red);
+          "
+          @click="passr = false"
+          value="Annuler"
+          >
+      </div>
+    </div>
+  </div>
+</section>
 </template>
 
 <script>
 import validator from 'validator';
 import { signUp, signIn, uploadImage, resetPassword } from '@/lib/firestoreLib';
 import Loader from '@/components/partials/Loader.vue';
+import Modal from '@/components/partials/Modal.vue';
+import userVerification from '@/components/partials/user/userVerification.vue';
 export default {
   name: 'Auth',
   components:{
     Loader,
+    Modal,
+    userVerification
   },
   data(){
     return{
@@ -221,9 +382,13 @@ export default {
         reqError: false,
         message: '',
       },
+      companyForm:{
+        fileList:[],
+      },
       flag: false,
       req: false,
-      passr: false
+      passr: false,
+      userSign: true
     }
   },
   methods: {
@@ -250,13 +415,12 @@ export default {
     birthChange(){
       this.errors.start = false
       const birthYear = new Date(Date.parse(this.form.birth)).getFullYear()
-      this.errors.birth = (new Date().getFullYear() - birthYear) < 18
+      this.errors.birth = this.userSign ? (new Date().getFullYear() - birthYear) < 18 : false
     },
     addressChange(){
       this.errors.start = false
       this.errors.address = !(this.form.address.trim() === this.form.address
-      && this.form.address.length >= 3
-      && validator.isAlpha(this.form.address, {ignore: ' '})
+      && this.form.address.length >= 3 && !this.form.address.includes('.')
       )
     },
     login(){
@@ -311,6 +475,22 @@ export default {
               errorMessage: e.code ? e.code : e?.message,
         })
       })
+    },
+    addFile(file){
+      this.companyForm.fileList.push(file)
+    },
+    removeFile(file){
+      this.companyForm.fileList.splice(this.companyForm.fileList.indexOf(file), 1)
+    },
+    async companyRegister(){
+      await this.register()
+      await this.$refs.verif.submitVerification()
+      this.$refs.modal.show({
+        title: 'Inscription',
+        type: 'info',
+        message: 'Inscrit avec succès en attente de validation',
+        resultMessage: 'Inscrit avec succès en attente de validation ...',
+      })
     }
   },
   setup(){
@@ -324,7 +504,23 @@ export default {
       ps.type = ps.type === 'password' ? 'text' : 'password'
       vs.textContent = ps.type ==='password' ? 'visibility_off' : 'visibility'
     }
-    return { toggleForm, toggleVisibility }
+
+    const next = (e)=>{
+      const parent = e.target.closest('.formBx')
+      const imgBx = parent.closest(".user.signupBx").querySelector(".imgBx")
+      imgBx.style.display = 'none'
+      parent.style.display = 'none'
+      parent.nextElementSibling.style.display= 'flex'
+    }
+
+    const prev = (e)=>{
+      const parent = e.target.closest('.formBx')
+      const imgBx = parent.closest(".user.signupBx").querySelector(".imgBx")
+      imgBx.style.display = 'block'
+      parent.style.display = 'none'
+      parent.previousElementSibling.style.display = 'flex'
+    }
+    return { toggleForm, toggleVisibility, next, prev }
   }
 }
 </script>
@@ -553,6 +749,10 @@ div.error{
   text-align: center;
   color: red;
   font-weight: 300;
+}
+
+.formBx.company .user-files{
+  margin-bottom: 5px !important;
 }
 
 @media (max-width: 991px) {

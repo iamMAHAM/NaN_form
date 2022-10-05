@@ -146,6 +146,7 @@ import Loader from '../Loader.vue'
 export default {
   name: 'userVerification',
   props: ['props'],
+  emits: ['fileAdd', 'fileRemove'],
   components: {
     Loader
   },
@@ -179,13 +180,14 @@ export default {
       nameE.textContent = name
       docType.style.display = 'block'
       parent.classList.add("uploaded")
+      this.$emit('fileAdd', file)
     },
     removeFile(e){
       const parent = e.target.closest("li")
       const input = parent.querySelector("input")
       const id = input.id
       const docType = parent.querySelector(".docType")
-
+      this.$emit('fileRemove', e.target.previousElementSibling.previousElementSibling.files[0])
       input.value = ''
       docType.style.display = 'none'
       parent.classList.remove("uploaded")
@@ -206,6 +208,7 @@ export default {
         }
         const user = await findOne("users", auth?.currentUser?.uid)
         user.verifInfoImages = images
+        user.isCompany = this.props?.company === true
         Promise.all([
           setOne("admin/vAJXH3iQabt9AjGLAaej/verification", user, auth?.currentUser?.uid),
           updateOne("users", auth?.currentUser?.uid, {isAwaitingVerification: true}),

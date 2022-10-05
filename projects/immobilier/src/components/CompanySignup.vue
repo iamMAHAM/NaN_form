@@ -1,5 +1,6 @@
 <template>
 <section>
+  
   <div class="container active" ref="container">
     <div class="user signupBx">
       <div class="formBx">
@@ -81,13 +82,7 @@
               placeholder="Date de création de l'entreprise"
               type="text"
               onfocus="(this.type='date')"
-              min="1900-01-01" max="2003-01-01"
               >
-          </div>
-          <div class="error"
-            v-if="errors.birth"
-            >
-            date invalide
           </div>
           <div class="input">
             <i class="material-symbols-outlined">imagesmode</i>
@@ -103,6 +98,7 @@
             v-if="!req"
             type="submit"
             value="Suivant"
+            :disabled="state"
             @click.prevent="next"
             />
           <Loader :view="3" :width="30" :height="30" v-if="req"/>
@@ -112,18 +108,21 @@
           </p>
         </form>
       </div>
-      <div class="formBx" style="width: 100%; overflow: scroll; display: none;">
+      <div class="formBx company" style="width: 100%; overflow: scroll; display: none;">
         <form action="" onsubmit="return false;">
           <h2>Verification des informations</h2>
           <userVerification
+            ref="verif"
             :props="{
               company: true,
               selfie: 'photo de l\'entrprise (vue de déhors)',
-              recto: '',
-              verso: '',
-              facture: '',
+              recto: 'une copie de la pièce d\'identité du propriétaire de la société ou représentant légal',
+              verso: 'une copie de l\'extrait du Registre du Commerce et De Crédit Mobilier (RCCM) ou une copie du Certificat d\'Immatriculation Unique de l\'Entreprise',
+              facture: 'une copie de la Déclaration Fiscale d\'Existence (DFE) ou une copie du Certificat d\'Immatriculation Unique de l\'Entreprise',
               show: false
             }"
+            @fileAdd="addFile"
+            @fileRemove="removeFile"
           />
           <input
             v-if="!req"
@@ -136,8 +135,8 @@
             v-if="!req"
             type="submit"
             value="Soumettre"
-            :disabled="state"
-            @click.prevent="register"
+            :disabled="state || companyForm.fileList.length !== 4"
+            @click.prevent="companyRegister"
             />
           <!-- <input
             v-if="!req"
@@ -187,11 +186,14 @@ import validator from 'validator';
 import { signUp, signIn, uploadImage, resetPassword } from '@/lib/firestoreLib';
 import Loader from '@/components/partials/Loader.vue';
 import userVerification from './partials/user/userVerification.vue';
+import Modal from './partials/Modal.vue';
+
 export default {
   name: 'Auth',
   components:{
     Loader,
-    userVerification
+    userVerification,
+    Modal
   },
   data(){
     return{
@@ -207,7 +209,6 @@ export default {
         password: '',
         fullName: '',
         birth: '',
-        isVerified: false,
         address: '',
         avatar: "https://firebasestorage.googleapis.com/v0/b/immobilier-0.appspot.com/o/profiles%2Favatar-icon.svg?alt=media&token=516f42ab-4ec8-45a0-b66c-1e4058455e4c",
       },
@@ -221,9 +222,12 @@ export default {
         reqError: false,
         message: '',
       },
+      companyForm:{
+        fileList:[],
+      },
       flag: false,
       req: false,
-      passr: false,
+      passr: false
     }
   },
   methods: {
@@ -255,8 +259,7 @@ export default {
     addressChange(){
       this.errors.start = false
       this.errors.address = !(this.form.address.trim() === this.form.address
-      && this.form.address.length >= 3
-      && validator.isAlpha(this.form.address, {ignore: ' '})
+      && this.form.address.length >= 3 && !this.form.address.includes('.')
       )
     },
     login(){
@@ -276,20 +279,23 @@ export default {
       })
     },
     async register(){
-      this.req = true
-      if (this.flag){
-        const target = this.$refs.avatar
-        const avatar = await uploadImage(`images/${target?.files[0].name}`, target.files[0])
-        this.form.avatar = avatar
-      }
-      signUp(this.form)
-      .then((userInfo)=>{
-        this.req = false
-        this.$refs.container.classList.toggle("active")
-      })
-      .catch(e=>{
-        this.req = false
-        this.showError(e, 3500)
+      await new Promise(async resolve=>{
+        this.req = true
+        if (this.flag){
+          const target = this.$refs.avatar
+          const avatar = await uploadImage(`images/${target?.files[0].name}`, target.files[0])
+          this.form.avatar = avatar
+        }
+        signUp(this.form)
+        .then((userInfo)=>{
+          this.req = false
+          // this.$refs.container.classList.toggle("active")
+          resolve()
+        })
+        .catch(e=>{
+          this.req = false
+          this.showError(e, 3500)
+        })
       })
     },
     reinitPassword(){
@@ -311,6 +317,22 @@ export default {
               errorMessage: e.code ? e.code : e?.message,
         })
       })
+    },
+    addFile(file){
+      this.companyForm.fileList.push(file)
+    },
+    removeFile(file){
+      this.companyForm.fileList.splice(this.companyForm.fileList.indexOf(file), 1)
+    },
+    async companyRegister(){
+      await this.register()
+      await this.$refs.verif.submitVerification()
+      this.$refs.modal.show({
+        title: 'Inscription',
+        type: 'info',
+        message: 'Inscrit avec succès en attente de validation',
+        resultMessage: 'Inscrit avec succès en attente de validation ...',
+      })
     }
   },
   setup(){
@@ -328,9 +350,10 @@ export default {
     const next = (e)=>{
       const imgBx = document.querySelector(".imgBx")
       const parent = e.target.closest('.formBx')
+      console.log('parent', parent)
       imgBx.style.display = 'none'
       parent.style.display = 'none'
-      console.log(parent.nextElementSibling.style.display= 'flex')
+      parent.nextElementSibling.style.display= 'flex'
     }
 
     const prev = (e)=>{
@@ -338,9 +361,9 @@ export default {
       const parent = e.target.closest('.formBx')
       imgBx.style.display = 'block'
       parent.style.display = 'none'
-      console.log(parent.previousElementSibling.style.display = 'flex')
+      parent.previousElementSibling.style.display = 'flex'
     }
-    return { toggleForm, toggleVisibility, next, prev }
+    return { toggleVisibility, next, prev }
   }
 }
 </script>
@@ -353,5 +376,11 @@ section {
   justify-content: center;
   align-items: center;
   padding: 2rem;
+}
+</style>
+
+<style>
+  .formBx.company .user-files{
+  margin-bottom: 5px !important;
 }
 </style>
