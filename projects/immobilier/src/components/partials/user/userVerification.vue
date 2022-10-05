@@ -1,7 +1,7 @@
 <template>
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
   <div id="uploadFiles">
-  <p class="insUpload">Téléverser vos Informations de vérification</p>
+  <p class="insUpload" v-if="!props">Téléverser vos Informations de vérification</p>
   <div class="user-files user-files1">
     <ul>
       <li>
@@ -13,7 +13,7 @@
               </svg>
             </span>
             <div style="text-align:justify">
-              <span class="docName">Selfie (photo de vous)</span>
+              <span class="docName">{{ props?.selfie || 'Selfie (photo de vous)'}} </span>
               <div class="docType"><span class="fileName"></span> <i class="mdot"></i><span class="fileSize"></span></div>
               <div class="msg"></div>
             </div>
@@ -40,7 +40,7 @@
               </svg>
             </span>
             <div style="text-align:justify">
-              <span class="docName">Recto de la pièce d'identité</span>
+              <span class="docName">{{ props?.recto || 'Recto de la pièce d\'identité'}}</span>
               <div class="docType"><span class="fileName"></span> <i class="mdot"></i><span class="fileSize"></span></div>
               <div class="msg"></div>
             </div>
@@ -67,7 +67,7 @@
               </svg>
             </span>
             <div style="text-align:justify">
-              <span class="docName">Verso de la pièce d'identité</span>
+              <span class="docName">{{ props?.verso || 'Verso de la pièce d\'identité'}}</span>
               <div class="docType"><span class="fileName"></span> <i class="mdot"></i><span class="fileSize"></span></div>
               <div class="msg"></div>
             </div>
@@ -94,7 +94,7 @@
               </svg>
             </span>
             <div style="text-align:justify">
-              <span class="docName">Facture (CIE, SODECI, CANAL+)</span>
+              <span class="docName">{{ props?.facture || 'Facture (CIE, SODECI, CANAL+)'}}</span>
               <div class="docType"><span class="fileName"></span> <i class="mdot"></i><span class="fileSize"></span></div>
               <div class="msg"></div>
             </div>
@@ -116,21 +116,21 @@
   </div>
   <div class="error" v-if="error" style="font-size: 1.6rem; padding: 1rem;"> Tous les documents sont obligatoires</div>
   <div class="previewImages">
-    <img :src="selfie" alt="" class="uploadedImages" v-if="selfie">
-    <img :src="recto" alt="" class="uploadedImages" v-if="recto">
-    <img :src="verso" alt="" class="uploadedImages" v-if="verso">
-    <img :src="facture" alt="" class="uploadedImages" v-if="facture">
+    <img :src="selfie" alt="" :class="props?.company? 'uploadedImages company' : 'uploadedImages'" v-if="selfie">
+    <img :src="recto" alt="" :class="props?.company? 'uploadedImages company' : 'uploadedImages'" v-if="recto">
+    <img :src="verso" alt="" :class="props?.company? 'uploadedImages company' : 'uploadedImages'" v-if="verso">
+    <img :src="facture" alt="" :class="props?.company? 'uploadedImages company' : 'uploadedImages'" v-if="facture">
   </div>
 
   <button
-    v-if="!req"
+    v-if="!req && !props"
     type="button"
     class="submit-btn js-submit"
     @click="submitVerification"
   >
-    Vérifier mon identité
+    Soumettre
   </button>
-  <Loader :view="3" :height="30" :width="30" v-else/>
+  <Loader :view="3" :height="30" :width="30" v-else-if="req && !props"/>
   <svg class="mainSvg" viewBox="-448.5 266.5 28.9 29" style="display:none">
     <g id="upload-svg">
       <path class="st0" d="M-434,295.5c-8,0-14.5-6.5-14.5-14.5s6.5-14.5,14.5-14.5c2.5,0,5,0.7,7.2,1.9c0.3,0.2,0.4,0.6,0.2,0.8c-0.1,0.2-0.3,0.3-0.5,0.3c-0.1,0-0.2,0-0.3-0.1c-2-1.2-4.3-1.8-6.6-1.8c-7.3,0.1-13.3,6.1-13.3,13.4s5.9,13.3,13.3,13.3s13.3-6,13.3-13.3c0-0.6,0-1.2-0.1-1.8c-0.1-1-0.4-2-0.8-3c-0.2-0.6-0.5-1.3-0.9-1.8c-0.1-0.1-0.1-0.3-0.1-0.5c0-0.2,0.1-0.3,0.3-0.4c0.1-0.1,0.2-0.1,0.3-0.1c0.2,0,0.4,0.1,0.5,0.3c0.4,0.6,0.7,1.3,1,2c0.4,1.1,0.7,2.2,0.8,3.3c0.1,0.6,0.1,1.3,0.1,1.9C-419.5,289-426,295.5-434,295.5"/>
@@ -145,6 +145,7 @@ import { auth, findOne, setOne, updateOne, uploadImage } from '@/lib/firestoreLi
 import Loader from '../Loader.vue'
 export default {
   name: 'userVerification',
+  props: ['props'],
   components: {
     Loader
   },
@@ -408,7 +409,7 @@ body {
   cursor: pointer;
   background: var(--navcolor);
   color: #fff;
-  padding: 16px 39px;
+  padding: 1rem 2rem;
   font-size: 17px;
   border-radius: 30px;
   outline: 0;
@@ -428,5 +429,9 @@ body {
   width: 25rem;
 }
 
+.previewImages .uploadedImages.company{
+  height: 10rem;
+  width: 15rem;
+}
 
 </style>
