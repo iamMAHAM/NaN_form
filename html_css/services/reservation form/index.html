@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <img src="https://images.pexels.com/photos/3727469/pexels-photo-3727469.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+        <div class="header-text">
+            <h1>Réservez une prestation</h1>
+            <small>Réserver une prestation et payer en espèce ou par mobile money</small>
+        </div>
+    </header>
+    <div class="container">
+        <h1>Et pour que le professionnel puisse intervenir :</h1>
+        <small>Les champs comportant un <span>(*)</span> sont obligatoires.</small>
+        <form class="form">
+            <div class="input">
+                <label for="address">Où l'artisan doit-il intervenir ?</label>
+                <div class="input-items">
+                    <input type="text" placeholder="Address *" id="address" name="address" required>
+                </div>
+            </div>
+            <div class="input">
+                <label>À quelles date et heure doit-il intervenir ?</label>
+                <div class="input-items">
+                    <input type="date" name="date" required>
+                    <input type="time" name="heure" required>
+                </div>
+            </div>
+            <div class="input">
+                <label>Pour que nous puissions mieux suivre votre intervention :</label>
+                <div class="input-items">
+                    <input type="text" placeholder="Noms et Prenoms *" name="nomComplet" required>
+                    <input type="text" placeholder="Contact Téléphonique *" required>
+                </div>
+                <div class="input-items">
+                    <input type="email" placeholder="Email *" name="email" required>
+                    <textarea type="text" cols="50" rows="4" placeholder="Détails supplémentaires" name="details"></textarea>
+                </div>
+            </div>
+            <div class="input">
+                <label>Code Promo :</label>
+                <small>Montant de la prestation : <span>300000 FCFA</span></small>
+                <div class="input-items" style="flex-direction: row !important">
+                    <input type="text" placeholder="Ex: ARTNCODEP-000000000000000" style="margin: 0; width: calc(70%);">
+                    <button onclick="return false" class="codepromo">valider</button>
+                </div>
+            </div>
+            <div class="input">
+                <label>Concernant le règlement :</label>
+                <small>Choisissez votre mode de paiement</small>
+                <div class="input-items">
+                    <select name="paiementType" required>
+                        <option value="" selected>Sélectionner le mode de paiement (*)</option>
+                        <option value="mobileMoney">MOBILE MONEY</option>
+                        <option value="cash">CASH</option>
+                    </select>
+                </div>
+            </div>
+            <div class="upload">
+                <div class="upload-item">
+                    <div class="images">
+                        <img src="https://images.pexels.com/photos/8921246/pexels-photo-8921246.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+                        <span class="delete">x</span>
+                    </div>
+                    <label for="input1">Importer une image</label>
+                    <input type="file" id="input1" name="image1">
+                    
+                </div>
+                <div class="upload-item">
+                    <div class="images">
+                        <img src="https://images.pexels.com/photos/8921246/pexels-photo-8921246.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+                        <span class="delete">x</span>
+                    </div>
+                    <label for="input2">Importer une image</label>
+                    <input type="file" id="input2" name="image2">
+                </div>
+            </div>
+            <div class="condition">
+                <input type="checkbox" name="acceptCondition">
+                <span>J'accepte les <span>conditions générales d'utilisation</span></span>
+            </div>
+            <div class="submit" align=center>
+                <button type="submit">
+                    valider
+                </button>
+            </div>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
