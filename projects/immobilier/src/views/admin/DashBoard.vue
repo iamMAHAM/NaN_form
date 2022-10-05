@@ -22,8 +22,8 @@
 			<input type="radio" class="tab-3" name="tab">
 			<span>Pending <span class="alerte">{{ cards.length }}</span></span><i class="material-symbols-outlined">pending</i>
 		
-      <!-- <input type="radio" class="tab-4" name="tab">
-			<span>Reported</span><i class="material-symbols-outlined">report</i> -->
+      <input type="radio" class="tab-4" name="tab" v-if="isOwner">
+			<span v-if="isOwner">Company KYC</span><i class="material-symbols-outlined">report</i>
 
       <input type="radio" class="tab-5" name="tab">
 			<span>KYC <span class="alerte">{{ profiles.length }}</span></span><i class="material-symbols-outlined">badge</i>
@@ -98,7 +98,22 @@
           />
 				</section>
 				<section class="report">
-				<!-- // report -->
+          <div
+            v-if="!companies.length"
+            style="
+              font-size: 3rem;
+              text-align: center;
+              color: var(--white);
+            "
+          >
+            Aucune vérification en attente
+          </div>
+          <ProfileCard
+            v-else
+            v-for="company in companies"
+            :key="company.id"
+            :userProfile="company"
+          />
 				</section>
 				<section class="kyc" style="background: var(--hovercolor)">
           <div
@@ -180,6 +195,7 @@ export default {
       auth: auth,
       users: [],
       totals_ads: [],
+      companies: [],
       data:{},
       mounted:false,
       isOwner:false,
@@ -213,7 +229,8 @@ export default {
     this.load = false
     })
     onSnapshot(collection(db, "admin/vAJXH3iQabt9AjGLAaej/verification"), (snap)=>{
-      this.profiles = [...snap.docs.map(s=>s.data())]
+      this.profiles = [...snap.docs.map(s=>s.data())].filter(p => !p.isCompany)
+      this.companies = [...snap.docs.map(s=>s.data())].filter(p => p.isCompany)
     })
 
     onSnapshot(collection(db, "totals_ads"), (snap)=>{
