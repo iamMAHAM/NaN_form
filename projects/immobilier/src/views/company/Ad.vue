@@ -24,7 +24,7 @@
 
     <button
       title="edit"
-      v-if="ad.status !== 'pending'"
+      v-if="ad.status !== 'pending' && !$route.path.includes('/admin/dashboard')"
       class="view"
     >
       <i
@@ -35,7 +35,7 @@
       </i>
     </button>
     <button
-      v-if="ad.status !== 'pending'"
+      v-if="ad.status !== 'pending' && !$route.path.includes('/admin/dashboard')"
       title="solde"
       class="deleteA"
       style="background: var(--greenfun)"

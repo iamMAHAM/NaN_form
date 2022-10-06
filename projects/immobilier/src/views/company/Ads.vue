@@ -68,6 +68,9 @@ export default {
     }
   },
   props: ['ads', 'load'],
+  updated(){
+    console.log(this.ads)
+  },
   methods:{
     filterAds(){
       this.$emit('filterAds', [this.filter, this.search])

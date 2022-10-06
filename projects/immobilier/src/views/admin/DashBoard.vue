@@ -19,6 +19,9 @@
 			<input type="radio" class="tab-2" name="tab">
 			<span>Users</span><i class="material-symbols-outlined">group</i>
 
+      <input type="radio" class="tab-6" name="tab">
+			<span>Ads</span><i class="material-symbols-outlined">ads_click</i>
+
 			<input type="radio" class="tab-3" name="tab">
 			<span>Pending <span class="alerte">{{ cards.length }}</span></span><i class="material-symbols-outlined">pending</i>
 		
@@ -28,8 +31,6 @@
       <input type="radio" class="tab-5" name="tab">
 			<span>KYC <span class="alerte">{{ profiles.length }}</span></span><i class="material-symbols-outlined">badge</i>
 
-			<!-- <input type="radio" class="tab-6" name="tab">
-			<span>Profile</span><i class="material-symbols-outlined">person</i> -->
 
 
 			<!-- tab-top-bar -->
@@ -134,8 +135,12 @@
           />
 
 				</section>
-				<section class="settings">
-				<!-- settings -->
+				<section class="adsD" style="overflow: scroll">
+          <Ads
+            :ads="ads"
+            :load="load"
+            @filterAds="filter"
+          />
 				</section>
 			</div>
 		</div>
@@ -151,14 +156,15 @@ import { onValue, ref as dbref } from '@firebase/database';
 import { db, rtdb,  } from '@/lib/firebaseConfig';
 import { auth, findOne, signOutUser } from '@/lib/firestoreLib';
 import { collection, onSnapshot } from '@firebase/firestore';
-
+import Ads from '../company/Ads.vue';
 export default {
   name: 'DashBoard',
   components:{
     Users,
     Stats,
     CardContainer,
-    ProfileCard
+    ProfileCard,
+    Ads
   },
   methods:{
     updatedUsers(users){
@@ -185,6 +191,13 @@ export default {
         adsData.push(array.filter(t => t[property]?.toDate()?.toLocaleString('en', { month: 'long' }) === m).length)
       })
       this.data[type] = adsData
+    },
+    filter([filter, search]){
+      console.log(filter, search)
+      if (!filter) this.ads = [...this.totals_ads]
+      this.ads = this.totals_ads.filter(u=>
+      u.status?.includes(filter)
+      && u.title?.toLowerCase().includes(search.toLowerCase()))
     }
   },
   data(){
@@ -197,6 +210,7 @@ export default {
       totals_ads: [],
       companies: [],
       data:{},
+      ads: [],
       mounted:false,
       isOwner:false,
       signOutUser: signOutUser
@@ -235,6 +249,7 @@ export default {
 
     onSnapshot(collection(db, "totals_ads"), (snap)=>{
       this.totals_ads = [...snap.docs.map(s=>s.data())]
+      this.ads = [...this.totals_ads]
       this.getDataArray(this.totals_ads, 'publishedAt', 'totalAds')
       const solded = this.totals_ads.filter(a => a.status === "solded")
       this.getDataArray(solded, 'publishedAt', 'soldedAds')
@@ -459,7 +474,7 @@ li{
 	display: block;
 }
 
-.clear-backend > input.tab-6:checked ~ .tab-content .settings {
+.clear-backend > input.tab-6:checked ~ .tab-content .adsD {
 	display: block;
 }
 

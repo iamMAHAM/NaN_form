@@ -16,7 +16,7 @@
 			<span>Overview</span><i class="material-symbols-outlined">home</i>
 
 			<input type="radio" class="tab-2" name="tab">
-			<span>Ads</span><i class="material-symbols-outlined">group</i>
+			<span>Ads</span><i class="material-symbols-outlined">ads_click</i>
 
 			<div class="top-bar">
 				<ul>
@@ -71,7 +71,7 @@
           </div>
 
 				</section>
-				<section class="users">
+				<section class="users" style="overflow: scroll">
           <Ads
             :ads="ads"
             :load="load"
