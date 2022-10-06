@@ -110,7 +110,7 @@ export default {
           ticks: {
             min: 0,
             max: 2000,
-            stepSize: 100,
+            stepSize: 10,
             reverse: false,
             beginAtZero: true
           }

@@ -280,7 +280,6 @@ export default {
       if (!this.flag){
         this.pass
         ? updatePassword(auth?.currentUser, this.pass)
-          .then(console.log("success updated password"))
           .catch(e=>{
             this.$refs.modal.show({
               type: 'error',
@@ -304,7 +303,6 @@ export default {
       this.verify = !this.verify
     },
     like(){
-    console.log(this.isLiked)
     let inter = []
      if (this.isLiked){
       this.user.likes = this.user.likes.filter(s => s!== this.user.id)

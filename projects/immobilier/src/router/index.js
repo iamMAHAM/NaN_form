@@ -8,7 +8,6 @@ import DashBoard from "@/views/admin/DashBoard.vue"
 import Profile from "@/views/Profile.vue"
 import NotFound from "@/views/404.vue"
 import Vendor from "@/views/company/Vendor.vue"
-import CompanySignup from "@/components/CompanySignup.vue"
 
 const routes = [
   {
@@ -58,11 +57,6 @@ const routes = [
     path: '/pro/vendor/:id',
     name: 'Vendor',
     component: Vendor
-  },
-  {
-    path: '/company/signup',
-    name: 'Comp',
-    component: CompanySignup
   },
   {
     path: '/:pathMatch(.*)*',

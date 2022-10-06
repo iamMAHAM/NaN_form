@@ -99,11 +99,6 @@ export default {
       ]
     }
 
-    onUpdated(()=>{
-      console.log('update catcged in setup')
-    })
-
-
     const chartOptions = {
       responsive: true,
       maintainAspectRatio: false,
@@ -113,7 +108,7 @@ export default {
           ticks: {
             min: 0,
             max: 2000,
-            stepSize: 100,
+            stepSize: 10,
             reverse: false,
             beginAtZero: true
           }

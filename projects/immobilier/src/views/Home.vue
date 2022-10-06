@@ -15,6 +15,7 @@
 import Banner from '@/components/partials/Banner.vue';
 import CardContainer from '@/components/CardContainer.vue';
 import { allCategories, find, searchLow } from '@/lib/firestoreLib';
+
 export default {
   name: 'Home',
   props: ['isLogged', 'searchData'],
@@ -47,8 +48,9 @@ export default {
     this.match = window.matchMedia("(max-width: 800px)").matches
     find(`ads/X1eA1Bk8tfnVXHqduiTg${this.$route.path}`)
     .then(data=>{
-      this.cards = data
-      this.allCards = [...data]
+      const pros = data.filter(d => d.isPro)
+      this.cards = [...pros, ...data.filter(d => !d.isPro)]
+      this.allCards = [...this.cards]
       this.load = false
       this.message = 'Rien dans cette section'
     })

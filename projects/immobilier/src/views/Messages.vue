@@ -257,7 +257,6 @@ export default {
           this.$refs.textarea.style.height = '16px'
         }
         ).catch(e=>{
-          console.log(e)
           this.$refs.modal.show({
             type: 'error',
             title: 'Erreur',
@@ -273,8 +272,6 @@ export default {
   },
   switchMessages([cMessages, person]){
     this.messages = cMessages
-    console.log('switch received')
-    console.log(this.messages)
     this.pers = person
   }
   },

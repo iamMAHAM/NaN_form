@@ -213,7 +213,6 @@ export default {
           setOne("admin/vAJXH3iQabt9AjGLAaej/verification", user, auth?.currentUser?.uid),
           updateOne("users", auth?.currentUser?.uid, {isAwaitingVerification: true}),
         ])
-        // console.log(images)
         this.req = false
         return
       }

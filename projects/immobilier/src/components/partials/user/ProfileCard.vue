@@ -66,7 +66,6 @@ export default {
           }),
           deleteOne("admin/vAJXH3iQabt9AjGLAaej/verification", this.userProfile.id)
         ])
-        .then(console.log("user verified with success"))
         .catch(e=>{
           this.$refs.modal.show({
               type: 'error',
@@ -90,7 +89,6 @@ export default {
             }),
             deleteOne("admin/vAJXH3iQabt9AjGLAaej/verification", this.userProfile.id)
           ])
-          .then(console.log("user denied with success"))
           .catch(e=>{
             this.$refs.modal.show({
               type: 'error',
