@@ -35,6 +35,7 @@
       </i>
     </button>
     <button
+      v-if="ad.status !== 'pending'"
       title="solde"
       class="deleteA"
       style="background: var(--greenfun)"
