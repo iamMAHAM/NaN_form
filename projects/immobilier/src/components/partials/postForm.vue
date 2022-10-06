@@ -211,6 +211,7 @@ export default {
               if (user.isVerified){
                 this.form.ownerId = auth.currentUser.uid
                 this.form.images = this.fileList
+                if (user.role === 'company'){this.form.isPro = true}
                 if (this.form.flag === 'edit'){
                   delete this.form?.flag
                   Promise.all([
