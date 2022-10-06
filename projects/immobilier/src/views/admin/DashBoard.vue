@@ -193,7 +193,6 @@ export default {
       this.data[type] = adsData
     },
     filter([filter, search]){
-      console.log(filter, search)
       if (!filter) this.ads = [...this.totals_ads]
       this.ads = this.totals_ads.filter(u=>
       u.status?.includes(filter)
@@ -249,7 +248,7 @@ export default {
 
     onSnapshot(collection(db, "totals_ads"), (snap)=>{
       this.totals_ads = [...snap.docs.map(s=>s.data())]
-      this.ads = [...this.totals_ads]
+      this.ads = [...this.totals_ads.filter(s => s.status !== 'solded'), ...this.totals_ads.filter(s => s.status === 'solded')]
       this.getDataArray(this.totals_ads, 'publishedAt', 'totalAds')
       const solded = this.totals_ads.filter(a => a.status === "solded")
       this.getDataArray(solded, 'publishedAt', 'soldedAds')
