@@ -18,9 +18,6 @@
 			<input type="radio" class="tab-2" name="tab">
 			<span>Ads</span><i class="material-symbols-outlined">group</i>
 
-			<input type="radio" class="tab-3" name="tab">
-			<span>Pending</span><i class="material-symbols-outlined">pending</i>
-
 			<div class="top-bar">
 				<ul>
           <a style="display: inline-block; pointer-events: none;">
