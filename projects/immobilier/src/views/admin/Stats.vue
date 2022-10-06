@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { h, onMounted, onUpdated, ref, watchEffect } from 'vue'
+import { h, onUpdated, toRefs } from 'vue'
 import { Bar } from 'vue-chartjs'
 import {
   Chart as ChartJS,
@@ -64,9 +64,7 @@ export default {
     }
   },
   setup(props) {
-    const usersData = ref(props.data.users)
-    const adsData = ref(props.data.totalAds)
-    const soldedData = ref(props.data.soldedAds)
+    const { data } = toRefs(props)
     const chartData = {
       labels: [
         'January',
@@ -86,30 +84,29 @@ export default {
         {
           label: 'Users',
           backgroundColor: 'blue',
-          data: usersData.value
+          data: data.value.users
         },
         {
           label: 'Ads',
           backgroundColor: 'darkgray',
-          data: adsData.value
+          data: data.value.totalAds
         },
         {
           label: 'Solded Ads',
           backgroundColor: 'green',
-          data: soldedData.value
+          data: data.value.soldedAds
         }
       ]
     }
+    onUpdated(()=>{
+      console.log('update catcged in setup')
+    })
+
 
     const chartOptions = {
       responsive: true,
       maintainAspectRatio: false
     }
-    onMounted(()=>{
-      usersData.value = props.data.users
-      adsData.value = props.data.totalAds
-      soldedData.value = props.data.soldedAds
-    })
 
     return () =>
       h(Bar, {
