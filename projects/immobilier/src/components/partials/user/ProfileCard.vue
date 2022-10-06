@@ -51,12 +51,17 @@ export default {
   methods:{
     async verify(){
       const ok = this.$refs.modal.show({
-        title: 'Verify user identity ?'
+        title: 'Verify user identity ?',
+        type: 'confirm',
+        display: true,
       })
       if (ok){
+        const isComp = this.userProfile.isCompany
+        delete this.userProfile.isCompany
         Promise.all([
           updateOne("users", this.userProfile.id, {
             isVerified: true,
+            role: isComp ? 'company' : this.userProfile.role,
             isAwaitingVerification: false
           }),
           deleteOne("admin/vAJXH3iQabt9AjGLAaej/verification", this.userProfile.id)
@@ -73,7 +78,10 @@ export default {
     },
     deny(){
       const ok = this.$refs.modal.show({
-        title: 'Deny user identity ? '
+        title: 'Deny user identity ? ',
+        type: 'confirm',
+        display: true,
+        resultMessage: 'réfusé avec succèss'
       })
       if (ok){
         Promise.all([

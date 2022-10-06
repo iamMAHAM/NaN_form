@@ -119,6 +119,8 @@ export default {
 		},
     async del(){
       const ok = await this.$refs.modal.show({
+        type: 'confirm',
+        display: true,
         message: 'refuser l\'annonce?',
         resultMessage: 'annonce refusé'
       })
@@ -150,6 +152,8 @@ export default {
     },
     async validate(){
       const ok = await this.$refs.modal.show({
+        type: 'confirm',
+        display: true,
         message: 'valider l\'annonce?',
         resultMessage: 'Annonce validée'
       })
@@ -167,6 +171,8 @@ export default {
     },
     async deleteAds(){
       const ok = await this.$refs.modal.show({
+        type: 'confirm',
+        display: true,
         message: 'supprimer l\'annonce?',
         resultMessage: 'annonce supprimée.'
       })
@@ -189,6 +195,8 @@ export default {
     },
     async soldeAds(){
       const ok = await this.$refs.modal.show({
+        type: 'confirm',
+        display: true,
         message: 'marqué comme vendu ?',
         resultMessage: 'annonce marqué comme vendu'
       })

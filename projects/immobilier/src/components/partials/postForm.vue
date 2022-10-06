@@ -220,7 +220,8 @@ export default {
                   .then(()=>{
                     this.$refs.modal.show({
                       type: 'info',
-                      display: true,
+                      title: 'Modification',
+                      message: 'Annonce modifiée avec succèss !'
                     })
                   })
                   .catch(e=>{
@@ -255,7 +256,7 @@ export default {
               }else{
                 this.$refs.modal.show({
                   type: 'info',
-                  title: 'Vérification',
+                  title: 'Vérification requise',
                   message: 'veuillez verifier votre identité'
                 })
                 this.req = false

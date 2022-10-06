@@ -103,6 +103,8 @@ export default {
 		async deleteUser(){
       const ok = await this.$refs.modal.show({
         title: 'Delete user',
+        type: 'confirm',
+        display: true,
       })
 			if (ok){
 				deleteOne("users", this.user.id)
@@ -121,7 +123,10 @@ export default {
     },
     async submit(){
       const ok = await this.$refs.modal.show({
-        title: 'Update user'
+        type: 'confirm',
+        display: true,
+        title: 'Update user ?',
+        resultMessage: 'Mis à jour effectuée .'
       })
       ok
       ? updateOne("users", this.user?.id, this.user)
@@ -131,7 +136,7 @@ export default {
 	},
   computed:{
     role(){
-      return this.user.role = this.user.role ? this.user.role : 'acheteur'
+      return this.user.role = this.user.role ? this.user.role : 'customer'
     },
     age(){
       return new Date().getFullYear() -  parseInt(this.user?.birth?.split("-")[0])

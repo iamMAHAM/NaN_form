@@ -97,7 +97,7 @@
             :message="'Aucune annonce en attente'"
           />
 				</section>
-				<section class="report">
+				<section class="report" style="background: var(--hovercolor)">
           <div
             v-if="!companies.length"
             style="

@@ -304,6 +304,7 @@ export default {
         this.$refs.modal.show({
               type: 'info',
               title: 'confirmation email',
+              display: false,
               message: 'consultez votre boite mail afin de\
               reinitialiser votre mot de passe',
           })

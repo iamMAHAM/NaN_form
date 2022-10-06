@@ -12,10 +12,10 @@
 			</div>
 
 			<!-- tab-menu -->
-			<input type="radio" class="tab-1" name="tab">
+			<input type="radio" class="tab-1" name="tab" checked="checked">
 			<span>Overview</span><i class="material-symbols-outlined">home</i>
 
-			<input type="radio" class="tab-2" name="tab" checked="checked">
+			<input type="radio" class="tab-2" name="tab">
 			<span>Ads</span><i class="material-symbols-outlined">group</i>
 
 			<input type="radio" class="tab-3" name="tab">
