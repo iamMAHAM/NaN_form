@@ -14,7 +14,7 @@
 <script>
 import Banner from '@/components/partials/Banner.vue';
 import CardContainer from '@/components/CardContainer.vue';
-import { allCategories, find, searchLow, setOne } from '@/lib/firestoreLib';
+import { allCategories, find, searchLow } from '@/lib/firestoreLib';
 export default {
   name: 'Home',
   props: ['isLogged', 'searchData'],
