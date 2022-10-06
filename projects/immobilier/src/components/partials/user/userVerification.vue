@@ -198,7 +198,7 @@ export default {
       const images = []
       this.error = true
       let flag = false
-      const inputs = Array.from(document.querySelectorAll("input[type='file']"))
+      const inputs = Array.from(document.querySelectorAll(".upload-img"))
       inputs.map(i=>!i.files[0] ? flag = true : '')
       if (!flag){
         this.error = false

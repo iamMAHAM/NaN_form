@@ -10,7 +10,7 @@
   <td>{{ age }}</td>
   <td>{{ user.address }}</td>
   <td>{{ user.isVerified}}</td>
-  <td v-if="!user.owner">
+  <td v-if="!user.owner && !(auth?.currentUser?.uid === user.id)">
     <button
       class="view"
     >
@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import { updateOne, deleteOne} from '@/lib/firestoreLib';
+import { updateOne, deleteOne, auth} from '@/lib/firestoreLib';
 import Modal from '../Modal.vue';
 export default {
   name: 'User',
@@ -97,7 +97,8 @@ export default {
     return {
     show: false,
     backup: {},
-    showss: true
+    showss: true,
+    auth: auth,
   }},
 	methods:{
 		async deleteUser(){
