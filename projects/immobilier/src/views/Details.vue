@@ -85,6 +85,7 @@
 
 <Maps
   v-if="emp"
+  :coordinate="cardInfo?.coordinate"
   :emp="emp"
 />
 
@@ -155,11 +156,9 @@ export default {
       .then(user=>{
         if (user.role === "admin" || user.id === auth?.currentUser.uid){
           const tempId = this.$route.query.tempId || this.$route.params.id
-          console.log(tempId)
           getRtdbOne('waitingAds', tempId)
           .then(card=>{
             this.cardInfo = {...card}
-            console.log(this.cardInfo)
             this.current = card?.images[0]
           })
         }else{
