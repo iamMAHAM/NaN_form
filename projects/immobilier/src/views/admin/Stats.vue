@@ -98,6 +98,7 @@ export default {
         }
       ]
     }
+
     onUpdated(()=>{
       console.log('update catcged in setup')
     })
@@ -105,7 +106,19 @@ export default {
 
     const chartOptions = {
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          suggestedMax: 200,
+          ticks: {
+            min: 0,
+            max: 2000,
+            stepSize: 100,
+            reverse: false,
+            beginAtZero: true
+          }
+        }
+      }
     }
 
     return () =>
@@ -117,7 +130,7 @@ export default {
         height: props.height,
         cssClasses: props.cssClasses,
         styles: props.styles,
-        plugins: props.plugins
+        plugins: props.plugins,
       })
   }
 }

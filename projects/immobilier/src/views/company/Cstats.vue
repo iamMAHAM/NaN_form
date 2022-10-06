@@ -103,7 +103,19 @@ export default {
 
     const chartOptions = {
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          suggestedMax: 200,
+          ticks: {
+            min: 0,
+            max: 2000,
+            stepSize: 100,
+            reverse: false,
+            beginAtZero: true
+          }
+        }
+      }
     }
     onMounted(()=>{
       totalAds.value = props.data.totalsAds

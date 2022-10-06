@@ -151,7 +151,6 @@ export default {
         return {...d.data(), id: d.id}
       })]
       this.ads = [...this.totals_ads]
-      console.log(this.ads)
       const online = this.totals_ads.filter(a => a.status === 'online')
       const solded = this.totals_ads.filter(a=>a .status === 'solded')
       this.getDataArray(this.totals_ads, 'publishedAt', 'totalsAds')
