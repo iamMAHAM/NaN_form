@@ -86,13 +86,15 @@ html{
 }
 
 body{
-  background: var(--hovercolor);
+  background: #eef1f4;
     line-height:1.5;
     font-size: 1.6rem;
     font-family: 'Poppins', sans-serif;
 }
 
 .app-content{
+  width: 80vw;
+  margin: 0 auto;
   position: relative;
   height: 100vh;
 }

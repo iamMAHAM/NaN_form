@@ -96,7 +96,7 @@ export default {
 
 <style>
 .card-container {
-  width: calc(90%);
+  width: calc(100%);
   margin: 50px auto;
   display: flex;
   justify-content: space-between;

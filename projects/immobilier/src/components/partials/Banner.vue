@@ -85,7 +85,7 @@ export default {
 }
 
 .rightd{
-  width: calc(70%)
+  width: calc(85%)
 }
 
 
