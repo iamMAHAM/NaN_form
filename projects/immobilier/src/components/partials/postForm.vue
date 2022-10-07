@@ -165,9 +165,6 @@ export default {
           || {}
       }
     },
-    updated(){
-      console.log(this.coordinate)
-    },
     methods:{
       createImages(e){
         const inter = []
@@ -213,7 +210,6 @@ export default {
         }
       },
       postAds(){
-        console.log(this.form.coordinate)
         this.handleErrors()
         if (this.form.flag === 'edit'){
           Object.keys(this.errors).map(e=> this.errors[e] = false)
@@ -240,6 +236,7 @@ export default {
                       title: 'Modification',
                       message: 'Annonce modifiée avec succèss !'
                     })
+                    this.req = false
                   })
                   .catch(e=>{
                     this.$refs.modal.show({
@@ -248,6 +245,7 @@ export default {
                       display: false,
                       message: e?.code ? e.code : e.message
                     })
+                    this.req = false
                     return
                   })
                 }else{
@@ -268,6 +266,7 @@ export default {
                       type: 'error',
                       errorMessage: e.code ? e.code : e.message
                     })
+                    this.req = false
                   })
                 } // vendor update
               }else{

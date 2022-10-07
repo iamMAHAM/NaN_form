@@ -76,7 +76,7 @@
                       Messages
                   </a>  
               </router-link>
-              <a @click="signOut" v-if="isLogged && user?.role !== 'admin'" >
+              <a @click="signOut" v-if="isLogged && user?.role !== 'admin' && user?.role !== 'company'" >
                   <a href="#" class="item" style="color: var(--red); opacity: .5;">
                       <i class="material-symbols-outlined">logout</i>
                       Déconnexion

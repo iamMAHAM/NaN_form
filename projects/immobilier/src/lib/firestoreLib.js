@@ -207,10 +207,10 @@ export const addConversation = async (senderId, receiverId)=>{
 }
 
 export const getRtdbOne = (_collection, tempId)=>{
-  return new Promise(async resolve=>{
+  return new Promise(async (resolve, reject)=>{
     const r = dbref(rtdb, `${_collection}/${tempId}`)
     const d = await get(r)
-    d.exists() ? resolve(d.val()) : resolve({})
+    d.exists() ? resolve(d.val()) : reject('Not')
   })
   
 

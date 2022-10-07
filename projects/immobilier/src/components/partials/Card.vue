@@ -2,7 +2,10 @@
     <Modal
       ref="modal"
     ></Modal>
-    <div class="box" :id="card.id">
+    <div
+      :class="authorized ? 'box online': 'box'"
+      :id="card.id"
+    >
       <div class="top" @click="handleClick"
           :style="{
             pointerEvents: solded ? 'none' : 'all'
@@ -233,6 +236,9 @@ export default {
     location(){
       const l = this.card.location
       return l.replace(l.substring(12), '...').toLowerCase()
+    },
+    authorized(){
+      return this.card?.status === 'online' || this.$route.path.includes("/admin/dashboard")
     }
   }
 }
@@ -319,7 +325,7 @@ p{
   pointer-events: all;
 }
 
-.card-container .box .top:after {
+.card-container .box.online .top:after {
   pointer-events: all;
   border-radius: .5rem;
   content: "Voir Details";
