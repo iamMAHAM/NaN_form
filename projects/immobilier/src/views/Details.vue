@@ -162,17 +162,25 @@ export default {
           .then(card=>{
             this.cardInfo = {...card}
             this.emp = card?.location
-            this.current = card?.images?.slice(0)
+            this.current = card?.images[0]
+            this.load = false
           })
           .catch(e=>{
-            console.log(e)
+            findOne("admin/vAJXH3iQabt9AjGLAaej/solded", this.$route.params.id)
+            .then(card=>{
+              console.log('card', card)
+              this.cardInfo = {...card}
+              this.emp = card?.location
+              this.current = card?.images[0]
+              this.load = false
+            })
           })
         }else{
           if (e === 'notFound'){
             this.$router.push("/404")
+            this.load = false
           }
         }
-        this.load = false
       })
     })
   },
