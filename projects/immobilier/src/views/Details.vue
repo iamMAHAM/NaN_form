@@ -168,7 +168,6 @@ export default {
           .catch(e=>{
             findOne("admin/vAJXH3iQabt9AjGLAaej/solded", this.$route.params.id)
             .then(card=>{
-              console.log('card', card)
               this.cardInfo = {...card}
               this.emp = card?.location
               this.current = card?.images[0]

@@ -56,30 +56,6 @@ export default {
       'Gqbz54cIVxVeDpl483hMZMgnhqC2',
       'mjWboYwJ5ySSkmnkHmvkdUogMy02'
     ]
-    // allCategories.forEach(cat=>{
-    //   find(`ads/X1eA1Bk8tfnVXHqduiTg/${cat}`)
-    //   .then(cards=>{
-    //     cards.forEach(c=>{
-    //       if (c.ownerId != 'vulEKiaO74eYZzoMiiWQd7or02s2') {
-    //         c.ownerId = randomChoice(ids)
-    //         c.publishedAt = serverTimestamp()
-    //       }
-    //       c.status = 'online'
-    //       setOne("totals_ads", c, c.id)
-    //     })
-    //   })
-    // })
-
-    // find('/admin/vAJXH3iQabt9AjGLAaej/solded')
-    // .then(all=>{
-    //   console.log(all)
-    //   all.forEach(a=>{
-    //     if (a.ownerId === '89tUBz2CfUY6aylA3fhYvmj4EPD2')  a.ownerId = randomChoice(ids)
-    //     setOne(`users/${a.ownerId}/ads`, a, a.id)
-    //     setOne(`totals_ads`, a, a.id)
-    //     console.log("write sucess ", a.id, " in totals_ads and also in owner ", a.ownerId)
-    //   })
-    // })
     find(`ads/X1eA1Bk8tfnVXHqduiTg${this.$route.path}`)
     .then(data=>{
       const pros = data.filter(d => d.isPro)
