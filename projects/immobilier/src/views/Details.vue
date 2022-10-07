@@ -95,6 +95,7 @@
 import { addConversation, auth, findOne, getRtdbOne, messageTemplate } from '@/lib/firestoreLib'
 import Maps from "../components/Map.vue"
 import Loader from '@/components/partials/Loader.vue'
+
 export default {
   name: 'Details',
   props: ['isLogged', 'searchData'],
@@ -152,6 +153,7 @@ export default {
       this.load = false
     })
     .catch(e=>{
+      this.load = true
       findOne("users", auth.currentUser?.uid)
       .then(user=>{
         if (user.role === "admin" || user.id === auth?.currentUser.uid){
@@ -159,8 +161,18 @@ export default {
           getRtdbOne('waitingAds', tempId)
           .then(card=>{
             this.cardInfo = {...card}
+            this.emp = card?.location
             this.current = card?.images[0]
           })
+          .catch(e=>{
+            findOne("totals_ads", this.$route.params.id)
+            .then(card=>{
+              this.cardInfo = { ...card }
+              this.emp = card?.location
+              if (!this.cardInfo.ownerId) this.$router.push('/404')
+            })
+          })
+          .then(this.load = false)
         }else{
           if (e === 'notFound'){
             this.$router.push("/404")
