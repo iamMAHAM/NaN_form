@@ -77,7 +77,7 @@ export const searchLow = (_collection, searchTerm)=>{
     const q = collection(db, `ads/X1eA1Bk8tfnVXHqduiTg/${_collection}`)
     const qs = await getDocs(q)
     for (const _doc of qs.docs){
-      _doc.data().title.includes(searchTerm) && _doc.data().status !== 'solded'
+      _doc.data().title.toLowerCase().includes(searchTerm.toLowerCase()) && _doc.data().status !== 'solded'
       ? results.push({..._doc.data(), id: _doc.id})
       : ''
     }
