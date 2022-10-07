@@ -145,6 +145,7 @@ export default {
     }else{
       func = findOne(`ads/X1eA1Bk8tfnVXHqduiTg/${params.categorie}`, params.id)
     }
+    console.log(`ads/X1eA1Bk8tfnVXHqduiTg/${params.categorie}`)
     func
     .then(detailInfo=>{
       this.current = detailInfo?.images[0]
@@ -153,6 +154,7 @@ export default {
       this.load = false
     })
     .catch(e=>{
+      console.log(e)
       this.load = true
       findOne("users", auth.currentUser?.uid)
       .then(user=>{
@@ -162,13 +164,14 @@ export default {
           .then(card=>{
             this.cardInfo = {...card}
             this.emp = card?.location
-            this.current = card?.images[0]
+            this.current = card?.images?.slice(0)
           })
           .catch(e=>{
             findOne("totals_ads", this.$route.params.id)
             .then(card=>{
               this.cardInfo = { ...card }
               this.emp = card?.location
+              this.current = card?.images[0]
               if (!this.cardInfo.ownerId) this.$router.push('/404')
             })
           })

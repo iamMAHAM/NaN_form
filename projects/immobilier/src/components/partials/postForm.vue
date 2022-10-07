@@ -54,8 +54,13 @@
             </div>
             <div class="error" v-if="errors.proposition">valeur inconnue</div>
             <div class="input">
-              <i class="material-symbols-outlined">location_on</i>
-              <input type="text" placeholder="Lieu" v-model="form.location" required>
+              <i class="material-symbols-outlined" @click="emp = !emp" style="cursor: pointer;" v-if="emp">location_on</i>
+              <i class="material-symbols-outlined" @click="emp = !emp" style="cursor: pointer;" v-else>map</i>
+              <input type="text" placeholder="Lieu" v-model="form.location" required v-if="emp">
+              <div v-else>
+                <input type="text" placeholder="Longitude" required v-model="coordinate.long">
+                <input type="text" placeholder="Latitude"  required v-model="coordinate.lat">
+              </div>
             </div>
             <div class="error" v-if="errors.location">emplacement invalide</div>
             <div class="input">
@@ -138,7 +143,7 @@ export default {
           proposition: '',
           area: 0,
           price: 0,
-          options: {}
+          options: {},
         },
         errors:{
           type: false,
@@ -151,8 +156,17 @@ export default {
           files: false,
           options: false
         },
-        req: false
+        req: false,
+        emp: true,
+        coordinate: this.formDetails?.coordinate && {
+          long: this.formDetails?.coordinate[0],
+          lat: this.formDetails?.coordinate[1]
+          } 
+          || {}
       }
+    },
+    updated(){
+      console.log(this.coordinate)
     },
     methods:{
       createImages(e){
@@ -199,6 +213,7 @@ export default {
         }
       },
       postAds(){
+        console.log(this.form.coordinate)
         this.handleErrors()
         if (this.form.flag === 'edit'){
           Object.keys(this.errors).map(e=> this.errors[e] = false)
@@ -209,6 +224,7 @@ export default {
             findOne("users", auth.currentUser.uid)
             .then(user=>{
               if (user.isVerified){
+                if (!this.emp) {this.form.coordinate = [this.coordinate?.long, this.coordinate?.lat]}// gps coordinate case
                 this.form.ownerId = auth.currentUser.uid
                 this.form.images = this.fileList
                 if (user.role === 'company'){this.form.isPro = true}
