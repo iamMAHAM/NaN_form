@@ -5,11 +5,11 @@
   </Modal>
   <postForm :show="show" :formDetails="{...ad, flag: 'edit'}" @close="show = false"/>
   <td><img :src="ad?.images[0] || getImage('assets/home.svg')" alt="img"></td>
-  <td>{{ ad.title.replace(ad.title.substring(10), '...').toLowerCase()}}</td>
-  <td>{{ ad.type }}</td>
-  <td>{{ ad.proposition }}</td>
-  <td>{{ ad?.publishedAt?.toDate()?.toLocaleString() }}</td>
-  <td>{{ ad.soldedAt || NaN }}</td>
+  <td>{{ ad?.title?.replace(ad.title.substring(10), '...').toLowerCase()}}</td>
+  <td>{{ ad?.type }}</td>
+  <td>{{ ad?.proposition }}</td>
+  <td>{{ dateFormat(ad?.publishedAt) }}</td>
+  <td>{{ dateFormat(ad?.soldedAt)}}</td>
   <td>{{ ad.status}}</td>
   <td>
     <button
@@ -35,9 +35,10 @@
       </i>
     </button>
     <button
-      v-if="ad.status !== 'pending' && !$route.path.includes('/admin/dashboard')"
+      v-if="!$route.path.includes('/admin/dashboard')"
       title="solde"
       class="deleteA"
+      :disabled="ad.status === 'solded' || ad.status === 'pending'"
       style="background: var(--greenfun)"
       @click="soldeAds"
     >
@@ -68,6 +69,10 @@ export default {
     showss: true
   }},
 	methods:{
+    dateFormat(date){
+      try{ return date ? date?.toDate()?.toLocaleString() : NaN }
+      catch(e){}
+    },
     getImage(path){
       return require('@/' + path)
     },
@@ -102,7 +107,7 @@ export default {
         message: 'marqué comme vendu ?',
         resultMessage: 'annonce marqué comme vendu'
       })
-      if (ok) soldeAd(auth?.currentUser.uid, this.card)
+      if (ok) soldeAd(auth?.currentUser.uid, this.ad)
     },
 	},
 }
@@ -113,6 +118,9 @@ export default {
   width: 50px;
   height: 50px;
   border-radius: 50%;
+}
+button:disabled{
+  opacity: .6;
 }
 </style>
 

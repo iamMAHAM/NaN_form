@@ -4,8 +4,8 @@
   <div class="app-content">
     <router-view :isLogged="isLogged" :key="$route.path" :searchData="searchData"/>
     <Support :isAdmin="isAdmin && !flag" :uid="uid"/>
-    <Footer />
   </div>
+  <Footer />
 </template>
 
 
@@ -86,7 +86,7 @@ html{
 }
 
 body{
-  background: #eef1f4;
+  background: #e6e3e3;
     line-height:1.5;
     font-size: 1.6rem;
     font-family: 'Poppins', sans-serif;
@@ -96,7 +96,7 @@ body{
   width: 80vw;
   margin: 0 auto;
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 :root{

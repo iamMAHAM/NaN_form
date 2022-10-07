@@ -1,5 +1,5 @@
 <template>
-  <div class="home-component">
+  <div class="home-component" style="min-height: 100vh">
     <Banner @filter="filter" :match="match"/>
     <CardContainer
       :cards="cards"

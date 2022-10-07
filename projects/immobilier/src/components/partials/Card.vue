@@ -231,11 +231,11 @@ export default {
     },
     title(){
       const t = this.card.title
-      return t.replace(t.substring(17), '...').toLowerCase()
+      return t.replace(t.substring(15), '...').toLowerCase()
     },
     location(){
       const l = this.card.location
-      return l.replace(l.substring(12), '...').toLowerCase()
+      return l.replace(l.substring(15), '.').toLowerCase()
     },
     authorized(){
       return this.card?.status === 'online' || this.$route.path.includes("/admin/dashboard")

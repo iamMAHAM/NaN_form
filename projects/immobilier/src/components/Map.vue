@@ -1,5 +1,5 @@
 <template>
-    <h2 style="color: var(--white); text-align: center; padding: .5rem;">Emplacement Exact</h2> 
+    <h2 style="color: var(--navcolor); text-align: center; padding: .5rem;">Emplacement Exact</h2> 
     <div id='map' ref="mapRef">
       <div class="btn">
         <i @click="satelite" class="material-symbols-outlined" v-if="normalvue">satellite_alt</i>
