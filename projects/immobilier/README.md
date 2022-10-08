@@ -18,7 +18,7 @@ Exemple : une plateforme de gestion foncière gérée par le ministère, un site
 Nous avons décider de mettre en place une Plateform du nom de **IMMO SOLUCE** spécialisée dans :
 * la mise en relation entre vendeurs et acquéreurs (locataires/acheteurs) de biens immobiliers
 * une fiabilités assurées grace à notre système de vérification
-* Lien du site : [ici](https://immobilier-0.web.app/maison)
+* Lien du site : [ici](https://immo-soluce.web.app/)
 
 **Nos objectifs** :
 
