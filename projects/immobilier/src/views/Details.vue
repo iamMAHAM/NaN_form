@@ -90,7 +90,7 @@
 />
 
 <div style="margin-bottom: 50px">
-  <Comments :postId="cardInfo.id" v-if="!load"/>
+  <Comments :postId="cardInfo.id" v-if="!load" :isLogged="isLogged"/>
 </div>
 </template>
 

@@ -93,7 +93,7 @@ body{
 }
 
 .app-content{
-  width: 80vw;
+  width: 85vw;
   margin: 0 auto;
   position: relative;
   min-height: 100vh;

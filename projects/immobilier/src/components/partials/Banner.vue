@@ -77,7 +77,7 @@ export default {
 
 <style>
 .banner-component{
-  margin: 3rem auto;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   overflow: hidden;
@@ -85,13 +85,20 @@ export default {
 }
 
 .rightd{
-  width: calc(85%)
+  width: calc(95%)
 }
 
 
-@media screen and (max-width: 959px){
+@media screen and (max-width: 1015px){
+
+  .app-content{
+    width: 100vw;
+  }
+
   .banner-component{
-    height: 40vh;
+    margin: 0 auto;
+    width: 100vw;
+    height: 80vh;
   }
 
   .nav-title{
@@ -99,12 +106,13 @@ export default {
   }
 
   .rightd{
-    width: calc(70%);
+    width: calc(95%);
   }
 }
 @media screen and (max-width: 609px){
   .banner-component{
-    height: 31vh;
+    height: 70vh;
+    width: 100vw;
   }
 
   .rightd{

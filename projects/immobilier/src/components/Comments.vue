@@ -1,7 +1,7 @@
 <template>
   <div class="comments">
     <h2 align=center>COMMENTAIRES</h2>
-    <div class="add-comment">
+    <div class="add-comment" v-if="isLogged">
       <textarea placeholder="ajouter un commentaire" cols="50" rows="10" v-model="commentInfo.message"></textarea>
       <button @click="postComment">envoyer</button>
     </div>
@@ -37,7 +37,7 @@ import { collection, onSnapshot } from '@firebase/firestore'
 import { db } from '@/lib/firebaseConfig'
 export default {
   name: 'Comment',
-  props: ['postId'],
+  props: ['postId', 'isLogged'],
   components:{
     Modal
   },
