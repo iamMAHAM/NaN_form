@@ -11,9 +11,11 @@ Un proche parent est grugé, spolié de son bien ou surfacturé lors de la const
 
 Exemple : une plateforme de gestion foncière gérée par le ministère, un site répertoriant les ouvriers et les prix de leur travail, un site comparant les prix des matériaux, etc."
 
-## Notre solution et Objects
+## Notre solution et Objectifs
 
-Nous avons décider de mettre en place une Plateform eu nom de **IMMO SOLUCE** spécialisé dans :
+**Solution** : 
+
+Nous avons décider de mettre en place une Plateform du nom de **IMMO SOLUCE** spécialisée dans :
 * la mise en relation entre vendeurs et acquéreurs (locataires/acheteurs) de biens immobiliers
 * une fiabilités assurées grace à notre système de vérification
 * Lien du site : [ici](https://immobilier-0.web.app/maison)
