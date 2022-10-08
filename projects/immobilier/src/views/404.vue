@@ -35,7 +35,7 @@ export default {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  color: white;
+  color: var(--navcolor);
   position: relative;
   z-index: 10;
   user-select: none;
@@ -44,7 +44,6 @@ export default {
 .aks-404-page-content h1 {
   position: relative;
   font-size: 177px;
-  font-family: Code-Pro-Bold;
   margin-bottom: 2rem;
   display: flex;
   align-items: center;
@@ -64,10 +63,10 @@ export default {
 }
 
 .aks-404-page-btn {
-  color: var(--navcolor);
+  color: var(--white);
   text-decoration: none;
   padding: 15px 25px;
-  background: white;
+  background: var(--navcolor);
   border-radius: 3rem;
   position: relative;
   cursor: pointer;
@@ -75,6 +74,6 @@ export default {
 }
 
 .aks-404-page-btn:hover {
-  background: #dadada;
+  background: var(--hovercolor);
 }
 </style>
