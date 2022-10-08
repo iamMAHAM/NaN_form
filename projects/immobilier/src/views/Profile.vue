@@ -89,7 +89,7 @@
         </button>
         <button
             class="edit"
-            v-if="home" 
+            v-if="home && isLogged" 
             @click="like"
           >
             <span
