@@ -8,6 +8,7 @@ import DashBoard from "@/views/admin/DashBoard.vue"
 import Profile from "@/views/Profile.vue"
 import NotFound from "@/views/404.vue"
 import Vendor from "@/views/company/Vendor.vue"
+import Comments from "@/components/Comments.vue"
 
 const routes = [
   {
@@ -47,6 +48,11 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/comment',
+    name: 'Comment',
+    component: Comments
   },
   {
     path: '/admin/dashboard',

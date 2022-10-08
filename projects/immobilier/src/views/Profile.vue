@@ -396,6 +396,9 @@ export default {
   gap: 2%;
 }
 
+.myads .card-container .box .top img{
+  min-height: 100%;
+}
 
 .material-symbols-outlined{
   vertical-align: middle;

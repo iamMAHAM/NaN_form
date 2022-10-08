@@ -89,19 +89,23 @@
   :emp="emp"
 />
 
+<div style="margin-bottom: 50px">
+  <Comments :postId="cardInfo.id" v-if="!load"/>
+</div>
 </template>
 
 <script>
 import { addConversation, auth, findOne, getRtdbOne, messageTemplate } from '@/lib/firestoreLib'
 import Maps from "../components/Map.vue"
 import Loader from '@/components/partials/Loader.vue'
-
+import Comments from '@/components/Comments.vue'
 export default {
   name: 'Details',
   props: ['isLogged', 'searchData'],
   components: {
     Maps,
-    Loader
+    Loader,
+    Comments
   },
   data(){
     return {

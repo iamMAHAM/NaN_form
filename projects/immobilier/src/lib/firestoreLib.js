@@ -338,12 +338,12 @@ export const abortPost = async (tempId)=>{
   await remove(ref)
 }
 
-export const commentPost = (postId, message)=>{
-    saveOne(`comments/${postId}`, message)
+export const commentPost = async (postId, postData)=>{
+    await saveOne(`comments/comments/${postId}`, postData)
 }
 
-export const deleteComment = (postId, messageId)=>{
-    deleteOne(`comments/${postId}`, messageId)
+export const deleteComment = async (postId, messageId)=>{
+    await deleteOne(`comments/comments/${postId}`, messageId)
 }
 
 export const forbiden = (thiss)=>{
