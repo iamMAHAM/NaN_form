@@ -89,7 +89,7 @@
         </button>
         <button
             class="edit"
-            v-if="home && user.isVerified" 
+            v-if="home && user.isVerified && isLogged" 
             @click="like"
           >
             <span
@@ -359,7 +359,6 @@ export default {
 
 .profile-container{
   min-height: 100vh;
-  width: 100vw;
 }
 .myads div.card-container{
   background: var(--hovercolor);
