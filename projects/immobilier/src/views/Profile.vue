@@ -1,4 +1,5 @@
 <template>
+  <Modal ref="modal"/>
   <div class="profile-container">
     <Loader v-if="iLoad"/>
     <div class="main-container" v-if="!iLoad">
@@ -86,6 +87,29 @@
               {{ verify ? 'close' :  'fingerprint'}}
             </i>
         </button>
+        <button
+            class="edit"
+            v-if="home && user.isVerified" 
+            @click="like"
+          >
+            <span
+              style="
+                vertical-align: middle;
+                color: var(--white);
+                margin: 0;
+                font-size: 1.7rem;
+              "
+            >
+              {{ !isLiked ? 'j\'aime' : 'j\'aime déjà'}}
+            </span>
+            <i class="material-symbols-outlined"
+              :style="{
+                color: !isLiked ? 'var(--greenfun)' : 'red'
+              }"
+            >
+              {{ !isLiked ? 'thumb_up_off' :  'thumb_down'}}
+            </i>
+        </button>
       </div>
       <!-- break -->
       <hr class="break" v-if="!iLoad"/>
@@ -115,8 +139,8 @@
               <p class="num">{{ cards?.length}}</p>
             </div>
             <div class="card bg-dark" style="cursor: normal">
-              <p>Popularité</p>
-              <p class="num">{{ user?.popularity || 0}}</p>
+              <p>J'aimes</p>
+              <p class="num">{{ user?.likes?.length || 0}}</p>
             </div>
           </div>
           <div class="ads" v-if="ads" @click="rightFilter">
@@ -168,6 +192,7 @@ import { auth, find, findOne, updateOne } from '@/lib/firestoreLib';
 import { collection, doc, onSnapshot } from '@firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
 import { updatePassword } from '@firebase/auth';
+import Modal from '@/components/partials/Modal.vue';
 
 export default {
   name: 'Profile',
@@ -175,9 +200,10 @@ export default {
     CardContainer,
     Uprofile,
     Loader,
-    userVerification
+    userVerification,
+    Modal
   },
-  props:['isLogged'],
+  props:['isLogged', 'searchData'],
   data(){
     return {
       backup: null,
@@ -254,8 +280,14 @@ export default {
       if (!this.flag){
         this.pass
         ? updatePassword(auth?.currentUser, this.pass)
-          .then(console.log("success updated password"))
-          .catch(e=>alert(e))
+          .catch(e=>{
+            this.$refs.modal.show({
+              type: 'error',
+              title: 'Erreur',
+              display: false,
+              errorMessage: e.code ? e.code : e?.message,
+          })
+          })
         : updateOne("users", this.user?.id, this.user)
       }
     },
@@ -269,6 +301,27 @@ export default {
     },
     verifyUser(){
       this.verify = !this.verify
+    },
+    like(){
+    let inter = []
+     if (this.isLiked){
+      this.user.likes = this.user.likes.filter(s => s!== this.user.id)
+     }else{
+      inter = typeof(this.user.likes) === Array
+      ? this.user.likes.push(this.user.id)
+      : [auth?.currentUser?.uid]
+     }
+     this.user.likes = inter
+      updateOne("users", this.user.id, {
+        likes: this.user.likes
+      }).then(()=>{
+        this.$refs.modal.show({
+          title: 'Like',
+          type: 'info',
+          display: false,
+          message: 'Success'
+        })
+      })
     }
   },
   computed:{ 
@@ -294,6 +347,9 @@ export default {
     },
     showRoutes(){
       return this.user?.id === auth?.currentUser?.uid
+    },
+    isLiked(){
+      return this.user?.likes?.includes(auth?.currentUser?.uid)
     }
   }
 }

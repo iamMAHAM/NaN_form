@@ -56,7 +56,7 @@ export default {
     width: 100%;
   }
   div.empty *, div.empty{
-    color: var(--white);
+    color: var(--navcolor);
     text-align: center;
     font-size: 6rem;
   }

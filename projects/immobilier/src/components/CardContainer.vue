@@ -1,4 +1,5 @@
 <template>
+  <Modal ref="modal"/>
   <Loader v-if="load"/>
   <div class="text" align="center"
     :style="{
@@ -7,45 +8,42 @@
     }"
     v-if="isSearch && cards.length"
   >
-    RECHERCHE - {{ cards.length + ' Correspondances à : ' + searchTerm}}
+    RECHERCHE - {{ cardTodisplay.length + ' Correspondances à : ' + searchTerm}}
   </div>
   <div class="card-container" v-if="!load">
     <div v-if="!load && !cards?.length" class="em">{{ message }}</div>
     <Card
-      v-for="card in cards"
+      v-for="card in cardTodisplay"
       :key="card.id"
       :card="card"
       @addFav="addFavs"
       @removeFav="removeFavs"
     />
   </div>
+  <div align="center" style="margin-bottom: 5px" v-if="cards.length"><Pagination class="paginate" :items="cards" @changePage="newItems"/></div>
 </template>
 
 <script>
 import { auth, deleteOne, override } from '@/lib/firestoreLib';
 import Card from './partials/Card.vue';
 import Loader from './partials/Loader.vue';
+import Modal from './partials/Modal.vue';
+import Pagination from './partials/user/Pagination.vue';
 
 export default {
   name: 'CardContainer',
   props: ['cards', 'load', 'message', 'searchTerm', 'isSearch'],
   emits: ['filteringCard'],
-  components: {
-    Card,
-    Loader
-  },
   data(){
     return {
-      // cards : [
-      //   {
-      //     type: 'magasin',
-      //     proposition: 'vente',
-      //     location: 'Abidjan',
-      //     description: 'lorem 20 je xjnj ckn c ezv zivz vrzvnz v ezvnzvzvezvez veznvebzve',
-      //     superficie: 500,
-      //     price: 2000000
-      //   },
+      page: 1,
     }
+  },
+  components: {
+    Card,
+    Loader,
+    Modal,
+    Pagination
   },
   methods: {
     addFavs(card){ // add to favorite
@@ -65,7 +63,14 @@ export default {
         this.cards[index].isFav = true
 				this.cards[index].isLoad = false
       })
-      .catch(e=>console.error("error", e))
+      .catch(e=>{
+        this.$refs.modal.show({
+              type: 'error',
+              title: 'Erreur',
+              display: false,
+              errorMessage: e.code ? e.code : e?.message,
+          })
+      })
 		},
 		removeFavs(card){ // remove to favorite
 			const index = this.cards.indexOf(card)
@@ -76,22 +81,30 @@ export default {
         this.cards[index].isFav = false
         this.cards[index].isLoad = false
       })
-		}
+		},
+    newItems(page){
+      this.page = page
+    }
+  },
+  computed: {
+    cardTodisplay(){
+      return this.cards.filter((c, index)=> index >= (20 * this.page - 20) && index < 20 * this.page)
+    }
   }
 }
 </script>
 
 <style>
 .card-container {
-  width: calc(80%);
-  margin: 100px auto;
+  width: calc(100%);
+  margin: 50px auto;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 
 .card-container .em{
-  font-size: 2.5rem;
+  font-size: 3rem;
   text-align: center;
   color: var(--white);
   width: 100%;

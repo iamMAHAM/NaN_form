@@ -1,10 +1,11 @@
 <template>
+  <i v-if="user.role === 'company' && !flag1" class="vcompany material-symbols-outlined" @click="$router.push(`/pro/vendor/${user.id}`)">dashboard</i>
   <NavBar :isLogged="isLogged" :user="user" :auth="auth" @search="search"/>
   <div class="app-content">
     <router-view :isLogged="isLogged" :key="$route.path" :searchData="searchData"/>
     <Support :isAdmin="isAdmin && !flag" :uid="uid"/>
-    <Footer />
   </div>
+  <Footer />
 </template>
 
 
@@ -21,6 +22,7 @@
         uid: '',
         user: {},
         flag: false,
+        flag1: false,
         auth:false,
         searchData: []
       }
@@ -58,6 +60,7 @@
     updated(){
       this.flag = this.$route.path === "/admin/dashboard"
       this.auth = this.$route.path === "/auth"
+      this.flag1 = this.$route.path.includes('/pro/vendor')
     },
 
     watch:{
@@ -83,27 +86,36 @@ html{
 }
 
 body{
-  background: var(--hovercolor);
+  background: #e6e3e3;
     line-height:1.5;
     font-size: 1.6rem;
     font-family: 'Poppins', sans-serif;
 }
 
 .app-content{
+  width: 80vw;
+  margin: 0 auto;
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 :root{
   --white: #fff;
   --gray: #f0f0f0;
-  --navcolor: #1E262D;
+  --navcolor: #12192c;
   --hovercolor: #34495e;
   --green: #d9fdd2;
   --greenfun: #1ABC9C;
   --red: #E91E63;
   --blue: #03A9F4;
   --orange: #ff9800;
+  --primary: #333;
+    --secondary: #333;
+    --errorColor: red;
+    --stepNumber: 6;
+    --containerWidth: 600px;
+    --bgColor: #333;
+    --inputBorderColor: lightgray;
   --light100: hsl(237, 14%, 72%);
   --light200: hsl(240, 15%, 86%);
   --light400: hsl(240, 20%, 92%);
@@ -111,6 +123,7 @@ body{
   --dark400: hsl(240, 16%, 32%);
   --dark600: hsl(238, 11%, 49%);
   --anim-dur: 3s;
+  --containerWidth: 650px;
   --shadow: 0px 2px 1px 0 #0001, 0 0.125em 0.25em 0.0625em #0002,
     0 0.2em 0.5em #0002;
 }
@@ -125,6 +138,21 @@ body{
   border-radius: 99px;
 }
 
+
+.vcompany{
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 700,
+  'GRAD' 200,
+  'opsz' 48;
+  z-index: 3;
+  cursor: pointer;
+  font-size: 4rem !important;
+  position: fixed;
+  top: 10%;
+  right: 5%;
+  color: var(--greenfun);
+}
 
 
 </style>

@@ -63,6 +63,7 @@ import validator from 'validator'
 export default {
 	name: 'profile',
   props: ['form'],
+  emits: ['changePass'], 
   data(){return { error: false}},
   methods:{
     changeAvatar(e){
@@ -78,7 +79,6 @@ export default {
         })
         .then(()=>{
           const url = window.URL.createObjectURL(file)
-          console.log(url)
           preview.src = url
         })
       })

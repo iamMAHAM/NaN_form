@@ -1,4 +1,5 @@
 <template>
+  <Modal ref="modal" />
   <div class="flex-container space-between">
     <div class="vas">
       <button
@@ -40,34 +41,61 @@
 </template>
 <script>
 import { deleteOne, updateOne } from '@/lib/firestoreLib'
+import Modal from '../Modal.vue'
 export default {
   name: 'ProfileCard',
   props: ['userProfile'],
+  components: {
+    Modal
+  },
   methods:{
-    verify(){
-      console.log("verify request", this.userProfile)
-      if (window.confirm("vérifier cet utilisateur ?")){
+    async verify(){
+      const ok = this.$refs.modal.show({
+        title: 'Verify user identity ?',
+        type: 'confirm',
+        display: true,
+      })
+      if (ok){
+        const isComp = this.userProfile.isCompany
+        delete this.userProfile.isCompany
         Promise.all([
           updateOne("users", this.userProfile.id, {
             isVerified: true,
+            role: isComp ? 'company' : this.userProfile.role,
             isAwaitingVerification: false
           }),
           deleteOne("admin/vAJXH3iQabt9AjGLAaej/verification", this.userProfile.id)
         ])
-        .then(console.log("user verified with success"))
-        .catch(e=>alert(e.message))
+        .catch(e=>{
+          this.$refs.modal.show({
+              type: 'error',
+              title: 'Erreur',
+              errorMessage: e.code ? e.code : e?.message,
+          })
+        })
       }
     },
     deny(){
-      if (window.confirm("refuser cet utilisateurs ?")){
+      const ok = this.$refs.modal.show({
+        title: 'Deny user identity ? ',
+        type: 'confirm',
+        display: true,
+        resultMessage: 'réfusé avec succèss'
+      })
+      if (ok){
         Promise.all([
             updateOne("users", this.userProfile.id, {
               isAwaitingVerification: false
             }),
             deleteOne("admin/vAJXH3iQabt9AjGLAaej/verification", this.userProfile.id)
           ])
-          .then(console.log("user denied with success"))
-          .catch(e=>alert(e.message))
+          .catch(e=>{
+            this.$refs.modal.show({
+              type: 'error',
+              title: 'Erreur',
+              errorMessage: e.code ? e.code : e?.message,
+          })
+        })
       }
     }
   }
@@ -107,9 +135,6 @@ export default {
   background-color: #fff;
   display: flex;
   column-gap: 20px;
-  box-shadow: 1px 1px 16px -6px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 1px 1px 16px -6px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 1px 1px 16px -6px rgba(0, 0, 0, 0.5);
 }
 
 .card img {
@@ -121,9 +146,6 @@ export default {
   max-height: 200px;
   overflow: hidden;
   border-radius: 15px;
-  box-shadow: 1px 1px 16px -6px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 1px 1px 16px -6px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 1px 1px 16px -6px rgba(0, 0, 0, 0.75);
 }
 
 h3 {

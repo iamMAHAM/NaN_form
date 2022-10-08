@@ -81,7 +81,7 @@ const map = (array, callback)=>{
 
 const fill = (array, ...args) => {
     if (length(args) === 1){
-        
+        array
     }else if (length(args) === 2){
 
     }else{

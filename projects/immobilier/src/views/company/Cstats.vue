@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { h, onUpdated, toRefs } from 'vue'
+import { h, onMounted, onUpdated, ref, watchEffect } from 'vue'
 import { Bar } from 'vue-chartjs'
 import {
   Chart as ChartJS,
@@ -64,7 +64,9 @@ export default {
     }
   },
   setup(props) {
-    const { data } = toRefs(props)
+    const totalAds = ref(props.data.totalsAds)
+    const online = ref(props.data.online)
+    const solded = ref(props.data.solded)
     const chartData = {
       labels: [
         'January',
@@ -82,19 +84,19 @@ export default {
       ],
       datasets: [
         {
-          label: 'Users',
+          label: 'total',
           backgroundColor: 'blue',
-          data: data.value.users
+          data: totalAds.value
         },
         {
-          label: 'Ads',
+          label: 'online',
           backgroundColor: 'darkgray',
-          data: data.value.totalAds
+          data: online.value
         },
         {
-          label: 'Solded Ads',
+          label: 'solded',
           backgroundColor: 'green',
-          data: data.value.soldedAds
+          data: solded.value
         }
       ]
     }
@@ -115,6 +117,11 @@ export default {
         }
       }
     }
+    onMounted(()=>{
+      totalAds.value = props.data.totalsAds
+      online.value = props.data.online
+      solded.value = props.data.solded
+    })
 
     return () =>
       h(Bar, {
@@ -125,7 +132,7 @@ export default {
         height: props.height,
         cssClasses: props.cssClasses,
         styles: props.styles,
-        plugins: props.plugins,
+        plugins: props.plugins
       })
   }
 }

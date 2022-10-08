@@ -1,5 +1,11 @@
 <template>
   <div id="search">
+    <Modal
+      ref="modal"
+      :type="'info'"
+      :message="message"
+      :display="false"
+    ></Modal>
     <span class="close">X</span>
     <div>
       <div class="to-absolute">
@@ -64,13 +70,13 @@
                       Favoris
                   </a>
               </router-link>
-              <router-link to="/messages" v-if="isLogged" class="navLink">
+              <router-link to="/messages" v-if="isLogged && user.role !== 'admin' && user.role !== 'company'" class="navLink">
                   <a href="" class="item">
                       <i class="material-symbols-outlined">mail</i>
                       Messages
                   </a>  
               </router-link>
-              <a @click="signOut" v-if="isLogged && user?.role !== 'admin'" >
+              <a @click="signOut" v-if="isLogged && user?.role !== 'admin' && user?.role !== 'company'" >
                   <a href="#" class="item" style="color: var(--red); opacity: .5;">
                       <i class="material-symbols-outlined">logout</i>
                       Déconnexion
@@ -92,7 +98,7 @@
 import { allCategories, auth, signOutUser } from '@/lib/firestoreLib'
 import postForm from './partials/postForm.vue'
 import Logo from "@/components/partials/Logo.vue"
-
+import Modal from './partials/Modal.vue'
 export default {
   name: 'NavBar',
   props: ['isLogged', 'user', 'auth'],
@@ -102,12 +108,14 @@ export default {
       show: false,
       searchTerm: '',
       categories: allCategories,
-      categorie: ''
+      categorie: '',
+      message: ''
     }
   },
   components: {
     postForm,
-    Logo
+    Logo,
+    Modal
   },
   setup(){
     window.addEventListener("DOMContentLoaded", ()=>{
@@ -120,7 +128,6 @@ export default {
       })
       search.addEventListener("click", e=>{
         const target = e.target
-        console.log(e.target)
         if (e.target === search || e.target.className === 'close'){
           search.classList.remove("open")
         }
@@ -141,7 +148,8 @@ export default {
         this.$emit('search', [this.categorie, this.searchTerm])
         document.getElementById("search").classList.remove('open')
       }else{
-        alert("le champ et la catégorie sont obligatoire")
+        this.message = 'le champ et la catégorie sont obligatoire'
+        this.$refs.modal.open()
       }
     },
     click(){
@@ -189,7 +197,7 @@ nav a{
   -o-transform: translate(0px, 0px) scale(1, 1);
   transform: translate(0px, 0px) scale(1, 1);
   opacity: 1;
-  z-index: 106;
+  z-index: 11;
   display: block;
 }
 

@@ -1,4 +1,8 @@
 <template>
+  <Modal
+    ref="modal"
+  >
+  </Modal>
   <td><img :src="user.avatar" alt="img"></td>
   <td>{{ user.fullName}}</td>
   <td>{{ user.email }}</td>
@@ -6,7 +10,7 @@
   <td>{{ age }}</td>
   <td>{{ user.address }}</td>
   <td>{{ user.isVerified}}</td>
-  <td v-if="user.role !== 'admin'">
+  <td v-if="!user.owner && !(auth?.currentUser?.uid === user.id)">
     <button
       class="view"
     >
@@ -58,9 +62,10 @@
         <i class="material-symbols-outlined">local_police</i>
         <select v-model="user.role">
           <option disabled :value="undefined">choisir un rôle</option>
-          <option value="acheteur">acheteur</option>
-          <option value="vendeur">vendeur</option>
-          <!-- <option value="admin">admin</option> -->
+          <option value="customer">customer</option>
+          <option value="seller">seller</option>
+          <option value="company">company</option>
+          <option value="admin" v-if="isOwner">admin</option>
         </select>
       </div>
       <button
@@ -82,21 +87,30 @@
 </template>
 
 <script>
-import { updateOne, deleteOne} from '@/lib/firestoreLib';
+import { updateOne, deleteOne, auth} from '@/lib/firestoreLib';
+import Modal from '../Modal.vue';
 export default {
   name: 'User',
-	props: ["user"],
-  data(){return {show: false, backup: {}}},
+	props: ['user', 'isOwner'],
+  components: {Modal},
+  data(){
+    return {
+    show: false,
+    backup: {},
+    showss: true,
+    auth: auth,
+  }},
 	methods:{
-		async updateUser(){
-			updateOne(`users`, this.user.id, this.user)
-			.then(alert("user updated with success"))
-      .catch(e=>alerte(e))
-		},
 		async deleteUser(){
-			if (window.confirm("really delete this user ?")){
+      const ok = await this.$refs.modal.show({
+        title: 'Delete user',
+        type: 'confirm',
+        display: true,
+      })
+			if (ok){
 				deleteOne("users", this.user.id)
-			}
+			}else{
+      }
 		},
     shows(){
       this.backup.role = this.user.role
@@ -108,18 +122,22 @@ export default {
       this.user.isVerified = this.backup.isVerified
       this.show = false
     },
-    submit(){
-      window.confirm('valider les modifications ?')
+    async submit(){
+      const ok = await this.$refs.modal.show({
+        type: 'confirm',
+        display: true,
+        title: 'Update user ?',
+        resultMessage: 'Mis à jour effectuée .'
+      })
+      ok
       ? updateOne("users", this.user?.id, this.user)
-        .then(alert("modifié avec succès"))
-        .catch(e=>alert("erreur : ", e.message ))
       : ''
       this.show = false
     }
 	},
   computed:{
     role(){
-      return this.user.role = this.user.role ? this.user.role : 'acheteur'
+      return this.user.role = this.user.role ? this.user.role : 'customer'
     },
     age(){
       return new Date().getFullYear() -  parseInt(this.user?.birth?.split("-")[0])

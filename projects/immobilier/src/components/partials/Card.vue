@@ -1,6 +1,16 @@
 <template>
-    <div class="box" :id="card.id">
-      <div class="top" @click="handleClick">
+    <Modal
+      ref="modal"
+    ></Modal>
+    <div
+      :class="authorized ? 'box online': 'box'"
+      :id="card.id"
+    >
+      <div class="top" @click="handleClick"
+          :style="{
+            pointerEvents: solded ? 'none' : 'all'
+          }"
+      >
         <span v-if="solded" class="soldout">Vendu</span>
         <img :src="card?.images[0] || getImage('assets/home.svg')"/>
         <i
@@ -11,7 +21,7 @@
           {{ rightIcone }}
         </i>
         <i
-          v-if="profile"
+          v-if="profile && !solded"
           :class="`material-symbols-outlined favs`"
           @click="deleteAds"
         >
@@ -87,15 +97,17 @@
 <script>
 import { abortPost, auth, deleteOne, soldeAd, unValidateAd, validateAd } from '@/lib/firestoreLib'
 import Loader from './Loader.vue'
+import Modal from './Modal.vue'
 
 export default {
   name: 'Card',
   props: ['card', 'req'],
-  components: {Loader},
+  components: {Loader, Modal},
+  emits: ['addFav', 'removeFav'],
   methods:{
     handleClick(e){
       if (e.target.className !== 'top') return
-      if (this.$route.path.includes('admin/dashboard')){
+      if (this.$route.path.includes('admin/dashboard') || this.card.status === 'pending'){
         this.$router.push(`/details/${this.card.type}/${this.card.id}?tempId=${this.card.tempId}`)
       }else{
         this.$router.push(`/details/${this.card.type}/${this.card.id}`)
@@ -108,28 +120,90 @@ export default {
 				this.$emit("addFav", this.card)
 			}
 		},
-    del(){
-      unValidateAd(this.card.ownerId, this.card)
-      .then(alert("annonce refusé avec succès"))
+    async del(){
+      const ok = await this.$refs.modal.show({
+        type: 'confirm',
+        display: true,
+        message: 'refuser l\'annonce?',
+        resultMessage: 'annonce refusé'
+      })
+      if (ok){
+        const urlRegex = /\bhttps?:\/\/\S+/gi
+        const content = 'Votre annonce à été refusée car elle ne respecte pas nos standards \n\
+        http://localhost:8080/details/refused/'+ this.card.tempId
+        const hasUrl = content.match(urlRegex)
+        const link =  hasUrl ? hasUrl[0] : null
+        const a = document.createElement("a")
+        a.href = link
+        const messages = {
+          message: {
+            type: 'text',
+            content: content.replace(link, ''),
+            link: a.pathname
+          }
+        }
+        unValidateAd(this.card.ownerId, auth?.currentUser?.uid, this.card, messages)
+        .catch(e=>{
+          this.$refs.modal.show({
+              type: 'error',
+              title: 'Erreur',
+              display: false,
+              errorMessage: e.code ? e.code : e?.message,
+          })
+        })
+      }
     },
-    validate(){
-      validateAd(this.card.ownerId, this.card)
-      .then(alert("annonce validé avec succès"))
-      .catch(e=>alert(e))
+    async validate(){
+      const ok = await this.$refs.modal.show({
+        type: 'confirm',
+        display: true,
+        message: 'valider l\'annonce?',
+        resultMessage: 'Annonce validée'
+      })
+      if (ok){
+        validateAd(this.card.ownerId, this.card)
+        .catch(e=>{
+          this.$refs.modal.show({
+            type: 'error',
+            title: 'Erreur',
+            display: false,
+            errorMessage: e.code ? e.code : e?.message,
+          })
+        })
+      }
     },
-    deleteAds(){
-      Promise.all([
-        deleteOne(`/users/${auth?.currentUser?.uid}/ads`, this.card.id),
-        deleteOne(`ads/X1eA1Bk8tfnVXHqduiTg/${this.card.type}`, this.card.id),
-        abortPost(this.card.tempId),
-        deleteOne('totals_ads', this.card.id)
-      ])
-      .then(alert("annonce supprimée avec succès"))
-      .catch(e=>console.error(e))
+    async deleteAds(){
+      const ok = await this.$refs.modal.show({
+        type: 'confirm',
+        display: true,
+        message: 'supprimer l\'annonce?',
+        resultMessage: 'annonce supprimée.'
+      })
+      if (ok){
+        Promise.all([
+          deleteOne(`/users/${auth?.currentUser?.uid}/ads`, this.card.id),
+          deleteOne(`ads/X1eA1Bk8tfnVXHqduiTg/${this.card.type}`, this.card.id),
+          abortPost(this.card.tempId),
+          deleteOne('totals_ads', this.card.id)
+        ])
+        .catch(e=>{
+          this.$refs.modal.show({
+              type: 'error',
+              title: 'Erreur',
+              display: false,
+              errorMessage: e.code ? e.code : e?.message,
+          })
+        })
+      }
     },
-    soldeAds(){
-      soldeAd(auth?.currentUser.uid, this.card)
-      .then(alert("Annonce marquée comme vendu :)"))
+    async soldeAds(){
+      const ok = await this.$refs.modal.show({
+        type: 'confirm',
+        display: true,
+        message: 'marqué comme vendu ?',
+        resultMessage: 'annonce marqué comme vendu'
+      })
+      if (ok) soldeAd(auth?.currentUser.uid, this.card)
     },
     getImage(path){
       return require('@/' + path)
@@ -157,11 +231,14 @@ export default {
     },
     title(){
       const t = this.card.title
-      return t.replace(t.substring(17), '...').toLowerCase()
+      return t.replace(t.substring(15), '...').toLowerCase()
     },
     location(){
       const l = this.card.location
-      return l.replace(l.substring(12), '...').toLowerCase()
+      return l.replace(l.substring(15), '.').toLowerCase()
+    },
+    authorized(){
+      return this.card?.status === 'online' || this.$route.path.includes("/admin/dashboard")
     }
   }
 }
@@ -222,7 +299,9 @@ p{
 }
 
 .card-container .box {
-  transition: box-shadow .5s;
+  transition: box-shadow .2s;
+  overflow: hidden;
+  border-radius: 1rem;
   pointer-events: none;
   width: 23%;
   height: max-content;
@@ -236,14 +315,17 @@ p{
 }
 
 .card-container .box:hover{
-  box-shadow: -8px 9px 5px 0px #ACBABF;
+  transform: translateY(-10px);
+  box-shadow: -2px 10px 5px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -2px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -2px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
 .card-container .box .bottom{
   pointer-events: all;
 }
 
-.card-container .box .top:after {
+.card-container .box.online .top:after {
   pointer-events: all;
   border-radius: .5rem;
   content: "Voir Details";

@@ -12,32 +12,16 @@
 			</div>
 
 			<!-- tab-menu -->
-      
 			<input type="radio" class="tab-1" name="tab" checked="checked">
-			<span>Home</span><i class="material-symbols-outlined">home</i>
+			<span>Overview</span><i class="material-symbols-outlined">home</i>
 
 			<input type="radio" class="tab-2" name="tab">
-			<span>Users</span><i class="material-symbols-outlined">group</i>
-
-      <input type="radio" class="tab-6" name="tab">
 			<span>Ads</span><i class="material-symbols-outlined">ads_click</i>
 
-			<input type="radio" class="tab-3" name="tab">
-			<span>Pending <span class="alerte">{{ cards.length }}</span></span><i class="material-symbols-outlined">pending</i>
-		
-      <input type="radio" class="tab-4" name="tab" v-if="isOwner">
-			<span v-if="isOwner">Company KYC <span class="alerte">{{ companies.length }}</span></span><i class="material-symbols-outlined">report</i>
-
-      <input type="radio" class="tab-5" name="tab">
-			<span>KYC <span class="alerte">{{ profiles.length }}</span></span><i class="material-symbols-outlined">badge</i>
-
-
-
-			<!-- tab-top-bar -->
 			<div class="top-bar">
 				<ul>
           <a style="display: inline-block; pointer-events: none;">
-            <div>{{'Admin : ' + auth?.currentUser?.displayName }}</div>
+            <div>{{'Company : ' + auth?.currentUser?.displayName }}</div>
           </a>
 					<li @click="signOutUser().then($router.push('/'))" >
 						<a href="" title="Log Out" >
@@ -57,25 +41,24 @@
 				</ul>
 			</div>
 
-			<!-- tab-content -->
 			<div class="tab-content">
 				<section class="home">
 					<div class="home-top">
             <div class="item">
               <div class="ileft">
-                Total users
-              </div>
-              <div class="iright">{{ users.length }}</div>
-            </div>
-            <div class="item">
-              <div class="ileft">
-                Total Ads
+                Annonces
               </div>
               <div class="iright">{{ totals_ads.length }}</div>
             </div>
             <div class="item">
               <div class="ileft">
-                Solded Ads
+                En ligne
+              </div>
+              <div class="iright">{{ totals_ads.filter(a=>a.status === 'online').length }}</div>
+            </div>
+            <div class="item">
+              <div class="ileft">
+                Vendu
               </div>
               <div class="iright">{{ totals_ads.filter(a=>a.status === 'solded').length }}</div>
             </div>
@@ -88,54 +71,7 @@
           </div>
 
 				</section>
-				<section class="users">
-          <Users @userUpdated="updatedUsers" :isOwner="isOwner"/>
-				</section>
-				<section class="pending">
-          <CardContainer
-            :load="load"
-            :cards="cards"
-            :message="'Aucune annonce en attente'"
-          />
-				</section>
-				<section class="report" style="background: var(--hovercolor)">
-          <div
-            v-if="!companies.length"
-            style="
-              font-size: 3rem;
-              text-align: center;
-              color: var(--white);
-            "
-          >
-            Aucune vérification en attente
-          </div>
-          <ProfileCard
-            v-else
-            v-for="company in companies"
-            :key="company.id"
-            :userProfile="company"
-          />
-				</section>
-				<section class="kyc" style="background: var(--hovercolor)">
-          <div
-            v-if="!profiles.length"
-            style="
-              font-size: 3rem;
-              text-align: center;
-              color: var(--white);
-            "
-          >
-            Aucune vérification en attente
-          </div>
-          <ProfileCard
-            v-else
-            v-for="profile in profiles"
-            :key="profile.id"
-            :userProfile="profile"
-          />
-
-				</section>
-				<section class="adsD" style="overflow: scroll">
+				<section class="users" style="overflow: scroll">
           <Ads
             :ads="ads"
             :load="load"
@@ -148,29 +84,19 @@
 </template>
 
 <script>
-import Stats from './Stats.vue';
-import Users from '@/components/partials/user/Users.vue';
-import CardContainer from '@/components/CardContainer.vue';
-import ProfileCard from '@/components/partials/user/ProfileCard.vue';
-import { onValue, ref as dbref } from '@firebase/database';
-import { db, rtdb,  } from '@/lib/firebaseConfig';
-import { auth, findOne, signOutUser } from '@/lib/firestoreLib';
+import Stats from './Cstats.vue';
+import Ads from '@/views/company/Ads.vue'
+import { db } from '@/lib/firebaseConfig';
+import { auth, findOne, signOutUser} from '@/lib/firestoreLib';
 import { collection, onSnapshot } from '@firebase/firestore';
-import Ads from '../company/Ads.vue';
+
 export default {
-  name: 'DashBoard',
+  name: 'Vendor',
   components:{
-    Users,
     Stats,
-    CardContainer,
-    ProfileCard,
     Ads
   },
   methods:{
-    updatedUsers(users){
-      this.users = [ ...users]
-      this.getDataArray(this.users, 'registratedAt', 'users')
-    },
     getDataArray(array=[], property, type){
       const adsData = []
       const months = [
@@ -193,79 +119,47 @@ export default {
       this.data[type] = adsData
     },
     filter([filter, search]){
-      if (!filter) this.ads = [...this.totals_ads]
+      if (!filter) this.ads = this.totals_ads
       this.ads = this.totals_ads.filter(u=>
-      u.status?.includes(filter)
-      && u.title?.toLowerCase().includes(search.toLowerCase()))
+      u.status.includes(filter)
+      && u.title.toLowerCase().includes(search.toLowerCase()))
     }
   },
   data(){
     return {
       load: true,
-      cards: [],
-      profiles: [],
       auth: auth,
-      users: [],
       totals_ads: [],
-      companies: [],
       data:{},
-      ads: [],
       mounted:false,
-      isOwner:false,
+      ads: [],
       signOutUser: signOutUser
     }
   },
   beforeCreate(){
-    const uid = this.$route.query.uid
+    const uid = this.$route.params.id
     if (!uid){
       this.$router.push('/404')
       return
     }
     findOne("users", uid)
-    .then(user=>{
-      this.isOwner = user.owner
-      user.role === "admin" ? '' : this.$router.push("/404")
-    })
+    .then(user=> user.role === "company" ? '' : this.$router.push("/404"))
   },
   mounted(){
-    const wads = dbref(rtdb, `waitingAds`);
-    onValue(wads, (snapshot)=>{
-      const all = snapshot.val()
-      const inter = []
-      if (all){
-        for (const [k, v] of Object.entries(all)){
-          v.tempId = k
-          inter.push(v)
-        }
-    }
-    this.cards = inter
-    this.load = false
-    })
-    onSnapshot(collection(db, "admin/vAJXH3iQabt9AjGLAaej/verification"), (snap)=>{
-      this.profiles = [...snap.docs.map(s=>s.data())].filter(p => !p.isCompany)
-      this.companies = [...snap.docs.map(s=>s.data())].filter(p => p.isCompany)
-    })
-
-    onSnapshot(collection(db, "totals_ads"), (snap)=>{
-      this.totals_ads = [...snap.docs.map(s=>s.data())]
-      this.ads = [...this.totals_ads.filter(s => s.status !== 'solded'), ...this.totals_ads.filter(s => s.status === 'solded')]
-      this.getDataArray(this.totals_ads, 'publishedAt', 'totalAds')
-      const solded = this.totals_ads.filter(a => a.status === "solded")
-      this.getDataArray(solded, 'publishedAt', 'soldedAds')
+    onSnapshot(collection(db, `users/${this.$route.params.id}/ads`), snap=>{
+      this.totals_ads = [...snap.docs.map(d => {
+        return {...d.data(), id: d.id}
+      })]
+      this.ads = [...this.totals_ads]
+      const online = this.totals_ads.filter(a => a.status === 'online')
+      const solded = this.totals_ads.filter(a=>a .status === 'solded')
+      this.getDataArray(this.totals_ads, 'publishedAt', 'totalsAds')
+      this.getDataArray(online, 'publishedAt', 'online')
+      this.getDataArray(solded, 'publishedAt', 'solded')
       this.mounted = true
+      this.load = false
     })
   },
-  computed: {
-    usersLength(){
-      return this.users.filter(u => u.role === "acheteur").length
-    },
-    sellerLength(){
-      return this.users.filter(u => u.role === "vendeur").length
-    },
-    adminLength(){
-      return this.users.filter(u => u.role === "admin").length
-    }
-  }
 }
 </script>
 
@@ -456,7 +350,6 @@ li{
 }
 
 .clear-backend > input.tab-2:checked ~ .tab-content .users {
-  overflow: scroll;
 	display: block;
 }
 
@@ -473,7 +366,7 @@ li{
 	display: block;
 }
 
-.clear-backend > input.tab-6:checked ~ .tab-content .adsD {
+.clear-backend > input.tab-6:checked ~ .tab-content .settings {
 	display: block;
 }
 
@@ -504,11 +397,6 @@ li{
   height: calc(100% - 62px);
 }
 
-span.alerte{
-  float: right;
-  transform: translateX(-20px);
-  color: var(--red);
-}
 /* Responsive */
 @media only screen and (max-width: 641px) {
 	.avatar, 

@@ -1,7 +1,7 @@
 <template>
   <div
     @click="showConversation"
-    :id="person?.id"
+    :id="'user-'+person?.id"
     class="person"
   >
     <div class="box">
@@ -49,6 +49,7 @@ import { auth } from '@/lib/firestoreLib';
 export default {
   name: 'Person',
   props: ['person', 'messages'],
+  emits: ['switch'],
   data(){
     return {auth: auth}
   },

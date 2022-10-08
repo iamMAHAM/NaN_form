@@ -1,4 +1,5 @@
 <template>
+  <Modal ref="modal"/>
   <div class="messages-container">
       <div class="case">
         <Loader v-if="load"/>
@@ -150,7 +151,7 @@ import { rtdb } from "@/lib/firebaseConfig"
 import {  auth, deleteMessage, sendMessage, uploadImage } from '@/lib/firestoreLib'
 import { onValue, ref as dbref, query as dbquery } from "firebase/database"
 import Loader from '@/components/partials/Loader.vue'
-
+import Modal from '@/components/partials/Modal.vue'
 const compare = ( a, b )=>{
   if ( a.timestamp < b.timestamp ){
     return -1;
@@ -187,7 +188,9 @@ export default {
     Person,
     Emojis,
     Loader,
+    Modal
   },
+  props: ['searchData', 'isLogged'],
   data(){
     return {
       messages:[],
@@ -253,7 +256,14 @@ export default {
           this.message = ''
           this.$refs.textarea.style.height = '16px'
         }
-        ).catch(e=>alert(e))
+        ).catch(e=>{
+          this.$refs.modal.show({
+            type: 'error',
+            title: 'Erreur',
+            display: false,
+            errorMessage: e?.code ? e?.code : e?.message,
+          })
+        })
       })
     },
   deleteMessages(e){
@@ -262,7 +272,6 @@ export default {
   },
   switchMessages([cMessages, person]){
     this.messages = cMessages
-    console.log(this.messages)
     this.pers = person
   }
   },
@@ -300,7 +309,7 @@ export default {
       })).then(inter=>{
         this.conversations = inter
         this.load = false
-        const ab = Object.filter(inter, v=> v?.info?.id === this.pers?.id)
+        const ab = inter.filter(c => c?.info?.id === this.pers?.id)
         this.messages = ab[0]?.messages.sort(compare)
       })
     }
@@ -309,7 +318,7 @@ export default {
       const id = this.$route.query.id
       const message = this.$route.query.template
       this.message = JSON.parse(message)?.message?.content
-      const conversation = await waitForElm(`#${id}`)
+      const conversation = await waitForElm(`#user-${id}`)
       conversation.click()
       const textarea = await waitForElm("textarea")
       textarea.style.height = "100px"

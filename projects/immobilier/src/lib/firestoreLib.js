@@ -77,7 +77,7 @@ export const searchLow = (_collection, searchTerm)=>{
     const q = collection(db, `ads/X1eA1Bk8tfnVXHqduiTg/${_collection}`)
     const qs = await getDocs(q)
     for (const _doc of qs.docs){
-      _doc.data().title.includes(searchTerm) && _doc.data().status !== 'solded'
+      _doc.data().title.toLowerCase().includes(searchTerm.toLowerCase()) && _doc.data().status !== 'solded'
       ? results.push({..._doc.data(), id: _doc.id})
       : ''
     }
@@ -207,10 +207,10 @@ export const addConversation = async (senderId, receiverId)=>{
 }
 
 export const getRtdbOne = (_collection, tempId)=>{
-  return new Promise(async resolve=>{
+  return new Promise(async (resolve, reject)=>{
     const r = dbref(rtdb, `${_collection}/${tempId}`)
     const d = await get(r)
-    d.exists() ? resolve(d.val()) : resolve({})
+    d.exists() ? resolve(d.val()) : reject('Not')
   })
   
 
@@ -264,26 +264,21 @@ export const uploadImage = (path, file)=>{
 }
 
 export const postAd = (userId, adInfo={})=>{
-    return new Promise((resolve, reject)=>{
+    return new Promise(async (resolve)=>{
         const images = []
         const id = uuidv4()
-        adInfo.images.map(async img=>{
-            uploadImage(`images/${id + img.name}`, img).then(url=>{
-                images.push(url)
-            }).then(()=>{
-              adInfo.images = images
-              adInfo.status = "pending"
-              adInfo.tempId = id
-              saveOne(`users/${userId}/ads`, adInfo)
-              .then((ad)=>{
-                  const waitRef = dbref(rtdb, `waitingAds/${id}`)
-                  ad.images = images
-                  set(waitRef, ad)
-                  resolve(ad)
-              })
-              .catch(e=>reject("failed to post ad : ", e.message))
-            })
-        })
+        for (const img of adInfo.images){
+          const url = await uploadImage(`images/${id + img.name}`, img)
+          images.push(url)
+        }
+        adInfo.images = images
+        adInfo.status = "pending"
+        adInfo.tempId = id
+        const ad = await saveOne(`users/${userId}/ads`, adInfo)
+        ad.images = images
+        const waitRef = dbref(rtdb, `waitingAds/${id}`)
+        set(waitRef, ad)
+        resolve(ad)
     })
 }
 
@@ -293,6 +288,7 @@ export const validateAd = (userId, adInfo)=>{
     remove(ref)
     .then(()=>{
       adInfo.status = "online"
+      adInfo.publishedAt = sT()
       delete adInfo.tempId
       Promise.all([
         setOne(`users/${userId}/ads`, adInfo, adInfo.id),
@@ -305,14 +301,18 @@ export const validateAd = (userId, adInfo)=>{
   })
 }
 
-export const unValidateAd = (userId, adInfo)=>{
+export const unValidateAd = (userId, refusedById, adInfo, message)=>{
   return new Promise((resolve, reject)=>{
     const ref = dbref(rtdb, `waitingAds/${adInfo.tempId}`)
+    const refusedRed = dbref(rtdb, `refusedAds/${adInfo.tempId}`)
+    set(refusedRed, adInfo)
     remove(ref)
     .then(()=>{
-      adInfo.status = "refused",
-      setOne(`users/${userId}/ads`, adInfo, adInfo.id)
-      .then(resolve()) //send mail to tell user add is refused
+      deleteOne(`users/${userId}/ads`, adInfo.id)
+      .then(async ()=>{
+        await sendMessage(refusedById, userId, message)
+        resolve()
+      }) //send mail to tell user add is refused
     }).catch(e=>reject(e.message))
   })
 }
@@ -324,6 +324,7 @@ export const deleteFromDatabase = async (path)=>{
 
 export const soldeAd = async (userId, adInfo)=>{
   adInfo.status = "solded"
+  adInfo.soldedAt = sT()
   Promise.all([
     updateOne(`users/${userId}/ads`, adInfo.id, adInfo),
     saveOne(`admin/vAJXH3iQabt9AjGLAaej/solded`, adInfo),

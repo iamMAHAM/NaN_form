@@ -16,18 +16,7 @@ export default {
     Categories,
     Carousel
   },
-  data(){
-    return {
-      slides:[
-        "assets/house.jpeg",
-        "https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768",
-        "assets/farm.jpeg",
-        "assets/hotel.webp",
-        "assets/fiable.jpeg",
-        "assets/accordconclu.webp",
-      ]
-    }
-  },
+  data(){ return { slides:[] } },
   methods:{
     emit(data){
       this.$emit('filter', data)
@@ -61,7 +50,6 @@ export default {
       ],
       magasin:[
         'https://cdn.shopify.com/s/files/1/0249/6376/files/10_Conseils_d_Experts_Pour_augmenter_Vos_Ventes_en_magasin.png?15743940905870153897&format=jpg&quality=90',
-        'https://www.latelier-web.fr/wp-content/uploads/2017/03/retail.jpg',
         'https://blog-assets.lightspeedhq.com/img/2022/04/49bf6fb5-7-tips-to-speed-up-the-checkout-process-in-your-store-fr.png'
       ]
     }
@@ -97,7 +85,7 @@ export default {
 }
 
 .rightd{
-  width: calc(70%)
+  width: calc(85%)
 }
 
 

@@ -1,4 +1,5 @@
 <template>
+  <Modal ref="modal"/>
   <div class="post-modal" v-if="show">
     <form class="post-modal-form" @submit.prevent="">
       <span
@@ -53,8 +54,13 @@
             </div>
             <div class="error" v-if="errors.proposition">valeur inconnue</div>
             <div class="input">
-              <i class="material-symbols-outlined">location_on</i>
-              <input type="text" placeholder="Lieu" v-model="form.location" required>
+              <i class="material-symbols-outlined" @click="emp = !emp" style="cursor: pointer;" v-if="emp">location_on</i>
+              <i class="material-symbols-outlined" @click="emp = !emp" style="cursor: pointer;" v-else>map</i>
+              <input type="text" placeholder="Lieu" v-model="form.location" required v-if="emp">
+              <div v-else>
+                <input type="text" placeholder="Longitude" required v-model="coordinate.long">
+                <input type="text" placeholder="Latitude"  required v-model="coordinate.lat">
+              </div>
             </div>
             <div class="error" v-if="errors.location">emplacement invalide</div>
             <div class="input">
@@ -97,7 +103,7 @@
               @click.prevent="postAds"
               class="button-style"
               type="submit"
-              value="Poster"
+              :value="this.form.flag === 'edit' ? 'modifier' : 'Poster'"
             >
             <Loader :view="3" :height="30" :width="30" v-if="req"/>
           </div>
@@ -108,14 +114,17 @@
 
 <script>
 import validator from 'validator'
-import { auth, findOne,postAd } from '@/lib/firestoreLib'
+import { auth, findOne,postAd, updateOne } from '@/lib/firestoreLib'
 import Loader from './Loader.vue'
+import Modal from './Modal.vue'
 
 export default {
-    props: ['show'],
+    props: ['show', 'close', 'formDetails'],
     components:{
-      Loader
+      Loader,
+      Modal
     },
+    emits: ['close'],
     data(){
       return {
         get error(){
@@ -126,7 +135,7 @@ export default {
         },
         files: [],
         fileList: [],
-        form: {
+        form: { ...this.formDetails, options:this.formDetails?.options || {}}  || {
           title: '',
           type: '',
           description: 'description ...',
@@ -134,7 +143,7 @@ export default {
           proposition: '',
           area: 0,
           price: 0,
-          options: {}
+          options: {},
         },
         errors:{
           type: false,
@@ -147,7 +156,13 @@ export default {
           files: false,
           options: false
         },
-        req: false
+        req: false,
+        emp: true,
+        coordinate: this.formDetails?.coordinate && {
+          long: this.formDetails?.coordinate[0],
+          lat: this.formDetails?.coordinate[1]
+          } 
+          || {}
       }
     },
     methods:{
@@ -190,38 +205,76 @@ export default {
       clicked(e){
         const target = e.target
         if (target.classList.contains("main-content") && target.classList.contains("failed")){
-          console.log("bingo")
           this.$router.push("/profile")
           this.$emit("close")
         }
       },
       postAds(){
         this.handleErrors()
+        if (this.form.flag === 'edit'){
+          Object.keys(this.errors).map(e=> this.errors[e] = false)
+        }
         if (!this.error){ // add !
           if (auth?.currentUser){
             this.req = true
             findOne("users", auth.currentUser.uid)
             .then(user=>{
               if (user.isVerified){
+                if (!this.emp) {this.form.coordinate = [this.coordinate?.long, this.coordinate?.lat]}// gps coordinate case
                 this.form.ownerId = auth.currentUser.uid
                 this.form.images = this.fileList
-                postAd(auth.currentUser.uid, this.form)
-                .then(adInfo=>{
-                  this.req = false
-                  this.$refs.content.classList.remove("failed")
-                  this.$refs.content.classList.add("success")
-                  setTimeout(()=>{
-                    this.$refs.content.classList.remove("success")
-                    this.$emit('close')
-                  }, 5000)
-                })
-                .catch(e=>{
-                  alert(e)
-                })
+                if (user.role === 'company'){this.form.isPro = true}
+                if (this.form.flag === 'edit'){
+                  delete this.form?.flag
+                  Promise.all([
+                    updateOne('totals_ads', this.form.id, this.form),
+                    updateOne(`users/${auth?.currentUser.uid}/ads`, this.form.id, this.form)
+                  ])
+                  .then(()=>{
+                    this.$refs.modal.show({
+                      type: 'info',
+                      title: 'Modification',
+                      message: 'Annonce modifiée avec succèss !'
+                    })
+                    this.req = false
+                  })
+                  .catch(e=>{
+                    this.$refs.modal.show({
+                      type: 'error',
+                      title: 'Erreur',
+                      display: false,
+                      message: e?.code ? e.code : e.message
+                    })
+                    this.req = false
+                    return
+                  })
+                }else{
+                  postAd(auth.currentUser.uid, this.form)
+                  .then(adInfo=>{
+                    this.req = false
+                    this.$refs.modal.show({
+                      type: 'info',
+                      title: 'Annonce',
+                      message: 'Annonce publiée avec succès . En attente de validation ...'
+                    })
+                    setTimeout(()=>{
+                      this.$emit('close')
+                    }, 5000)
+                  })
+                  .catch(e=>{
+                    this.$refs.modal.show({
+                      type: 'error',
+                      errorMessage: e.code ? e.code : e.message
+                    })
+                    this.req = false
+                  })
+                } // vendor update
               }else{
-                alert("Vous devez confirmer votre compte avant de poster")
-                this.$refs.content.classList.remove("success")
-                this.$refs.content.classList.add("failed")
+                this.$refs.modal.show({
+                  type: 'info',
+                  title: 'Vérification requise',
+                  message: 'veuillez verifier votre identité'
+                })
                 this.req = false
               }
 
@@ -254,10 +307,11 @@ export default {
 .post-modal{
     z-index: 12;
     top: 0;
+    left: 0;
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, .6);
+    background: rgba(0, 0, 0, .1);
 }
 
 form.post-modal-form{
@@ -270,7 +324,7 @@ form.post-modal-form{
   left: 50%;
   transform: translate(-50%, -50%);
   background: var(--white);
-  height: 60%;
+  height: 70%;
 }
 
 h1.title{
@@ -300,9 +354,9 @@ h1.title{
 .pa{
   text-align: center;
   outline-color: var(--navcolor);
-  min-width: 20vw;
-  max-width: 20vw;
-  min-height: 30vh;
+  min-width: 22vw;
+  max-width: 22vw;
+  min-height: 40vh;
   max-height: 45vh;
 }
 .main-content >div{
@@ -437,7 +491,7 @@ select,
   }
 
   .pa{
-    min-height: 10vh;
+    min-height: 20vh;
     min-width: 35vw;
   }
 

@@ -59,7 +59,7 @@
           </li>
         </ul>
       </div>
-      <div class = "purchase-info">
+      <div class = "purchase-info" v-if="notMe">
         <button
           type="button"
           class="btn button-style c"
@@ -85,6 +85,7 @@
 
 <Maps
   v-if="emp"
+  :coordinate="cardInfo?.coordinate"
   :emp="emp"
 />
 
@@ -94,6 +95,7 @@
 import { addConversation, auth, findOne, getRtdbOne, messageTemplate } from '@/lib/firestoreLib'
 import Maps from "../components/Map.vue"
 import Loader from '@/components/partials/Loader.vue'
+
 export default {
   name: 'Details',
   props: ['isLogged', 'searchData'],
@@ -107,7 +109,6 @@ export default {
       load: true,
       current: '',
       emp: '',
-      ownerInfo: ''
     }
   },
   methods:{
@@ -136,9 +137,15 @@ export default {
       return require('@/' + path)
     }
   },
-  mounted(){
+  async mounted(){
+    let func = async ()=>{}
     const params = this.$route.params
-    findOne(`ads/X1eA1Bk8tfnVXHqduiTg/${params.categorie}`, params.id)
+    if (this.$route.path.includes("/refused")){
+      func = getRtdbOne('refusedAds', this.$route.params.id)
+    }else{
+      func = findOne(`ads/X1eA1Bk8tfnVXHqduiTg/${params.categorie}`, params.id)
+    }
+    func
     .then(detailInfo=>{
       this.current = detailInfo?.images[0]
       this.cardInfo = detailInfo
@@ -146,30 +153,45 @@ export default {
       this.load = false
     })
     .catch(e=>{
+      this.load = true
       findOne("users", auth.currentUser?.uid)
       .then(user=>{
         if (user.role === "admin"){
-          const tempId = this.$route.query.tempId
+          const tempId = this.$route.query.tempId || this.$route.params.id
           getRtdbOne('waitingAds', tempId)
           .then(card=>{
             this.cardInfo = {...card}
-            this.current = card.images[0]
+            this.emp = card?.location
+            this.current = card?.images[0]
+            this.load = false
+          })
+          .catch(e=>{
+            findOne("admin/vAJXH3iQabt9AjGLAaej/solded", this.$route.params.id)
+            .then(card=>{
+              this.cardInfo = {...card}
+              this.emp = card?.location
+              this.current = card?.images[0]
+              this.load = false
+            })
           })
         }else{
           if (e === 'notFound'){
             this.$router.push("/404")
+            this.load = false
           }
         }
-        this.load = false
       })
     })
   },
   computed: {
     isPlan(){
-      return this.cardInfo.type === 'plan'
+      return this.cardInfo?.type === 'plan'
     },
     location(){
       return this.cardInfo?.proposition === 'location'
+    },
+    notMe(){
+      return auth?.currentUser?.uid !== this.cardInfo?.ownerId
     }
   }
 }

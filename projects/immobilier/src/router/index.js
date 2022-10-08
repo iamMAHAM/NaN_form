@@ -7,7 +7,7 @@ import Favoris from "../views/Favoris.vue"
 import DashBoard from "@/views/admin/DashBoard.vue"
 import Profile from "@/views/Profile.vue"
 import NotFound from "@/views/404.vue"
-import Youtube from "@/components/Youtube.vue"
+import Vendor from "@/views/company/Vendor.vue"
 
 const routes = [
   {
@@ -54,9 +54,9 @@ const routes = [
     component: DashBoard
   },
   {
-    path: '/video/youtube',
-    name: 'Youtube',
-    component: Youtube
+    path: '/pro/vendor/:id',
+    name: 'Vendor',
+    component: Vendor
   },
   {
     path: '/:pathMatch(.*)*',
