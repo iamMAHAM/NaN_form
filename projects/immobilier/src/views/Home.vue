@@ -1,7 +1,7 @@
 <template>
   <div class="home-component" style="min-height: 100vh">
     <Banner @filter="filter" :match="match"/>
-    <Categories class="sidebrleft"/>
+    <Categories class="sidebrleft" @filter="filter"/>
     <CardContainer
       :cards="cards"
       :load="load"

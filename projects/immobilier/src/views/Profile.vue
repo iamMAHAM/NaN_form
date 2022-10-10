@@ -153,7 +153,7 @@
               <p class="num">{{ online }}</p>
             </div>
             <div class="card">
-              <p title="sold">Soldés</p>
+              <p title="solded">Soldés</p>
               <p class="num">{{ solded }}</p>
             </div>
             <div class="card">
@@ -264,11 +264,13 @@ export default {
       this.infos = classs === "infos"
     },
     rightFilter(e){
-      const target = e.target.closest(".card")
-      const els = target.closest(".ads")
-      Array.from(els.children).map(e=>e.classList.remove("bg-dark"))
-      this.cards = this.filteringCards(target.firstChild.title)
-      target.classList.add("bg-dark")
+      try{
+        const target = e.target.closest(".card")
+        const els = target.closest(".ads")
+        Array.from(els.children).map(e=>e.classList.remove("bg-dark"))
+        this.cards = this.filteringCards(target.firstChild.title)
+        target.classList.add("bg-dark")
+      } catch(e){}
     },
     filteringCards(v){
       return this.all.filter(c=> c.status.includes(v))
