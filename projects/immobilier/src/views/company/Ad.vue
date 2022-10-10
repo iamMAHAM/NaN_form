@@ -35,10 +35,9 @@
       </i>
     </button>
     <button
-      v-if="!$route.path.includes('/admin/dashboard')"
+      v-if="!$route.path.includes('/admin/dashboard') && ad.status !== 'solded'"
       title="solde"
       class="deleteA"
-      :disabled="ad.status === 'solded' || ad.status === 'pending'"
       style="background: var(--greenfun)"
       @click="soldeAds"
     >
@@ -47,6 +46,7 @@
     <button
       title="delete"
       class="deleteA"
+      v-if="ad.status === 'online' || ad.status === 'pending'"
       @click="deleteAd"
     >
       <i class="material-symbols-outlined">delete</i>
