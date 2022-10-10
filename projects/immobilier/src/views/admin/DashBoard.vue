@@ -157,6 +157,17 @@ import { db, rtdb,  } from '@/lib/firebaseConfig';
 import { auth, findOne, signOutUser } from '@/lib/firestoreLib';
 import { collection, onSnapshot } from '@firebase/firestore';
 import Ads from '../company/Ads.vue';
+
+const compare = ( a, b )=>{
+  if ( a.publishedAt > b.publishedAt ){
+    return -1;
+  }
+  if ( a.publishedAt < b.publishedAt ){
+    return 1;
+  }
+  return 0;
+}
+
 export default {
   name: 'DashBoard',
   components:{
@@ -247,7 +258,7 @@ export default {
     })
 
     onSnapshot(collection(db, "totals_ads"), (snap)=>{
-      this.totals_ads = [...snap.docs.map(s=>s.data())]
+      this.totals_ads = [...snap.docs.map(s=>s.data()).sort(compare)]
       this.ads = [...this.totals_ads.filter(s => s.status !== 'solded'), ...this.totals_ads.filter(s => s.status === 'solded')]
       this.getDataArray(this.totals_ads, 'publishedAt', 'totalAds')
       const solded = this.totals_ads.filter(a => a.status === "solded")
