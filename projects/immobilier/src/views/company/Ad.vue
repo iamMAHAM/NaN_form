@@ -3,7 +3,7 @@
     ref="modal"
   >
   </Modal>
-  <postForm :show="show" :formDetails="{...ad, flag: 'edit'}" @close="show = false"/>
+  <postForm :show="show" :formDetails="{...ad}" @close="show = false" :flag='flag'/>
   <td><img :src="ad?.images[0] || getImage('assets/home.svg')" alt="img"></td>
   <td>{{ ad?.title?.replace(ad.title.substring(10), '...').toLowerCase()}}</td>
   <td>{{ ad?.type }}</td>
@@ -24,7 +24,7 @@
 
     <button
       title="edit"
-      v-if="ad.status !== 'pending' && !$route.path.includes('/admin/dashboard')"
+      v-if="ad.status !== 'pending' && ad.status !== 'solded' && !$route.path.includes('/admin/dashboard')"
       class="view"
     >
       <i
@@ -51,6 +51,15 @@
     >
       <i class="material-symbols-outlined">delete</i>
     </button>
+    <button
+      title="recycle"
+      class="deleteA"
+      style="background: var(--greenfun)"
+      v-if="ad.status === 'solded'"
+      @click="shows"
+    >
+      <i class="material-symbols-outlined">recycling</i>
+    </button>
   </td>
 </template>
 
@@ -66,6 +75,7 @@ export default {
     return {
     show: false,
     backup: {},
+    flag: 'edit',
     showss: true
   }},
 	methods:{
@@ -98,7 +108,8 @@ export default {
         })
 			}
 		},
-    shows(){
+    shows(e){
+      this.flag = e.target.textContent.trim()
       this.backup = {...this.ad}
       this.show = true
     },

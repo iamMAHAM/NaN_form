@@ -62,12 +62,11 @@
       this.auth = this.$route.path === "/auth"
       this.flag1 = this.$route.path.includes('/pro/vendor')
     },
-
-    watch:{
-    $route (to, from){
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  } 
+  //   watch:{
+  //   $route (to, from){
+  //     window.scrollTo({ top: 0, behavior: 'smooth' });
+  //   }
+  // } 
   }
 </script>
 <style>

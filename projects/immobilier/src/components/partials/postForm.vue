@@ -103,7 +103,7 @@
               @click.prevent="postAds"
               class="button-style"
               type="submit"
-              :value="this.form.flag === 'edit' ? 'modifier' : 'Poster'"
+              :value="this.flag === 'edit' ? 'modifier' : 'Poster'"
             >
             <Loader :view="3" :height="30" :width="30" v-if="req"/>
           </div>
@@ -119,7 +119,7 @@ import Loader from './Loader.vue'
 import Modal from './Modal.vue'
 
 export default {
-    props: ['show', 'close', 'formDetails'],
+    props: ['show', 'close', 'formDetails', 'flag'],
     components:{
       Loader,
       Modal
@@ -211,7 +211,7 @@ export default {
       },
       postAds(){
         this.handleErrors()
-        if (this.form.flag === 'edit'){
+        if (this.flag === 'edit'){
           Object.keys(this.errors).map(e=> this.errors[e] = false)
         }
         if (!this.error){ // add !
@@ -224,7 +224,7 @@ export default {
                 this.form.ownerId = auth.currentUser.uid
                 this.form.images = this.fileList
                 if (user.role === 'company'){this.form.isPro = true}
-                if (this.form.flag === 'edit'){
+                if (this.flag === 'edit'){
                   delete this.form?.flag
                   Promise.all([
                     updateOne('totals_ads', this.form.id, this.form),
@@ -250,16 +250,14 @@ export default {
                   })
                 }else{
                   postAd(auth.currentUser.uid, this.form)
-                  .then(adInfo=>{
+                  .then(()=>{
                     this.req = false
+                    this.$emit('close')
                     this.$refs.modal.show({
                       type: 'info',
                       title: 'Annonce',
                       message: 'Annonce publiée avec succès . En attente de validation ...'
                     })
-                    setTimeout(()=>{
-                      this.$emit('close')
-                    }, 5000)
                   })
                   .catch(e=>{
                     this.$refs.modal.show({
@@ -285,7 +283,7 @@ export default {
             this.$router.push("/auth")
           }
         }
-      }
+      },
     }
 }
 </script>
