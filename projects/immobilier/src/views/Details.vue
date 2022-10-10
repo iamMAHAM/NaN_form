@@ -160,7 +160,7 @@ export default {
       this.load = true
       findOne("users", auth.currentUser?.uid)
       .then(user=>{
-        if (user.role === "admin"){
+        if (user.role === "admin" || this.$route.query.owner === auth?.currentUser?.uid /*ad owner*/){
           const tempId = this.$route.query.tempId || this.$route.params.id
           getRtdbOne('waitingAds', tempId)
           .then(card=>{
@@ -170,7 +170,7 @@ export default {
             this.load = false
           })
           .catch(e=>{
-            findOne("admin/vAJXH3iQabt9AjGLAaej/solded", this.$route.params.id)
+            findOne("totals_ads/", this.$route.params.id)
             .then(card=>{
               this.cardInfo = {...card}
               this.emp = card?.location
