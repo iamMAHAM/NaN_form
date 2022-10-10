@@ -26,6 +26,10 @@
         {{ comment.message }}
       </div>
     </div>
+
+    <div class="nocomment" style="font-size: 2rem; color: var(--navcolor);" align=center v-if="!comments.length">
+      Aucun commentaire pour l'instant
+    </div>
     
   </div>
 </template>
@@ -51,7 +55,6 @@ export default {
   methods: {
     async deleteC(e){
       const id = e.target.closest('.comment').id
-      console.log(id)
       await deleteComment(this.postId, id)
     },
     async postComment(){
