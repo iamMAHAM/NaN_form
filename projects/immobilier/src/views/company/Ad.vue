@@ -17,7 +17,7 @@
       v-if="ad.status !== 'pending'"
       class="deleteA"
       style="background: var(--hovercolor)"
-      @click="$router.push(`/details/${ad.type}/${ad.id}`)"
+      @click="$router.push(`/details/${ad.type}/${ad.id}?owner=${ad.ownerId}`)"
     >
       <i class="material-symbols-outlined">visibility</i>
     </button>
@@ -46,7 +46,7 @@
     <button
       title="delete"
       class="deleteA"
-      v-if="ad.status === 'online' || ad.status === 'pending'"
+      v-if="ad.status === 'online' || ad.status === 'pending' || $route.path.includes('admin/dashboard')"
       @click="deleteAd"
     >
       <i class="material-symbols-outlined">delete</i>
@@ -55,7 +55,7 @@
       title="recycle"
       class="deleteA"
       style="background: var(--greenfun)"
-      v-if="ad.status === 'solded'"
+      v-if="ad.status === 'solded' && !$route.path.includes('admin/dashboard')"
       @click="shows"
     >
       <i class="material-symbols-outlined">recycling</i>
