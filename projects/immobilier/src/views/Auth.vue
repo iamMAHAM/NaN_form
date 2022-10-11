@@ -127,7 +127,9 @@
               <input
                 v-model="form.birth" 
                 @change="birthChange"
-                type="date"
+                type="text"
+                placeholder="Date de naissance (majeur uniquement)"
+                onfocus="(this.type='date')"
                 min="1900-01-01" max="2003-01-01"
                 >
             </div>
@@ -139,8 +141,10 @@
             <div class="input">
               <i class="material-symbols-outlined">imagesmode</i>
               <input
-                type="file"
+                type="text"
                 ref="avatar"
+                placeholder="Photo de profil (avatar)"
+                onfocus="(this.type='file')"
                 @change="flag = true"
                 >
             </div>
@@ -451,6 +455,14 @@ export default {
         this.req = false
         this.$refs.container.classList.toggle("active")
       })
+      .then(()=>{
+        this.$refs.modal.show({
+          type: 'info',
+          title: 'Confirmer votre compte',
+          message: 'consultez votre boite mail afin de\
+          valider votre inscription',
+        })
+      })
       .catch(e=>{
         this.req = false
         this.showError(e, 3500)
@@ -485,12 +497,12 @@ export default {
     async companyRegister(){
       await this.register()
       await this.$refs.verif.submitVerification()
-      this.$refs.modal.show({
-        title: 'Inscription',
-        type: 'info',
-        message: 'Inscrit avec succès en attente de validation',
-        resultMessage: 'Inscrit avec succès en attente de validation ...',
-      })
+      // this.$refs.modal.show({
+      //   title: 'Inscription',
+      //   type: 'info',
+      //   message: 'Inscrit avec succès en attente de validation',
+      //   resultMessage: 'Inscrit avec succès en attente de validation ...',
+      // })
     }
   },
   setup(){

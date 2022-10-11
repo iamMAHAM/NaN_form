@@ -1,6 +1,7 @@
 <template>
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
   <div id="uploadFiles">
+    <Modal ref='modal'/>
   <p class="insUpload" v-if="!props">Téléverser vos Informations de vérification</p>
   <div class="user-files user-files1">
     <ul>
@@ -142,13 +143,15 @@
 
 <script>
 import { auth, findOne, setOne, updateOne, uploadImage } from '@/lib/firestoreLib'
+import Modal from '@/components/partials/Modal.vue'
 import Loader from '../Loader.vue'
 export default {
   name: 'userVerification',
   props: ['props'],
   emits: ['fileAdd', 'fileRemove'],
   components: {
-    Loader
+    Loader,
+    Modal
   },
   data(){
     return {
@@ -212,7 +215,13 @@ export default {
         Promise.all([
           setOne("admin/vAJXH3iQabt9AjGLAaej/verification", user, auth?.currentUser?.uid),
           updateOne("users", auth?.currentUser?.uid, {isAwaitingVerification: true}),
-        ])
+        ]).then(()=>{
+          this.$refs.modal.show({
+            type: 'info',
+            title: 'Verification d\'identité',
+            message: 'informations soumises avec succès\n...'
+          })
+        })
         this.req = false
         return
       }

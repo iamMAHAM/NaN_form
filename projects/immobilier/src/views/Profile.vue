@@ -8,7 +8,7 @@
           <img :src="user?.avatar" />
           <div class="name">
             <h2>{{ user?.fullName }}</h2>
-            <span>{{ user?.role }}</span>
+            <span>{{ role }}</span>
             <span>{{ verified }}
               <i class="material-symbols-outlined verified"
               style="vertical-align: middle"
@@ -59,7 +59,7 @@
           </button>
     
         </div>
-        <button v-if="home && user?.isAwaitingVerification">
+        <button v-if="home && user?.isAwaitingVerification && !user.isVerified">
           vérification en cours...
     
           <Loader :view="1" :height="15" :width="15"/>
@@ -119,7 +119,7 @@
             <i class="material-symbols-outlined">home</i>
             <a href="#">Accueil</a>
           </li>
-          <li class="ad">
+          <li class="ad" v-if="role !== 'customer'">
             <i class="material-symbols-outlined">ads_click</i>
             <a href="#">Annonces</a>
           </li>
@@ -326,7 +326,10 @@ export default {
       })
     }
   },
-  computed:{ 
+  computed:{
+    role(){
+      return this.user.role || 'customer'
+    },
     pending(){
       return this.all.filter(c=>c.status === 'pending').length
     },

@@ -35,7 +35,7 @@
       </i>
     </button>
     <button
-      v-if="!$route.path.includes('/admin/dashboard') && ad.status !== 'solded'"
+      v-if="!$route.path.includes('/admin/dashboard') && ad.status === 'online'"
       title="solde"
       class="deleteA"
       style="background: var(--greenfun)"

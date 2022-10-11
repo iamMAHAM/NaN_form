@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Categories from './banner/Categories.vue';
+import Categories from './partials/banner/Categories.vue';
 import Carousel from "@/components/partials/banner/carousel/Carousel.vue"
 export default {
   name: 'Banner',

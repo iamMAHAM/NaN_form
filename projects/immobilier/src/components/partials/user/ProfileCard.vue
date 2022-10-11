@@ -50,10 +50,11 @@ export default {
   },
   methods:{
     async verify(){
-      const ok = this.$refs.modal.show({
-        title: 'Verify user identity ?',
+      const ok = await this.$refs.modal.show({
         type: 'confirm',
         display: true,
+        message: 'Valider les modifications',
+        resultMessage: 'validé avec succès'
       })
       if (ok){
         const isComp = this.userProfile.isCompany
@@ -61,7 +62,7 @@ export default {
         Promise.all([
           updateOne("users", this.userProfile.id, {
             isVerified: true,
-            role: isComp ? 'company' : this.userProfile.role,
+            role: isComp ? 'company' : 'seller',
             isAwaitingVerification: false
           }),
           deleteOne("admin/vAJXH3iQabt9AjGLAaej/verification", this.userProfile.id)

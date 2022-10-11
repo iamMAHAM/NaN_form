@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Banner from '@/components/partials/Banner.vue';
+import Banner from '@/components/Banner.vue';
 import CardContainer from '@/components/CardContainer.vue';
 import { allCategories, find, save, saveOne, searchLow, setOne } from '@/lib/firestoreLib';
 import Categories from '@/components/partials/banner/Categories.vue'
