@@ -273,7 +273,6 @@ export default {
       } catch(e){}
     },
     filteringCards(v){
-      console.log(v)
       return this.all.filter(c=> c.status.includes(v))
     },
     editProfile(e){

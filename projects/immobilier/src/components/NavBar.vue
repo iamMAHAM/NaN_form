@@ -130,20 +130,20 @@ export default {
           menu.textContent = menu?.textContent === "close" ? "menu" : "close"
       })
 
-      const top = navbar.offsetHeight
+      const top = navbar?.offsetHeight
       search.addEventListener("click", e=>{
         const target = e.target
-        if (target === search || target.className === 'close'){
-          search.classList.remove("open")
+        if (target === search || target?.className === 'close'){
+          search?.classList?.remove("open")
         }
       })
 
       window.addEventListener('scroll', ()=>{
-        const fixed = navbar.classList.contains('fixed')
+        const fixed = navbar?.classList?.contains('fixed')
         if (scrollY() > top){
-          !fixed ? navbar.classList.add('fixed') : ''
+          !fixed ? navbar?.classList?.add('fixed') : ''
         }else{
-          fixed ? navbar.classList.remove('fixed') : ''
+          fixed ? navbar?.classList?.remove('fixed') : ''
         }
       })
     })
@@ -160,10 +160,9 @@ export default {
     search(){
       if (this.searchTerm && this.categorie){
         this.$emit('search', [this.categorie, this.searchTerm])
-        document.getElementById("search").classList.remove('open')
+        document.getElementById("search")?.classList?.remove('open')
       }else{
         this.message = 'le champ et la catégorie sont obligatoire'
-        this.$refs.modal.open()
       }
     },
     click(){
@@ -413,6 +412,15 @@ nav a{
 
     ul.active{
         flex-direction: column;
+    }
+
+    .to-absolute *{
+      text-align: center;
+      font-size: 1.7rem !important;
+    }
+
+    .to-absolute i{
+      font-size: 2.4rem !important;
     }
 
     .material-symbols-outlined.menu{

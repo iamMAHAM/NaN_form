@@ -43,12 +43,12 @@ export default {
     },
 
     flagger(){
-      const categories = document.querySelector('.sidebrleft')
+      const categories = document?.querySelector('.sidebrleft')
       const scrollY = ()=>{ return window.scrollY }
       if(scrollY() > 766){
-          categories.classList.add('blockq')
+          categories?.classList?.add('blockq')
         }else{
-          categories.classList.remove('blockq')
+          categories?.classList?.remove('blockq')
         }
     }
   },
@@ -108,6 +108,7 @@ export default {
 }
 
 .sidebrleft.blockq{
+  z-index: 22;
   display: block;
 }
 

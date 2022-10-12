@@ -4,7 +4,7 @@
   <div class="text" align="center"
     :style="{
       fontSize: '2rem',
-      color: 'var(--white)'
+      color: 'var(--navcolor)'
     }"
     v-if="isSearch && cards.length"
   >

@@ -111,7 +111,7 @@ export default {
 }
 @media screen and (max-width: 609px){
   .banner-component{
-    height: 70vh;
+    height: 60vh;
     width: 100vw;
   }
 

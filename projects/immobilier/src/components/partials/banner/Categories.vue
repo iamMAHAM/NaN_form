@@ -234,7 +234,7 @@ aside.expand{
 }
 
 [data-tooltip]::before {
-  z-index: 5;
+  z-index: 20;
   content: attr(data-tooltip);
   position: absolute;
   top: 50%;

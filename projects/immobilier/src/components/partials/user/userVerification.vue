@@ -1,5 +1,4 @@
 <template>
-  <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
   <div id="uploadFiles">
     <Modal ref='modal'/>
   <p class="insUpload" v-if="!props">Téléverser vos Informations de vérification</p>
@@ -124,7 +123,7 @@
   </div>
 
   <button
-    v-if="!req && !props"
+    v-if="!req && !props && !isAwaitingVerification"
     type="button"
     class="submit-btn js-submit"
     @click="submitVerification"
