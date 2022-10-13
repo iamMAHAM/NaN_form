@@ -1,6 +1,6 @@
 <template>
   <Modal ref='modal'/>
-  <div id="uploadFiles" v-if="!flagged && ">
+  <div id="uploadFiles" v-if="!flagged">
   <p class="insUpload" v-if="!props">Téléverser vos Informations de vérification</p>
   <div class="user-files user-files1">
     <ul>
