@@ -15,6 +15,8 @@ Exemple : une plateforme de gestion foncière gérée par le ministère, un site
 
 **Solution** : 
 
+![image de immo-soluce](./src/assets/logo.png)
+
 Nous avons décider de mettre en place une Plateform du nom de **IMMO SOLUCE** spécialisée dans :
 * la mise en relation entre vendeurs et acquéreurs (locataires/acheteurs) de biens immobiliers
 * une fiabilités assurées grace à notre système de vérification
@@ -25,4 +27,8 @@ Nous avons décider de mettre en place une Plateform du nom de **IMMO SOLUCE** s
 * révolutionner le secteur de l’immobilier ivoirien par une mise en relation directe entre les vendeurs et les acheteurs via notre plateforme.
 
 * limiter les coûts de transactions par la réduction du nombre d’intervenants dans le processus de vente et ainsi de faciliter l'accès au logement aux populations
+
+## Images
+
+![image de immo-soluce](./data/immo-soluce.png)
 
