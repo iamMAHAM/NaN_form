@@ -447,7 +447,7 @@ export default {
       this.req = true
       if (this.flag){
         const target = this.$refs.avatar
-        const avatar = await uploadImage(`images/${target?.files[0].name}`, target.files[0])
+        const avatar = await uploadImage(`images/registerAvatar/${target?.files[0].name}`, target.files[0])
         this.form.avatar = avatar
       }
       signUp(this.form)

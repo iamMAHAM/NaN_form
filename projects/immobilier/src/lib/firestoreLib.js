@@ -1,6 +1,6 @@
 
 import { db, storage, rtdb } from "./firebaseConfig"
-import { ref, uploadBytes,getDownloadURL } from "firebase/storage"
+import { ref, uploadBytes,getDownloadURL, deleteObject, listAll } from "firebase/storage"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged,signOut, updateProfile, deleteUser, sendPasswordResetEmail } from "firebase/auth"
 import { collection, doc, addDoc, getDoc, getDocs, where, query, deleteDoc, setDoc, updateDoc, orderBy, serverTimestamp as sT } from "firebase/firestore"
 import { set, ref as dbref, remove, get } from "firebase/database"
@@ -134,6 +134,28 @@ export const signUp = async (data)=>{
     })
 }
 
+export const deleteFiles = async (_ref)=>{
+  const reference = ref(storage, _ref)
+  const all = await listAll(reference)
+  for (const ref of all.items){
+    await deleteObject(ref)
+  }
+}
+
+export const deleteFile = async (_ref)=>{
+  const reference = ref(storage, _ref)
+  await deleteObject(reference)
+}
+
+export const deleteAllAds = async (id)=>{
+  const qs = await getDocs(collection(db, `users/${id}/ads`))
+  const ids = qs.docs.map(d => {
+    return {type: d.data().type, id: d.id}
+  })
+  for (const ad of ids){
+    await deleteOne(`ads/${ad.type}/${ad.id}`)
+  }
+}
 export const signIn = async (form)=>{
     return new Promise((resolve, reject)=>{
         signInWithEmailAndPassword(auth, form.email, form.password)
@@ -172,10 +194,8 @@ export const monitorState = async (callback)=>{
 //     ]).catch(e=>{return callback(e.message)})
 // }
 
-export const deleteUsers = ()=>{
-  return new Promise(async (resolve, rejecte)=>{
-    const deleted = await deleteUser()
-  })
+export const deleteUsers = async ()=>{
+  await deleteUser()
 }
 
 const setData = (info, receiver, message)=>{
@@ -268,7 +288,7 @@ export const postAd = (userId, adInfo={})=>{
         const images = []
         const id = uuidv4()
         for (const img of adInfo.images){
-          const url = await uploadImage(`images/${id + img.name}`, img)
+          const url = await uploadImage(`images/ads/${adInfo.ownerId}/${id + '-' + img.name}`, img)
           images.push(url)
         }
         adInfo.images = images

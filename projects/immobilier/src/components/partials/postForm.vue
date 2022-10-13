@@ -94,6 +94,23 @@
             <div class="preview">
               <img v-for="file in files" :src="file.src" :key="file.id">
             </div>
+            <div class="preview" v-if="flag === 'edit'">
+              <div class="c" style="position: relative; height: 100px; width: 100px;" v-for="img in form.images">
+                <img :src="img" :key="img" style="width: 100%; height: 100%">
+                <i class="material-symbols-outlined"
+                  @click="form.images.splice(form.images.indexOf(img), 1)"
+                  style="
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    color: var(--red);
+                    cursor: pointer;
+                  "
+                  >
+                  close
+                </i>
+              </div>
+            </div>
           </div>
           <div class="extra">
             <textarea class="pa" v-model="form.description"></textarea>
@@ -114,9 +131,10 @@
 
 <script>
 import validator from 'validator'
-import { auth, findOne,postAd, updateOne } from '@/lib/firestoreLib'
+import { auth, findOne,postAd, updateOne, uploadImage } from '@/lib/firestoreLib'
 import Loader from './Loader.vue'
 import Modal from './Modal.vue'
+import { uuidv4 } from '@firebase/util'
 
 export default {
     props: ['show', 'close', 'formDetails', 'flag'],
@@ -135,6 +153,7 @@ export default {
         },
         files: [],
         fileList: [],
+        editImages: [],
         form: { ...this.formDetails, options:this.formDetails?.options || {}}  || {
           title: '',
           type: '',
@@ -161,7 +180,7 @@ export default {
         coordinate: this.formDetails?.coordinate && {
           long: this.formDetails?.coordinate[0],
           lat: this.formDetails?.coordinate[1]
-          } 
+          }
           || {}
       }
     },
@@ -218,16 +237,22 @@ export default {
           if (auth?.currentUser){
             this.req = true
             findOne("users", auth.currentUser.uid)
-            .then(user=>{
+            .then(async user=>{
               if (user.isVerified){
                 if (!this.emp) {this.form.coordinate = [this.coordinate?.long, this.coordinate?.lat]}// gps coordinate case
                 this.form.ownerId = auth.currentUser.uid
-                this.form.images = this.fileList
                 if (user.role === 'company'){this.form.isPro = true}
                 if (this.flag === 'edit'){
+                  const inter = []
+                  for (const file of this.fileList){
+                    const url =  await uploadImage(`profiles/${auth?.currentUser?.uid}/${uuidv4() + '-' +file.name}`, file)
+                    inter.push(url)
+                  }
+                  this.form.images?.push(...inter)
                   delete this.form?.flag
                   Promise.all([
                     updateOne('totals_ads', this.form.id, this.form),
+                    updateOne(`ads/X1eA1Bk8tfnVXHqduiTg/${this.form.type}`, this.form.id, this.form),
                     updateOne(`users/${auth?.currentUser.uid}/ads`, this.form.id, this.form)
                   ])
                   .then(()=>{
@@ -239,16 +264,18 @@ export default {
                     this.req = false
                   })
                   .catch(e=>{
+                    console.log(e)
                     this.$refs.modal.show({
                       type: 'error',
                       title: 'Erreur',
                       display: false,
-                      message: e?.code ? e.code : e.message
+                      errorMessage: e?.code ? e.code : e.message
                     })
                     this.req = false
                     return
                   })
                 }else{
+                  this.form.images = this.fileList
                   postAd(auth.currentUser.uid, this.form)
                   .then(()=>{
                     this.req = false
@@ -284,6 +311,9 @@ export default {
           }
         }
       },
+    },
+    updated(){
+      console.log(this.form)
     }
 }
 </script>

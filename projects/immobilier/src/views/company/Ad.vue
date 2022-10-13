@@ -94,7 +94,7 @@ export default {
       })
 			if (ok){
         Promise.all([
-          deleteOne(`/users/${auth?.currentUser?.uid}/ads`, this.ad.id),
+          deleteOne(`/users/${this.ad.ownerId}/ads`, this.ad.id),
           deleteOne(`ads/X1eA1Bk8tfnVXHqduiTg/${this.ad.type}`, this.ad.id),
           abortPost(this.ad.tempId),
           deleteOne('totals_ads', this.ad.id)

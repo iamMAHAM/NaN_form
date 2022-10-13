@@ -123,7 +123,7 @@
   </div>
 
   <button
-    v-if="!req && !props && !isAwaitingVerification"
+    v-if="!req && !props && !flagged"
     type="button"
     class="submit-btn js-submit"
     @click="submitVerification"
@@ -146,7 +146,7 @@ import Modal from '@/components/partials/Modal.vue'
 import Loader from '../Loader.vue'
 export default {
   name: 'userVerification',
-  props: ['props'],
+  props: ['props', 'flagged'],
   emits: ['fileAdd', 'fileRemove'],
   components: {
     Loader,
@@ -226,7 +226,7 @@ export default {
       }
       this.error = true
       this.req = false
-    }
+    },
   }
 }
 </script>

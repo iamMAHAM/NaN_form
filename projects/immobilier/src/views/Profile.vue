@@ -162,7 +162,7 @@
             </div>
           </div>
           <div v-if="home && verify" class="verify">
-            <userVerification />
+            <userVerification :flagged='user?.isAwaitingVerification'/>
           </div>
         </div>
         <section class="myads" v-if="ads">
@@ -188,9 +188,9 @@ import CardContainer from '@/components/CardContainer.vue';
 import Uprofile from '@/components/partials/user/Uprofile.vue'
 import Loader from '@/components/partials/Loader.vue';
 import userVerification from '@/components/partials/user/userVerification.vue';
-import { auth, find, findOne, updateOne } from '@/lib/firestoreLib';
+import { auth, deleteAllAds, deleteFile, deleteFiles, find, findOne, updateOne } from '@/lib/firestoreLib';
 import { collection, doc, onSnapshot } from '@firebase/firestore';
-import { db } from '@/lib/firebaseConfig';
+import { db, storage } from '@/lib/firebaseConfig';
 import { updatePassword } from '@firebase/auth';
 import Modal from '@/components/partials/Modal.vue';
 
@@ -225,7 +225,7 @@ export default {
     const id = this.$route.query.id
     if (id && auth?.currentUser?.uid !== id){
       findOne("users", this.$route.query.id)
-      .then(user=>{
+      .then(async user=>{
         this.user = user
         this.iLoad = false
       })

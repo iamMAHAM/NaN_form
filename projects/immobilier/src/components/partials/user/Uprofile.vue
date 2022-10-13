@@ -8,7 +8,7 @@
               <i class="fa material-symbols-outlined">
                 photo_camera
               </i>
-              <input type="file" id="avatar" style="visibility:hidden;" accept=".png,.jpg,jpeg,.PNG,.JPEG" name="avatar" @change="changeAvatar">
+              <input type="file" id="avatar" style="visibility:hidden;" accept=".png,.jpg,jpeg,.PNG,.JPEG, .webp" name="avatar" @change="changeAvatar">
             </label>
             <img :src="form.avatar" ref="preview" id="preview" alt="Avatar">
           </section>
@@ -69,7 +69,7 @@ export default {
     changeAvatar(e){
       const file = e.target.files[0]
       const preview = this.$refs.preview
-      uploadImage(`profiles/${file.name + uuidv4()}`, file)
+      uploadImage(`profiles/${auth?.currentUser?.uid}/${uuidv4() + '-' +file.name}`, file)
       .then(url=>{
         updateProfile(auth?.currentUser, {
           photoURL: url
