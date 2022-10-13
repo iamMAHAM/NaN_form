@@ -95,8 +95,8 @@
               <img v-for="file in files" :src="file.src" :key="file.id">
             </div>
             <div class="preview" v-if="flag === 'edit'">
-              <div class="c" style="position: relative; height: 100px; width: 100px;" v-for="img in form.images">
-                <img :src="img" :key="img" style="width: 100%; height: 100%">
+              <div class="c" style="position: relative; height: 100px; width: 100px; margin: .3rem;" v-for="img in form.images">
+                <img :src="img" :key="img" style="width: 100%; height: 100%; margin: 0;">
                 <i class="material-symbols-outlined"
                   @click="form.images.splice(form.images.indexOf(img), 1)"
                   style="
@@ -153,7 +153,6 @@ export default {
         },
         files: [],
         fileList: [],
-        editImages: [],
         form: { ...this.formDetails, options:this.formDetails?.options || {}}  || {
           title: '',
           type: '',
@@ -264,7 +263,6 @@ export default {
                     this.req = false
                   })
                   .catch(e=>{
-                    console.log(e)
                     this.$refs.modal.show({
                       type: 'error',
                       title: 'Erreur',
@@ -311,9 +309,6 @@ export default {
           }
         }
       },
-    },
-    updated(){
-      console.log(this.form)
     }
 }
 </script>
