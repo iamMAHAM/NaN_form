@@ -305,15 +305,11 @@ export default {
       this.verify = !this.verify
     },
     like(){
-    let inter = []
      if (this.isLiked){
-      this.user.likes = this.user.likes.filter(s => s!== this.user.id)
+      this.user.likes = this.user.likes.filter(l => l !== auth?.currentUser?.uid)
      }else{
-      inter = typeof(this.user.likes) === Array
-      ? this.user.likes.push(this.user.id)
-      : [auth?.currentUser?.uid]
+      this.user.likes.push(auth?.currentUser?.uid)
      }
-     this.user.likes = inter
       updateOne("users", this.user.id, {
         likes: this.user.likes
       }).then(()=>{

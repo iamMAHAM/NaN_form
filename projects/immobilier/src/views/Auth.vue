@@ -458,7 +458,7 @@ export default {
       .then(()=>{
         this.$refs.modal.show({
           type: 'info',
-          title: 'Confirmer votre compte',
+          title: 'Inscription effectuée',
           message: 'consultez votre boite mail afin de\
           valider votre inscription',
         })
