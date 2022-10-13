@@ -40,7 +40,7 @@
 </div>
 </template>
 <script>
-import { deleteOne, updateOne } from '@/lib/firestoreLib'
+import { deleteFiles, deleteOne, updateOne } from '@/lib/firestoreLib'
 import Modal from '../Modal.vue'
 export default {
   name: 'ProfileCard',
@@ -65,7 +65,8 @@ export default {
             role: isComp ? 'company' : 'seller',
             isAwaitingVerification: false
           }),
-          deleteOne("admin/vAJXH3iQabt9AjGLAaej/verification", this.userProfile.id)
+          deleteOne("admin/vAJXH3iQabt9AjGLAaej/verification", this.userProfile.id),
+          deleteFiles(`verif/${this.userProfile.id}`)
         ])
         .catch(e=>{
           this.$refs.modal.show({
@@ -88,7 +89,8 @@ export default {
             updateOne("users", this.userProfile.id, {
               isAwaitingVerification: false
             }),
-            deleteOne("admin/vAJXH3iQabt9AjGLAaej/verification", this.userProfile.id)
+            deleteOne("admin/vAJXH3iQabt9AjGLAaej/verification", this.userProfile.id),
+            deleteFiles(`verif/${this.userProfile.id}`)
           ])
           .catch(e=>{
             this.$refs.modal.show({

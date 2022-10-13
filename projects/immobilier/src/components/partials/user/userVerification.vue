@@ -1,6 +1,6 @@
 <template>
-  <div id="uploadFiles">
-    <Modal ref='modal'/>
+  <Modal ref='modal'/>
+  <div id="uploadFiles" v-if="!flagged && ">
   <p class="insUpload" v-if="!props">Téléverser vos Informations de vérification</p>
   <div class="user-files user-files1">
     <ul>
@@ -123,7 +123,7 @@
   </div>
 
   <button
-    v-if="!req && !props && !flagged"
+    v-if="!req && !props"
     type="button"
     class="submit-btn js-submit"
     @click="submitVerification"
