@@ -211,7 +211,6 @@ export default {
         }
         const user = await findOne("users", auth?.currentUser?.uid || id)
         user.verifInfoImages = images
-        user.verifPathID = id
         user.isCompany = this.props?.company === true
         Promise.all([
           setOne("admin/vAJXH3iQabt9AjGLAaej/verification", user, auth?.currentUser?.uid ||id),
