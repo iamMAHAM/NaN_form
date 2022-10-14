@@ -153,7 +153,7 @@ export const deleteAllAds = async (id)=>{
     return {type: d.data().type, id: d.id}
   })
   for (const ad of ids){
-    await deleteOne(`ads/${ad.type}/${ad.id}`)
+    await deleteOne(`ads/X1eA1Bk8tfnVXHqduiTg/${ad.type}/${ad.id}`)
   }
 }
 export const signIn = async (form)=>{
