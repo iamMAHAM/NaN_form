@@ -285,7 +285,7 @@
               ref="verif"
               :props="{
                 company: true,
-                selfie: 'photo de l\'entrprise (vue de déhors)',
+                selfie: 'photo de l\'entreprise (vue de déhors)',
                 recto: 'une copie de la pièce d\'identité du propriétaire de la société ou représentant légal',
                 verso: 'une copie de l\'extrait du Registre du Commerce et De Crédit Mobilier (RCCM) ou une copie du Certificat d\'Immatriculation Unique de l\'Entreprise',
                 facture: 'une copie de la Déclaration Fiscale d\'Existence (DFE) ou une copie du Certificat d\'Immatriculation Unique de l\'Entreprise',
@@ -392,7 +392,8 @@ export default {
       flag: false,
       req: false,
       passr: false,
-      userSign: true
+      userSign: true,
+      companyId: ''
     }
   },
   methods: {
@@ -444,28 +445,35 @@ export default {
       })
     },
     async register(){
-      this.req = true
-      if (this.flag){
-        const target = this.$refs.avatar
-        const avatar = await uploadImage(`images/registerAvatar/${target?.files[0].name}`, target.files[0])
-        this.form.avatar = avatar
-      }
-      signUp(this.form)
-      .then((userInfo)=>{
-        this.req = false
-        this.$refs.container.classList.toggle("active")
-      })
-      .then(()=>{
-        this.$refs.modal.show({
-          type: 'info',
-          title: 'Inscription effectuée',
-          message: 'consultez votre boite mail afin de\
-          valider votre inscription',
+      await new Promise(async (resolve, reject)=>{
+        this.req = true
+        if (this.flag){
+          const target = this.$refs.avatar
+          if (target?.files[0]){
+            const avatar = await uploadImage(`images/registerAvatar/${target?.files[0]?.name}`, target.files[0])
+            this.form.avatar = avatar
+          }
+        }
+        signUp(this.form)
+        .then((userInfo)=>{
+          this.companyId = userInfo.id
+          this.req = false
+          this.$refs.container.classList.toggle("active")
         })
-      })
-      .catch(e=>{
-        this.req = false
-        this.showError(e, 3500)
+        .then(()=>{
+          this.$refs.modal.show({
+            type: 'info',
+            title: 'Inscription effectuée',
+            message: 'consultez votre boite mail afin de\
+            valider votre inscription',
+          })
+        })
+        .then(()=>resolve())
+        .catch(e=>{
+          this.req = false
+          this.showError(e, 3500)
+          reject(e)
+        })
       })
     },
     reinitPassword(){
@@ -481,10 +489,10 @@ export default {
       })
       .catch(e=>{
         this.$refs.modal.show({
-              type: 'error',
-              title: 'Erreur',
-              display: false,
-              errorMessage: e.code ? e.code : e?.message,
+          type: 'error',
+          title: 'Erreur',
+          display: false,
+          errorMessage: e.code ? e.code : e?.message,
         })
       })
     },
@@ -495,14 +503,18 @@ export default {
       this.companyForm.fileList.splice(this.companyForm.fileList.indexOf(file), 1)
     },
     async companyRegister(){
-      await this.register()
-      await this.$refs.verif.submitVerification()
-      // this.$refs.modal.show({
-      //   title: 'Inscription',
-      //   type: 'info',
-      //   message: 'Inscrit avec succès en attente de validation',
-      //   resultMessage: 'Inscrit avec succès en attente de validation ...',
-      // })
+      this.register()
+      .then(async ()=>{
+        await this.$refs.verif.submitVerification(this.companyId)
+      })
+      .catch(e=>{
+        this.$refs.modal.show({
+          type: 'error',
+          title: 'Erreur',
+          display: false,
+          errorMessage: e.code ? e.code : e?.message || e,
+        })
+      })
     }
   },
   setup(){
