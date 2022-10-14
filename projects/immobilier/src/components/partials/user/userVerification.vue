@@ -51,7 +51,7 @@
               class="upload-img"
               id="userFile4"
               @change="addFile"
-              accept="*.jpeg, *.png, *.webp, *.svg"
+              accept=".jpeg, .png, .webp, .svg"
             >
             <label for="userFile4">Ajouter</label>
             <span class="closeStyle removeFile" @click="removeFile"></span>
@@ -78,7 +78,7 @@
               class="upload-img"
               id="userFile5"
               @change="addFile"
-              accept="*.jpeg, *.png, *.webp, *.svg"
+              accept=".jpeg, .png, .webp, .svg"
             >
             <label for="userFile5">Ajouter</label>
             <span class="closeStyle removeFile" @click="removeFile"></span>
@@ -105,7 +105,7 @@
               class="upload-img"
               id="userFile6"
               @change="addFile"
-              accept="*.jpeg, *.png, *.webp, *.svg"
+              accept=".jpeg, .png, .webp, .svg"
             >
             <label for="userFile6">Ajouter</label>
             <span class="closeStyle removeFile" @click="removeFile"></span>
@@ -144,6 +144,7 @@
 import { auth, findOne, setOne, updateOne, uploadImage } from '@/lib/firestoreLib'
 import Modal from '@/components/partials/Modal.vue'
 import Loader from '../Loader.vue'
+import { uuidv4 } from '@firebase/util'
 export default {
   name: 'userVerification',
   props: ['props', 'flagged'],
@@ -195,31 +196,37 @@ export default {
       parent.classList.remove("uploaded")
       this.rightValue('', id)
     },
-    async submitVerification(){
+    async submitVerification(id){
       this.req = true
       const images = []
       this.error = true
       let flag = false
       const inputs = Array.from(document.querySelectorAll(".upload-img"))
-      inputs.map(i=>!i.files[0] ? flag = true : '')
+      inputs.forEach(i=>!i.files[0] ? flag = true : '')
       if (!flag){
         this.error = false
         for (const i of inputs){
-          const url = await uploadImage(`verif/${auth?.currentUser?.uid}/${i.files[0].name}`, i.files[0])
+          const url = await uploadImage(`verif/${auth?.currentUser?.uid || id}/${i.files[0].name}`, i.files[0])
           images.push(url)
         }
-        const user = await findOne("users", auth?.currentUser?.uid)
+        const user = await findOne("users", auth?.currentUser?.uid || id)
         user.verifInfoImages = images
+        user.verifPathID = id
         user.isCompany = this.props?.company === true
         Promise.all([
-          setOne("admin/vAJXH3iQabt9AjGLAaej/verification", user, auth?.currentUser?.uid),
-          updateOne("users", auth?.currentUser?.uid, {isAwaitingVerification: true}),
+          setOne("admin/vAJXH3iQabt9AjGLAaej/verification", user, auth?.currentUser?.uid ||id),
+          updateOne("users", auth?.currentUser?.uid || id, {isAwaitingVerification: true}),
         ]).then(()=>{
           this.$refs.modal.show({
             type: 'info',
             title: 'Verification d\'identité',
             message: 'informations soumises avec succès\n...'
           })
+        })
+        .then(()=>{
+          setTimeout(()=>{
+            this.$refs.modal.close()
+          }, 3000)
         })
         this.req = false
         return
