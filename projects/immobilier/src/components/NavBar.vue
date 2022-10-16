@@ -122,14 +122,28 @@ export default {
       const ul = document.querySelector(".ul")
       const menu = document.querySelector(".material-symbols-outlined.menu")
       const search = document.getElementById('search')
+      const navbar = document.getElementById('header')
+
+      const scrollY = ()=>{ return window.scrollY}
       menu?.addEventListener("click", ()=>{
           ul?.classList?.toggle("active")
           menu.textContent = menu?.textContent === "close" ? "menu" : "close"
       })
+
+      const top = navbar?.offsetHeight
       search.addEventListener("click", e=>{
         const target = e.target
-        if (e.target === search || e.target.className === 'close'){
-          search.classList.remove("open")
+        if (target === search || target?.className === 'close'){
+          search?.classList?.remove("open")
+        }
+      })
+
+      window.addEventListener('scroll', ()=>{
+        const fixed = navbar?.classList?.contains('fixed')
+        if (scrollY() > top){
+          !fixed ? navbar?.classList?.add('fixed') : ''
+        }else{
+          fixed ? navbar?.classList?.remove('fixed') : ''
         }
       })
     })
@@ -146,10 +160,9 @@ export default {
     search(){
       if (this.searchTerm && this.categorie){
         this.$emit('search', [this.categorie, this.searchTerm])
-        document.getElementById("search").classList.remove('open')
+        document.getElementById("search")?.classList?.remove('open')
       }else{
         this.message = 'le champ et la catégorie sont obligatoire'
-        this.$refs.modal.open()
       }
     },
     click(){
@@ -257,6 +270,11 @@ nav a{
   color: #fff;
 }
 
+#header.fixed{
+  position: fixed;
+  top: 0;
+}
+
 #search .close:hover {
   color: var(--red);
   cursor: pointer;
@@ -301,7 +319,9 @@ a{
 }
 
 #header{
+    z-index: 15;
     display: flex;
+    position: fixed;
     align-items: center;
     justify-content: space-around;
     background: var(--navcolor);
@@ -392,6 +412,15 @@ nav a{
 
     ul.active{
         flex-direction: column;
+    }
+
+    .to-absolute *{
+      text-align: center;
+      font-size: 1.7rem !important;
+    }
+
+    .to-absolute i{
+      font-size: 2.4rem !important;
     }
 
     .material-symbols-outlined.menu{

@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import { updateOne, deleteOne, auth} from '@/lib/firestoreLib';
+import { updateOne, deleteOne, auth, deleteFiles, deleteFile, deleteAllAds} from '@/lib/firestoreLib';
 import Modal from '../Modal.vue';
 export default {
   name: 'User',
@@ -108,7 +108,14 @@ export default {
         display: true,
       })
 			if (ok){
-				deleteOne("users", this.user.id)
+        Promise.all([
+         deleteOne("users", this.user.id),
+         deleteFiles(`images/ads/${this.user.id}`),
+         deleteFiles(`images/messages/${this.user.id}`),
+         deleteFiles(`profiles/${this.user.id}`),
+         deleteFiles(`verif/${this.user.id}`),
+         deleteAllAds(this.user.id)
+        ])
 			}else{
       }
 		},

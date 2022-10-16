@@ -8,7 +8,7 @@
           <img :src="user?.avatar" />
           <div class="name">
             <h2>{{ user?.fullName }}</h2>
-            <span>{{ user?.role }}</span>
+            <span>{{ role }}</span>
             <span>{{ verified }}
               <i class="material-symbols-outlined verified"
               style="vertical-align: middle"
@@ -59,7 +59,7 @@
           </button>
     
         </div>
-        <button v-if="home && user?.isAwaitingVerification">
+        <button v-if="home && user?.isAwaitingVerification && !user.isVerified">
           vérification en cours...
     
           <Loader :view="1" :height="15" :width="15"/>
@@ -119,7 +119,7 @@
             <i class="material-symbols-outlined">home</i>
             <a href="#">Accueil</a>
           </li>
-          <li class="ad">
+          <li class="ad" v-if="role !== 'customer'">
             <i class="material-symbols-outlined">ads_click</i>
             <a href="#">Annonces</a>
           </li>
@@ -153,7 +153,7 @@
               <p class="num">{{ online }}</p>
             </div>
             <div class="card">
-              <p title="sold">Soldés</p>
+              <p title="solded">Soldés</p>
               <p class="num">{{ solded }}</p>
             </div>
             <div class="card">
@@ -162,7 +162,7 @@
             </div>
           </div>
           <div v-if="home && verify" class="verify">
-            <userVerification />
+            <userVerification :flagged='user?.isAwaitingVerification || user.isVerified'/>
           </div>
         </div>
         <section class="myads" v-if="ads">
@@ -225,7 +225,7 @@ export default {
     const id = this.$route.query.id
     if (id && auth?.currentUser?.uid !== id){
       findOne("users", this.$route.query.id)
-      .then(user=>{
+      .then(async user=>{
         this.user = user
         this.iLoad = false
       })
@@ -264,11 +264,13 @@ export default {
       this.infos = classs === "infos"
     },
     rightFilter(e){
-      const target = e.target.closest(".card")
-      const els = target.closest(".ads")
-      Array.from(els.children).map(e=>e.classList.remove("bg-dark"))
-      this.cards = this.filteringCards(target.firstChild.title)
-      target.classList.add("bg-dark")
+      try{
+        const target = e.target.closest(".card")
+        const els = target.closest(".ads")
+        Array.from(els.children).map(e=>e.classList.remove("bg-dark"))
+        this.cards = this.filteringCards(target.firstChild.title)
+        target.classList.add("bg-dark")
+      } catch(e){}
     },
     filteringCards(v){
       return this.all.filter(c=> c.status.includes(v))
@@ -303,15 +305,11 @@ export default {
       this.verify = !this.verify
     },
     like(){
-    let inter = []
      if (this.isLiked){
-      this.user.likes = this.user.likes.filter(s => s!== this.user.id)
+      this.user.likes = this.user.likes.filter(l => l !== auth?.currentUser?.uid)
      }else{
-      inter = typeof(this.user.likes) === Array
-      ? this.user.likes.push(this.user.id)
-      : [auth?.currentUser?.uid]
+      this.user.likes.push(auth?.currentUser?.uid)
      }
-     this.user.likes = inter
       updateOne("users", this.user.id, {
         likes: this.user.likes
       }).then(()=>{
@@ -324,7 +322,10 @@ export default {
       })
     }
   },
-  computed:{ 
+  computed:{
+    role(){
+      return this.user.role || 'customer'
+    },
     pending(){
       return this.all.filter(c=>c.status === 'pending').length
     },

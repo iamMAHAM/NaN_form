@@ -1,6 +1,7 @@
 <template>
   <div class="home-component" style="min-height: 100vh">
     <Banner @filter="filter" :match="match"/>
+    <Categories class="sidebrleft" @filter="filter"/>
     <CardContainer
       :cards="cards"
       :load="load"
@@ -12,10 +13,10 @@
 </template>
 
 <script>
-import Banner from '@/components/partials/Banner.vue';
+import Banner from '@/components/Banner.vue';
 import CardContainer from '@/components/CardContainer.vue';
 import { allCategories, find, save, saveOne, searchLow, setOne } from '@/lib/firestoreLib';
-import { serverTimestamp } from '@firebase/firestore';
+import Categories from '@/components/partials/banner/Categories.vue'
 
 export default {
   name: 'Home',
@@ -23,6 +24,7 @@ export default {
   components: {
       Banner,
       CardContainer,
+      Categories
   },
   data(){
     return {
@@ -38,6 +40,16 @@ export default {
   methods:{
     filter(type){
       this.cards = this.allCards.filter(c=> c.proposition.includes(type))
+    },
+
+    flagger(){
+      const categories = document?.querySelector('.sidebrleft')
+      const scrollY = ()=>{ return window.scrollY }
+      if(scrollY() > 766){
+          categories?.classList?.add('blockq')
+        }else{
+          categories?.classList?.remove('blockq')
+        }
     }
   },
   beforeMount(){
@@ -47,10 +59,6 @@ export default {
   },
   mounted(){
     this.match = window.matchMedia("(max-width: 800px)").matches
-
-    function randomChoice(arr) {
-    return arr[Math.floor(arr.length * Math.random())];
-  }
     const ids = [
       'zsHm67Xam6bfrPNUbPCRkHGJZz33',
       'Gqbz54cIVxVeDpl483hMZMgnhqC2',
@@ -64,6 +72,12 @@ export default {
       this.load = false
       this.message = 'Rien dans cette section'
     })
+    .then(()=>{
+      window.addEventListener("scroll", this.flagger)
+    })
+  },
+  unmounted(){
+    window.removeEventListener('scroll', this.flagger)
   },
   watch:{
     searchData (value){
@@ -82,3 +96,35 @@ export default {
 
 }
 </script>
+
+<style>
+.sidebrleft{
+  position: fixed;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  height: max-content;
+}
+
+.sidebrleft.blockq{
+  z-index: 22;
+  display: block;
+}
+
+.sidebrleft {
+  width: 5.5rem;
+}
+
+.sidebrleft > nav{
+  flex: 0;
+}
+
+.sidebrleft .nav-title{
+  display: none;
+}
+
+.sidebrleft .nav-toggle{
+  display: none;
+}
+</style>

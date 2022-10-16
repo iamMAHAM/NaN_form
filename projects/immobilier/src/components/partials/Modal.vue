@@ -9,7 +9,7 @@
           {{ title }}
         </h2>
         <div class="content" align="center" style="padding: 1rem; color: var(--navcolor);">
-          <p v-if="!result">{{ message }}</p>
+          <p v-if="!result && type !== 'error'">{{ message }}</p>
           <p v-if="result && !errorMessage"> {{ resultMessage }}</p>
           <p v-else> {{ errorMessage }}</p>
         </div>

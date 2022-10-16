@@ -128,7 +128,7 @@
                 <input
                   @change="sendMessages"
                   type="file"
-                  accept="*.png; *.jpeg; *.svg"
+                  accept=".png, .jpeg, .svg"
                   id="photof"
                   style="display: none;"
                   ref="tof"
@@ -231,7 +231,7 @@ export default {
       await new Promise(async r=>{
         let type = null, content = null
         if (e.target === this.$refs.tof){
-          const url = await uploadImage(`images/${e.target.files[0].name}`, e.target.files[0])
+          const url = await uploadImage(`images/messages/${auth?.currentUser?.uid}/${e.target.files[0].name}`, e.target.files[0])
           type = 'image'
           content = url
         }else{

@@ -12,7 +12,7 @@
 <script>
   import NavBar from './components/NavBar.vue';
   import Support from './components/Settings.vue';
-  import { auth, findOne, monitorState } from './lib/firestoreLib';
+  import { auth, findOne, monitorState, signOutUser } from './lib/firestoreLib';
   import Footer from './components/Footer.vue';
   export default {
     data(){
@@ -38,7 +38,7 @@
       }
     },
     mounted(){
-      monitorState(user=>{
+      monitorState(async user=>{
         const notConnectedR = ['/profile', '/admin/dashboard', '/messages', '/favorites']
         const connectedRoute = ['/auth']
         if (user?.emailVerified){
@@ -52,6 +52,7 @@
           })
         }
         else {
+          await signOutUser()
           this.isLogged = false
           notConnectedR.includes(this.$route.path) ? this.$router.push("/") : ''
         }
@@ -62,12 +63,11 @@
       this.auth = this.$route.path === "/auth"
       this.flag1 = this.$route.path.includes('/pro/vendor')
     },
-
     watch:{
     $route (to, from){
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (to?.fullPath?.includes('details')) window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  } 
+  }
   }
 </script>
 <style>

@@ -4,7 +4,7 @@
   <div class="text" align="center"
     :style="{
       fontSize: '2rem',
-      color: 'var(--white)'
+      color: 'var(--navcolor)'
     }"
     v-if="isSearch && cards.length"
   >
@@ -106,7 +106,7 @@ export default {
 .card-container .em{
   font-size: 3rem;
   text-align: center;
-  color: var(--white);
+  color: var(--navcolor);
   width: 100%;
   height: 100%;
 }
