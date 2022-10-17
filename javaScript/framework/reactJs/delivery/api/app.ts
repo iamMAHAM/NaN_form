@@ -15,7 +15,7 @@ app.use(cors())
 app.use('/api/user', userRoutes)
 app.use('/api/admin', adminRoutes)
 
-app.listen(process.env.PORT, ()=>{
+app.listen(process.env.PORT || 3000, ()=>{
   console.log(
     'serveur demarré sur le port ' + process.env.PORT
   )
