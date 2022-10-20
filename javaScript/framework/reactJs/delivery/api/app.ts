@@ -3,8 +3,8 @@ import { config } from "dotenv"
 import connect from './config/bd';
 import cors from "cors"
 
-import userRoutes from "./routes/userRoutes"
-import adminRoutes from "./routes/adminRoutes"
+import userRoutes from "./routes/user.routes"
+import adminRoutes from "./routes/admin.routes"
 
 config()
 
