@@ -1,5 +1,6 @@
 import express, { Express } from 'express';
 import { config } from "dotenv"
+import connect from './config/bd';
 import cors from "cors"
 
 import userRoutes from "./routes/userRoutes"
@@ -15,8 +16,16 @@ app.use(cors())
 app.use('/api/user', userRoutes)
 app.use('/api/admin', adminRoutes)
 
-app.listen(process.env.PORT || 3000, ()=>{
-  console.log(
-    'serveur demarré sur le port ' + process.env.PORT
-  )
-}) 
+
+connect()
+.then(()=>{
+  app.listen(process.env.PORT || 3000, ()=>{
+    console.log(
+      'serveur demarré sur le port ' + process.env.PORT
+    )
+  }) 
+})
+.catch(e =>{
+  console.log('app not started reason : ')
+  console.error(e)
+})
