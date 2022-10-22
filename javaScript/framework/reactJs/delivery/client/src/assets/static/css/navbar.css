@@ -1,0 +1,31 @@
+.navbar ul{
+  padding: 10px;
+  display: flex;
+  flex: row;
+  justify-content: center;
+  gap: 10px;
+}
+
+.navbar{
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar li{
+  border-radius: 8px;
+  padding: 10px;
+  width: 80px;
+  text-align: center;
+  background-color: rgba(28, 148, 234, 0.391);
+}
+
+.navbar a{
+  color: #000;
+  font-size: 20px;
+}
+
+.logo{
+  align-self: center;
+  width: 50px;
+  height: 50px;
+}
