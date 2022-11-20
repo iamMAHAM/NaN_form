@@ -9,6 +9,7 @@ const useFetch = (url) => {
         const abort = new AbortController()
         fetch(url, {signal: abort.signal}).then(response => {
             if (!response.ok){
+                console.log('dala')
                 throw Error("An unknow error has occured")
             }
             return response.json()
